@@ -1,0 +1,30 @@
+.container-fluid{
+    margin: auto;
+    margin-top: 10%;
+}
+
+.logo{
+    margin: auto;
+    height: 15%;
+    width: 15%;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.btn{
+    width: 250px;
+    border-radius: 10px;
+}
+
+.form-control{
+    margin: auto;
+    width: 450px;
+    border-radius: 10px;
+}
+
+.card{
+    margin: auto;
+    height: 50%;
+    width: 50%;
+}
+

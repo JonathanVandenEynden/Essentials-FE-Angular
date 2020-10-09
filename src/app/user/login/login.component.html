@@ -1,0 +1,16 @@
+<div class="containe-fluid text-center">
+    <img class="logo" alt="Company logo" src="assets/images/logo.png" />
+    <form>
+        <span>
+            <div class="form-group">
+                <input type="email" class="form-control" id="input1" data-cy="login-username" formControlName="username" placeholder="johnsmith@outlook.com" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="input2" data-cy="login-password" formControlName="password" placeholder="password" required>
+            </div>
+        </span>
+        <div class="text-center">
+            <button type="submit" class="btn btn-secondary" (click)="nextPage()">Sign in</button>
+        </div>
+    </form>
+</div>
