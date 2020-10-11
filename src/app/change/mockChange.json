@@ -1,0 +1,68 @@
+{
+  "Id": "1",
+  "firstName": "Sukrit",
+  "lastName": "Sukrit",
+  "country": "Switzerland",
+  "office": "Swiss",
+  "factory": "factory1",
+  "department": "IT",
+  "team": "Management",
+  "changeInitiatives":[
+  {
+    "Id": "1",
+    "description": "New Catering",
+    "startDate": "11/10/2020",
+    "endDate": "30/10/2020",
+    "roadMap": [
+      {
+        "Id": "1",
+        "title": "Step 1",
+        "done": true
+      },
+      {
+        "Id": "2",
+        "title": "Step 2",
+        "done": false
+      },
+      {
+        "Id": "3",
+        "title": "Step 3",
+        "done": false
+      },
+      {
+        "Id": "4",
+        "title": "Step 4",
+        "done": false
+      }
+    ]
+  },
+    {
+      "Id": "2",
+      "description": "Expansion German Market",
+      "startDate": "12/10/2020",
+      "endDate": "01/11/2020",
+      "roadMap": [
+        {
+          "Id": "5",
+          "title": "Step 1",
+          "done": true
+        },
+        {
+          "Id": "6",
+          "title": "Step 2",
+          "done": true
+        },
+        {
+          "Id": "7",
+          "title": "Step 3",
+          "done": true
+        },
+        {
+          "Id": "8",
+          "title": "Step 4",
+          "done": false
+        }
+      ]
+    }
+    ]
+}
