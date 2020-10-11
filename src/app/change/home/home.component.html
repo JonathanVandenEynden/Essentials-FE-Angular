@@ -17,7 +17,7 @@
               <button class="btn btn-primary" (click)="routeDashboard()">Dashboard<fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon></button>
             </div>
             <div class="row">
-                <button class="btn btn-primary active" aria-pressed="true">Change Events<fa-icon [icon]="faSync" class="fa-pull-right"></fa-icon></button>
+                <button class="btn active" disabled>Change Events<fa-icon [icon]="faSync" class="fa-pull-right"></fa-icon></button>
             </div>
         </div>
         <div class="col">
@@ -26,12 +26,9 @@
             <a class="ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-lg"></fa-icon></a>
           </div>
             <div class="container">
-                <button class="btn btn-outline-light shadow p-3 mb-5 bg-white" *ngFor="let changes of changeManager.CHANGEINITIATIVES">
-                  {{changes.description}}
-                  <div class="progress">
-                    <div class="progress-bar" style="width:{{changes.progress}}%;" role="progressbar" aria-valuenow={{changes.progress}} aria-valuemin="0" aria-valuemax="100">{{changes.progress}}%</div>
-                  </div>
-                </button>
+              <div *ngFor="let change of changeManager.CHANGEINITIATIVES">
+                <app-change-button [change] = "change"></app-change-button>
+              </div>
             </div>
         </div>
     </div>

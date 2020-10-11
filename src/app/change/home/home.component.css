@@ -56,8 +56,13 @@ h1{
 }
 
 .active{
-    background-color: #8dc262 !important;
-    border: #8dc262;
+  color: white;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+  background-color: #8dc262 !important;
+  border: #8dc262;
+  width: 200px;
 }
 
 fa-icon{
@@ -70,31 +75,9 @@ fa-icon{
   height: 100%;
 }
 
-.btn-outline-light{
-  border-radius: 20px;
-  color: black;
-  font-weight: bold;
-  text-align: left;
-  width: 100%;
-}
-
-.btn-outline-light:hover{
-  opacity: 80%;
-}
-
 .dark{
   margin-right: 20px;
   color: black;
-}
-
-.progress{
-  margin-top: 20px;
-  border-radius: 20px;
-}
-
-.progress-bar{
-  background-color: #8dc262;
-  border-radius: 20px;
 }
 
 a{

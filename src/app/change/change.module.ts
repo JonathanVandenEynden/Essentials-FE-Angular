@@ -9,15 +9,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { AddChangeComponent } from './add-change/add-change.component';
+import { ChangeButtonComponent } from './change-button/change-button.component';
+import {ChangeResolver} from './changeResolver';
 
 const routes: Routes =
 [
   { path: 'Home', component: HomeComponent },
-  { path: 'Add', component: AddChangeComponent}
+  { path: 'Add', component: AddChangeComponent},
+  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver } },
 ];
 
 @NgModule({
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent ],
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent ],
   imports: [
     CommonModule,
     HttpClientModule,
