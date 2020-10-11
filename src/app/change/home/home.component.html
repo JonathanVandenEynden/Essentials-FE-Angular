@@ -4,7 +4,7 @@
 </div>
 <div class="row">
     <div class="col-11">
-        <h1>Welcome, Sukrit</h1>
+        <h1>Welcome, {{changeManager.FIRSTNAME}}</h1>
     </div>
     <div class="col">
         <button class="btn btn-secondary">Log out</button>
@@ -26,14 +26,10 @@
             <fa-icon [icon]="faPlus" class="dark ml-auto fa-lg"></fa-icon>
           </div>
             <div class="container">
-                <button class="btn btn-outline-light shadow p-3 mb-5 bg-white">New Catering
+                <button class="btn btn-outline-light shadow p-3 mb-5 bg-white" *ngFor="let changes of changeManager.CHANGEINITIATIVES">
+                  {{changes.description}}
                   <div class="progress">
-                    <div class="progress-bar" style="width: 25%;" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                  </div>
-                </button>
-                <button class="btn btn-outline-light shadow p-3 mb-5 bg-white">Expansion German Market
-                  <div class="progress">
-                    <div class="progress-bar" style="width: 80%;" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                    <div class="progress-bar" style="width:{{changes.progress}}%;" role="progressbar" aria-valuenow={{changes.progress}} aria-valuemin="0" aria-valuemax="100">{{changes.progress}}%</div>
                   </div>
                 </button>
             </div>

@@ -1,0 +1,26 @@
+{
+  "Id": "1",
+  "firstName": "Sukrit",
+  "lastName": "Sukrit",
+  "country": "Switzerland",
+  "office": "Swiss",
+  "factory": "factory1",
+  "department": "IT",
+  "team": "Management",
+  "changeInitiatives":[
+  {
+    "Id": "1",
+    "description": "New Catering",
+    "startDate": "11/10/2020",
+    "endDate": "30/10/2020",
+    "progress": "25"
+  },
+    {
+      "Id": "2",
+      "description": "Expansion German Market",
+      "startDate": "12/10/2020",
+      "endDate": "01/11/2020",
+      "progress": "80"
+    }
+    ]
+}
