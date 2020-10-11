@@ -1,13 +1,14 @@
 .container-fluid{
-    background-color: white;
-    height: 150px;
-    margin: auto;
+  overflow: hidden;
+  background-color: white;
+  height: 150px;
+  margin: auto;
 }
 
 .logo{
     margin-top: 20px;
     height: 100px;
-    width: 100px;
+    width: 90px;
     margin-bottom: 50px;
 }
 
@@ -36,10 +37,12 @@ h1{
 }
 
 .container{
-    border: solid;
-    border-radius: 20px;
-    border-color: #264754;
-    padding: 20px;
+  height: 500px;
+  overflow: auto;
+  border: solid;
+  border-radius: 10px;
+  border-color: #264754;
+  padding: 20px;
 }
 
 .btn-primary{
