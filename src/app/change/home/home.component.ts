@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {faPlus, faSyncAlt, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
 import mockChange from '../mockChange.json';
 import {Changemanager} from '../changemanager.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +15,16 @@ export class HomeComponent implements OnInit {
   faPlus = faPlus;
   public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  routeDashboard(): void {
+    this.router.navigate(['dashboard']);
+  }
+
+  addChangeEvent(): void {
+    this.router.navigate(['Add']);
+  }
 }

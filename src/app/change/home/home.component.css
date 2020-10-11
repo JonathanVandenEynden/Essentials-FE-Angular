@@ -97,3 +97,7 @@ fa-icon{
   border-radius: 20px;
 }
 
+a{
+  cursor: pointer;
+}
+

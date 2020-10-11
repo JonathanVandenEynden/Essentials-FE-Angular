@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserModule } from '@angular/platform-browser';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const appRoutes: Routes =
  [
@@ -15,7 +16,8 @@ const appRoutes: Routes =
     loadChildren: () => import('./user/user.module').then(mod => mod.UserModule),
     data: { preload: true }
   },
-  { path: '', redirectTo: 'user/LogIn', pathMatch: 'full' },
+   { path: 'dashboard', component: DashboardComponent},
+   { path: '', redirectTo: 'user/LogIn', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

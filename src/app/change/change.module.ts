@@ -8,14 +8,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { AddChangeComponent } from './add-change/add-change.component';
 
 const routes: Routes =
 [
   { path: 'Home', component: HomeComponent },
+  { path: 'Add', component: AddChangeComponent}
 ];
 
 @NgModule({
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent ],
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent ],
   imports: [
     CommonModule,
     HttpClientModule,
