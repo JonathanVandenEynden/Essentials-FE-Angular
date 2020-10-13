@@ -1,1 +1,47 @@
-<p>{{change.description}}</p>
+<div class="container-fluid">
+  <img class="logo" alt="Company logo" src="assets/images/logo.png" />
+  <img class="logoE" alt="Company logo" src="assets/images/logoE.png" />
+</div>
+<div class="row">
+  <div class="col-11">
+    <h1>Welcome, {{changeManager.FIRSTNAME}}</h1>
+  </div>
+  <div class="col">
+    <button class="btn btn-secondary">Log out</button>
+  </div>
+</div>
+<div class="container-fluid second">
+  <div class="row">
+    <div class="col-sm-3">
+      <h2>{{change.description}} |<br/>
+        <div class="progress">
+          <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>
+        </div>
+      </h2>
+      <div class="row">
+        <button class="btn active" disabled>Surveys<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row d-flex">
+        <h5>Surveys</h5>
+        <a class="ml-auto" (click)="addSurvey()"><fa-icon [icon]="faPlus" class="dark fa-lg"></fa-icon></a>
+      </div>
+      <div class="container">
+        <div *ngFor="let roadMap of change.roadMap">
+          <button class="btn btn-outline-light shadow p-3 mb-3 bg-white">
+            {{change.description}} - Survey {{roadMap.title}}<br/>
+            <p>from {{roadMap.STARTDATE}} until {{roadMap.ENDDATE}}</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
