@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import {MaterialModule} from '../material/material.module';
 
 const routes: Routes =
 [
@@ -13,12 +14,13 @@ const routes: Routes =
 
 @NgModule({
   declarations: [LoginComponent, AdminComponent],
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule.forChild(routes),
-  ]
+    imports: [
+        CommonModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forChild(routes),
+        MaterialModule
+    ]
 })
 export class UserModule { }

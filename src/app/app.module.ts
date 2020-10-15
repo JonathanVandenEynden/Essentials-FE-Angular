@@ -2,14 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavComponent } from './navigation/nav/nav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChangeModule } from './change/change.module';
 import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
-import {NavigationModule} from './navigation/navigation.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { LottieModule } from 'ngx-lottie';
+import {MaterialModule} from './material/material.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+// tslint:disable-next-line:typedef
+export function playerFactory() {
+  return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -23,7 +29,10 @@ import {NavigationModule} from './navigation/navigation.module';
     UserModule,
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    LottieModule.forRoot({ player: playerFactory }),
+    MaterialModule,
+    NoopAnimationsModule
   ],
   providers: [],
   exports: [
