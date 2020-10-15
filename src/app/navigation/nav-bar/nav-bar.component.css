@@ -1,0 +1,37 @@
+.container-fluid{
+  overflow: hidden;
+  background-color: white;
+  height: 150px;
+  margin: auto;
+}
+
+.logo{
+  margin-top: 20px;
+  height: 100px;
+  width: 90px;
+  margin-bottom: 50px;
+}
+
+.logoE{
+  margin-left: 10px;
+  margin-top: 30px;
+  height: 50px;
+  width: 180px;
+}
+
+.row{
+  margin: 0;
+}
+
+.col{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+button{
+  border-radius: 10px;
+}
+
+h1{
+  color: white;
+}
