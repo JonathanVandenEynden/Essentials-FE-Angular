@@ -11,6 +11,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { AddChangeComponent } from './add-change/add-change.component';
 import { ChangeButtonComponent } from './change-button/change-button.component';
 import {ChangeResolver} from './changeResolver';
+import {NavigationModule} from '../navigation/navigation.module';
+import {LottieModule} from 'ngx-lottie';
+import {MaterialModule} from '../material/material.module';
 
 const routes: Routes =
 [
@@ -22,12 +25,16 @@ const routes: Routes =
 @NgModule({
   declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent ],
   imports: [
+    NavigationModule,
+    MaterialModule,
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    LottieModule,
+
   ]
 })
 export class ChangeModule { }

@@ -17,21 +17,33 @@
       {
         "Id": "1",
         "title": "Step 1",
+        "assesment": {"Id": 1},
+        "startDate": "11/10/2020",
+        "endDate": "30/10/2020",
         "done": true
       },
       {
         "Id": "2",
         "title": "Step 2",
+        "assesment": {"Id": 2},
+        "startDate": "11/10/2020",
+        "endDate": "30/10/2020",
         "done": false
       },
       {
         "Id": "3",
         "title": "Step 3",
+        "assesment": {"Id": 3},
+        "startDate": "11/10/2020",
+        "endDate": "30/10/2020",
         "done": false
       },
       {
         "Id": "4",
         "title": "Step 4",
+        "assesment": {"Id": 4},
+        "startDate": "11/10/2020",
+        "endDate": "30/10/2020",
         "done": false
       }
     ]
@@ -45,21 +57,33 @@
         {
           "Id": "5",
           "title": "Step 1",
+          "assesment": {"Id": 5},
+          "startDate": "12/10/2020",
+          "endDate": "01/11/2020",
           "done": true
         },
         {
           "Id": "6",
           "title": "Step 2",
+          "assesment": {"Id": 6},
+          "startDate": "12/10/2020",
+          "endDate": "01/11/2020",
           "done": true
         },
         {
           "Id": "7",
           "title": "Step 3",
+          "assesment": {"Id": 7},
+          "startDate": "12/10/2020",
+          "endDate": "01/11/2020",
           "done": true
         },
         {
           "Id": "8",
           "title": "Step 4",
+          "assesment": {"Id": 8},
+          "startDate": "12/10/2020",
+          "endDate": "01/11/2020",
           "done": false
         }
       ]

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserModule } from '@angular/platform-browser';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -22,8 +22,8 @@ const appRoutes: Routes =
 ];
 
 @NgModule({
-  declarations:[],
-  imports: [RouterModule.forRoot(appRoutes),
+  declarations: [],
+  imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
     BrowserModule],
   exports: [RouterModule]
 })

@@ -1,0 +1,99 @@
+.container-fluid{
+  overflow: hidden;
+  background-color: white;
+  height: 150px;
+  margin: auto;
+}
+
+.row{
+  margin: 0;
+}
+
+.col{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+button{
+  border-radius: 10px;
+}
+
+.container{
+  max-height: 500px;
+  overflow: auto;
+  border: solid;
+  border-radius: 10px;
+  border-color: #264754;
+  padding: 20px;
+}
+
+.btn-primary{
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+  background-color: #264754;
+  border: #264754;
+  width: 200px;
+}
+
+.btn-primary:hover{
+  opacity: 90%;
+}
+
+.active{
+  color: white;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+  background-color: #8dc262 !important;
+  border: #8dc262;
+  width: 200px;
+}
+
+fa-icon{
+  color: white;
+}
+
+.second{
+  position: absolute;
+  padding: 20px;
+  height: 100%;
+}
+
+.dark{
+  margin-right: 20px;
+  color: black;
+}
+
+a{
+  cursor: pointer;
+}
+
+h1{
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.progress{
+  width: 280px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.progress-bar{
+  background-color: #8dc262;
+  border-radius: 20px;
+}
+
+.btn-outline-light{
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+p{
+  font-size: 10px;
+}
+

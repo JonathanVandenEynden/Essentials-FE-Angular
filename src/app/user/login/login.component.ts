@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  // tslint:disable-next-line:typedef
   nextPage(){
     this.router.navigate(['change/Home']);
   }

@@ -1,15 +1,4 @@
-<div class="container-fluid">
-    <img class="logo" alt="Company logo" src="assets/images/logo.png" />
-    <img class="logoE" alt="Company logo" src="assets/images/logoE.png" />
-</div>
-<div class="row">
-    <div class="col-11">
-        <h1>Welcome, {{changeManager.FIRSTNAME}}</h1>
-    </div>
-    <div class="col">
-        <button class="btn btn-secondary">Log out</button>
-    </div>
-</div>
+<app-nav-bar></app-nav-bar>
 <div class="container-fluid second">
     <div class="row">
         <div class="col-sm-3">
@@ -22,8 +11,8 @@
         </div>
         <div class="col">
           <div class="row d-flex">
-            <h5>Change Events</h5>
-            <a class="ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-lg"></fa-icon></a>
+            <h2>Change Events</h2>
+            <a class="ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
           </div>
             <div class="container">
               <div *ngFor="let change of changeManager.CHANGEINITIATIVES">
