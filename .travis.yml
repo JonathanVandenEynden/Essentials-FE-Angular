@@ -1,4 +1,4 @@
-dist: essentials-e1
+dist: trusty
 sudo: false
 
 language: node_js
@@ -21,3 +21,4 @@ install:
 
 script:
   - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  - ng build --prod
