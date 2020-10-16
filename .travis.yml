@@ -1,4 +1,4 @@
-dist: trusty
+dist: essentials-e1
 sudo: false
 
 language: node_js
