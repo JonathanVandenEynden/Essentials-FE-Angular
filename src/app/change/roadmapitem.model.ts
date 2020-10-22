@@ -1,12 +1,13 @@
-import {Assesment, AssesmentJson} from './assesment.model';
+import {Survey, SurveyJson} from './survey.model';
 
 export interface RoadmapItemJson{
-  Id: number;
+  id: number;
   title: string;
-  assesment: AssesmentJson;
+  assesment: string;
+  done: boolean;
   startDate: string;
   endDate: string;
-  done: boolean;
+
 }
 
 export class RoadmapItem {
@@ -14,7 +15,7 @@ export class RoadmapItem {
   private ID: number;
   constructor(
     private TITLE: string,
-    private _ASSESMENT: Assesment,
+    private _ASSESMENT: string,
     private _STARTDATE: string,
     private _ENDDATE: string,
     private DONE: boolean
@@ -23,12 +24,12 @@ export class RoadmapItem {
   static fromJSON(json: RoadmapItemJson): RoadmapItem {
     const roadmapItem = new RoadmapItem(
       json.title,
-      Assesment.fromJSON(json.assesment),
+      json.assesment,
       json.startDate,
       json.endDate,
       json.done
     );
-    roadmapItem.ID = json.Id;
+    roadmapItem.ID = json.id;
     return roadmapItem;
   }
 
@@ -48,7 +49,7 @@ export class RoadmapItem {
   get title(): string {
     return this.TITLE;
   }
-  get assesment(): Assesment{
+  get assesment(): string{
     return this._ASSESMENT;
   }
   get done(): boolean{

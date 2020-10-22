@@ -5,7 +5,10 @@ import {faPen} from '@fortawesome/free-solid-svg-icons';
 import {Changemanager} from '../changemanager.model';
 import mockChange from '../mockChange.json';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {ChangeDataService} from '../change-data.service';
+import {empty, Observable} from 'rxjs';
+import {ChangeInitiative} from '../change.model';
 
 @Component({
   selector: 'app-add-change',
@@ -19,12 +22,16 @@ export class AddChangeComponent implements OnInit {
   faPen = faPen;
   public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
   public changeForm: FormGroup;
+  // tslint:disable-next-line:variable-name
+  private _fetchChanges$: Observable<ChangeInitiative[]>;
+  public errorMessage = '';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private changeDataService: ChangeDataService) { }
   get roadMap(): FormArray {
     return this.changeForm.get('roadMap') as FormArray;
   }
   ngOnInit(): void {
+    this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     this.changeForm = this.fb.group({title: [''], startDate: [''], endDate: [''], roadMap: this.fb.array([this.createRoadmap()])
     });
     this.roadMap.valueChanges
@@ -48,6 +55,11 @@ export class AddChangeComponent implements OnInit {
           }
         }
       });
+  }
+
+  get changes$(): Observable<ChangeInitiative[]>
+  {
+    return this._fetchChanges$;
   }
 
   createRoadmap(): FormGroup {

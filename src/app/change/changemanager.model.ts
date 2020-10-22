@@ -1,7 +1,7 @@
 import {ChangeInitiative, ChangeInitiativeJson} from './change.model';
 
 export interface ChangemanagerJson {
-  Id: number;
+  id: number;
   firstName: string;
   lastName: string;
   country: string;
@@ -35,7 +35,7 @@ export class Changemanager {
       json.team,
       json.changeInitiatives.map(ChangeInitiative.fromJSON)
     );
-    changeManager._ID = json.Id;
+    changeManager._ID = json.id;
     return changeManager;
   }
 
