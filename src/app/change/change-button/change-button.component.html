@@ -1,6 +1,9 @@
 <button class="btn btn-outline-light shadow p-3 mb-5 bg-white" (click)="seeSurveys()">
   {{change.name}}
-  <a class="ml-auto" (click)="deleteChange(change)"><fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon></a>
+  <a class="ml-auto" data-toggle="modal" data-target="#deleteChange"><fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon></a>
+  <div class="modal fade" id="deleteChange" tabindex="-1" role="dialog" aria-labelledby="deleteChange" aria-hidden="true">
+    <app-delete-change></app-delete-change>
+  </div>
   <a class="ml-auto" (click)="updateChange()"><fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon></a>
   <div class="progress">
     <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>

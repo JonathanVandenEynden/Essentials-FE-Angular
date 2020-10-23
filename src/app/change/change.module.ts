@@ -14,6 +14,7 @@ import {ChangeResolver} from './changeResolver';
 import {NavigationModule} from '../navigation/navigation.module';
 import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
+import { DeleteChangeComponent } from './delete-change/delete-change.component';
 
 const routes: Routes =
 [
@@ -23,7 +24,8 @@ const routes: Routes =
 ];
 
 @NgModule({
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent ],
+  // tslint:disable-next-line:max-line-length
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, DeleteChangeComponent ],
   imports: [
     NavigationModule,
     MaterialModule,
