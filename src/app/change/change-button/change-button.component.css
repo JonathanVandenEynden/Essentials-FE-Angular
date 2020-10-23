@@ -19,3 +19,7 @@
 .btn-outline-light:hover{
   opacity: 80%;
 }
+
+.icon{
+  margin-right: 30px;
+}

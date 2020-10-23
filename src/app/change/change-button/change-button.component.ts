@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
 })
 export class ChangeButtonComponent implements OnInit {
   @Input() public change: ChangeInitiative;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {

@@ -17,7 +17,14 @@
             <div class="container">
               <div *ngIf="(changes$ | async) as changes; else Error">
                 <div *ngFor="let change of changes">
-                  <app-change-button [change] = "change"></app-change-button>
+                  <div class="row">
+                    <div class="col-11">
+                      <app-change-button [change] = "change"></app-change-button>
+                    </div>
+                    <div class="col-1">
+                      <a class="ml-auto" (click)="deleteChange(change)"><fa-icon [icon]="faTrash" class="dark icon fa-2x"></fa-icon></a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -59,6 +59,17 @@ export class ChangeDataService {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  removeChange(id: any){
+    /*this._CHANGES.splice(id - 1);
+      this._CHANGES$.next(this._CHANGES);
+      return this.http.delete(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c : ChangeInitiative) => {
+      this._CHANGES = [...this._CHANGES, c];
+      this._CHANGES$.next(this._CHANGES);
+      this._RELOAD$.next(true);
+    });*/
+  }
+
   handleError(err: any): Observable<never>
   {
     let errorMessage: string;
