@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Changemanager} from '../../change/changemanager.model';
-import mockChange from '../../change/mockChange.json';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +7,6 @@ import mockChange from '../../change/mockChange.json';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
 
   constructor() { }
 

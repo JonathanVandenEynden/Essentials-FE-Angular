@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {faPlus, faSyncAlt, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
-import mockChange from '../mockChange.json';
-import {Changemanager} from '../changemanager.model';
 import {Router} from '@angular/router';
+import {catchError} from 'rxjs/operators';
+import {empty, Observable} from 'rxjs';
+import {ChangeInitiative} from '../change.model';
+import {ChangeDataService} from '../change-data.service';
 
 @Component({
   selector: 'app-home',
@@ -13,11 +15,14 @@ export class HomeComponent implements OnInit {
   faTachometer = faTachometerAlt;
   faSync = faSyncAlt;
   faPlus = faPlus;
-  public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
+  // tslint:disable-next-line:variable-name
+  private _fetchChanges$: Observable<ChangeInitiative[]>;
+  public errorMessage = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private changeDataService: ChangeDataService) { }
 
   ngOnInit(): void {
+    this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
   }
 
   routeDashboard(): void {
@@ -26,5 +31,10 @@ export class HomeComponent implements OnInit {
 
   addChangeEvent(): void {
     this.router.navigate(['Add']);
+  }
+
+  get changes$(): Observable<ChangeInitiative[]>
+  {
+    return this._fetchChanges$;
   }
 }
