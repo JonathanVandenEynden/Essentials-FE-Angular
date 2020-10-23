@@ -1,4 +1,3 @@
-import {Survey, SurveyJson} from './survey.model';
 
 export interface RoadmapItemJson{
   id: number;
@@ -56,11 +55,11 @@ export class RoadmapItem {
     return this.DONE;
   }
   get STARTDATE(): string {
-    return this._STARTDATE;
+    return this._STARTDATE.split('T')[0];
   }
 
   get ENDDATE(): string {
-    return this._ENDDATE;
+    return this._ENDDATE.split('T')[0];
   }
 }
 

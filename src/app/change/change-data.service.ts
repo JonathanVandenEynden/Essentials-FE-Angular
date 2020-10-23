@@ -1,7 +1,7 @@
-import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { map, catchError, tap, shareReplay, switchMap } from 'rxjs/operators';
-import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ChangeInitiative} from './change.model';
 
@@ -12,10 +12,6 @@ export class ChangeDataService {
   private _CHANGES$ = new BehaviorSubject<ChangeInitiative[]>([]);
   private _CHANGES: ChangeInitiative[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
-  // tslint:disable-next-line:typedef
-  getChange(changeId: any) {
-    throw new Error('Method not implemented.');
-  }
 
   constructor(private http: HttpClient) {
     this.changes$
@@ -53,7 +49,7 @@ export class ChangeDataService {
     return this.http.get(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON));
   }
   // tslint:disable-next-line:typedef
-  addNewCategory(change: ChangeInitiative)
+  addNewChange(change: ChangeInitiative)
   {
     // tslint:disable-next-line:max-line-length
     return this.http.post(`${environment.apiUrl}/ChangeInitiatives/`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c: ChangeInitiative) => {

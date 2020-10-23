@@ -70,7 +70,8 @@ a{
 }
 
 h1{
-  font-size: 45px;
+  border-right: black solid 5px;
+  font-size: 40px;
   font-weight: bold;
 }
 

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faClipboard, faPlus, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {ChangeInitiative} from '../change.model';
-import {Changemanager} from '../changemanager.model';
-import mockChange from '../mockChange.json';
 
 @Component({
   selector: 'app-survey',
@@ -12,7 +10,6 @@ import mockChange from '../mockChange.json';
 })
 export class SurveyComponent implements OnInit {
   public change: ChangeInitiative;
-  public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
   faPlus = faPlus;
   faClip = faClipboard;
   faGroup = faUsers;

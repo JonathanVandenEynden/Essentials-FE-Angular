@@ -56,6 +56,9 @@ export class User {
   get EMAIL(): string {
     return this._EMAIL;
   }
+  FULLNAME(): string{
+    return this._FIRSTNAME + ' ' + this._LASTNAME;
+  }
 
 }
 
