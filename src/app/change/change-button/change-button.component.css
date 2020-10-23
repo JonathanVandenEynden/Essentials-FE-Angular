@@ -21,5 +21,16 @@
 }
 
 .icon{
-  margin-right: 30px;
+  margin-right: 20px;
+  padding: 5px;
+  color: black;
+}
+
+a{
+  cursor: pointer;
+}
+
+.icon:hover{
+  background-color: lightgrey;
+  border-radius: 20px;
 }
