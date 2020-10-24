@@ -15,7 +15,6 @@ export class DashboardComponent implements OnInit {
   faPlus = faPlus;
   public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
 
-
   constructor(private _router: Router) { }
 
   ngOnInit(): void {

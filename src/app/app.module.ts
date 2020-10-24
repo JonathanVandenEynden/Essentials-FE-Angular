@@ -11,6 +11,7 @@ import { LottieModule } from 'ngx-lottie';
 import {MaterialModule} from './material/material.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from './dashboard/dashboard.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
@@ -32,7 +33,8 @@ export function playerFactory() {
     FontAwesomeModule,
     LottieModule.forRoot({ player: playerFactory }),
     MaterialModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    NgbModule
   ],
   providers: [],
   exports: [],

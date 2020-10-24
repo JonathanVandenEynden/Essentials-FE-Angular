@@ -17,9 +17,9 @@ import {MaterialModule} from '../material/material.module';
 
 const changeRoutes: Routes =
 [
-  { path: 'Home', component: HomeComponent },
-  { path: 'Add', component: AddChangeComponent},
-  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
+  { path: 'home', component: HomeComponent },
+  { path: 'add', component: AddChangeComponent},
+  { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
 ];
 
 @NgModule({

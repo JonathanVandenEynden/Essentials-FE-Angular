@@ -7,8 +7,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {LottieModule} from 'ngx-lottie';
+import {RouterModule, Routes} from '@angular/router';
 
-
+const dashboardRoutes: Routes =
+  [
+    { path: 'home', component: DashboardComponent }
+  ];
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -20,6 +24,7 @@ import {LottieModule} from 'ngx-lottie';
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
+    RouterModule.forChild(dashboardRoutes),
     LottieModule,
   ],
   exports: [DashboardComponent]
