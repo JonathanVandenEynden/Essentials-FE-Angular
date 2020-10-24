@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {Changemanager} from '../../change/changemanager.model';
 import mockChange from '../../change/mockChange.json';
 
@@ -7,10 +8,11 @@ import mockChange from '../../change/mockChange.json';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit {
-  public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
 
-  constructor() { }
+export class NavBarComponent implements OnInit {
+  loggedInUser$ = Changemanager.fromJSON(mockChange);
+
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }

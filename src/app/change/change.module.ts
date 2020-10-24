@@ -15,11 +15,11 @@ import {NavigationModule} from '../navigation/navigation.module';
 import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
 
-const routes: Routes =
+const changeRoutes: Routes =
 [
   { path: 'Home', component: HomeComponent },
   { path: 'Add', component: AddChangeComponent},
-  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver } },
+  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
 ];
 
 @NgModule({
@@ -32,7 +32,7 @@ const routes: Routes =
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(changeRoutes),
     LottieModule,
 
   ]

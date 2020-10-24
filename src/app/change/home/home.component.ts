@@ -15,16 +15,16 @@ export class HomeComponent implements OnInit {
   faPlus = faPlus;
   public changeManager: Changemanager = Changemanager.fromJSON(mockChange);
 
-  constructor(private router: Router) { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }
 
   routeDashboard(): void {
-    this.router.navigate(['dashboard']);
+    this._router.navigate(['dashboard']);
   }
 
   addChangeEvent(): void {
-    this.router.navigate(['Add']);
+    this._router.navigate(['Add']);
   }
 }
