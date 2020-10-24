@@ -16,12 +16,14 @@ import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
 import { UpdateChangeComponent } from './update-change/update-change.component';
 
-const routes: Routes =
+const changeRoutes: Routes =
 [
-  { path: 'Home', component: HomeComponent },
-  { path: 'Add', component: AddChangeComponent },
-  { path: 'Update', component: UpdateChangeComponent },
-  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver } },
+
+  { path: 'home', component: HomeComponent },
+  { path: 'add', component: AddChangeComponent},
+  { path: 'update', component: UpdateChangeComponent },
+  { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
+
 ];
 
 @NgModule({
@@ -35,7 +37,7 @@ const routes: Routes =
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(changeRoutes),
     LottieModule,
 
   ]

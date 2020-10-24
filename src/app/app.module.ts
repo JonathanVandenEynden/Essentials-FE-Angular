@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ChangeModule } from './change/change.module';
 import { UserModule } from './user/user.module';
@@ -10,7 +9,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavigationModule } from './navigation/navigation.module';
 import { LottieModule } from 'ngx-lottie';
 import {MaterialModule} from './material/material.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {DashboardModule} from './dashboard/dashboard.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
@@ -20,11 +21,11 @@ export function playerFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     PageNotFoundComponent,
   ],
   imports: [
     NavigationModule,
+    DashboardModule,
     ChangeModule,
     UserModule,
     BrowserModule,
@@ -32,11 +33,11 @@ export function playerFactory() {
     FontAwesomeModule,
     LottieModule.forRoot({ player: playerFactory }),
     MaterialModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    NgbModule
   ],
   providers: [],
-  exports: [
-  ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

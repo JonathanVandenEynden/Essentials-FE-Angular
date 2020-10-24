@@ -1,24 +1,3 @@
-.container-fluid{
-  overflow: hidden;
-  background-color: white;
-  height: 150px;
-  margin: auto;
-}
-
-.logo{
-  margin-top: 20px;
-  height: 100px;
-  width: 90px;
-  margin-bottom: 50px;
-}
-
-.logoE{
-  margin-left: 10px;
-  margin-top: 30px;
-  height: 50px;
-  width: 180px;
-}
-
 .row{
   margin: 0;
 }
@@ -36,4 +15,22 @@ h1{
   color: white;
   font-weight: bolder;
   font-size: 40px;
+}
+
+nav{
+  background: #264754;
+}
+
+.account{
+  color:white;
+}
+
+.account>button{
+  padding:0;
+  margin:0;
+}
+
+account>button:active{
+  text-decoration: none;
+  background: none;
 }

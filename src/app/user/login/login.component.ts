@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   nextPage(){
-    this.router.navigate(['change/Home']);
+    this.router.navigate(['dashboard/home']);
   }
 
 }

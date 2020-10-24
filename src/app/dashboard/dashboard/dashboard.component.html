@@ -1,0 +1,22 @@
+<app-nav-bar>
+  <div class="container-fluid second">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="row">
+          <button class="btn active btn-primary" disabled>Dashboard<fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon></button>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" (click)="routeChangeEvents()">Change Events<fa-icon [icon]="faSync" class="fa-pull-right"></fa-icon></button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row d-flex">
+          <h2>Dashboard</h2>
+        </div>
+        <div class="container">
+          <!--dashboard stats-->
+        </div>
+      </div>
+    </div>
+  </div>
+</app-nav-bar>
