@@ -5,6 +5,7 @@ import mockChange from '../../change/mockChange.json';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
+
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -12,9 +13,11 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 })
 
 export class NavBarComponent implements OnInit {
+
   faSignInAlt = faSignInAlt;
   faUser = faUser;
   loggedInUser$ = Changemanager.fromJSON(mockChange);
+
 
   constructor(private _router: Router) { }
 

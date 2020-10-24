@@ -14,16 +14,21 @@ import {ChangeResolver} from './changeResolver';
 import {NavigationModule} from '../navigation/navigation.module';
 import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
+import { UpdateChangeComponent } from './update-change/update-change.component';
 
 const changeRoutes: Routes =
 [
+
   { path: 'home', component: HomeComponent },
   { path: 'add', component: AddChangeComponent},
+  { path: 'update', component: UpdateChangeComponent },
   { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
+
 ];
 
 @NgModule({
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent ],
+  // tslint:disable-next-line:max-line-length
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent ],
   imports: [
     NavigationModule,
     MaterialModule,

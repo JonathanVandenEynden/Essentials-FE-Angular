@@ -22,17 +22,9 @@ mat-form-field.mat-form-field {
   font-size: 20px;
 }
 
-h2{
-  margin-top: -50px;
-}
-
 mat-card.mat-card{
   overflow: auto;
   width: 300px;
-}
-
-.col-4{
-  margin-top: -100px;
 }
 
 .btn{
