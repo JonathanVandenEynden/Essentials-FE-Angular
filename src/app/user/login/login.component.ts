@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) { }
+  public user: FormGroup;
+  public errorMessage = '';
+
+  constructor(private router: Router,
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.user = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
-  // tslint:disable-next-line:typedef
-  nextPage(){
-    this.router.navigate(['dashboard/home']);
+  onSubmit() {
+    if(true){
+      this.router.navigate(['dashboard/home']);
+    } else{
+      this.errorMessage = `Could not login`;
+    }
+
   }
 
 }

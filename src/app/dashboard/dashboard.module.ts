@@ -8,6 +8,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {LottieModule} from 'ngx-lottie';
 import {RouterModule, Routes} from '@angular/router';
+import { BaseChartDirective, ChartsModule, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { ChartsComponent } from './charts/charts.component';
+
 
 const dashboardRoutes: Routes =
   [
@@ -15,7 +20,7 @@ const dashboardRoutes: Routes =
   ];
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, ChartsComponent],
   imports: [
     NavigationModule,
     MaterialModule,
@@ -25,8 +30,17 @@ const dashboardRoutes: Routes =
     FormsModule,
     FontAwesomeModule,
     RouterModule.forChild(dashboardRoutes),
+    ChartsModule,
+    HighlightModule,
     LottieModule,
   ],
+  providers: [],
   exports: [DashboardComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {
+  constructor() {
+    BaseChartDirective.unregisterPlugin(ChartDataLabels);
+    monkeyPatchChartJsLegend();
+    monkeyPatchChartJsTooltip();
+  }
+}
