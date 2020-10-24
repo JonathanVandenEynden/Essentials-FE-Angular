@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   routeDashboard(): void {
-    this._router.navigate(['dashboard']);
+    this._router.navigate(['dashboard/home']);
   }
 
   addChangeEvent(): void {

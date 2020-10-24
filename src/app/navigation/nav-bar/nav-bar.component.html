@@ -34,12 +34,11 @@
       <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-6.jpg" class="rounded-circle z-depth-0 w-50" alt="avatar image">
     </button>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item>Account <fa-icon [icon]=faUser class="fa-pull-right"></fa-icon></button>
-      <button mat-menu-item>Sign out <fa-icon [icon]=faSignInAlt class="fa-pull-right"></fa-icon></button>
+      <button mat-menu-item (click)="routeAccount()">Account <fa-icon [icon]=faUser class="fa-pull-right"></fa-icon></button>
+      <button mat-menu-item (click)="routeSignOut()">Sign out <fa-icon [icon]=faSignInAlt class="fa-pull-right"></fa-icon></button>
     </mat-menu>
     </div>
     </div>
-
 </nav>
 <!--einde navbar -->
 <ng-content></ng-content>

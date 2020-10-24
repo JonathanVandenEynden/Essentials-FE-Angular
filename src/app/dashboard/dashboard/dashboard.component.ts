@@ -21,6 +21,6 @@ export class DashboardComponent implements OnInit {
   }
 
   routeChangeEvents(): void {
-    this._router.navigate(['change/home']);
+    this._router.navigate(['../../change/home']);
   }
 }
