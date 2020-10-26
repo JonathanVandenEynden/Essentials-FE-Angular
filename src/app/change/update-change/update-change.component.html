@@ -1,1 +1,17 @@
-<p>update-change works!</p>
+<app-nav-bar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-5">
+        <h1>{{change.name}}</h1>
+        <div class="progress">
+          <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-primary">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
+        <button class="btn btn-primary">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
+        <button class="btn btn-primary">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
+      </div>
+    </div>
+  </div>
+</app-nav-bar>
