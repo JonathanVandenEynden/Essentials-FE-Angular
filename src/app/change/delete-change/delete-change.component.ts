@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ChangeInitiative} from '../change.model';
 
 @Component({
   selector: 'app-delete-change',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./delete-change.component.css']
 })
 export class DeleteChangeComponent implements OnInit {
+  @Input() public change: ChangeInitiative;
 
   constructor() { }
 

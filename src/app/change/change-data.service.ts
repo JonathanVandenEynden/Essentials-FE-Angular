@@ -41,7 +41,7 @@ export class ChangeDataService {
   fetchChanges$(): Observable<ChangeInitiative[]>
   {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${2}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
   getChange$(id: any): Observable<ChangeInitiative>
   {
@@ -61,13 +61,9 @@ export class ChangeDataService {
 
   // tslint:disable-next-line:typedef
   removeChange(id: any){
-    /*this._CHANGES.splice(id - 1);
-      this._CHANGES$.next(this._CHANGES);
-      return this.http.delete(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c : ChangeInitiative) => {
-      this._CHANGES = [...this._CHANGES, c];
-      this._CHANGES$.next(this._CHANGES);
+    return this.http.delete(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError)).subscribe(() => {
       this._RELOAD$.next(true);
-    });*/
+    });
   }
 
   handleError(err: any): Observable<never>

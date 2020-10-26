@@ -12,9 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
-
-
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -33,7 +31,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    LayoutModule
+    MatDialogModule,
+    LayoutModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -49,7 +48,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    LayoutModule
-]
+    MatDialogModule,
+    LayoutModule,
+  ]
 })
 export class MaterialModule { }

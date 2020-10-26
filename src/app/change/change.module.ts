@@ -20,6 +20,7 @@ const routes: Routes =
 [
   { path: 'Home', component: HomeComponent },
   { path: 'Add', component: AddChangeComponent},
+  { path: 'delete', component: DeleteChangeComponent},
   { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver } },
 ];
 
@@ -36,7 +37,6 @@ const routes: Routes =
     FontAwesomeModule,
     RouterModule.forChild(routes),
     LottieModule,
-
   ]
 })
 export class ChangeModule { }
