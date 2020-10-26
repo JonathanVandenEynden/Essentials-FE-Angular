@@ -48,7 +48,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -86,6 +86,10 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatDialogModule,
+    LayoutModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,

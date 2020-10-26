@@ -60,6 +60,13 @@ export class ChangeDataService {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  removeChange(id: any){
+    return this.http.delete(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError)).subscribe(() => {
+      this._RELOAD$.next(true);
+    });
+  }
+
   handleError(err: any): Observable<never>
   {
     let errorMessage: string;

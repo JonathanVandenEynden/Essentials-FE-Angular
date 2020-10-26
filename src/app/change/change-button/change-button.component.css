@@ -19,3 +19,18 @@
 .btn-outline-light:hover{
   opacity: 80%;
 }
+
+.icon{
+  margin-right: 20px;
+  padding: 5px;
+  color: black;
+}
+
+a{
+  cursor: pointer;
+}
+
+.icon:hover{
+  background-color: lightgrey;
+  border-radius: 20px;
+}

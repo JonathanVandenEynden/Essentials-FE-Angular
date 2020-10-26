@@ -14,21 +14,21 @@ import {ChangeResolver} from './changeResolver';
 import {NavigationModule} from '../navigation/navigation.module';
 import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
+import { DeleteChangeComponent } from './delete-change/delete-change.component';
 import { UpdateChangeComponent } from './update-change/update-change.component';
 
 const changeRoutes: Routes =
 [
-
   { path: 'home', component: HomeComponent },
   { path: 'add', component: AddChangeComponent},
   { path: 'update', component: UpdateChangeComponent },
+  { path: 'delete', component: DeleteChangeComponent},
   { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
-
 ];
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent ],
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent, DeleteChangeComponent ],
   imports: [
     NavigationModule,
     MaterialModule,
@@ -39,7 +39,6 @@ const changeRoutes: Routes =
     FontAwesomeModule,
     RouterModule.forChild(changeRoutes),
     LottieModule,
-
   ]
 })
 export class ChangeModule { }
