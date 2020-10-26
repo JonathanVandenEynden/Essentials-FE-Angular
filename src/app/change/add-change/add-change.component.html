@@ -1,4 +1,4 @@
-<app-nav-bar></app-nav-bar>
+<app-nav-bar>
 <div class="container-fluid">
   <div class="row">
     <div class="col-4">
@@ -51,9 +51,9 @@
         </mat-form-field>
         <mat-form-field>
           <mat-select aria-label="ChangeSponsor" placeholder="Sponsor" type="text" formControlName="changesponsor" required>
-            <div *ngIf="(changes$ | async) as changes; else Error">
-              <mat-option *ngFor="let change of changes" [value]="change.sponsor">
-                {{ change.sponsor.FULLNAME() }}
+            <div *ngIf="(users$ | async) as users; else Error">
+              <mat-option *ngFor="let user of users" [value]="user">
+                {{ user.FULLNAME() }}
               </mat-option>
             </div>
           </mat-select>
@@ -69,7 +69,6 @@
   </div>
 </div>
 
-
 <ng-template #Error>
   <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
     <div class="card-header">
@@ -78,3 +77,5 @@
     </div>
   </div>
 </ng-template>
+  
+  </app-nav-bar>

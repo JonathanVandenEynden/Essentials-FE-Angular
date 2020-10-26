@@ -15,18 +15,20 @@ import {NavigationModule} from '../navigation/navigation.module';
 import {LottieModule} from 'ngx-lottie';
 import {MaterialModule} from '../material/material.module';
 import { DeleteChangeComponent } from './delete-change/delete-change.component';
+import { UpdateChangeComponent } from './update-change/update-change.component';
 
-const routes: Routes =
+const changeRoutes: Routes =
 [
-  { path: 'Home', component: HomeComponent },
-  { path: 'Add', component: AddChangeComponent},
+  { path: 'home', component: HomeComponent },
+  { path: 'add', component: AddChangeComponent},
+  { path: 'update', component: UpdateChangeComponent },
   { path: 'delete', component: DeleteChangeComponent},
-  { path: 'Survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver } },
+  { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
 ];
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, DeleteChangeComponent ],
+  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent, DeleteChangeComponent ],
   imports: [
     NavigationModule,
     MaterialModule,
@@ -35,7 +37,7 @@ const routes: Routes =
     ReactiveFormsModule,
     FormsModule,
     FontAwesomeModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(changeRoutes),
     LottieModule,
   ]
 })

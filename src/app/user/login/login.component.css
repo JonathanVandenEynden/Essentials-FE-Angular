@@ -7,24 +7,31 @@
     height: 15%;
     width: 15%;
     margin-top: 100px;
-    margin-bottom: 50px;
 }
 
 .btn{
-    width: 250px;
+    width: 10%;
     border-radius: 10px;
+    color: white;
+    background-color: rgb(54,162,54);
 }
 
 .form-control{
     margin: auto;
     width: 450px;
     border-radius: 10px;
+    border: 1px solid rgb(54,162,54)
 }
 
 .card{
     margin: auto;
     height: 50%;
     width: 50%;
+}
+
+.input{
+  margin-top:5%;
+  margin-bottom:2%;
 }
 
 

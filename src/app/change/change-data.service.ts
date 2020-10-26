@@ -51,6 +51,7 @@ export class ChangeDataService {
   // tslint:disable-next-line:typedef
   addNewChange(change: ChangeInitiative)
   {
+    console.log(change.sponsor);
     // tslint:disable-next-line:max-line-length
     return this.http.post(`${environment.apiUrl}/ChangeInitiatives/`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c: ChangeInitiative) => {
       this._CHANGES = [...this._CHANGES, c];

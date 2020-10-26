@@ -21,18 +21,19 @@ export class HomeComponent implements OnInit {
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   public errorMessage = '';
 
-  constructor(private router: Router, private changeDataService: ChangeDataService) { }
+
+  constructor(private _router: Router, private changeDataService: ChangeDataService) { }
 
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
   }
 
   routeDashboard(): void {
-    this.router.navigate(['dashboard']);
+    this._router.navigate(['dashboard/home']);
   }
 
   addChangeEvent(): void {
-    this.router.navigate(['Add']);
+    this._router.navigate(['add']);
   }
 
   get changes$(): Observable<ChangeInitiative[]>

@@ -9,7 +9,7 @@ import {MaterialModule} from '../material/material.module';
 
 const routes: Routes =
 [
-  { path: 'LogIn', component: LoginComponent },
+  { path: 'logIn', component: LoginComponent },
 ];
 
 @NgModule({

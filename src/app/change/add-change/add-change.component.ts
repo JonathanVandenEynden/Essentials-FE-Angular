@@ -7,6 +7,8 @@ import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
 import {ChangeInitiative} from '../change.model';
+import {UserDataService} from '../user-data.service';
+import {Employee} from '../user.model';
 
 @Component({
   selector: 'app-add-change',
@@ -21,21 +23,29 @@ export class AddChangeComponent implements OnInit {
   public changeForm: FormGroup;
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
+  // tslint:disable-next-line:variable-name
+  private _fetchUsers$: Observable<Employee[]>;
   public errorMessage = '';
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
 
-  constructor(private fb: FormBuilder, private changeDataService: ChangeDataService) { }
+  constructor(private fb: FormBuilder, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
   get roadMap(): FormArray {
     return this.changeForm.get('roadMap') as FormArray;
   }
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
+    this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     this.changeForm = this.fb.group({name: [''], description: [''], startDate: [''], endDate: [''], changetype: [''], changesponsor: ['']});
   }
 
   get changes$(): Observable<ChangeInitiative[]>
   {
     return this._fetchChanges$;
+  }
+
+  get users$(): Observable<Employee[]>
+  {
+    return this._fetchUsers$;
   }
 
   // tslint:disable-next-line:typedef
