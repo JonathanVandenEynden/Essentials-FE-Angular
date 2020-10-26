@@ -8,9 +8,44 @@
         </div>
       </div>
       <div class="col-6">
-        <button class="btn btn-primary">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
-        <button class="btn btn-primary">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
-        <button class="btn btn-primary">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
+        <div class="row">
+          <div class="col-4">
+            <mat-card>
+              <mat-card-title>
+                <button class="btn btn-primary">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
+              </mat-card-title>
+              <mat-card-content>
+                <div *ngFor="let item of change.roadMap">
+                  <h5>{{item.title}}</h5>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="col-4">
+            <mat-card>
+              <mat-card-title>
+                <button class="btn btn-primary">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
+              </mat-card-title>
+              <mat-card-content>
+                <div *ngFor="let item of change.roadMap">
+                  <h5>{{item.assesment}}</h5>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class="col-4">
+            <mat-card>
+              <mat-card-title>
+                <button class="btn btn-primary">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
+              </mat-card-title>
+              <mat-card-content>
+                <div *ngFor="let item of change.roadMap">
+                  <h5>{{i}}</h5>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
