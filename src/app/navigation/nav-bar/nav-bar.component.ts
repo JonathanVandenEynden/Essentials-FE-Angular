@@ -18,6 +18,7 @@ export class NavBarComponent implements OnInit {
   loggedInUser$ = 'Sukrit';
 
 
+  // tslint:disable-next-line:variable-name
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
