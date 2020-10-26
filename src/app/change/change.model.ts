@@ -1,6 +1,6 @@
 import {RoadmapItem, RoadmapItemJson} from './roadmapitem.model';
 import {ChangeGroupJson} from './changegroup.model';
-import {User, UserJson} from './user.model';
+import {Employee, EmployeeJson} from './user.model';
 
 export interface ChangeInitiativeJson{
   id: number;
@@ -9,7 +9,7 @@ export interface ChangeInitiativeJson{
   startDate: string;
   endDate: string;
   changeGroup: ChangeGroupJson;
-  changeSponsor: UserJson;
+  changeSponsor: EmployeeJson;
   changeType: string;
   roadMap: RoadmapItemJson[];
 }
@@ -21,7 +21,7 @@ export class ChangeInitiative {
     private DESCRIPTION: string,
     private STARTDATE: string,
     private ENDDATE: string,
-    private CHANGESPONSOR: User,
+    private CHANGESPONSOR: Employee,
     private ROADMAP: RoadmapItem[]
   ) {}
 
@@ -31,7 +31,7 @@ export class ChangeInitiative {
       json.description,
       json.startDate,
       json.endDate,
-      User.fromJSON(json.changeSponsor),
+      Employee.fromJSON(json.changeSponsor),
       json.roadMap.map(RoadmapItem.fromJSON)
     );
     change.ID = json.id;
@@ -45,6 +45,7 @@ export class ChangeInitiative {
       description: this.DESCRIPTION,
       startDate: this.STARTDATE,
       endDate: this.ENDDATE,
+      sponsor: this.CHANGESPONSOR,
       roadMap: this.ROADMAP
     } as ChangeInitiativeJson;
   }
@@ -63,7 +64,7 @@ export class ChangeInitiative {
   get endDate(): string{
     return this.ENDDATE.split('T')[0];
   }
-  get sponsor(): User{
+  get sponsor(): Employee{
     return this.CHANGESPONSOR;
   }
   get roadMap(): RoadmapItem[]{

@@ -1,5 +1,5 @@
 
-export interface UserJson{
+export interface EmployeeJson{
   organizationParts: string;
   id: number;
   firstName: string;
@@ -7,7 +7,7 @@ export interface UserJson{
   email: string;
 }
 
-export class User {
+export class Employee {
   private _ID: number;
   constructor(
     private _ORGANIZATIONPARTS: string,
@@ -16,8 +16,8 @@ export class User {
     private _EMAIL: string,
   ) {}
 
-  static fromJSON(json: UserJson): User {
-    const user = new User(
+  static fromJSON(json: EmployeeJson): Employee {
+    const user = new Employee(
       json.organizationParts,
       json.firstName,
       json.lastName,
@@ -27,14 +27,14 @@ export class User {
     return user;
   }
 
-  toJSON(): UserJson {
+  toJSON(): EmployeeJson {
     // @ts-ignore
     return {
       organizationParts: this._ORGANIZATIONPARTS,
       firstName: this._FIRSTNAME,
       lastName: this._LASTNAME,
       email: this._EMAIL
-    } as UserJson;
+    } as EmployeeJson;
   }
 
   get ID(): number {

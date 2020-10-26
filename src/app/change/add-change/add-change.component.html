@@ -51,9 +51,9 @@
         </mat-form-field>
         <mat-form-field>
           <mat-select aria-label="ChangeSponsor" placeholder="Sponsor" type="text" formControlName="changesponsor" required>
-            <div *ngIf="(changes$ | async) as changes; else Error">
-              <mat-option *ngFor="let change of changes" [value]="change.sponsor">
-                {{ change.sponsor.FULLNAME() }}
+            <div *ngIf="(users$ | async) as users; else Error">
+              <mat-option *ngFor="let user of users" [value]="user">
+                {{ user.FULLNAME() }}
               </mat-option>
             </div>
           </mat-select>
