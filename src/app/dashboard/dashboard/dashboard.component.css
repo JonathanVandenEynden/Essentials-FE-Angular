@@ -1,7 +1,6 @@
 .container-fluid{
   overflow: hidden;
   background-color: white;
-  height: 150px;
   margin: auto;
 }
 
@@ -23,7 +22,7 @@ h1{
 }
 
 .container{
-  max-height: 500px;
+  max-height: 700px;
   overflow: auto;
   border: solid;
   border-radius: 10px;
@@ -56,6 +55,10 @@ h1{
 
 fa-icon{
   color: white;
+}
+
+.container{
+  min-width: 100%;
 }
 
 .second{
