@@ -15,6 +15,6 @@ export class ChangeButtonComponent implements OnInit {
   }
 
   seeSurveys(): void{
-    this.router.navigate(['Survey/', this.change.id]);
+    this.router.navigate(['survey/', this.change.id]);
   }
 }

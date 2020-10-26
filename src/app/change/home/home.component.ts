@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   addChangeEvent(): void {
-    this._router.navigate(['Add']);
+    this._router.navigate(['add']);
   }
 
   get changes$(): Observable<ChangeInitiative[]>
