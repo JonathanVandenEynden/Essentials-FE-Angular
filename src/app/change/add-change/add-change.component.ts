@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -29,9 +29,7 @@ export class AddChangeComponent implements OnInit {
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
 
   constructor(private fb: FormBuilder, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
-  get roadMap(): FormArray {
-    return this.changeForm.get('roadMap') as FormArray;
-  }
+
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));

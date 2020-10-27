@@ -6,13 +6,64 @@
         <div class="progress">
           <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>
         </div>
+        <form [formGroup]="changeForm" (ngSubmit)='onSubmit()'>
+          <mat-form-field>
+            <input matInput aria-label="Title" placeholder="{{change.name}}" type="text" formControlName="name" required />
+            <mat-error *ngIf="changeForm.get('name')['errors'] && changeForm.get('name').touched">
+              {{ getErrorMessage(changeForm.get('name')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput aria-label="Description" placeholder="{{change.description}}" type="text" [value]="change.description"  formControlName="description" required />
+            <mat-error *ngIf="changeForm.get('description')['errors'] && changeForm.get('description').touched">
+              {{ getErrorMessage(changeForm.get('description')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput aria-label="Start date" placeholder="{{change.startDate}}" type="date" formControlName="startDate" required />
+            <mat-error *ngIf="changeForm.get('startDate')['errors'] && changeForm.get('startDate').touched">
+              {{ getErrorMessage(changeForm.get('startDate')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput aria-label="End date" placeholder="{{change.endDate}}" type="date" formControlName="endDate" required />
+            <mat-error *ngIf="changeForm.get('endDate')['errors'] && changeForm.get('endDate').touched">
+              {{ getErrorMessage(changeForm.get('endDate')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select aria-label="ChangeType" placeholder="{{changeTypes[0]}}" type="text" formControlName="changetype" required>
+              <mat-option *ngFor="let type of changeTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="changeForm.get('changetype')['errors'] && changeForm.get('changetype').touched">
+              {{ getErrorMessage(changeForm.get('changetype')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select aria-label="ChangeSponsor" placeholder="{{change.sponsor.FULLNAME()}}" type="text" formControlName="changesponsor" required>
+              <div *ngIf="(users$ | async) as users; ">
+                <mat-option *ngFor="let user of users" [value]="user">
+                  {{ user.FULLNAME() }}
+                </mat-option>
+              </div>
+            </mat-select>
+            <mat-error *ngIf="changeForm.get('changesponsor')['errors'] && changeForm.get('changesponsor').touched">
+              {{ getErrorMessage(changeForm.get('changesponsor')['errors']) }}
+            </mat-error>
+          </mat-form-field>
+          <button class="btn btn-secondary" type="submit" [disabled]="!changeForm.valid">
+            Update
+          </button>
+        </form>
       </div>
       <div class="col-6">
         <div class="row">
           <div class="col-4">
             <mat-card>
               <mat-card-title>
-                <button class="btn btn-primary">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
+                <button class="btn btn-primary" (click)="updateRoadmap()">Roadmap<fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon></button>
               </mat-card-title>
               <mat-card-content>
                 <div *ngFor="let item of change.roadMap">
@@ -24,7 +75,7 @@
           <div class="col-4">
             <mat-card>
               <mat-card-title>
-                <button class="btn btn-primary">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
+                <button class="btn btn-primary" (click)="updateSurvey()">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>
               </mat-card-title>
               <mat-card-content>
                 <div *ngFor="let item of change.roadMap">
@@ -36,11 +87,11 @@
           <div class="col-4">
             <mat-card>
               <mat-card-title>
-                <button class="btn btn-primary">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
+                <button class="btn btn-primary" (click)="updateGroup()">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
               </mat-card-title>
               <mat-card-content>
-                <div *ngFor="let item of change.roadMap">
-                  <h5>{{i}}</h5>
+                <div>
+                  <h5>Groups</h5>
                 </div>
               </mat-card-content>
             </mat-card>

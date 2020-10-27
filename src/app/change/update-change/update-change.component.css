@@ -44,3 +44,15 @@ h5{
   margin-left: 5px;
   font-size: 15px;
 }
+
+mat-form-field.mat-form-field {
+  margin-top: 20px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.btn-secondary{
+  margin-left: 150px;
+  background-color: #8dc262;
+  color: white;
+}
