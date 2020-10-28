@@ -1,27 +1,47 @@
+import {ClosedQuestion, ClosedQuestionJson} from './ClosedQuestion.model';
 
 export interface SurveyJson{
   id: number;
+  // TODO closedQuestions nog veranderen met andere soort vragen
+  questions: ClosedQuestionJson[];
+  feedback: ClosedQuestionJson;
+  amountSubmitted: number;
 }
 
 export class Survey {
-  private ID: number;
+  private id: number;
   constructor(
+    private questions: ClosedQuestion[],
+    private feedback: ClosedQuestion,
+    private amountSubmitted: number
   ) {}
 
   static fromJSON(json: SurveyJson): Survey {
     const assesment = new Survey(
+      json.questions.map(ClosedQuestion.fromJson),
+      ClosedQuestion.fromJson(json.feedback),
+      json.amountSubmitted
     );
-    assesment.ID = json.id;
+    assesment.id = json.id;
     return assesment;
   }
 
   toJSON(): SurveyJson {
-    // @ts-ignore
     return {
+      id: this.id,
+      questions: this.questions.map(q => q.toJson()),
+      feedback: this.feedback.toJson(),
+      amountSubmitted: this.amountSubmitted
     } as SurveyJson;
   }
-  get id(): number {
-    return this.ID;
+  get Id(): number {
+    return this.id;
+  }
+  get Questions(): ClosedQuestion[] {
+    return this.questions;
+  }
+  get Feedback(): ClosedQuestion {
+    return this.feedback;
   }
 }
 

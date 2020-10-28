@@ -31,7 +31,7 @@ export class EmployeeOrganizationPart {
       employee: this.employee,
       organizationPartId: this.organizationPartId,
       organizationPart: this.organizationPart
-    };
+    } as EmployeeOrganizationPartJson;
   }
   get EmployeeId(): number{
     return this.employeeId;

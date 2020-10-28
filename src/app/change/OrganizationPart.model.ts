@@ -31,7 +31,7 @@ export class OrganizationPart {
       name: this.name,
       employeeOrganizationParts: this.employeeOrganizationParts.map(t => t.toJson()),
       type: this.type
-    };
+    } as OrganizationPartJson;
   }
   get Id(): number{
     return this.id;
