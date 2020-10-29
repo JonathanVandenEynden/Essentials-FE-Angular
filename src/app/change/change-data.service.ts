@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ChangeInitiative} from './change.model';
@@ -41,7 +41,7 @@ export class ChangeDataService {
   fetchChanges$(): Observable<ChangeInitiative[]>
   {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${2}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${2}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
   getChange$(id: any): Observable<ChangeInitiative>
   {
@@ -67,6 +67,13 @@ export class ChangeDataService {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  updateChange(change: ChangeInitiative) {
+    // tslint:disable-next-line:max-line-length no-shadowed-variable
+    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap((change: ChangeInitiative) => {
+        this._RELOAD$.next(true);
+    }));
+  }
   handleError(err: any): Observable<never>
   {
     let errorMessage: string;
@@ -78,4 +85,6 @@ export class ChangeDataService {
     console.error(err);
     return throwError(errorMessage);
   }
+
+
 }
