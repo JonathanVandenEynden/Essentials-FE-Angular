@@ -28,7 +28,7 @@ export class ChangeButtonComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   updateChange(){
-    this.router.navigate(['Update']);
+    this.router.navigate(['update/', this.change.id]);
   }
 
   // tslint:disable-next-line:typedef

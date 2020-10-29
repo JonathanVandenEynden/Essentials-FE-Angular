@@ -21,17 +21,13 @@ mat-card{
   overflow: auto;
   border-radius: 10px;
   padding: 20px;
+  width: 300px;
 }
 
 mat-form-field.mat-form-field {
   margin-top: 20px;
   width: 400px;
   font-size: 20px;
-}
-
-mat-card.mat-card{
-  overflow: auto;
-  width: 300px;
 }
 
 .btn{

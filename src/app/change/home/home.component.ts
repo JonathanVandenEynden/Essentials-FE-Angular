@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   public errorMessage = '';
 
 
+  // tslint:disable-next-line:variable-name
   constructor(private _router: Router, private changeDataService: ChangeDataService) { }
 
   ngOnInit(): void {

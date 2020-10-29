@@ -17,11 +17,11 @@ export interface ChangeInitiativeJson{
 export class ChangeInitiative {
   private ID: number;
   constructor(
-    private NAME: string,
-    private DESCRIPTION: string,
-    private STARTDATE: string,
-    private ENDDATE: string,
-    private CHANGESPONSOR: Employee,
+    private _NAME: string,
+    private _DESCRIPTION: string,
+    private _STARTDATE: string,
+    private _ENDDATE: string,
+    private _CHANGESPONSOR: Employee,
     private ROADMAP: RoadmapItem[]
   ) {}
 
@@ -41,11 +41,11 @@ export class ChangeInitiative {
   toJSON(): ChangeInitiativeJson {
     // @ts-ignore
     return {
-      name: this.NAME,
-      description: this.DESCRIPTION,
-      startDate: this.STARTDATE,
-      endDate: this.ENDDATE,
-      sponsor: this.CHANGESPONSOR,
+      name: this._NAME,
+      description: this._DESCRIPTION,
+      startDate: this._STARTDATE,
+      endDate: this._ENDDATE,
+      sponsor: this._CHANGESPONSOR,
       roadMap: this.ROADMAP
     } as ChangeInitiativeJson;
   }
@@ -53,19 +53,44 @@ export class ChangeInitiative {
     return this.ID;
   }
   get name(): string{
-    return this.NAME;
+    return this._NAME;
+  }
+  // tslint:disable-next-line:typedef
+  public NAME(value: string) {
+    this._NAME = value;
   }
   get description(): string {
-    return this.DESCRIPTION;
+    return this._DESCRIPTION;
   }
+
+  // tslint:disable-next-line:typedef
+  public DESCRIPTION(value: string) {
+    this._DESCRIPTION = value;
+  }
+
+  // tslint:disable-next-line:typedef
+  public STARTDATE(value: string) {
+    this._STARTDATE = value;
+  }
+
+  // tslint:disable-next-line:typedef
+  public ENDDATE(value: string) {
+    this._ENDDATE = value;
+  }
+
+  // tslint:disable-next-line:typedef
+  public CHANGESPONSOR(value: Employee) {
+    this._CHANGESPONSOR = value;
+  }
+
   get startDate(): string {
-    return this.STARTDATE.split('T')[0];
+    return this._STARTDATE.split('T')[0];
   }
   get endDate(): string{
-    return this.ENDDATE.split('T')[0];
+    return this._ENDDATE.split('T')[0];
   }
   get sponsor(): Employee{
-    return this.CHANGESPONSOR;
+    return this._CHANGESPONSOR;
   }
   get roadMap(): RoadmapItem[]{
     return this.ROADMAP;
