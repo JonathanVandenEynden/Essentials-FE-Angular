@@ -70,7 +70,7 @@ export class ChangeDataService {
   // tslint:disable-next-line:typedef
   updateChange(change: ChangeInitiative) {
     // tslint:disable-next-line:max-line-length no-shadowed-variable
-    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap((change: ChangeInitiative) => {
+    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/${change.id}`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap((change: ChangeInitiative) => {
         this._RELOAD$.next(true);
     }));
   }
