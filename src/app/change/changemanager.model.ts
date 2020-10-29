@@ -1,11 +1,11 @@
 import {ChangeInitiative, ChangeInitiativeJson} from './change.model';
-import {EmployeeOrganizationPart} from './EmployeeOrganizationPart.model';
+import {EmployeeOrganizationPart, EmployeeOrganizationPartJson} from './EmployeeOrganizationPart.model';
 
 export interface ChangemanagerJson {
   id: number;
   firstName: string;
   lastName: string;
-  employeeOrganizationParts: EmployeeOrganizationPart[];
+  employeeOrganizationParts: EmployeeOrganizationPartJson[];
   changeInitiatives: ChangeInitiativeJson[];
 }
 export class Changemanager {
@@ -21,7 +21,7 @@ export class Changemanager {
     const changeManager = new Changemanager(
       json.firstName,
       json.lastName,
-      json.employeeOrganizationParts,
+      json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
       json.changeInitiatives.map(ChangeInitiative.fromJSON)
     );
     changeManager._ID = json.id;
@@ -33,7 +33,7 @@ export class Changemanager {
     return {
       firstName: this._FIRSTNAME,
       lastName: this._LASTNAME,
-      employeeOrganizationParts: this._EMPLOYEEORGANIZATIONPARTS,
+      employeeOrganizationParts: this._EMPLOYEEORGANIZATIONPARTS.map(eop => eop.toJson()),
       changeInitiatives: this._CHANGEINITIATIVES
     } as ChangemanagerJson;
   }

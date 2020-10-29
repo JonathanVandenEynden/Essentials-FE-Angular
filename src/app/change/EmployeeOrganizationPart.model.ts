@@ -1,11 +1,11 @@
-import { OrganizationPart } from './OrganizationPart.model';
-import {Employee} from './user.model';
+import {OrganizationPart, OrganizationPartJson} from './OrganizationPart.model';
+import {Employee, EmployeeJson} from './user.model';
 
 export interface EmployeeOrganizationPartJson {
   employeeId: number;
-  employee: Employee;
+  employee: EmployeeJson;
   organizationPartId: number;
-  organizationPart: OrganizationPart;
+  organizationPart: OrganizationPartJson;
 }
 
 export class EmployeeOrganizationPart {
@@ -19,8 +19,8 @@ export class EmployeeOrganizationPart {
 
   static fromJSON(json: EmployeeOrganizationPartJson): EmployeeOrganizationPart{
     const eop = new EmployeeOrganizationPart(
-      json.employee,
-      json.organizationPart);
+      Employee.fromJSON(json.employee),
+      OrganizationPart.fromJSON(json.organizationPart));
     eop.employeeId = json.employeeId;
     eop.organizationPartId = json.organizationPartId;
     return eop;
@@ -28,9 +28,9 @@ export class EmployeeOrganizationPart {
   toJson(): EmployeeOrganizationPartJson{
     return {
       employeeId: this.employeeId,
-      employee: this.employee,
+      employee: this.employee.toJSON(),
       organizationPartId: this.organizationPartId,
-      organizationPart: this.organizationPart
+      organizationPart: this.organizationPart.toJson()
     } as EmployeeOrganizationPartJson;
   }
   get EmployeeId(): number{

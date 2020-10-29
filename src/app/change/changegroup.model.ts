@@ -1,9 +1,9 @@
-import {Employee} from './user.model';
+import {Employee, EmployeeJson} from './user.model';
 
 export interface ChangeGroupJson{
   id: number;
   name: string;
-  users: Employee[];
+  users: EmployeeJson[];
 }
 
 export class ChangeGroup {
@@ -16,7 +16,7 @@ export class ChangeGroup {
   static fromJSON(json: ChangeGroupJson): ChangeGroup {
     const changegroup = new ChangeGroup(
       json.name,
-      json.users
+      json.users.map(Employee.fromJSON)
     );
     changegroup.ID = json.id;
     return changegroup;
