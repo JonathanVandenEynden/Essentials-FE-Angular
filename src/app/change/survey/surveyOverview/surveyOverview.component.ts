@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faClipboard, faPlus, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../change.model';
 
 @Component({
   selector: 'app-survey',
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  templateUrl: './surveyOverview.component.html',
+  styleUrls: ['./surveyOverview.component.css']
 })
-export class SurveyComponent implements OnInit {
+export class SurveyOverviewComponent implements OnInit {
   public change: ChangeInitiative;
   faPlus = faPlus;
   faClip = faClipboard;

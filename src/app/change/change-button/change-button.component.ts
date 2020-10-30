@@ -23,7 +23,7 @@ export class ChangeButtonComponent implements OnInit {
   }
 
   seeSurveys(): void{
-    this.router.navigate(['survey/', this.change.id]);
+    this.router.navigate(['surveyOverview/', this.change.id]);
   }
 
   // tslint:disable-next-line:typedef

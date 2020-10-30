@@ -22,12 +22,11 @@
         <h2>Surveys</h2>
         <a class="ml-auto" (click)="addSurvey()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
       </div>
+      <!-- surveylijst -->
       <div class="container">
         <div *ngFor="let roadMap of change.roadMap">
-          <button class="btn btn-outline-light shadow p-3 mb-3 bg-white">
-            {{change.name}} - Survey {{roadMap.title}}<br/>
-            <p>from {{roadMap.STARTDATE}} until {{roadMap.ENDDATE}}</p>
-          </button>
+          <!-- surveyElement -->
+          <app-survey-button [roadmap] = "roadMap"></app-survey-button>
         </div>
       </div>
     </div>

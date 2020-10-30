@@ -13,9 +13,11 @@ import {ChangeResolver} from './changeResolver';
 import {ChangeButtonComponent} from './change-button/change-button.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {SurveyComponent} from './survey/survey.component';
+import {SurveyOverviewComponent} from './survey/surveyOverview/surveyOverview.component';
 import {GroupComponent} from './group/group.component';
 import {RoadmapComponent} from './roadmap/roadmap.component';
+import {SurveyResolver} from './survey/surveyResolver';
+import {SurveyButtonComponent} from './survey/survey-button/survey-button.component';
 
 const changeRoutes: Routes =
 [
@@ -23,12 +25,12 @@ const changeRoutes: Routes =
   { path: 'add', component: AddChangeComponent},
   { path: 'update/:id', component: UpdateChangeComponent, resolve: { change : ChangeResolver } },
   { path: 'delete', component: DeleteChangeComponent},
-  { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
+  { path: 'surveyOverview/:id', component: SurveyOverviewComponent, resolve: { change : ChangeResolver }},
 ];
 
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [RoadmapComponent, GroupComponent, SurveyComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent, DeleteChangeComponent ],
+  declarations: [RoadmapComponent, GroupComponent, SurveyOverviewComponent, SurveyButtonComponent, HomeComponent, AddChangeComponent, ChangeButtonComponent, UpdateChangeComponent, DeleteChangeComponent ],
   imports: [
     NavigationModule,
     MaterialModule,
@@ -38,7 +40,7 @@ const changeRoutes: Routes =
     FormsModule,
     FontAwesomeModule,
     RouterModule.forChild(changeRoutes),
-    LottieModule,
+    LottieModule
   ]
 })
 export class ChangeModule { }

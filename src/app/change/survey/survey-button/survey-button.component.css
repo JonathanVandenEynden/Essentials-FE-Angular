@@ -1,0 +1,11 @@
+.btn-outline-dark{
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.btn-outline-dark:hover{
+  opacity: 80%;
+}

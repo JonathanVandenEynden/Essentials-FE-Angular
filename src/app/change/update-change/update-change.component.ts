@@ -114,7 +114,7 @@ export class UpdateChangeComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateSurvey(){
-    this.router.navigate(['survey/update']);
+    this.router.navigate(['surveyOverview/update']);
   }
   // tslint:disable-next-line:typedef
   updateGroup(){
