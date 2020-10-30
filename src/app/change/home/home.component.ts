@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   public errorMessage = '';
+  public added = true;
 
 
   // tslint:disable-next-line:variable-name
@@ -41,5 +42,4 @@ export class HomeComponent implements OnInit {
   {
     return this._fetchChanges$;
   }
-
 }

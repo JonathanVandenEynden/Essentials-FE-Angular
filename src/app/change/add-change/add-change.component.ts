@@ -9,6 +9,8 @@ import {empty, Observable} from 'rxjs';
 import {ChangeInitiative} from '../change.model';
 import {UserDataService} from '../user-data.service';
 import {Employee} from '../user.model';
+import {MatDialog} from '@angular/material/dialog';
+import {GroupComponent} from '../group/group.component';
 
 @Component({
   selector: 'app-add-change',
@@ -28,7 +30,8 @@ export class AddChangeComponent implements OnInit {
   public errorMessage = '';
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
 
-  constructor(private fb: FormBuilder, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
@@ -55,6 +58,13 @@ export class AddChangeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, this.changeForm.value.changesponsor, []));
     this.changeForm = this.fb.group({name: [''], description: [''], startDate: [''], endDate: [''], changetype: [''], changesponsor: ['']});
+    const dialogRef = this.dialog.open(GroupComponent, {
+      width: '500px',
+      panelClass: 'custom-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
   // tslint:disable-next-line:typedef
   getErrorMessage(errors: any)

@@ -34,3 +34,7 @@ a{
   background-color: lightgrey;
   border-radius: 20px;
 }
+
+::ng-deep mat-dialog-content{
+  background-color: white;
+}

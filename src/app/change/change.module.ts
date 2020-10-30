@@ -24,6 +24,7 @@ const changeRoutes: Routes =
   { path: 'update/:id', component: UpdateChangeComponent, resolve: { change : ChangeResolver } },
   { path: 'delete', component: DeleteChangeComponent},
   { path: 'survey/:id', component: SurveyComponent, resolve: { change : ChangeResolver }},
+  { path: 'group', component: GroupComponent },
 ];
 
 @NgModule({

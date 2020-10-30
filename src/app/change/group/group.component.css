@@ -1,0 +1,3 @@
+::ng-deep .custom-dialog > mat-dialog-container, mat-dialog-content {
+  background-color: var(--background);
+}
