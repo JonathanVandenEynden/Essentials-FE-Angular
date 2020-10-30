@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SurveyDataService } from './survey/survey-data.service';
+import { SurveyDataService } from './roadmap/survey/survey-data.service';
 
 describe('SurveyDataService', () => {
   let service: SurveyDataService;

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SurveyButtonComponent } from './survey-button.component';
+import { RoadmapComponent } from './roadmap.component';
 
-describe('SurveyButtonComponent', () => {
-  let component: SurveyButtonComponent;
-  let fixture: ComponentFixture<SurveyButtonComponent>;
+describe('SurveyComponent', () => {
+  let component: RoadmapComponent;
+  let fixture: ComponentFixture<RoadmapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SurveyButtonComponent ]
+      declarations: [ RoadmapComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SurveyButtonComponent);
+    fixture = TestBed.createComponent(RoadmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

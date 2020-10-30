@@ -5,10 +5,10 @@ import {ChangeInitiative} from '../../change.model';
 
 @Component({
   selector: 'app-survey',
-  templateUrl: './surveyOverview.component.html',
-  styleUrls: ['./surveyOverview.component.css']
+  templateUrl: './roadmap.component.html',
+  styleUrls: ['./roadmap.component.css']
 })
-export class SurveyOverviewComponent implements OnInit {
+export class RoadmapComponent implements OnInit {
   public change: ChangeInitiative;
   faPlus = faPlus;
   faClip = faClipboard;
