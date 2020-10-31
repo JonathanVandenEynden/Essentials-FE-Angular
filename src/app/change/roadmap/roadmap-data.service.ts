@@ -45,7 +45,7 @@ export class RoadmapDataService {
   getRoadmapItem$(id: any): Observable<RoadmapItem>
   {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/RoadMapItems/${id}`).pipe(catchError(this.handleError), map(RoadmapItem.fromJSON));
+    return this.http.get(`${environment.apiUrl}/RoadMapItems/${id}`).pipe(catchError(this.handleError), tap(console.log),  map(RoadmapItem.fromJSON));
   }
 
   handleError(err: any): Observable<never>

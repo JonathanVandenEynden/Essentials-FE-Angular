@@ -5,10 +5,10 @@ import {ChangeInitiative} from '../../change.model';
 
 @Component({
   selector: 'app-survey',
-  templateUrl: './roadmap.component.html',
-  styleUrls: ['./roadmap.component.css']
+  templateUrl: './roadmapView.component.html',
+  styleUrls: ['./roadmapView.component.css']
 })
-export class RoadmapComponent implements OnInit {
+export class RoadmapViewComponent implements OnInit {
   public change: ChangeInitiative;
   faPlus = faPlus;
   faClip = faClipboard;
@@ -21,7 +21,7 @@ export class RoadmapComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
   }
 
-  addSurvey(): void{
-    this.router.navigate(['addSurvey']);
-  }
+  // addSurvey(): void{
+  //   this.router.navigate(['addSurvey']);
+  // }
 }

@@ -2,7 +2,6 @@ import {ClosedQuestion, ClosedQuestionJson} from './ClosedQuestion.model';
 
 export interface SurveyJson{
   id: number;
-  // TODO closedQuestions nog veranderen met andere soort vragen
   questions: ClosedQuestionJson[];
   feedback: ClosedQuestionJson;
   amountSubmitted: number;

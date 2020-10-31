@@ -48,7 +48,7 @@ export class RoadmapItem {
   get title(): string {
     return this.TITLE;
   }
-  get assesment(): string{
+  get assessment(): string{
     return this._ASSESMENT;
   }
   get done(): boolean{
