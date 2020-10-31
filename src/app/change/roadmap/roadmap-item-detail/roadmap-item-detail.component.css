@@ -1,0 +1,13 @@
+h1{
+  border-right: black solid 5px;
+  font-size: 40px;
+  font-weight: bold;
+}
+.container{
+  max-height: 500px;
+  overflow: auto;
+  border-radius: 10px;
+  border: solid #264754;
+  padding: 20px;
+  margin-left: 20px;
+}

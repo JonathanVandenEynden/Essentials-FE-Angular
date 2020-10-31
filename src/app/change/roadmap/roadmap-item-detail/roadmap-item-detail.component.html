@@ -1,0 +1,28 @@
+<app-nav-bar>
+  <div class="container-fluid second">
+    <div class="row">
+      <div class="col-sm-3">
+        <h1>{{roadmapItem.title}}</h1>
+        <!--        <div class="row">-->
+        <!--          <button class="btn active" disabled>Surveys-->
+        <!--            <fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon>-->
+        <!--          </button>-->
+        <!--        </div>-->
+      </div>
+      <div class="col">
+        <!-- roadmap -->
+        <div class="container">
+          <div class="row d-flex">
+            <h2>Survey</h2>
+            <!-- geen survey toevoegen aan change initiative, maar in roadmap-->
+            <!-- <a class="ml-auto" (click)="addSurvey()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>-->
+          </div>
+          <div *ngIf="roadmapItem.survey">
+            <!-- roadmapItem -->
+            <app-survey-button [survey]="roadmapItem.survey"></app-survey-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-nav-bar>
