@@ -1,8 +1,9 @@
+import {Survey, SurveyJson} from './survey/survey.model';
 
 export interface RoadmapItemJson{
   id: number;
   title: string;
-  assesment: string;
+  assesment: SurveyJson;
   done: boolean;
   startDate: string;
   endDate: string;
@@ -14,7 +15,7 @@ export class RoadmapItem {
   private ID: number;
   constructor(
     private TITLE: string,
-    private _ASSESMENT: string,
+    private _SURVEY: Survey,
     private _STARTDATE: string,
     private _ENDDATE: string,
     private DONE: boolean
@@ -23,7 +24,7 @@ export class RoadmapItem {
   static fromJSON(json: RoadmapItemJson): RoadmapItem {
     const roadmapItem = new RoadmapItem(
       json.title,
-      json.assesment,
+      Survey.fromJSON(json.assesment),
       json.startDate,
       json.endDate,
       json.done
@@ -36,7 +37,7 @@ export class RoadmapItem {
     // @ts-ignore
     return {
       title: this.TITLE,
-      assesment: this._ASSESMENT,
+      survey: this._SURVEY.toJSON(),
       startDate: this._STARTDATE,
       endDate: this._ENDDATE,
       done: this.DONE
@@ -48,8 +49,8 @@ export class RoadmapItem {
   get title(): string {
     return this.TITLE;
   }
-  get assessment(): string{
-    return this._ASSESMENT;
+  get survey(): Survey{
+    return this._SURVEY;
   }
   get done(): boolean{
     return this.DONE;

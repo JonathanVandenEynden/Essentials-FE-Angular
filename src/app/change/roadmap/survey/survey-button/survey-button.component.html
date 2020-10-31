@@ -1,15 +1,17 @@
 <mat-card class="btn btn-outline-light shadow p-3 mb-5 bg-white">
   <div class="row">
     <div class="col">
-      <a class="ml-auto" (click)="deleteSurvey()"><fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon></a>
-      <a class="ml-auto" (click)="updateSurvey()"><fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon></a>
+      <a class="ml-auto" (click)="deleteSurvey()">
+        <fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon>
+      </a>
+      <a class="ml-auto" (click)="updateSurvey()">
+        <fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon>
+      </a>
     </div>
     <div class="col-12">
-        <div *ngIf="survey.Questions != undefined"> <!-- TODO else schrijven -->
-          <div *ngFor="let question of survey.Questions">
-            <p>{{ question.QuestionString }}</p>
-          </div>
-        </div>
+      <div *ngFor="let question of survey.Questions">
+        <p>{{ question.QuestionString }}</p>
+      </div>
     </div>
 
   </div>

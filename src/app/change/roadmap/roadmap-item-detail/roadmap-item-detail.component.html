@@ -17,9 +17,9 @@
             <!-- geen survey toevoegen aan change initiative, maar in roadmap-->
             <!-- <a class="ml-auto" (click)="addSurvey()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>-->
           </div>
-          <div *ngIf="roadmapItem.assessment">
+          <div *ngIf="roadmapItem.survey">
             <!-- roadmapItem -->
-            <app-survey-button [survey]="roadmapItem.assessment"></app-survey-button>
+            <app-survey-button [survey]="roadmapItem.survey"></app-survey-button>
           </div>
         </div>
       </div>

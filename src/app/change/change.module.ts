@@ -30,7 +30,7 @@ const changeRoutes: Routes =
     {path: 'update/:id', component: UpdateChangeComponent, resolve: {change: ChangeResolver}},
     {path: 'delete', component: DeleteChangeComponent},
     {path: 'roadmap/:id', component: RoadmapViewComponent, resolve: {change: ChangeResolver}},
-    {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {change: RoadmapItemResolver}},
+    {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
   ];
 
 @NgModule({

@@ -14,7 +14,7 @@ export class RoadmapItemDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(item => this.roadmapItem = item.change);
+    this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
     console.log(this.roadmapItem);
   }
 

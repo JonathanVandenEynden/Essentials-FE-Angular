@@ -15,6 +15,7 @@ export class SurveyButtonComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.survey);
+    console.log(this.survey.Questions);
   }
 
   deleteSurvey(): void {
