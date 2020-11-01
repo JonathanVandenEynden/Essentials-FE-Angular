@@ -55,4 +55,11 @@ export class SurveyDataService {
     console.error(err);
     return throwError(errorMessage);
   }
+
+  // tslint:disable-next-line:typedef
+  removeSurvey(roadmapItemId: number) {
+    return this.http.delete(`${environment.apiUrl}/Survey/${roadmapItemId}`).pipe(catchError(this.handleError)).subscribe(() =>{
+      this._RELOAD$.next(true);
+    });
+  }
 }

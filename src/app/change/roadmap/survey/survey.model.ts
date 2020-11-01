@@ -16,13 +16,16 @@ export class Survey {
   ) {}
 
   static fromJSON(json: SurveyJson): Survey {
-    const assessment = new Survey(
-      json.questions.map(ClosedQuestion.fromJson),
-      ClosedQuestion.fromJson(json.feedback),
-      json.amountSubmitted
-    );
-    assessment.id = json.id;
-    return assessment;
+    if (json != null){
+      const survey = new Survey(
+        json.questions.map(ClosedQuestion.fromJson),
+        ClosedQuestion.fromJson(json.feedback),
+        json.amountSubmitted
+      );
+      survey.id = json.id;
+      return survey;
+    }
+    return null as Survey;
   }
 
   toJSON(): SurveyJson {
