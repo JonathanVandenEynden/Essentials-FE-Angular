@@ -45,11 +45,6 @@ button{
   width: 200px;
 }
 
-fa-icon{
-  color: black;
-  padding-left: 10px;
-}
-
 .second{
   position: absolute;
   padding: 20px;
@@ -61,7 +56,7 @@ fa-icon{
   color: black;
 }
 
-a{
+a:hover{
   cursor: pointer;
 }
 
@@ -71,18 +66,13 @@ h1{
   font-weight: bold;
 }
 
-.progress{
-  width: 280px;
-  margin-top: 20px;
-  border-radius: 20px;
+.answers{
+  font-weight: normal;
 }
 
-.progress-bar{
-  background-color: #8dc262;
-  border-radius: 20px;
-}
 
-.btn-outline-light{
+
+.btn-outline-dark{
   border-radius: 20px;
   color: black;
   font-weight: bold;
@@ -91,6 +81,6 @@ h1{
 }
 
 p{
-  font-size: 10px;
+  font-size: 15px;
 }
 

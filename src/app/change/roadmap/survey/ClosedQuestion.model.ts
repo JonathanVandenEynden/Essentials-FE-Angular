@@ -1,17 +1,4 @@
-// TODO Answer verder uitwerken
-export class Answer {
-  static fromJson(json: any): Answer{
-    return new Answer();
-  }
-  toJson(): any{
-    return {};
-  }
-}
-
-export interface AnswerJson {
-  id: number;
-}
-// TODO END
+import {Answer, AnswerJson} from './Answer.model';
 
 export interface ClosedQuestionJson{
   id: number;

@@ -16,7 +16,7 @@ export class RoadmapItemButtonComponent implements OnInit {
   }
 
   showRoadmapItemDetail(): void {
-    this.router.navigate(['roadmapItemDetail/', this.roadmap.id]); // TODO moet geen 404 meer geven
+    this.router.navigate(['roadmapItemDetail/', this.roadmap.id]);
   }
 
 }

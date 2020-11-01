@@ -37,7 +37,6 @@ export class Survey {
     return this.id;
   }
   get Questions(): ClosedQuestion[] {
-    console.log(this.questions);
     return this.questions;
   }
   get Feedback(): ClosedQuestion {
