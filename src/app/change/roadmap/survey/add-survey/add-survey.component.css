@@ -1,0 +1,19 @@
+.answerbox{
+  padding-left: 40px;
+  width: auto;
+}
+.questionbox{
+  border: rgb(38, 71, 84) 2px solid;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 80%;
+}
+
+.typeselection{
+  padding-right: 25px;
+}
+
+.questionfield{
+  width: 40%;
+}

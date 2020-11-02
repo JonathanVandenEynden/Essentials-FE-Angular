@@ -1,51 +1,51 @@
 import {Answer, AnswerJson} from './Answer.model';
 
-export interface ClosedQuestionJson{
+export interface QuestionJson{
   id: number;
+  type: string;
   questionString: string;
-  possibleAnswers: AnswerJson[];
+  possibleAnswers: Map<string, number>;
   maxAmount: number;
 }
 
-export class ClosedQuestion {
+export class Question {
   private id: number;
   constructor(
+    private type: string,
     private questionString: string,
-    private possibleAnswers: Answer[],
-    private maxAmount: number
+    private possibleAnswers: Map<string, number>,
   ) {
   }
 
-  static fromJson(json: ClosedQuestionJson): ClosedQuestion {
-    const q = new ClosedQuestion(
+  static fromJson(json: QuestionJson): Question {
+    const q = new Question(
+      json.type,
       json.questionString,
-      json.possibleAnswers.map(Answer.fromJson),
-      json.maxAmount
+      json.possibleAnswers
     );
     q.id = json.id;
     return q;
   }
 
-  toJson(): ClosedQuestionJson {
+  toJson(): QuestionJson {
     return {
       id: this.id,
+      type: this.type,
       questionString: this.questionString,
-      possibleAnswers: this.possibleAnswers.map(a => a.toJson()),
-      maxAmount: this.maxAmount
-    } as ClosedQuestionJson;
+      possibleAnswers: this.possibleAnswers
+    } as QuestionJson;
   }
 
   get Id(): number {
     return this.id;
   }
+  get Type(): string {
+    return this.type;
+  }
   get QuestionString(): string {
     return this.questionString;
   }
-  get PossibleAnswers(): Answer[] {
+  get PossibleAnswers(): Map<string, number> {
     return this.possibleAnswers;
   }
-  get MaxAmount(): number {
-    return this.maxAmount;
-  }
-
 }

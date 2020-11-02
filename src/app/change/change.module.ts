@@ -31,6 +31,7 @@ const changeRoutes: Routes =
     {path: 'delete', component: DeleteChangeComponent},
     {path: 'roadmap/:id', component: RoadmapViewComponent, resolve: {change: ChangeResolver}},
     {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
+    {path: 'addSurvey/:id', component: AddSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
   ];
 
 @NgModule({
@@ -49,7 +50,7 @@ const changeRoutes: Routes =
     DeleteSurveyComponent,
     UpdateSurveyComponent,
     RoadmapItemDetailComponent,
-    SurveyButtonComponent
+    SurveyButtonComponent,
   ],
   imports: [
     NavigationModule,

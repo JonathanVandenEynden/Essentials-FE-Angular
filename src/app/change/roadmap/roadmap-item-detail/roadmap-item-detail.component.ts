@@ -30,7 +30,7 @@ export class RoadmapItemDetailComponent implements OnInit {
   }
 
   addSurvey(): void {
-
+      this.router.navigate(['addSurvey/', this.roadmapItem.id]);
   }
 
   deleteSurveyFromRoadmapItem(): void {

@@ -1,25 +1,25 @@
-import {ClosedQuestion, ClosedQuestionJson} from './ClosedQuestion.model';
+import {Question, QuestionJson} from './ClosedQuestion.model';
 
 export interface SurveyJson{
   id: number;
-  questions: ClosedQuestionJson[];
-  feedback: ClosedQuestionJson;
+  questions: QuestionJson[];
+  feedback: QuestionJson;
   amountSubmitted: number;
 }
 
 export class Survey {
   private id: number;
   constructor(
-    private questions: ClosedQuestion[],
-    private feedback: ClosedQuestion,
+    private questions: Question[],
+    private feedback: Question,
     private amountSubmitted: number
   ) {}
 
   static fromJSON(json: SurveyJson): Survey {
     if (json != null){
       const survey = new Survey(
-        json.questions.map(ClosedQuestion.fromJson),
-        ClosedQuestion.fromJson(json.feedback),
+        json.questions.map(Question.fromJson),
+        Question.fromJson(json.feedback),
         json.amountSubmitted
       );
       survey.id = json.id;
@@ -39,10 +39,10 @@ export class Survey {
   get Id(): number {
     return this.id;
   }
-  get Questions(): ClosedQuestion[] {
+  get Questions(): Question[] {
     return this.questions;
   }
-  get Feedback(): ClosedQuestion {
+  get Feedback(): Question {
     return this.feedback;
   }
 }

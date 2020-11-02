@@ -4,8 +4,8 @@
     <div class="col-12">
       <div *ngFor="let question of survey.Questions">
         <p>{{ question.QuestionString }}</p>
-        <div class="answers" *ngFor="let answer of question.PossibleAnswers">
-          - "{{answer.AnswerString}}": chosen {{answer.AmountChosen}} times
+        <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">
+          - "{{answer.key}}": chosen {{answer.value.toString()}} times
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
     <div class="col-12">
       <div>
         <p>{{ survey.Feedback.QuestionString }}</p>
-        <div class="answers" *ngFor="let answer of survey.Feedback.PossibleAnswers">
-          - "{{answer.AnswerString}}": chosen {{answer.AmountChosen}} times
+        <div class="answers" *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
+          - "{{answer.key}}": chosen {{answer.value}} times
         </div>
       </div>
     </div>
