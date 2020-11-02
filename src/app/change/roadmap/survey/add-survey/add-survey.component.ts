@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapItem} from '../../roadmapitem.model';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Survey} from '../survey.model';
 import {Question} from '../ClosedQuestion.model';
 import {map} from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class AddSurveyComponent implements OnInit {
   public surveyFrom: FormGroup;
   public questionTypes = ['Yes/No', 'multiple choice', 'Range'];
   faPlus = faPlus;
+  faMin = faMinus;
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder, private roadmapDataService: RoadmapDataService) {
   }
@@ -106,5 +107,13 @@ export class AddSurveyComponent implements OnInit {
 
   addAnswer(question): void {
     question.controls.answers.push(this.createAnswer());
+  }
+
+  removeQuestion(form, i): void {
+    form.controls.questions.removeAt(i);
+  }
+
+  removeAnswer(question, i): void {
+    question.controls.answers.removeAt(i);
   }
 }

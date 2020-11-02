@@ -12,39 +12,53 @@
                     {{type}}
                   </mat-option>
                 </mat-select>
-                <!--              <mat-error *ngIf="surveyFrom.get('type')['errors'] && surveyFrom.get('type').touched">-->
-                <!--                {{ getErrorMessage(surveyFrom.get('type')['errors']) }}-->
-                <!--              </mat-error>-->
+                <mat-error *ngIf="question.get('type')['errors'] && question.get('type').touched">
+                  {{ getErrorMessage(question.get('type')['errors']) }}
+                </mat-error>
               </mat-form-field>
               <br>
               <mat-form-field class="questionfield">
                 <input matInput type="text" aria-label="Question" formControlName="question" placeholder="question"/>
-                <!--              <mat-error *ngIf="surveyFrom.get('question')['errors'] && surveyFrom.get('question').touched">-->
-                <!--                {{ getErrorMessage(surveyFrom.get('question')['errors']) }}-->
-                <!--              </mat-error>-->
+                <mat-error *ngIf="question.get('question')['errors'] && question.get('question').touched">
+                  {{ getErrorMessage(question.get('question')['errors']) }}
+                </mat-error>
               </mat-form-field>
               <div class="answerbox">
-              <div formArrayName="answers">
-                <div [formGroupName]="j" *ngFor="let answer of getAnswers(question); let j = index">
-                  <mat-form-field>
-                    <input matInput type="text" placeholder="answer" formControlName="answer" />
-                  </mat-form-field>
+                <div formArrayName="answers">
+                  <div [formGroupName]="j" *ngFor="let answer of getAnswers(question); let j = index">
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="answer" formControlName="answer"/>
+                      <mat-error *ngIf="answer.get('answer')['errors'] && answer.get('answer').touched">
+                        {{ getErrorMessage(answer.get('answer')['errors']) }}
+                      </mat-error>
+                    </mat-form-field>
+                    <!-- Button voor remove answer-->
+                    <button class="btn btn-sm" (click)="removeAnswer(question, j)">
+                      <fa-icon [icon]="faMin"></fa-icon>
+                    </button>
+                  </div>
                 </div>
+                <!-- button voor add answer-->
+                <button class="btn btn-sm " (click)="addAnswer(question)">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                  Add answer
+                </button>
               </div>
-<!--              button voor add answer-->
-              <button class="btn active" (click)="addAnswer(question)">
-                <fa-icon [icon]="faPlus" ></fa-icon>Add answer
+              <!-- Button om remove question-->
+              <button class="btn btn-sm btn-danger btn-remove-question" (click)="removeQuestion(surveyFrom, i)">
+                <fa-icon [icon]="faMin"></fa-icon>
+                Remove question
               </button>
-              </div>
             </div>
           </div>
-          <button class="btn active" (click)="addQuestion(surveyFrom)">
-            <fa-icon [icon]="faPlus" ></fa-icon>Add question
+          <button class="btn" (click)="addQuestion(surveyFrom)">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Add question
           </button>
         </div>
         <!--submitbutton-->
         <br>
-        <button type="submit" mat-raised-button>Create survey</button>
+        <button type="submit" mat-raised-button [disabled]="!surveyFrom.valid">Create survey</button>
       </form>
     </div>
   </div>
