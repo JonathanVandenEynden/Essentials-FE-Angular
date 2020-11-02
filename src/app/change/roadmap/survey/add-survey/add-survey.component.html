@@ -7,7 +7,7 @@
           <div *ngFor="let question of getQuestions(surveyFrom); let i = index">
             <div [formGroupName]="i" class="questionbox d-flex">
               <mat-form-field class="typeselection">
-                <mat-select placeholder="type" aria-label="question type">
+                <mat-select placeholder="type" aria-label="question type" formControlName="type">
                   <mat-option *ngFor="let type of questionTypes" [value]="type">
                     {{type}}
                   </mat-option>

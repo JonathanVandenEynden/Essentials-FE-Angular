@@ -5,6 +5,18 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Survey} from '../survey.model';
 import {Question} from '../ClosedQuestion.model';
+import {map} from 'rxjs/operators';
+import {RoadmapDataService} from '../../roadmap-data.service';
+
+interface QuestionFieldJson {
+  type: string;
+  question: string;
+  answers: AnswerFieldJson[];
+}
+
+interface AnswerFieldJson {
+  answer: string;
+}
 
 @Component({
   selector: 'app-add-survey',
@@ -17,7 +29,7 @@ export class AddSurveyComponent implements OnInit {
   public questionTypes = ['Yes/No', 'multiple choice', 'Range'];
   faPlus = faPlus;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private roadmapDataService: RoadmapDataService) {
   }
 
   ngOnInit(): void {
@@ -41,21 +53,36 @@ export class AddSurveyComponent implements OnInit {
     });
   }
 
-  onSubmit(): void { // TODO get info from formarray and create survey
+  onSubmit(): void {
     const questionObjecten: Question[] = [];
 
     const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
-    console.log(questionFields);
+    // console.log(questionFields);
     for (let i = 0; i <= questionFields.length; i++) {
-      const question = questionFields[i];
+      const question = questionFields[i] as QuestionFieldJson;
       if (question === undefined) {
         continue;
       }
-      console.log(question); // NOT WORKING -> not able to get type etc. !!!!!!!!!!!!!!!!
-      // questionObjecten.push(new Question(question.type, question.question,));
+      const answerMap = new Map<string, number>();
+      question.answers.forEach(a => {
+        answerMap.set(a.answer, 0);
+      });
+      questionObjecten.push(new Question(question.type, question.question, answerMap));
+
+      // console.log(questionObjecten);
     }
 
-    // const survey = new Survey(questions, feedback);
+    // Default feedback question
+    const fbAnswers = new Map<string, number>();
+    fbAnswers.set('Good', 0);
+    fbAnswers.set('Okay', 0);
+    fbAnswers.set('Bad', 0);
+    const defaultFeedback: Question = new Question('multiple choice',
+      'How do you feel with the current change?', fbAnswers
+    );
+    const survey: Survey = new Survey(questionObjecten, defaultFeedback, 0);
+
+    this.roadmapDataService.addSurveyToRoadmapItem(this.roadmapItem.id, survey);
 
   }
 

@@ -5,6 +5,7 @@ import {RoadmapItem} from './roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {Survey} from './survey/survey.model';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,9 @@ export class RoadmapDataService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  addSurveyToRoadmapItem(id: number, survey: Survey): void {
+    // this.http.post(`${environment.apiUrl}/`) // TODO add endpoint for adding survey to rmi
   }
 }
