@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {NavigationModule} from '../navigation/navigation.module';
 import {MaterialModule} from '../material/material.module';
 import {HttpClientModule} from '@angular/common/http';
@@ -10,17 +9,23 @@ import {LottieModule} from 'ngx-lottie';
 import {RouterModule, Routes} from '@angular/router';
 import { BaseChartDirective, ChartsModule, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { HIGHLIGHT_OPTIONS, HighlightModule } from 'ngx-highlightjs';
+import { HighlightModule } from 'ngx-highlightjs';
+import { DashboardRoadmapItemComponent } from './dashboard-roadmap-item/dashboard-roadmap-item.component';
+import { DashboardSurveyComponent } from './dashboard-survey/dashboard-survey.component';
+import { DashbboardProjectComponent } from './dashboard-project/dashbboard-project.component';
 import { ChartsComponent } from './charts/charts.component';
+import { ChartComponent } from './charts/chart/chart.component';
 
 
 const dashboardRoutes: Routes =
   [
-    { path: 'home', component: DashboardComponent }
+    { path: 'project', component: DashbboardProjectComponent },
+    { path: 'roadmapitem', component: DashboardRoadmapItemComponent },
+    { path: 'survey', component: DashboardSurveyComponent }
   ];
 
 @NgModule({
-  declarations: [DashboardComponent, ChartsComponent],
+  declarations: [DashbboardProjectComponent, DashboardRoadmapItemComponent, DashboardSurveyComponent, DashbboardProjectComponent, ChartsComponent, ChartComponent],
   imports: [
     NavigationModule,
     MaterialModule,
@@ -35,7 +40,7 @@ const dashboardRoutes: Routes =
     LottieModule,
   ],
   providers: [],
-  exports: [DashboardComponent]
+  exports: []
 })
 export class DashboardModule {
   constructor() {
