@@ -32,6 +32,7 @@ const changeRoutes: Routes =
     {path: 'roadmap/:id', component: RoadmapViewComponent, resolve: {change: ChangeResolver}},
     {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'addSurvey/:id', component: AddSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
+    {path: 'updateSurvey/:id', component: UpdateSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
   ];
 
 @NgModule({

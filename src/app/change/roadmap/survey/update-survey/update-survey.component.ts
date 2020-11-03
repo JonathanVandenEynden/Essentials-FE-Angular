@@ -1,4 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import {RoadmapItem} from '../../roadmapitem.model';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {ActivatedRoute} from '@angular/router';
+import {RoadmapDataService} from '../../roadmap-data.service';
+import {Question} from '../ClosedQuestion.model';
+import {Survey} from '../survey.model';
+
+interface QuestionFieldJson {
+  type: string;
+  question: string;
+  answers: AnswerFieldJson[];
+}
+
+interface AnswerFieldJson {
+  answer: string;
+}
 
 @Component({
   selector: 'app-update-survey',
@@ -7,9 +24,128 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateSurveyComponent implements OnInit {
 
-  constructor() { }
+  public roadmapItem: RoadmapItem;
+  public survey: Survey;
+  public surveyFrom: FormGroup;
+  public questionTypes = ['Yes/No', 'multiple choice', 'Range'];
+  faPlus = faPlus;
+  faMin = faMinus;
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private roadmapDataService: RoadmapDataService) {
   }
 
+  ngOnInit(): void {
+    this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
+
+    this.survey = this.roadmapItem.survey;
+
+    // create form
+    this.surveyFrom = this.fb.group({
+      questions: this.fb.array([this.createQuestion()])
+    });
+    // populate form
+    this.surveyFrom.setControl('questions', this.populateQuestions(this.survey.Questions));
+  }
+
+  private populateQuestions(questions: Question[]): FormArray {
+    const qFormArray = new FormArray([]);
+    questions.forEach(q => {
+      const qform = this.fb.group({
+        type: [q.Type, Validators.required],
+        question: [q.QuestionString, Validators.required],
+        answers: this.fb.array([this.createAnswer()])
+      });
+      // populate answers
+      qform.setControl('answers', this.populateAnswers(q.PossibleAnswers));
+      qFormArray.push(qform);
+    });
+    return qFormArray;
+  }
+
+  private populateAnswers(answsers: Map<string, number>): FormArray {
+    const aFormArray = new FormArray([]);
+    answsers.forEach((v, k) => {
+      aFormArray.push(this.fb.group({
+        answer: [k, Validators.required]
+      }));
+    });
+    return aFormArray;
+  }
+
+  createQuestion(): FormGroup {
+    return this.fb.group({
+      type: ['', Validators.required],
+      question: ['', Validators.required],
+      answers: this.fb.array([this.createAnswer()])
+    });
+  }
+
+  createAnswer(): FormGroup {
+    return this.fb.group({
+      answer: ['', Validators.required]
+    });
+  }
+
+  onSubmit(): void {
+    const questionObjecten: Question[] = [];
+
+    const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
+    // console.log(questionFields);
+    for (let i = 0; i <= questionFields.length; i++) {
+      const question = questionFields[i] as QuestionFieldJson;
+      if (question === undefined) {
+        continue;
+      }
+      const answerMap = new Map<string, number>();
+      question.answers.forEach(a => {
+        answerMap.set(a.answer, 0);
+      });
+      questionObjecten.push(new Question(question.type, question.question, answerMap));
+
+      // console.log(questionObjecten);
+    }
+
+    // Default feedback question
+    const fbAnswers = new Map<string, number>();
+    fbAnswers.set('Good', 0);
+    fbAnswers.set('Okay', 0);
+    fbAnswers.set('Bad', 0);
+    const defaultFeedback: Question = new Question('multiple choice',
+      'How do you feel with the current change?', fbAnswers
+    );
+    const survey: Survey = new Survey(questionObjecten, defaultFeedback, 0);
+
+    this.roadmapDataService.addSurveyToRoadmapItem(this.roadmapItem.id, survey); // overrides current survey
+
+  }
+
+  getErrorMessage(errors: any): any {
+    if (errors.required) {
+      return 'is required';
+    }
+  }
+
+  getQuestions(form): any {
+    return form.controls.questions.controls;
+  }
+
+  getAnswers(question): any {
+    return question.controls.answers.controls;
+  }
+
+  addQuestion(form): void {
+    form.controls.questions.push(this.createQuestion());
+  }
+
+  addAnswer(question): void {
+    question.controls.answers.push(this.createAnswer());
+  }
+
+  removeQuestion(form, i): void {
+    form.controls.questions.removeAt(i);
+  }
+
+  removeAnswer(question, i): void {
+    question.controls.answers.removeAt(i);
+  }
 }

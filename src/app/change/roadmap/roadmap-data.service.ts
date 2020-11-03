@@ -61,7 +61,7 @@ export class RoadmapDataService {
     return throwError(errorMessage);
   }
 
-  addSurveyToRoadmapItem(id: number, survey: Survey): void {
+  addSurveyToRoadmapItem(id: number, survey: Survey): void { // overrides current survey
     // this.http.post(`${environment.apiUrl}/`) // TODO add endpoint for adding survey to rmi
   }
 }

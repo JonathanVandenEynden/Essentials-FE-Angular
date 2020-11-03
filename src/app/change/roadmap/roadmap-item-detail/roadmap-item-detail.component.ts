@@ -51,6 +51,6 @@ export class RoadmapItemDetailComponent implements OnInit {
   }
 
   updateSurvey(): void {
-
+    this.router.navigate(['updateSurvey/', this.roadmapItem.id]);
   }
 }
