@@ -1,0 +1,62 @@
+.container-fluid{
+  position: absolute;
+  padding: 20px;
+  background-color: white;
+  height: 1000px;
+  margin: auto;
+}
+
+.progress{
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.progress-bar{
+  background-color: #8dc262;
+  border-radius: 20px;
+}
+
+h1{
+  margin-top: 50px;
+  font-size: 50px;
+}
+.col-6{
+  margin-top: 30px;
+}
+
+.btn-primary{
+  padding: 15px;
+  text-align: left;
+  background-color: #264754;
+  border: #264754;
+  width: 200px;
+}
+
+.btn-primary:hover{
+  opacity: 90%;
+}
+
+mat-card{
+  width: 235px;
+}
+
+h5{
+  margin-left: 5px;
+  font-size: 15px;
+}
+
+mat-form-field.mat-form-field {
+  margin-top: 20px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.btn-secondary{
+  margin-left: 150px;
+  background-color: #8dc262;
+  color: white;
+}
+
+.colLoad{
+  margin-top: 100px;
+}

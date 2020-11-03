@@ -1,0 +1,37 @@
+.container-fluid{
+  position: absolute;
+  padding: 20px;
+  background-color: white;
+  height: 1000px;
+  margin: auto;
+}
+
+h1{
+  margin-top: 20px;
+  font-weight: 400;
+  font-size: 35px;
+}
+
+fa-icon{
+  margin-left: 40px;
+}
+
+mat-card{
+  max-height: 400px;
+  overflow: auto;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+mat-form-field.mat-form-field {
+  margin-top: 20px;
+  width: 400px;
+  font-size: 20px;
+}
+
+.btn{
+  background-color: #8dc262;
+  color: white;
+}
+

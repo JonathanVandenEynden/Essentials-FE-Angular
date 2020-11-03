@@ -1,0 +1,80 @@
+<app-nav-bar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <ng-lottie height="40%" width="40%" [options]="options" (animationCreated)="onAnimationCreated($event)"></ng-lottie>
+      <h2>Your running changes</h2>
+      <mat-card>
+        <div *ngIf="(changes$ | async) as changes; else Error">
+          <div *ngFor="let change of changes">
+            <app-change-button [change] = "change"></app-change-button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <h1>Add a new change<fa-icon [icon]="faPen"></fa-icon></h1>
+      <form [formGroup]="changeForm" (ngSubmit)='onSubmit()'>
+        <mat-form-field>
+          <input matInput aria-label="Title" placeholder="Title" type="text" formControlName="name" required />
+          <mat-error *ngIf="changeForm.get('name')['errors'] && changeForm.get('name').touched">
+            {{ getErrorMessage(changeForm.get('name')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput aria-label="Description" placeholder="Description" type="text" formControlName="description" required />
+          <mat-error *ngIf="changeForm.get('description')['errors'] && changeForm.get('description').touched">
+            {{ getErrorMessage(changeForm.get('description')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput aria-label="Start date" placeholder="Start date" type="date" formControlName="startDate" required />
+          <mat-error *ngIf="changeForm.get('startDate')['errors'] && changeForm.get('startDate').touched">
+            {{ getErrorMessage(changeForm.get('startDate')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput aria-label="End date" placeholder="End date" type="date" formControlName="endDate" required />
+          <mat-error *ngIf="changeForm.get('endDate')['errors'] && changeForm.get('endDate').touched">
+            {{ getErrorMessage(changeForm.get('endDate')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select aria-label="ChangeType" placeholder="Type of change" type="text" formControlName="changetype" required>
+            <mat-option *ngFor="let type of changeTypes" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="changeForm.get('changetype')['errors'] && changeForm.get('changetype').touched">
+            {{ getErrorMessage(changeForm.get('changetype')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select aria-label="ChangeSponsor" placeholder="Sponsor" type="text" formControlName="changesponsor" required>
+            <div *ngIf="(users$ | async) as users; else Error">
+              <mat-option *ngFor="let user of users" [value]="user">
+                {{ user.FULLNAME() }}
+              </mat-option>
+            </div>
+          </mat-select>
+          <mat-error *ngIf="changeForm.get('changesponsor')['errors'] && changeForm.get('changesponsor').touched">
+            {{ getErrorMessage(changeForm.get('changesponsor')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <button class="btn btn-success" type="submit" [disabled]="!changeForm.valid">
+          Add change
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<ng-template #Error>
+  <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
+    <div class="card-header">
+      <p>Error loading the products: {{errorMessage}}
+        Try again later.</p>
+    </div>
+  </div>
+</ng-template>
+</app-nav-bar>

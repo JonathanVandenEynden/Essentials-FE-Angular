@@ -1,0 +1,36 @@
+.row{
+  margin: 0;
+}
+
+.col,.col-11{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+button{
+  border-radius: 10px;
+}
+
+h1{
+  color: white;
+  font-weight: bolder;
+  font-size: 40px;
+}
+
+nav{
+  background: #264754;
+}
+
+.account{
+  color:white;
+}
+
+.account>button{
+  padding:0;
+  margin:0;
+}
+
+account>button:active{
+  text-decoration: none;
+  background: none;
+}
