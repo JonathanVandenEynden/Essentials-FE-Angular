@@ -1,4 +1,4 @@
-import {Question, QuestionJson} from './ClosedQuestion.model';
+import {Question, QuestionJson} from './Question.model';
 
 export interface SurveyJson{
   id: number;

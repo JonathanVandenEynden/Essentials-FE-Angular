@@ -6,6 +6,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {any} from 'codelyzer/util/function';
 import {ChangeInitiative} from '../../change.model';
+import {Question, QuestionJson} from './Question.model';
+import {log} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -58,8 +60,18 @@ export class SurveyDataService {
 
   // tslint:disable-next-line:typedef
   removeSurvey(roadmapItemId: number) {
-    return this.http.delete(`${environment.apiUrl}/Survey/${roadmapItemId}`).pipe(catchError(this.handleError)).subscribe(() =>{
+    return this.http.delete(`${environment.apiUrl}/Survey/${roadmapItemId}`).pipe(catchError(this.handleError)).subscribe(() => {
       this._RELOAD$.next(true);
     });
+  }
+
+  addQuestionToSurvey(surveyId: number, json: { questionString: string; type: number; }): Observable<Question> {
+    return this.http.post(`${environment.apiUrl}/Questions/${surveyId}`, json)
+      .pipe(
+        catchError(this.handleError),
+        tap(console.log),
+        map((jsonResponse: any) => Question.fromJson(jsonResponse)
+        )
+      );
   }
 }

@@ -2,16 +2,15 @@ import {Answer, AnswerJson} from './Answer.model';
 
 export interface QuestionJson{
   id: number;
-  type: string;
+  type: number;
   questionString: string;
   possibleAnswers: Map<string, number>;
-  maxAmount: number;
 }
 
 export class Question {
   private id: number;
   constructor(
-    private type: string,
+    private type: number,
     private questionString: string,
     private possibleAnswers: Map<string, number>,
   ) {
@@ -39,7 +38,7 @@ export class Question {
   get Id(): number {
     return this.id;
   }
-  get Type(): string {
+  get Type(): number {
     return this.type;
   }
   get QuestionString(): string {
