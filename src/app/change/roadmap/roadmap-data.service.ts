@@ -60,7 +60,7 @@ export class RoadmapDataService {
 
   // creates empty survey for a RMI and returns the created survey
   addSurveyToRoadmapItem(id: number): Observable<Survey> {
-    return this.http.post(`${environment.apiUrl}/Survey/${id}`, {})
+    return this.http.post(`${environment.apiUrl}/Survey?roadmapItemId=${id}`, null)
       .pipe(
         catchError(this.handleError),
         tap(console.log),

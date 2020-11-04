@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 import {RoadmapDataService} from '../../roadmap-data.service';
 import {SurveyDataService} from '../survey-data.service';
 import {QuestionDataService} from '../question-data.service';
+import {log} from 'util';
 
 interface QuestionFieldJson {
   type: string;
@@ -38,7 +39,8 @@ export class AddSurveyComponent implements OnInit {
     private roadmapDataService: RoadmapDataService,
     private surveyDataService: SurveyDataService,
     private questionDataService: QuestionDataService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
@@ -63,62 +65,64 @@ export class AddSurveyComponent implements OnInit {
 
   onSubmit(): void {
     // survey aanmaken voor dit RMI
-    let newSurveyObj: Survey;
     this.roadmapDataService
       .addSurveyToRoadmapItem(this.roadmapItem.id)
-      .subscribe((response) => newSurveyObj = response);
+      .subscribe((response) => {
+        this.persistQuestions(response);
+      });
+  }
 
-    if (newSurveyObj) {
-      const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
-      // console.log(questionFields);
-      for (let i = 0; i <= questionFields.length; i++) {
-        const question = questionFields[i] as QuestionFieldJson;
-        if (question === undefined) {
-          continue;
+  persistQuestions(newSurveyObj: Survey): void{
+    const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
+    // console.log(questionFields);
+    for (let i = 0; i <= questionFields.length; i++) {
+      const question = questionFields[i] as QuestionFieldJson;
+      if (question === undefined) {
+        continue;
+      }
+
+      console.log(question);
+      // question aanmaken
+      const newQuestionJson = {
+        type: 0,
+        questionString: ''
+      };
+      newQuestionJson.questionString = question.questionString;
+
+      switch (question.type) {
+        case 'Yes/No': {
+          newQuestionJson.type = 0;
+          break;
         }
-        // question aanmaken
-        const newQuestionJson = {
-          type: 0,
-          questionString: ''
-        };
-        newQuestionJson.questionString = question.questionString;
-
-        switch (question.type) {
-          case 'Yes/No': {
-            newQuestionJson.type = 0;
-            break;
-          }
-          case 'Range': {
-            newQuestionJson.type = 1;
-            break;
-          }
-          case 'Multiple choice': {
-            newQuestionJson.type = 2;
-            break;
-          }
-          default: {
-            newQuestionJson.type = 3;
-            break;
-          }
+        case 'Range': {
+          newQuestionJson.type = 1;
+          break;
         }
-
-        console.log(newQuestionJson);
-        let newQuestionObj: Question;
-        // question persisteren
-        this.surveyDataService.addQuestionToSurvey(newSurveyObj.Id, newQuestionJson).subscribe((response) => newQuestionObj = response);
-        // eventueel answers toevoegen
-        if (newQuestionObj && newQuestionObj.Type === 2) {
-          const answers: string[] = [];
-          question.answers.forEach(a => {
-            answers.push(a.answer);
-          });
-          this.questionDataService.addAnswersToQuestion(newQuestionObj.Id, answers);
+        case 'Multiple choice': {
+          newQuestionJson.type = 2;
+          break;
+        }
+        default: {
+          newQuestionJson.type = 3;
+          break;
         }
       }
 
-
+      console.log(newQuestionJson);
+      // question persisteren
+      this.surveyDataService.addQuestionToSurvey(newSurveyObj.Id, newQuestionJson).subscribe((response) => {
+        // eventueel answers toevoegen
+        if (response.Type === 2) {
+          const answerStrings: string[] = [];
+          question.answers.forEach(a => {
+            answerStrings.push(a.answer);
+          });
+          // console.log('HEEEEEJOOOOOO');
+          // console.log(answerStrings);
+          this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
+        }
+      });
     }
-
   }
 
   getErrorMessage(errors: any): any {

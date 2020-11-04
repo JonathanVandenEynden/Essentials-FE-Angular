@@ -3,7 +3,7 @@
     <p>Questions</p>
     <div class="col-12">
       <div *ngFor="let question of survey.Questions">
-        <p>{{ question.QuestionString }}</p>
+        <p>{{questionTypes[question.Type]}} question: {{ question.QuestionString }}</p>
         <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">
           - "{{answer.key}}": chosen {{answer.value.toString()}} times
         </div>

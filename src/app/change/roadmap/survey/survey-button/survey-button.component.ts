@@ -14,6 +14,7 @@ export class SurveyButtonComponent implements OnInit {
   @Input() public survey: Survey;
   faEdit = faEdit;
   faTrash = faTrash;
+  questionTypes = ['Yes/No', 'Range', 'Multiple choice', 'Open'];
 
 
   constructor() { }

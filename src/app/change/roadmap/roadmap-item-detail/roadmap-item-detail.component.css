@@ -24,12 +24,12 @@ fa-icon:hover{
 }
 
 .container {
-  max-height: 500px;
+  max-height: 800px;
   overflow: auto;
   border-radius: 10px;
   border: solid #264754;
   padding: 20px;
-  margin-left: 20px;
+  margin: 20px;
 }
 
 p {

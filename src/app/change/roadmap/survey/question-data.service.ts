@@ -18,17 +18,17 @@ export class QuestionDataService {
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
-    this.questions$
-      .pipe(
-        catchError((err) => {
-          this._QUESTIONS$.error(err);
-          return throwError(err);
-        })
-      )
-      .subscribe((questions: Question[]) => {
-        this._QUESTIONS = questions;
-        this._QUESTIONS$.next(this._QUESTIONS);
-      });
+    // this.questions$
+    //   .pipe(
+    //     catchError((err) => {
+    //       this._QUESTIONS$.error(err);
+    //       return throwError(err);
+    //     })
+    //   )
+    //   .subscribe((questions: Question[]) => {
+    //     this._QUESTIONS = questions;
+    //     this._QUESTIONS$.next(this._QUESTIONS);
+    //   });
   }
 
   getSurvey$(id: number): Observable<Question> {
@@ -39,16 +39,20 @@ export class QuestionDataService {
         map(Question.fromJson));
   }
 
-  get questions$(): Observable<Question[]> {
-    return this._RELOAD$.pipe(
-      switchMap(() => this.fetchQuestions())
-    );
-  }
+  // get questions$(): Observable<Question[]> {
+  //   return this._RELOAD$.pipe(
+  //     switchMap(() => this.fetchQuestions())
+  //   );
+  // }
 
-  fetchQuestions(): Observable<Question[]> {
-    // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/Questions`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Question[] => list.map(Question.fromJson)));
-  }
+  // fetchQuestions(): Observable<Question[]> {
+  //   // tslint:disable-next-line:max-line-length
+  //   return this.http.get(`${environment.apiUrl}/Questions`)
+  //       .pipe(
+  //         catchError(this.handleError),
+  //         tap(console.log),
+  //         map((list: any[]): Question[] => list.map(Question.fromJson)));
+  // }
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;
@@ -62,10 +66,9 @@ export class QuestionDataService {
   }
 
   addAnswersToQuestion(questionId: number, answers: string[]): void {
-    this.http.post(`${environment.apiUrl}/Question/${questionId}`, answers)
+    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}?initialize=true`, answers)
       .pipe(
-        catchError(this.handleError),
-        tap(console.log)
+        catchError(this.handleError)
       );
   }
 }
