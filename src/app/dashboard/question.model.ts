@@ -1,13 +1,13 @@
 export interface QuestionJson{
   id: number;
   questionString: string;
-  possibleAnswers: Map<string, number>;
+  possibleAnswers: {};
 }
 
 export class Question {
   private _id: number;
 
-  constructor(private _questionString: string, private _possibleAnswers: Map<string, number>) {}
+  constructor(private _questionString: string, private _possibleAnswers: {}) {}
 
   static fromJSON(json: QuestionJson): Question {
     const q = new Question(json.questionString, json.possibleAnswers);
@@ -29,7 +29,7 @@ export class Question {
   get questionString(): string {
     return this._questionString;
   }
-  get answers(): Map<string, number> {
+  get answers(): {} {
     return this._possibleAnswers;
   }
 

@@ -85,4 +85,4 @@ const JsonSurvey = [
   }
 ];
 
-//export const SURVEY: Survey[] = JsonSurvey.map(Survey.fromJSON);
+export const SURVEY: Survey[] = JsonSurvey.map(Survey.fromJSON);
