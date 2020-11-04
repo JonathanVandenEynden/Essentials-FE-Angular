@@ -7,7 +7,6 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {any} from 'codelyzer/util/function';
 import {ChangeInitiative} from '../../change.model';
 import {Question, QuestionJson} from './Question.model';
-import {log} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +65,8 @@ export class QuestionDataService {
   }
 
   addAnswersToQuestion(questionId: number, answers: string[]): void {
-    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}?initialize=true`, answers)
+    console.log('Antwoorden proberen doorsturen');
+    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}`, answers.toString())
       .pipe(
         catchError(this.handleError)
       );

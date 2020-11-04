@@ -3,13 +3,10 @@ import {ActivatedRoute} from '@angular/router';
 import {RoadmapItem} from '../../roadmapitem.model';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
-import {Survey, SurveyJson} from '../survey.model';
-import {Question} from '../Question.model';
-import {map} from 'rxjs/operators';
+import {Survey} from '../survey.model';
 import {RoadmapDataService} from '../../roadmap-data.service';
 import {SurveyDataService} from '../survey-data.service';
 import {QuestionDataService} from '../question-data.service';
-import {log} from 'util';
 
 interface QuestionFieldJson {
   type: string;
@@ -117,8 +114,8 @@ export class AddSurveyComponent implements OnInit {
           question.answers.forEach(a => {
             answerStrings.push(a.answer);
           });
-          // console.log('HEEEEEJOOOOOO');
-          // console.log(answerStrings);
+          console.log('HEEEEEJOOOOOO');
+          console.log(answerStrings);
           this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
         }
       });
