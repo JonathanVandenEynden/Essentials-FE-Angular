@@ -21,6 +21,10 @@ export class RoadmapViewComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
     console.log(this.change);
   }
+  // tslint:disable-next-line:typedef
+  routeGroup(){
+    this.router.navigate(['group', this.change.id]);
+  }
 
   // addSurvey(): void{
   //   this.router.navigate(['addSurvey']);

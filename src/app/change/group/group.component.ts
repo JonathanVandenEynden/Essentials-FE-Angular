@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AnimationItem} from 'lottie-web';
-import {AnimationOptions, BMCompleteEvent} from 'ngx-lottie';
-import {Router} from '@angular/router';
+import {ChangeInitiative} from '../change.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {faArrowLeft, faBars, faRoute, faUserMinus, faUsers} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-group',
@@ -9,22 +9,22 @@ import {Router} from '@angular/router';
   styleUrls: ['./group.component.css']
 })
 export class GroupComponent implements OnInit {
-  options: AnimationOptions = {
-    path: '/assets/animations/add_Done.json',
-  };
-  // tslint:disable-next-line:variable-name
-  constructor(public _router: Router) { }
+  public change: ChangeInitiative;
+  faArrow = faArrowLeft;
+  faBars = faBars;
+  faRoad = faRoute;
+  faGroup = faUsers;
+  faDeleteUser = faUserMinus;
+  groups = ['Management', 'IT'];
+  names = ['Simon De Wilde', 'Killian Hoefman', 'Ziggy Moens', 'Jonathan VDEVL', 'Sébastien De Pauw', 'Marbod Naassens'];
+
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(item => this.change = item.change);
+    console.log(this.change);
   }
-
-  // tslint:disable-next-line:typedef
-  onAnimationCreated(animation: AnimationItem) {
-    animation.loop = false;
-  }
-
-  // tslint:disable-next-line:typedef
-  onAnimationComplete($event: BMCompleteEvent) {
-    this._router.navigate(['/home']);
+  routeRoadmap(): void{
+    this.router.navigate(['roadmap/', this.change.id]);
   }
 }
