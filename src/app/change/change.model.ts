@@ -1,4 +1,4 @@
-import {RoadmapItem, RoadmapItemJson} from './roadmapitem.model';
+import {RoadmapItem, RoadmapItemJson} from './roadmap/roadmapitem.model';
 import {ChangeGroupJson} from './changegroup.model';
 import {Employee, EmployeeJson} from './user.model';
 

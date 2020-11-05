@@ -21,9 +21,8 @@ button{
 .container{
   max-height: 500px;
   overflow: auto;
-  border: solid;
   border-radius: 10px;
-  border-color: #264754;
+  border: solid #264754;
   padding: 20px;
 }
 
@@ -34,10 +33,6 @@ button{
   background-color: #264754;
   border: #264754;
   width: 200px;
-}
-
-.btn-primary:hover{
-  opacity: 90%;
 }
 
 .active{
@@ -51,7 +46,8 @@ button{
 }
 
 fa-icon{
-  color: white;
+  color: black;
+  padding-left: 10px;
 }
 
 .second{

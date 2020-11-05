@@ -37,7 +37,8 @@ export function playerFactory() {
     NgbModule
   ],
   providers: [],
-  exports: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

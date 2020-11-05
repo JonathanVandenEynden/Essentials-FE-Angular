@@ -22,8 +22,8 @@ export class ChangeButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  seeSurveys(): void{
-    this.router.navigate(['survey/', this.change.id]);
+  seeRoadmap(): void{
+    this.router.navigate(['roadmap/', this.change.id]);
   }
 
   // tslint:disable-next-line:typedef
