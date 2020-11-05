@@ -1,16 +1,26 @@
-<mat-card class="btn btn-outline-light shadow p-3 mb-5 bg-white">
+<mat-card class="shadow p-3 mb-5 bg-white">
   <div class="row">
-    <div class="col">
-      <a class="ml-auto" (click)="deleteSurvey()">
-        <fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon>
-      </a>
-      <a class="ml-auto" (click)="updateSurvey()">
-        <fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon>
-      </a>
-    </div>
+    <p>Questions</p>
     <div class="col-12">
       <div *ngFor="let question of survey.Questions">
-        <p>{{ question.QuestionString }}</p>
+        <p>{{questionTypes[question.Type]}} question: {{ question.QuestionString }}</p>
+        <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">
+          - "{{answer.key}}": chosen {{answer.value}} times
+        </div>
+      </div>
+    </div>
+
+  </div>
+</mat-card>
+<mat-card class="shadow p-3 mb-5 bg-white">
+  <div class="row">
+    <p>Feedback</p>
+    <div class="col-12">
+      <div>
+        <p>{{ survey.Feedback.QuestionString }}</p>
+        <div class="answers" *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
+          - "{{answer.key}}": chosen {{answer.value}} times
+        </div>
       </div>
     </div>
 

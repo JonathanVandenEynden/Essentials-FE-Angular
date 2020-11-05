@@ -15,7 +15,7 @@ export class RoadmapViewComponent implements OnInit {
   faGroup = faUsers;
   faRoad = faRoute;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.change = item.change);
