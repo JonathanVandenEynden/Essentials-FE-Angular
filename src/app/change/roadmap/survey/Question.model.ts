@@ -1,5 +1,3 @@
-import {Answer, AnswerJson} from './Answer.model';
-
 export interface QuestionJson{
   id: number;
   type: number;
