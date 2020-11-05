@@ -34,25 +34,27 @@
                       </mat-error>
                     </mat-form-field>
                     <!-- Button voor remove answer-->
-                    <button class="btn btn-sm" (click)="removeAnswer(question, j)">
+                    <button class="btn btn-sm" type="button" (click)="removeAnswer(question, j)">
                       <fa-icon [icon]="faMin"></fa-icon>
                     </button>
                   </div>
                 </div>
                 <!-- button voor add answer-->
-                <button class="btn btn-sm " (click)="addAnswer(question)">
+                <button class="btn btn-sm " type="button" (click)="addAnswer(question)">
                   <fa-icon [icon]="faPlus"></fa-icon>
                   Add answer
                 </button>
               </div>
               <!-- Button om remove question-->
-              <button class="btn btn-sm btn-danger btn-remove-question" (click)="removeQuestion(surveyFrom, i)">
+              <button class="btn btn-sm btn-danger btn-remove-question" type="button"
+                      (click)="removeQuestion(surveyFrom, i)">
                 <fa-icon [icon]="faMin"></fa-icon>
                 Remove question
               </button>
             </div>
           </div>
-          <button class="btn" (click)="addQuestion(surveyFrom)">
+          <!-- Button voor add question-->
+          <button class="btn" type="button" (click)="addQuestion(surveyFrom)">
             <fa-icon [icon]="faPlus"></fa-icon>
             Add question
           </button>

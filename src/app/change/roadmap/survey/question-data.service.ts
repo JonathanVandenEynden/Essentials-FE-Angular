@@ -64,11 +64,13 @@ export class QuestionDataService {
     return throwError(errorMessage);
   }
 
-  addAnswersToQuestion(questionId: number, answers: string[]): void {
-    console.log('Antwoorden proberen doorsturen');
-    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}`, answers.toString())
+  addAnswersToQuestion(questionId: number, possibleAnswers: string[]): void {
+    console.log('Antwoorden proberen doorsturen voor');
+    console.log(questionId);
+    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/1?initialize=true`, possibleAnswers)
       .pipe(
-        catchError(this.handleError)
+        // catchError(this.handleError),
+        tap(console.log)
       );
   }
 }

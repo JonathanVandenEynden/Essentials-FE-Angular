@@ -77,8 +77,6 @@ export class AddSurveyComponent implements OnInit {
       if (question === undefined) {
         continue;
       }
-
-      console.log(question);
       // question aanmaken
       const newQuestionJson = {
         type: 0,
@@ -104,8 +102,6 @@ export class AddSurveyComponent implements OnInit {
           break;
         }
       }
-
-      console.log(newQuestionJson);
       // question persisteren
       this.surveyDataService.addQuestionToSurvey(newSurveyObj.Id, newQuestionJson).subscribe((response) => {
         // eventueel answers toevoegen
