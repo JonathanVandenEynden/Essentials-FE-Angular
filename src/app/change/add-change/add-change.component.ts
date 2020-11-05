@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -12,6 +12,22 @@ import {Employee} from '../user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {GroupComponent} from '../group/group.component';
 
+
+function validateDates(control: FormGroup): { [key: string]: any } {
+  if (control.get('endDate').value > control.get('startDate').value)
+  {
+    return { endBeforeStart: true };
+  }
+  return null;
+}
+
+function validateStartDate(control: FormControl): { [key: string]: any } {
+  console.log(control.value + ' ' + Date.now());
+  if (control.value > Date.now()) {
+    return { dateNotInFuture: true };
+  }
+  return null;
+}
 @Component({
   selector: 'app-add-change',
   templateUrl: './add-change.component.html',
@@ -36,7 +52,8 @@ export class AddChangeComponent implements OnInit {
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
-    this.changeForm = this.fb.group({name: [''], description: [''], startDate: [''], endDate: [''], changetype: [''], changesponsor: ['']});
+    // tslint:disable-next-line:max-line-length
+    this.changeForm = this.fb.group({name: [''], description: [''], startDate: ['', validateStartDate], endDate: [''], changetype: [''], changesponsor: ['']}, {validator: validateDates});
   }
 
   get changes$(): Observable<ChangeInitiative[]>
@@ -58,13 +75,6 @@ export class AddChangeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, this.changeForm.value.changesponsor, []));
     this.changeForm = this.fb.group({name: [''], description: [''], startDate: [''], endDate: [''], changetype: [''], changesponsor: ['']});
-    const dialogRef = this.dialog.open(GroupComponent, {
-      width: '500px',
-      panelClass: 'custom-dialog'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
   // tslint:disable-next-line:typedef
   getErrorMessage(errors: any)
@@ -72,6 +82,14 @@ export class AddChangeComponent implements OnInit {
     if (errors.required)
     {
       return 'is required';
+    }
+    else if (errors.dateNotInFuture)
+    {
+      return 'The start date should be in the future';
+    }
+    else if (errors.endBeforeStart)
+    {
+      return 'The end date should be after the start date';
     }
   }
 
