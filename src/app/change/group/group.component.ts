@@ -24,7 +24,6 @@ export class GroupComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
     console.log(this.change);
   }
-
   routeRoadmap(): void{
     this.router.navigate(['roadmap/', this.change.id]);
   }
