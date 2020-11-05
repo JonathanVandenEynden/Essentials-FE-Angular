@@ -1,1 +1,68 @@
-<p>add-survey works!</p>
+<app-nav-bar>
+  <div class="container-fluid m-5">
+    <h2>Add survey to "{{this.roadmapItem.title}}"</h2>
+    <div>
+      <form [formGroup]="surveyFrom" (ngSubmit)="onSubmit()">
+        <div formArrayName="questions">
+          <div *ngFor="let question of getQuestions(surveyFrom); let i = index">
+            <div [formGroupName]="i" class="questionbox d-flex">
+              <mat-form-field class="typeselection">
+                <mat-select placeholder="type" aria-label="question type" formControlName="type">
+                  <mat-option *ngFor="let type of questionTypes" [value]="type">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="question.get('type')['errors'] && question.get('type').touched">
+                  {{ getErrorMessage(question.get('type')['errors']) }}
+                </mat-error>
+              </mat-form-field>
+              <br>
+              <mat-form-field class="questionfield">
+                <input matInput type="text" aria-label="Question" formControlName="questionString"
+                       placeholder="question"/>
+                <mat-error *ngIf="question.get('questionString')['errors'] && question.get('questionString').touched">
+                  {{ getErrorMessage(question.get('questionString')['errors']) }}
+                </mat-error>
+              </mat-form-field>
+              <div class="answerbox" *ngIf="question.controls.type.value === 'Multiple choice'">
+                <div formArrayName="answers">
+                  <div [formGroupName]="j" *ngFor="let answer of getAnswers(question); let j = index">
+                    <mat-form-field>
+                      <input matInput type="text" placeholder="answer" formControlName="answer"/>
+                      <mat-error *ngIf="answer.get('answer')['errors'] && answer.get('answer').touched">
+                        {{ getErrorMessage(answer.get('answer')['errors']) }}
+                      </mat-error>
+                    </mat-form-field>
+                    <!-- Button voor remove answer-->
+                    <button class="btn btn-sm" type="button" (click)="removeAnswer(question, j)">
+                      <fa-icon [icon]="faMin"></fa-icon>
+                    </button>
+                  </div>
+                </div>
+                <!-- button voor add answer-->
+                <button class="btn btn-sm " type="button" (click)="addAnswer(question)">
+                  <fa-icon [icon]="faPlus"></fa-icon>
+                  Add answer
+                </button>
+              </div>
+              <!-- Button om remove question-->
+              <button class="btn btn-sm btn-danger btn-remove-question" type="button"
+                      (click)="removeQuestion(surveyFrom, i)">
+                <fa-icon [icon]="faMin"></fa-icon>
+                Remove question
+              </button>
+            </div>
+          </div>
+          <!-- Button voor add question-->
+          <button class="btn" type="button" (click)="addQuestion(surveyFrom)">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Add question
+          </button>
+        </div>
+        <!--submitbutton-->
+        <br>
+        <button class="button" type="submit" mat-raised-button [disabled]="!surveyFrom.valid">Create survey</button>
+      </form>
+    </div>
+  </div>
+</app-nav-bar>

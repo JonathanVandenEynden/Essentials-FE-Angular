@@ -52,6 +52,9 @@ export class RoadmapItem {
   get survey(): Survey{
     return this._SURVEY;
   }
+  set survey(s){
+    this._SURVEY = s;
+  }
   get done(): boolean{
     return this.DONE;
   }
@@ -62,5 +65,6 @@ export class RoadmapItem {
   get ENDDATE(): string {
     return this._ENDDATE.split('T')[0];
   }
+
 }
 

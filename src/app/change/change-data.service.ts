@@ -61,7 +61,7 @@ export class ChangeDataService {
   }
 
   // tslint:disable-next-line:typedef
-  removeChange(id: any){
+  removeChange(id: number){
     return this.http.delete(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError)).subscribe(() => {
       this._RELOAD$.next(true);
     });
