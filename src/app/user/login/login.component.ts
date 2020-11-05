@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if(true){
-      this.router.navigate(['dashboard/project']);
+      this.router.navigate(['dashboard/roadmapitem']);
     } else{
       this.errorMessage = `Could not login`;
     }

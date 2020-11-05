@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {faPlus, faSyncAlt, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
+import {Router} from '@angular/router';
+import {DashboardDataService} from '../dashboard-data.service';
 
 @Component({
   selector: 'app-dashboard-survey',
@@ -6,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-survey.component.css']
 })
 export class DashboardSurveyComponent implements OnInit {
+  public faTachometer = faTachometerAlt;
+  public faSync = faSyncAlt;
+  public faPlus = faPlus;
 
-  constructor() { }
+  constructor(private _router: Router, private _dashboardDataService: DashboardDataService) { }
 
   ngOnInit(): void {
   }

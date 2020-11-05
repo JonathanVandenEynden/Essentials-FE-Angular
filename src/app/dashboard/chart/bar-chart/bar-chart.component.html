@@ -1,0 +1,12 @@
+<div style="display: inline-block; margin: 40px">
+<h2>{{title}}</h2>
+  <canvas baseChart width="700px" height="400px"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [colors]="barChartColors"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>
