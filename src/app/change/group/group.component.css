@@ -1,0 +1,157 @@
+mat-drawer-container{
+  margin-top: -5px;
+  height: 89%;
+}
+
+mat-drawer{
+  padding: 20px;
+  width: 180px;
+  background-color: #264754;
+  color: white;
+}
+
+h2{
+  border-bottom: solid white;
+}
+
+a{
+  color: white;
+}
+
+a:hover{
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.hover{
+  border: none;
+  outline: none;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.hover:before{
+  outline: none;
+  height: 35px;
+  position: absolute;
+  width: 0;
+  left: 24px;
+  border: 8px solid transparent;
+  content: '';
+}
+
+.hover:hover:before{
+  width: 95px;
+  border-bottom: solid whitesmoke;
+  border-radius: 2px;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  transition: width 0.2s linear 0.2s;
+}
+
+.container-fluid{
+  overflow: hidden;
+  background-color: white;
+  height: 150px;
+  margin: auto;
+}
+
+.row{
+  margin: 0;
+}
+
+.col{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.container{
+  max-height: 500px;
+  overflow: auto;
+  border-radius: 10px;
+  border: solid #264754;
+  padding: 20px;
+}
+
+.btn-primary{
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+  background-color: #264754;
+  border: #264754;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.btn-primary:hover{
+  opacity: 90%;
+}
+
+.active{
+  color: white;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: left;
+  background-color: #8dc262 !important;
+  border: #8dc262;
+  width: 200px;
+  border-radius: 10px;
+}
+
+fa-icon{
+  color: white;
+}
+
+.second{
+  position: absolute;
+  padding: 20px;
+  height: 100%;
+}
+
+.dark{
+  margin-right: 20px;
+  color: black;
+}
+
+h1{
+  border-right: black solid 5px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.progress{
+  width: 280px;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.progress-bar{
+  background-color: #8dc262;
+  border-radius: 20px;
+}
+
+.btn-outline-light{
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.btn-outline-light:hover{
+  opacity: 80%;
+}
+
+h5{
+  font-size: 20px;
+}
+
+h4{
+  border-bottom: solid black;
+}
+
+
+
