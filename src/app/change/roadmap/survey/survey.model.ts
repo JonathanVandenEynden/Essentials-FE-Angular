@@ -16,6 +16,7 @@ export class Survey {
   ) {}
 
   static fromJSON(json: SurveyJson): Survey {
+    console.log(json);
     const assessment = new Survey(
       json.questions.map(ClosedQuestion.fromJson),
       ClosedQuestion.fromJson(json.feedback),

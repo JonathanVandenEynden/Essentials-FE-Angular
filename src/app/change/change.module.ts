@@ -31,6 +31,7 @@ const changeRoutes: Routes =
     {path: 'delete', component: DeleteChangeComponent},
     {path: 'roadmap/:id', component: RoadmapViewComponent, resolve: {change: ChangeResolver}},
     {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
+    {path: 'group/:id', component: GroupComponent, resolve: {change: ChangeResolver}}
   ];
 
 @NgModule({
