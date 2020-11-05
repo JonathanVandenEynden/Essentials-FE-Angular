@@ -30,6 +30,11 @@ h1{
   padding: 20px;
 }
 
+.chart{
+  display: flex;
+  max-width: 50%
+}
+
 .btn-primary{
   margin-top: 20px;
   padding: 15px;
@@ -76,3 +81,7 @@ a{
   cursor: pointer;
 }
 
+.breedte{
+  width: 100%;
+  border-radius: 10px;
+}
