@@ -13,6 +13,13 @@
       </mat-card>
     </div>
     <div class="col-4">
+      <div *ngIf="added">
+          <mat-card class="card text-white mb-3" (click)="addRoadmap()">
+                Successfully added the new Change<fa-icon [icon]="faCheck" class="fa-pull-right fa-lg"></fa-icon>
+            <br/>
+                Click here to add a roadmap to your change
+          </mat-card>
+      </div>
       <h1>Add a new change<fa-icon [icon]="faPen"></fa-icon></h1>
       <form [formGroup]="changeForm" (ngSubmit)='onSubmit()'>
         <mat-form-field>
@@ -61,6 +68,11 @@
             {{ getErrorMessage(changeForm.get('changesponsor')['errors']) }}
           </mat-error>
         </mat-form-field>
+        <div>
+          <mat-error *ngIf="changeForm.errors">
+            {{ getErrorMessage(changeForm.errors) }}
+          </mat-error>
+        </div>
         <button class="btn btn-success" type="submit" [disabled]="!changeForm.valid">
           Add change
         </button>

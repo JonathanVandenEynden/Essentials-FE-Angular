@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
-import {faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -10,11 +10,11 @@ import {ChangeInitiative} from '../change.model';
 import {UserDataService} from '../user-data.service';
 import {Employee} from '../user.model';
 import {MatDialog} from '@angular/material/dialog';
-import {GroupComponent} from '../group/group.component';
+import {Router} from '@angular/router';
 
 
 function validateDates(control: FormGroup): { [key: string]: any } {
-  if (control.get('endDate').value > control.get('startDate').value)
+  if (control.get('endDate').value < control.get('startDate').value)
   {
     return { endBeforeStart: true };
   }
@@ -22,8 +22,8 @@ function validateDates(control: FormGroup): { [key: string]: any } {
 }
 
 function validateStartDate(control: FormControl): { [key: string]: any } {
-  console.log(control.value + ' ' + Date.now());
-  if (control.value > Date.now()) {
+  const now = new Date(Date.now());
+  if (control.value < now.toISOString().split('T')[0]) {
     return { dateNotInFuture: true };
   }
   return null;
@@ -38,6 +38,7 @@ export class AddChangeComponent implements OnInit {
     path: '/assets/animations/animation.json',
   };
   faPen = faPen;
+  faCheck = faCheck;
   public changeForm: FormGroup;
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
@@ -45,9 +46,10 @@ export class AddChangeComponent implements OnInit {
   private _fetchUsers$: Observable<Employee[]>;
   public errorMessage = '';
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
+  public added = false;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
+  constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
 
   ngOnInit(): void {
     this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
@@ -70,11 +72,15 @@ export class AddChangeComponent implements OnInit {
   onAnimationCreated(animation: AnimationItem) {
     animation.loop = false;
   }
-
   onSubmit(): void {
     // tslint:disable-next-line:max-line-length
     this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, this.changeForm.value.changesponsor, []));
-    this.changeForm = this.fb.group({name: [''], description: [''], startDate: [''], endDate: [''], changetype: [''], changesponsor: ['']});
+    this.added = true;
+    window.scrollTo(0, 0);
+  }
+  // tslint:disable-next-line:typedef
+  addRoadmap(){
+    this.router.navigate(['/home']);
   }
   // tslint:disable-next-line:typedef
   getErrorMessage(errors: any)
