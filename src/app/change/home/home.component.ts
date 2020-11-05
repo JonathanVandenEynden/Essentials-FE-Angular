@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
 
   routeDashboard(): void {
-    this._router.navigate(['dashboard/home']);
+    this._router.navigate(['dashboard/roadmapitem']);
   }
 
   addChangeEvent(): void {

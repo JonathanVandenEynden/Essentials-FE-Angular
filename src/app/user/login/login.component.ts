@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private onSubmit(): void {
+  public onSubmit(): void {
     if (true){
-      this.router.navigate(['dashboard/roadmapitem']);
+      this.router.navigate(['change/home']);
     } else{
       this.errorMessage = `Could not login`;
     }
