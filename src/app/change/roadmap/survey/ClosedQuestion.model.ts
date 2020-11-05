@@ -1,4 +1,5 @@
 // TODO Answer verder uitwerken
+
 export class Answer {
   static fromJson(json: any): Answer{
     return new Answer();
@@ -16,7 +17,7 @@ export interface AnswerJson {
 export interface ClosedQuestionJson{
   id: number;
   questionString: string;
-  possibleAnswers: AnswerJson[];
+  // possibleAnswers: AnswerJson[];
   maxAmount: number;
 }
 
@@ -24,7 +25,7 @@ export class ClosedQuestion {
   private id: number;
   constructor(
     private questionString: string,
-    private possibleAnswers: Answer[],
+    // private possibleAnswers: Answer[],
     private maxAmount: number
   ) {
   }
@@ -32,7 +33,7 @@ export class ClosedQuestion {
   static fromJson(json: ClosedQuestionJson): ClosedQuestion {
     const q = new ClosedQuestion(
       json.questionString,
-      json.possibleAnswers.map(Answer.fromJson),
+      // json.possibleAnswers.map(Answer.fromJson),
       json.maxAmount
     );
     q.id = json.id;
@@ -43,7 +44,7 @@ export class ClosedQuestion {
     return {
       id: this.id,
       questionString: this.questionString,
-      possibleAnswers: this.possibleAnswers.map(a => a.toJson()),
+      // possibleAnswers: this.possibleAnswers.map(a => a.toJson()),
       maxAmount: this.maxAmount
     } as ClosedQuestionJson;
   }
@@ -54,9 +55,9 @@ export class ClosedQuestion {
   get QuestionString(): string {
     return this.questionString;
   }
-  get PossibleAnswers(): Answer[] {
+  /*get PossibleAnswers(): Answer[] {
     return this.possibleAnswers;
-  }
+  }*/
   get MaxAmount(): number {
     return this.maxAmount;
   }
