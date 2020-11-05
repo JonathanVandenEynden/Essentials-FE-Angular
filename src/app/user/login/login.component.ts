@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
   public user: FormGroup;
   public errorMessage = '';
+  public faArrowRight = faArrowRight;
 
   constructor(private router: Router,
               private fb: FormBuilder) { }
@@ -21,8 +23,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if(true){
+  private onSubmit(): void {
+    if (true){
       this.router.navigate(['dashboard/roadmapitem']);
     } else{
       this.errorMessage = `Could not login`;

@@ -81,3 +81,7 @@ a{
   cursor: pointer;
 }
 
+.breedte{
+  width: 100%;
+  border-radius: 10px;
+}
