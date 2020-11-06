@@ -2,16 +2,36 @@
 <div class="container-fluid second">
     <div class="row">
         <div class="col-sm-3">
-            <div class="row">
-              <button class="btn btn-primary" (click)="routeDashboard()">Dashboard<fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon></button>
-            </div>
-            <div class="row">
-                <button class="btn active" disabled>Change Events<fa-icon [icon]="faSync" class="fa-pull-right"></fa-icon></button>
-            </div>
+          <mat-card class="filter">
+            <mat-card-title class="title">
+              <h2>Apply filter<fa-icon [icon]="faFilter" class="fa-pull-right"></fa-icon></h2>
+            </mat-card-title>
+            <mat-card-content>
+              <h3>Groups</h3>
+              <mat-divider></mat-divider>
+              <div>
+                <div class="row top">
+                  <mat-checkbox>All employees</mat-checkbox>
+                </div>
+                <div class="row top">
+                  <mat-checkbox>Management</mat-checkbox>
+                </div>
+                <div class="row top">
+                  <mat-checkbox>IT</mat-checkbox>
+                </div>
+                <div class="row top">
+                  <mat-checkbox>Human Resources</mat-checkbox>
+                </div>
+              </div>
+              <h3>Progress</h3>
+              <mat-divider></mat-divider>
+              <mat-slider thumbLabel min="0" max="100" step="0.5" value="0"></mat-slider>
+            </mat-card-content>
+          </mat-card>
         </div>
         <div class="col">
           <div class="row d-flex">
-            <h2>Change Events</h2>
+            <h1>Change Events</h1>
             <a class="ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
           </div>
             <div class="container">
