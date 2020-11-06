@@ -8,6 +8,7 @@ import {Question} from '../Question.model';
 import {Survey} from '../survey.model';
 import {QuestionDataService} from '../question-data.service';
 import {SurveyDataService} from '../survey-data.service';
+import {Location} from '@angular/common';
 
 interface QuestionFieldJson {
   type: string;
@@ -37,7 +38,8 @@ export class UpdateSurveyComponent implements OnInit {
               private fb: FormBuilder,
               private roadmapDataService: RoadmapDataService,
               private surveyDataService: SurveyDataService,
-              private questionDataService: QuestionDataService
+              private questionDataService: QuestionDataService,
+              private location: Location
   ) {
   }
 
@@ -124,6 +126,7 @@ export class UpdateSurveyComponent implements OnInit {
       .addSurveyToRoadmapItem(this.roadmapItem.id)
       .subscribe((response) => {
         this.persistQuestions(response);
+        this.location.back(); // TODO zou moeten wachten tot persistQuestions gedaan is, maar werkt nog niet (ook niet met observables)
       });
   }
 

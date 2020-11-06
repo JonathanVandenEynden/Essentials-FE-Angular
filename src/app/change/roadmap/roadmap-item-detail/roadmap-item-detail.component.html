@@ -1,5 +1,5 @@
 <app-nav-bar>
-  <div class="container-fluid second">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-sm-3">
         <h1>{{roadmapItem.title}}</h1>
@@ -12,7 +12,7 @@
       </div>
       <div class="col">
         <div *ngIf="roadmapItem.survey; else noSurvey">
-          <div class="container">
+          <div class= "container-fluid bordered">
             <div class="row d-flex">
               <h2>Survey</h2>
               <div>
@@ -29,8 +29,8 @@
             </div>
           </div>
         </div>
-        <ng-template #noSurvey>
-          <div class="container">
+        <ng-template #noSurvey bordered>
+          <div class="container-fluid ">
             <div class="row d-flex">
               <h2>Survey</h2>
             </div>

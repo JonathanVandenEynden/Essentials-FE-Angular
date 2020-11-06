@@ -7,6 +7,9 @@ import {Survey} from '../survey.model';
 import {RoadmapDataService} from '../../roadmap-data.service';
 import {SurveyDataService} from '../survey-data.service';
 import {QuestionDataService} from '../question-data.service';
+import {Location} from '@angular/common';
+import {Observable} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 interface QuestionFieldJson {
   type: string;
@@ -35,7 +38,8 @@ export class AddSurveyComponent implements OnInit {
     private fb: FormBuilder,
     private roadmapDataService: RoadmapDataService,
     private surveyDataService: SurveyDataService,
-    private questionDataService: QuestionDataService
+    private questionDataService: QuestionDataService,
+    private location: Location
   ) {
   }
 
@@ -66,17 +70,15 @@ export class AddSurveyComponent implements OnInit {
       .addSurveyToRoadmapItem(this.roadmapItem.id)
       .subscribe((response) => {
         this.persistQuestions(response);
+        this.location.back(); // TODO zou moeten wachten tot persistQuestions gedaan is, maar werkt nog niet (ook niet met observables)
       });
   }
 
-  persistQuestions(newSurveyObj: Survey): void{
+  persistQuestions(newSurveyObj: Survey): void {
     const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
     // console.log(questionFields);
-    for (let i = 0; i <= questionFields.length; i++) {
+    for (let i = 0; i < questionFields.length; i++) {
       const question = questionFields[i] as QuestionFieldJson;
-      if (question === undefined) {
-        continue;
-      }
       // question aanmaken
       const newQuestionJson = {
         type: 0,
@@ -110,8 +112,8 @@ export class AddSurveyComponent implements OnInit {
           question.answers.forEach(a => {
             answerStrings.push(a.answer);
           });
-          console.log('HEEEEEJOOOOOO');
-          console.log(answerStrings);
+          // console.log('HEEEEEJOOOOOO');
+          // console.log(answerStrings);
           this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
         }
       });

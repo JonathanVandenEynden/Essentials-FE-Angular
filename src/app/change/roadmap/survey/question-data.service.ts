@@ -67,10 +67,11 @@ export class QuestionDataService {
   addAnswersToQuestion(questionId: number, possibleAnswers: string[]): void {
     console.log('Antwoorden proberen doorsturen voor');
     console.log(questionId);
-    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/1?initialize=true`, possibleAnswers)
+    this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}?initialize=true`, possibleAnswers)
       .pipe(
-        // catchError(this.handleError),
+        catchError(this.handleError),
         tap(console.log)
-      );
+      )
+      .subscribe();
   }
 }

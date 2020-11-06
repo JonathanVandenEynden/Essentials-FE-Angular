@@ -9,6 +9,14 @@ h1 {
   font-weight: bold;
 }
 
+.bordered{
+  max-height: 800px;
+  overflow: auto;
+  border-radius: 10px;
+  border: solid #264754;
+  padding: 20px;
+}
+
 h2 {
   padding-left: 10px;
   font-size: 30px;
@@ -23,14 +31,6 @@ fa-icon:hover{
   cursor: pointer;
 }
 
-.container {
-  max-height: 800px;
-  overflow: auto;
-  border-radius: 10px;
-  border: solid #264754;
-  padding: 20px;
-  margin: 20px;
-}
 
 p {
   font-size: 20px;

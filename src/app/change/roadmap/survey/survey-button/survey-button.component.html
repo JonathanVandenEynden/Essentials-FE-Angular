@@ -5,7 +5,7 @@
       <div *ngFor="let question of survey.Questions">
         <p>{{questionTypes[question.Type]}} question: {{ question.QuestionString }}</p>
         <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">
-          - "{{answer.key}}": chosen {{answer.value}} times
+          - {{answer.key}} : chosen {{answer.value}} times
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
       <div>
         <p>{{ survey.Feedback.QuestionString }}</p>
         <div class="answers" *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
-          - "{{answer.key}}": chosen {{answer.value}} times
+          - {{answer.key}} : chosen {{answer.value}} times
         </div>
       </div>
     </div>

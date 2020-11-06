@@ -18,7 +18,7 @@ export class Survey {
   static fromJSON(json: SurveyJson): Survey {
     if (json != null){
       const survey = new Survey(
-        json.questions.map(Question.fromJson),
+        json.questions != null ? json.questions.map(Question.fromJson) : null as Question[],
         Question.fromJson(json.feedback),
         json.amountSubmitted
       );

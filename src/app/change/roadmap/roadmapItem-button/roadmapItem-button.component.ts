@@ -8,7 +8,7 @@ import {RoadmapItem} from '../roadmapitem.model';
   styleUrls: ['./roadmapItem-button.component.css']
 })
 export class RoadmapItemButtonComponent implements OnInit {
-  @Input() public roadmap: RoadmapItem;
+  @Input() public roadmapItem: RoadmapItem;
 
   constructor(private router: Router) { }
 
@@ -16,7 +16,7 @@ export class RoadmapItemButtonComponent implements OnInit {
   }
 
   showRoadmapItemDetail(): void {
-    this.router.navigate(['roadmapItemDetail/', this.roadmap.id]);
+    this.router.navigate(['roadmapItemDetail/', this.roadmapItem.id]);
   }
 
 }

@@ -15,13 +15,16 @@ export class Question {
   }
 
   static fromJson(json: QuestionJson): Question {
-    const q = new Question(
-      json.type,
-      json.questionString,
-      json.possibleAnswers
-    );
-    q.id = json.id;
-    return q;
+    if (json != null){
+      const q = new Question(
+        json.type,
+        json.questionString,
+        json.possibleAnswers
+      );
+      q.id = json.id;
+      return q;
+    }
+    return null as Question;
   }
 
   toJson(): QuestionJson {
