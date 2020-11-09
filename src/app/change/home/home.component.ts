@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faEdit, faPlus, faSyncAlt, faTachometerAlt, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faEdit, faFilter, faPlus, faSyncAlt, faTachometerAlt, faTrash, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {empty, Observable} from 'rxjs';
@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   faPlus = faPlus;
   faTrash = faTrash;
   faEdit = faEdit;
+  faUsers = faUsers;
+  faFilter = faFilter;
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   public errorMessage = '';

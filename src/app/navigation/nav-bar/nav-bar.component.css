@@ -34,3 +34,17 @@ account>button:active{
   text-decoration: none;
   background: none;
 }
+
+a:hover{
+  cursor: pointer;
+}
+
+::ng-deep .mat-menu-content{
+  transition: 0.5s;
+  background-color: #264754;
+}
+
+button{
+  color: white;
+  outline: none;
+}

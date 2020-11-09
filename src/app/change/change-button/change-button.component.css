@@ -35,6 +35,11 @@ a{
   border-radius: 20px;
 }
 
+.mat-card-title{
+  font-size: larger;
+  font-weight: 500;
+}
+
 ::ng-deep mat-dialog-content{
   background-color: white;
 }
