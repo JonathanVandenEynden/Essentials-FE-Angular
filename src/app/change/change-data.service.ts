@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import {Observable, throwError, BehaviorSubject, observable, of} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ChangeInitiative} from './change.model';
 
@@ -87,4 +87,29 @@ export class ChangeDataService {
   }
 
 
+  // tslint:disable-next-line:typedef
+  getChangesWithProgress$(filter?: any): Observable<ChangeInitiative[]> {
+    return this._RELOAD$.pipe(
+      switchMap(() => this.fetchChangesWithProgress$(filter))
+    );
+  }
+
+  fetchChangesWithProgress$(filter?: any): Observable<ChangeInitiative[]>
+  {
+    if (filter === undefined)
+    {
+      // tslint:disable-next-line:max-line-length
+      return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.progress >= 0)));
+    }
+    else
+    {
+      if (filter.type === 'number')
+      {
+        // tslint:disable-next-line:max-line-length
+        return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.progress >= filter)));
+      }
+      // tslint:disable-next-line:max-line-length
+      return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.CHANGEGROUP.name === filter)));
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {faEdit, faFilter, faPlus, faSyncAlt, faTachometerAlt, faTrash, faUsers} from '@fortawesome/free-solid-svg-icons';
-import {Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
-import {empty, Observable} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {catchError, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {EMPTY, empty, Observable, Subject} from 'rxjs';
 import {ChangeInitiative} from '../change.model';
 import {ChangeDataService} from '../change-data.service';
 
@@ -19,17 +19,43 @@ export class HomeComponent implements OnInit {
   faEdit = faEdit;
   faUsers = faUsers;
   faFilter = faFilter;
+  filter: any;
+  value = 0;
+  checked1 = false;
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
+  // tslint:disable-next-line:variable-name
+  public _filterChanges$ = new Subject<any>();
   public errorMessage = '';
   public added = true;
 
 
   // tslint:disable-next-line:variable-name
-  constructor(private _router: Router, private changeDataService: ChangeDataService) { }
+  constructor(private _router: Router, private changeDataService: ChangeDataService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
+    this._filterChanges$.pipe(distinctUntilChanged(), debounceTime(250)).subscribe(
+      val => {
+        const params = val ? { queryParams: { filter: val } } : undefined;
+        this._router.navigate(['/change/home'], params);
+      }
+    );
+    this._fetchChanges$ = this._route.queryParams.pipe(switchMap(params => {
+      if (params.filter) {
+        if (typeof params.filter === 'number')
+        {
+          this.value = params.filter;
+        }
+        this.filter = params.filter;
+        this.checked1 = true;
+      }
+      return this.changeDataService.getChangesWithProgress$(params.filter);
+    })).pipe(
+      catchError((err) => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
+    );
   }
 
   routeDashboard(): void {
@@ -43,5 +69,17 @@ export class HomeComponent implements OnInit {
   get changes$(): Observable<ChangeInitiative[]>
   {
     return this._fetchChanges$;
+  }
+
+  // tslint:disable-next-line:typedef
+  onCheckBoxClick() {
+    if (this.checked1)
+    {
+      this._filterChanges$.next('All employees');
+    }
+    else
+    {
+      this._filterChanges$.next();
+    }
   }
 }
