@@ -24,6 +24,7 @@ import {RoadmapItemResolver} from './roadmap/roadmapItemResolver';
 import { SurveyButtonComponent } from './roadmap/survey/survey-button/survey-button.component';
 import { AddRoadmapItemComponent } from './roadmap/add-roadmap-item/add-roadmap-item.component';
 import { UpdateRoadmapItemComponent } from './roadmap/update-roadmap-item/update-roadmap-item.component';
+import { DeleteRoadmapItemComponent } from './roadmap/delete-roadmap-item/delete-roadmap-item.component';
 
 const changeRoutes: Routes =
   [
@@ -59,6 +60,7 @@ const changeRoutes: Routes =
     SurveyButtonComponent,
     AddRoadmapItemComponent,
     UpdateRoadmapItemComponent,
+    DeleteRoadmapItemComponent,
   ],
   imports: [
     NavigationModule,

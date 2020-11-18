@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RoadmapItem} from '../roadmapitem.model';
 import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {MatDialog} from '@angular/material/dialog';
+import {RoadmapDataService} from '../roadmap-data.service';
+import {DeleteRoadmapItemComponent} from '../delete-roadmap-item/delete-roadmap-item.component';
+
 
 
 @Component({
@@ -13,8 +17,11 @@ export class RoadmapItemButtonComponent implements OnInit {
   @Input() public roadmapItem: RoadmapItem;
   faEdit = faEdit;
   faTrash = faTrash;
+  delete: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              public dialog: MatDialog,
+              private roadmapDataService: RoadmapDataService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +36,18 @@ export class RoadmapItemButtonComponent implements OnInit {
   }
 
   deleteRoadmapItem(): void {
+    const dialogRef = this.dialog.open(DeleteRoadmapItemComponent, {
+      width: '500px',
+      data: {delete: this.delete}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.delete = result;
+      if (this.delete) {
+        this.roadmapDataService.deleteRoadmapItem(this.roadmapItem.id).subscribe(() => {
+          window.location.reload();
+        });
+      }
+    });
   }
 }

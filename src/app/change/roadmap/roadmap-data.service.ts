@@ -77,4 +77,8 @@ export class RoadmapDataService {
   updateRoadMapItem(rmiId: number, rmiJson: PostRmiJson): Observable<any>  {
     return this.http.put(`${environment.apiUrl}/RoadMapItems/${rmiId}`, rmiJson).pipe(catchError(this.handleError));
   }
+
+  deleteRoadmapItem(rmiId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/RoadMapItems/${rmiId}`).pipe(catchError(this.handleError), tap(console.log));
+  }
 }
