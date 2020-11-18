@@ -71,6 +71,10 @@ export class RoadmapDataService {
   }
 
   addRoadmapItemToChangeInitiative(ciId: number, rmiJson: PostRmiJson): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/RoadMapItems/${ciId}`, rmiJson);
+    return this.http.post(`${environment.apiUrl}/RoadMapItems/${ciId}`, rmiJson).pipe(catchError(this.handleError));
+  }
+
+  updateRoadMapItem(rmiId: number, rmiJson: PostRmiJson): Observable<any>  {
+    return this.http.put(`${environment.apiUrl}/RoadMapItems/${rmiId}`, rmiJson).pipe(catchError(this.handleError));
   }
 }
