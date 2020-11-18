@@ -22,6 +22,7 @@ import { UpdateSurveyComponent } from './roadmap/survey/update-survey/update-sur
 import { RoadmapItemDetailComponent } from './roadmap/roadmap-item-detail/roadmap-item-detail.component';
 import {RoadmapItemResolver} from './roadmap/roadmapItemResolver';
 import { SurveyButtonComponent } from './roadmap/survey/survey-button/survey-button.component';
+import { AddRoadmapItemComponent } from './roadmap/add-roadmap-item/add-roadmap-item.component';
 
 const changeRoutes: Routes =
   [
@@ -33,7 +34,8 @@ const changeRoutes: Routes =
     {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'addSurvey/:id', component: AddSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'updateSurvey/:id', component: UpdateSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
-    {path: 'group/:id', component: GroupComponent, resolve: {change: ChangeResolver}}
+    {path: 'group/:id', component: GroupComponent, resolve: {change: ChangeResolver}},
+    {path: 'addRoadmapItem/:id', component: AddRoadmapItemComponent, resolve: {change: ChangeResolver}}
   ];
 
 @NgModule({
@@ -53,6 +55,7 @@ const changeRoutes: Routes =
     UpdateSurveyComponent,
     RoadmapItemDetailComponent,
     SurveyButtonComponent,
+    AddRoadmapItemComponent,
   ],
   imports: [
     NavigationModule,
