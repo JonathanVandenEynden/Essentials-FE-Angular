@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   filter: any;
   value = 0;
   checked1 = false;
+  public filterChangesName = '';
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   // tslint:disable-next-line:variable-name
@@ -34,7 +35,29 @@ export class HomeComponent implements OnInit {
   constructor(private _router: Router, private changeDataService: ChangeDataService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this._filterChanges$.pipe(distinctUntilChanged(), debounceTime(250)).subscribe(
+    this._filterChanges$
+      .pipe(distinctUntilChanged(), debounceTime(250))
+      .subscribe((val) => {
+        const params = val ? { queryParams: { filter: val } } : undefined;
+        this._router.navigate(['/change/home'], params);
+      });
+
+    this._fetchChanges$ = this._route.queryParams
+      .pipe(
+        switchMap((newParams) => {
+          if (newParams.filter) {
+            this.filterChangesName = newParams.filter;
+          }
+          return this.changeDataService.getChanges$(newParams.filter);
+        })
+      )
+      .pipe(
+        catchError((err) => {
+          this.errorMessage = err;
+          return EMPTY;
+        })
+      );
+    /*this._filterChanges$.pipe(distinctUntilChanged(), debounceTime(250)).subscribe(
       val => {
         const params = val ? { queryParams: { filter: val } } : undefined;
         this._router.navigate(['/change/home'], params);
@@ -55,7 +78,7 @@ export class HomeComponent implements OnInit {
         this.errorMessage = err;
         return EMPTY;
       })
-    );
+    );*/
   }
 
   routeDashboard(): void {

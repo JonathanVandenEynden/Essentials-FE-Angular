@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject, observable, of} from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -38,10 +38,21 @@ export class ChangeDataService {
     );
   }
 
-  fetchChanges$(): Observable<ChangeInitiative[]>
+  getChanges$(group?: string, progress?: string): Observable<ChangeInitiative[]>
   {
+    return this._RELOAD$.pipe(
+      switchMap(() => this.fetchChanges$(group, progress))
+    );
+  }
+
+  fetchChanges$(group?: string, progress?: string): Observable<ChangeInitiative[]>
+  {
+    let params = new HttpParams();
+    params = group ? params.append('group', group) : params;
+    params = progress ? params.append('progress', progress) : params;
+    console.log(params);
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
   getChange$(id: any): Observable<ChangeInitiative>
   {
@@ -84,32 +95,5 @@ export class ChangeDataService {
     }
     console.error(err);
     return throwError(errorMessage);
-  }
-
-
-  // tslint:disable-next-line:typedef
-  getChangesWithProgress$(filter?: any): Observable<ChangeInitiative[]> {
-    return this._RELOAD$.pipe(
-      switchMap(() => this.fetchChangesWithProgress$(filter))
-    );
-  }
-
-  fetchChangesWithProgress$(filter?: any): Observable<ChangeInitiative[]>
-  {
-    if (filter === undefined)
-    {
-      // tslint:disable-next-line:max-line-length
-      return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.progress >= 0)));
-    }
-    else
-    {
-      if (filter.type === 'number')
-      {
-        // tslint:disable-next-line:max-line-length
-        return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.progress >= filter)));
-      }
-      // tslint:disable-next-line:max-line-length
-      return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON).filter(e => e.CHANGEGROUP.name === filter)));
-    }
   }
 }
