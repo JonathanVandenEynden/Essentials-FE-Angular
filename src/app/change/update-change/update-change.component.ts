@@ -110,12 +110,12 @@ export class UpdateChangeComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateRoadmap(){
-    this.router.navigate(['roadmap/update']);
+    this.router.navigate(['roadmap', this.change.id]);
   }
-  // tslint:disable-next-line:typedef
-  updateSurvey(){
-    this.router.navigate(['roadmapView/update']);
-  }
+  // // tslint:disable-next-line:typedef
+  // updateSurvey(){
+  //   this.router.navigate(['roadmapView/update']);
+  // }
   // tslint:disable-next-line:typedef
   updateGroup(){
     this.router.navigate(['group/update']);

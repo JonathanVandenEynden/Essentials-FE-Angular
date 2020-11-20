@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
@@ -15,9 +15,8 @@ import {ChangeGroup} from '../changegroup.model';
 
 
 function validateDates(control: FormGroup): { [key: string]: any } {
-  if (control.get('endDate').value < control.get('startDate').value)
-  {
-    return { endBeforeStart: true };
+  if (control.get('endDate').value < control.get('startDate').value) {
+    return {endBeforeStart: true};
   }
   return null;
 }
@@ -25,10 +24,11 @@ function validateDates(control: FormGroup): { [key: string]: any } {
 function validateStartDate(control: FormControl): { [key: string]: any } {
   const now = new Date(Date.now());
   if (control.value < now.toISOString().split('T')[0]) {
-    return { dateNotInFuture: true };
+    return {dateNotInFuture: true};
   }
   return null;
 }
+
 @Component({
   selector: 'app-add-change',
   templateUrl: './add-change.component.html',
@@ -50,22 +50,34 @@ export class AddChangeComponent implements OnInit {
   public added = false;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) { }
-
-  ngOnInit(): void {
-    this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
-    this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
-    // tslint:disable-next-line:max-line-length
-    this.changeForm = this.fb.group({name: [''], description: [''], startDate: ['', validateStartDate], endDate: [''], changetype: [''], changesponsor: ['']}, {validator: validateDates});
+  constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) {
   }
 
-  get changes$(): Observable<ChangeInitiative[]>
-  {
+  ngOnInit(): void {
+    this._fetchChanges$ = this.changeDataService.changes$.pipe(catchError(err => {
+      this.errorMessage = err;
+      return empty;
+    }));
+    this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => {
+      this.errorMessage = err;
+      return empty;
+    }));
+    // tslint:disable-next-line:max-line-length
+    this.changeForm = this.fb.group({
+      name: [''],
+      description: [''],
+      startDate: ['', validateStartDate],
+      endDate: [''],
+      changetype: [''],
+      changesponsor: ['']
+    }, {validator: validateDates});
+  }
+
+  get changes$(): Observable<ChangeInitiative[]> {
     return this._fetchChanges$;
   }
 
-  get users$(): Observable<Employee[]>
-  {
+  get users$(): Observable<Employee[]> {
     return this._fetchUsers$;
   }
 
@@ -73,29 +85,26 @@ export class AddChangeComponent implements OnInit {
   onAnimationCreated(animation: AnimationItem) {
     animation.loop = false;
   }
+
   onSubmit(): void {
     // tslint:disable-next-line:max-line-length
     this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, new ChangeGroup('Test'), this.changeForm.value.changesponsor, []));
     this.added = true;
     window.scrollTo(0, 0);
   }
+
   // tslint:disable-next-line:typedef
-  addRoadmap(){
+  addRoadmap() {
     this.router.navigate(['/home']);
   }
+
   // tslint:disable-next-line:typedef
-  getErrorMessage(errors: any)
-  {
-    if (errors.required)
-    {
+  getErrorMessage(errors: any) {
+    if (errors.required) {
       return 'is required';
-    }
-    else if (errors.dateNotInFuture)
-    {
+    } else if (errors.dateNotInFuture) {
       return 'The start date should be in the future';
-    }
-    else if (errors.endBeforeStart)
-    {
+    } else if (errors.endBeforeStart) {
       return 'The end date should be after the start date';
     }
   }
