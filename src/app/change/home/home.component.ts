@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {faEdit, faFilter, faPlus, faSyncAlt, faTachometerAlt, faTrash, faUsers} from '@fortawesome/free-solid-svg-icons';
+import { faFilter, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {EMPTY, Observable, Subject} from 'rxjs';
 import {ChangeInitiative} from '../change.model';
 import {ChangeDataService} from '../change-data.service';
+import {ChangeGroup} from '../changegroup.model';
 
 @Component({
   selector: 'app-home',
@@ -12,36 +13,32 @@ import {ChangeDataService} from '../change-data.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  faTachometer = faTachometerAlt;
-  faSync = faSyncAlt;
   faPlus = faPlus;
-  faTrash = faTrash;
-  faEdit = faEdit;
-  faUsers = faUsers;
   faFilter = faFilter;
-  filter: any;
   value = 0;
   checked1 = false;
   public filterChangesNames = {group: '', progress: 0};
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   // tslint:disable-next-line:variable-name
+  private _fetchChangeGroups$: Observable<ChangeGroup[]>;
+  // tslint:disable-next-line:variable-name
   public _filterChanges$ = new Subject<any>();
   public errorMessage = '';
-  public added = true;
 
 
   // tslint:disable-next-line:variable-name
   constructor(private _router: Router, private changeDataService: ChangeDataService, private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this._fetchChangeGroups$ = this.changeDataService.getChangeGroup();
     this._filterChanges$
       .pipe(distinctUntilChanged(), debounceTime(250))
       .subscribe((val) => {
         let params;
         if (this.checked1 && this.value !== 0)
         {
-          if (this.filterChangesNames.group === '')
+          if (this.filterChangesNames.group === '' || val.length > 4)
           {
             // tslint:disable-next-line:max-line-length
             params = val ? { queryParams: { group: val, progress: this.filterChangesNames.progress } } : undefined; // Aparte naam voor group en progress
@@ -84,32 +81,6 @@ export class HomeComponent implements OnInit {
           return EMPTY;
         })
       );
-    /*this._filterChanges$.pipe(distinctUntilChanged(), debounceTime(250)).subscribe(
-      val => {
-        const params = val ? { queryParams: { filter: val } } : undefined;
-        this._router.navigate(['/change/home'], params);
-      }
-    );
-    this._fetchChanges$ = this._route.queryParams.pipe(switchMap(params => {
-      if (params.filter) {
-        if (typeof params.filter === 'number')
-        {
-          this.value = params.filter;
-        }
-        this.filter = params.filter;
-        this.checked1 = true;
-      }
-      return this.changeDataService.getChangesWithProgress$(params.filter);
-    })).pipe(
-      catchError((err) => {
-        this.errorMessage = err;
-        return EMPTY;
-      })
-    );*/
-  }
-
-  routeDashboard(): void {
-    this._router.navigate(['dashboard/roadmapitem']);
   }
 
   addChangeEvent(): void {
@@ -121,14 +92,21 @@ export class HomeComponent implements OnInit {
     return this._fetchChanges$;
   }
 
+  get changegroups$(): Observable<ChangeGroup[]>
+  {
+    return this._fetchChangeGroups$;
+  }
+
   // tslint:disable-next-line:typedef
-  onCheckBoxClick() {
-    if (this.checked1)
+  onCheckBoxClick(checked: boolean, name: string) {
+    if (checked)
     {
-      this._filterChanges$.next('All employees');
+      this.checked1 = true;
+      this._filterChanges$.next(name);
     }
     else
     {
+      this.checked1 = false;
       this._filterChanges$.next(this.filterChangesNames.progress);
     }
   }

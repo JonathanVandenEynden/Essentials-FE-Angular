@@ -9,18 +9,11 @@
             <mat-card-content>
               <h3>Groups</h3>
               <mat-divider></mat-divider>
-              <div>
-                <div class="row top">
-                  <mat-checkbox [(ngModel)]="checked1" (change)="onCheckBoxClick()" [value]="filterChangesNames.group">All employees</mat-checkbox>
-                </div>
-                <div class="row top">
-                  <mat-checkbox>Management</mat-checkbox>
-                </div>
-                <div class="row top">
-                  <mat-checkbox>IT</mat-checkbox>
-                </div>
-                <div class="row top">
-                  <mat-checkbox>Human Resources</mat-checkbox>
+              <div *ngIf="(changegroups$ | async) as changeGroups; else Error">
+                <div *ngFor="let group of changeGroups">
+                  <div class="row top">
+                    <mat-checkbox [(ngModel)]="group.CHECKED" (change)="onCheckBoxClick(group.CHECKED, group.name)" [value]="filterChangesNames.group">{{group.name}}</mat-checkbox>
+                  </div>
                 </div>
               </div>
               <h3>Progress</h3>
