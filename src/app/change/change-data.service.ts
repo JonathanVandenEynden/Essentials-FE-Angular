@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
-import {Observable, throwError, BehaviorSubject, observable, of} from 'rxjs';
+import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ChangeInitiative} from './change.model';
 
@@ -49,7 +49,7 @@ export class ChangeDataService {
   {
     let params = new HttpParams();
     params = group ? params.append('group', group) : params;
-    params = progress ? params.append('progress', progress) : params;
+    params = progress ? params.append('progress', progress.replace('.', ',')) : params;
     console.log(params);
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
