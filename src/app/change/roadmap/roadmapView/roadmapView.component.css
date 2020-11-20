@@ -70,12 +70,10 @@ a{
 
 h1{
   border-right: black solid 5px;
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 30px;
 }
 
 .progress{
-  width: 280px;
   margin-top: 20px;
   border-radius: 20px;
 }
