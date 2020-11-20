@@ -7,6 +7,7 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {Survey, SurveyJson} from './survey/survey.model';
 import {Question} from './survey/Question.model';
+import {PostRmiJson} from './add-roadmap-item/add-roadmap-item.component';
 
 @Injectable({
   providedIn: 'root'
@@ -67,5 +68,17 @@ export class RoadmapDataService {
         map((json: any) => Survey.fromJSON(json)
         )
       );
+  }
+
+  addRoadmapItemToChangeInitiative(ciId: number, rmiJson: PostRmiJson): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/RoadMapItems/${ciId}`, rmiJson).pipe(catchError(this.handleError));
+  }
+
+  updateRoadMapItem(rmiId: number, rmiJson: PostRmiJson): Observable<any>  {
+    return this.http.put(`${environment.apiUrl}/RoadMapItems/${rmiId}`, rmiJson).pipe(catchError(this.handleError));
+  }
+
+  deleteRoadmapItem(rmiId: number): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/RoadMapItems/${rmiId}`).pipe(catchError(this.handleError), tap(console.log));
   }
 }
