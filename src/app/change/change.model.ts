@@ -12,6 +12,7 @@ export interface ChangeInitiativeJson{
   changeSponsor: EmployeeJson;
   changeType: string;
   roadMap: RoadmapItemJson[];
+  progress: number;
 }
 
 export class ChangeInitiative {
@@ -23,7 +24,8 @@ export class ChangeInitiative {
     private _ENDDATE: string,
     private _CHANGEGROUP: ChangeGroup,
     private _CHANGESPONSOR: Employee,
-    private ROADMAP: RoadmapItem[]
+    private ROADMAP: RoadmapItem[],
+    private _PROGRESS: number
   ) {}
 
   static fromJSON(json: any): ChangeInitiative {
@@ -34,7 +36,8 @@ export class ChangeInitiative {
       json.endDate,
       ChangeGroup.fromJSON(json.changeGroup),
       Employee.fromJSON(json.changeSponsor),
-      json.roadMap.map(RoadmapItem.fromJSON)
+      json.roadMap.map(RoadmapItem.fromJSON),
+      json.progress
     );
     change.ID = json.id;
     return change;
@@ -49,7 +52,8 @@ export class ChangeInitiative {
       endDate: this._ENDDATE,
       changeGroup: this._CHANGEGROUP,
       sponsor: this._CHANGESPONSOR,
-      roadMap: this.ROADMAP
+      roadMap: this.ROADMAP,
+      progress: this._PROGRESS
     } as ChangeInitiativeJson;
   }
   get id(): number {
@@ -105,11 +109,13 @@ export class ChangeInitiative {
   get roadMap(): RoadmapItem[]{
     return this.ROADMAP;
   }
-  get progress(): number{
-    let progress = 0;
-    this.ROADMAP.forEach(e => e.done ? progress++ : progress);
-    progress = (progress / this.ROADMAP.length) * 100;
-    return progress;
+
+  get PROGRESS(): number {
+    return this._PROGRESS;
+  }
+
+  set PROGRESS(value: number) {
+    this._PROGRESS = value;
   }
 }
 
