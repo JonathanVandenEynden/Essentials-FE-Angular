@@ -12,6 +12,7 @@ import {MaterialModule} from './material/material.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from './dashboard/dashboard.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {httpInterceptorProviders} from './interceptors';
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
@@ -36,7 +37,7 @@ export function playerFactory() {
     NoopAnimationsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   exports: [
   ],
   bootstrap: [AppComponent]

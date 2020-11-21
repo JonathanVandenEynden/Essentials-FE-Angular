@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {ChangeInitiative} from './change.model';
+import {ChangeGroup} from './changegroup.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,16 +39,35 @@ export class ChangeDataService {
     );
   }
 
-  fetchChanges$(): Observable<ChangeInitiative[]>
+  getChanges$(group?: string, progress?: string): Observable<ChangeInitiative[]>
+  {
+    return this._RELOAD$.pipe(
+      switchMap(() => this.fetchChanges$(group, progress))
+    );
+  }
+
+  fetchChanges$(group?: string, progress?: string): Observable<ChangeInitiative[]>
+  {
+    let params = new HttpParams();
+    params = group ? params.append('group', group) : params;
+    params = progress ? params.append('progress', progress.replace('.', ',')) : params;
+    console.log(params);
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+  }
+
+  getChangeGroup(): Observable<ChangeGroup[]>
   {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeGroups/GetAllGhangeGroupsOfOrganization/${1}`).pipe(catchError(this.handleError), map((list: any[]): ChangeGroup[] => list.map(ChangeGroup.fromJSON)));
   }
+
   getChange$(id: any): Observable<ChangeInitiative>
   {
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeInitiatives/${id}`).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON));
   }
+
   // tslint:disable-next-line:typedef
   addNewChange(change: ChangeInitiative)
   {
@@ -85,6 +105,4 @@ export class ChangeDataService {
     console.error(err);
     return throwError(errorMessage);
   }
-
-
 }

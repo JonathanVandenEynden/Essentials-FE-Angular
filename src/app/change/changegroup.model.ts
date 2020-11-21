@@ -8,6 +8,7 @@ export interface ChangeGroupJson{
 
 export class ChangeGroup {
   private ID: number;
+  private _CHECKED = false;
   constructor(
     private NAME: string,
     // private USERS: Employee[]
@@ -35,8 +36,14 @@ export class ChangeGroup {
   get name(): string{
     return this.NAME;
   }
+  get CHECKED(): boolean{
+    return this._CHECKED;
+  }
+  set CHECKED(value: boolean) {
+    this._CHECKED = value;
+  }
   /*get users(): Employee[]{
-    return this.USERS;
-  }*/
+      return this.USERS;
+    }*/
 }
 
