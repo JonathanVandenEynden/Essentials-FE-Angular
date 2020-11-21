@@ -8,7 +8,7 @@ import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
 import {ChangeInitiative} from '../change.model';
 import {UserDataService} from '../user-data.service';
-import {Employee} from '../user.model';
+import {Employee} from '../../user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {ChangeGroup} from '../changegroup.model';

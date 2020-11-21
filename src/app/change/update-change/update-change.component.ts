@@ -6,7 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ChangeDataService} from '../change-data.service';
 import {UserDataService} from '../user-data.service';
 import {EMPTY, empty, Observable} from 'rxjs';
-import {Employee} from '../user.model';
+import {Employee} from '../../user.model';
 import {catchError} from 'rxjs/operators';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
