@@ -1,18 +1,27 @@
 <div class="container container-fluid">
-  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png" />
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
 
   <div class="h2">Add new organization</div>
 
   <div class="form">
-    <mat-form-field>
-      <input matInput aria-label="Name" type="text" placeholder="Name" [(ngModel)]="organizationName">
-    </mat-form-field>
-    <br>
-    // TODO employees uitlezen uit cvs
+    <div>
+      <mat-form-field>
+        <input matInput aria-label="Name" type="text" placeholder="Name" [(ngModel)]="organizationName">
+      </mat-form-field>
+    </div>
+    <div>
+      <input type="file" #csvReader name="Upload Employee csv" aria-label="Upload Employee csv"
+             (change)="convertCsv($event)"
+             accept=".csv">
+    </div>
     <br>
     // TODO changemanager aanwijzen
     <br>
     <button class="btn btn-primary" (click)="createOrganization()">Create Organization</button>
+  </div>
+
+  <div *ngFor="let employeeRecord of employeesList">
+    {{employeeRecord.name}}
   </div>
 
 
