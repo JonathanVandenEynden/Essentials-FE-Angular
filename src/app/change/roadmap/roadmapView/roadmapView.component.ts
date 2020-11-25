@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faClipboard, faPlus, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
-import {ChangeInitiative} from '../../change.model';
+import {ChangeInitiative} from '../../../models/change.model';
 import {RoadmapDataService} from '../roadmap-data.service';
 
 @Component({

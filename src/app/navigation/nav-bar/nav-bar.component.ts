@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {Changemanager} from '../../change/changemanager.model';
+import {Changemanager} from '../../models/changemanager.model';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 

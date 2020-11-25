@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ChangeInitiative} from '../../change.model';
+import {ChangeInitiative} from '../../../models/change.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Location} from '@angular/common';
 import {PostRmiJson} from '../add-roadmap-item/add-roadmap-item.component';
-import {RoadmapItem} from '../roadmapitem.model';
+import {RoadmapItem} from '../../../models/roadmapitem.model';
 
 function validateDates(control: FormGroup): { [key: string]: any } {
   if (control.get('endDate').value < control.get('startDate').value) {

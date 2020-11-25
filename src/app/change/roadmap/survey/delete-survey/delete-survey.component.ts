@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Survey} from '../survey.model';
+import {Survey} from '../../../../models/survey.model';
 
 @Component({
   selector: 'app-delete-survey',
