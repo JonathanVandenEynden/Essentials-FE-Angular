@@ -1,9 +1,9 @@
 import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {ChangeDataService} from '../change-data.service';
 import {Observable} from 'rxjs';
-import {RoadmapItem} from './roadmapitem.model';
+import {RoadmapItem} from '../../models/roadmapitem.model';
 import {RoadmapDataService} from './roadmap-data.service';
 
 

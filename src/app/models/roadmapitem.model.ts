@@ -1,4 +1,4 @@
-import {Survey, SurveyJson} from './survey/survey.model';
+import {Survey, SurveyJson} from './survey.model';
 
 export interface RoadmapItemJson{
   id: number;
@@ -11,7 +11,8 @@ export interface RoadmapItemJson{
 }
 
 export class RoadmapItem {
-
+  private _startDate: Date;
+  private _endDate: Date;
   private ID: number;
   constructor(
     private TITLE: string,
@@ -30,6 +31,8 @@ export class RoadmapItem {
       json.done
     );
     roadmapItem.ID = json.id;
+    roadmapItem.startDate = new Date(json.startDate);
+    roadmapItem.endDate = new Date(json.endDate);
     return roadmapItem;
   }
 
@@ -61,10 +64,21 @@ export class RoadmapItem {
   get STARTDATE(): string {
     return this._STARTDATE.split('T')[0];
   }
-
   get ENDDATE(): string {
     return this._ENDDATE.split('T')[0];
   }
 
+  get startDate(): Date{
+    return this._startDate;
+  }
+  set startDate(value: Date){
+    this._startDate = value;
+  }
+  get endDate(): Date{
+    return this._endDate;
+  }
+  set endDate(value: Date){
+    this._endDate = value;
+  }
 }
 

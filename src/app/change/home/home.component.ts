@@ -3,9 +3,9 @@ import { faFilter, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute, Router} from '@angular/router';
 import {catchError, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {EMPTY, Observable, Subject} from 'rxjs';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {ChangeDataService} from '../change-data.service';
-import {ChangeGroup} from '../changegroup.model';
+import {ChangeGroup} from '../../models/changegroup.model';
 
 @Component({
   selector: 'app-home',

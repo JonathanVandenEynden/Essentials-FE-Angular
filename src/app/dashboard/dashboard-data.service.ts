@@ -1,48 +1,31 @@
 import { Injectable } from '@angular/core';
-import {Survey} from './survey.model';
-import { SURVEY } from './mock-surveys';
-import {Roadmapitem} from './roadmapitem.model';
-import {ROADMAPITEM} from './mock-roadmap';
+import {Survey} from '../models/survey.model';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {RoadmapItem} from '../change/roadmap/roadmapitem.model';
+import {RoadmapItem} from '../models/roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DashboardDataService {
-  //mock
-  private _surveys = SURVEY;
-  private _roadmapitem = ROADMAPITEM;
-
-  get roadmapitem(): Roadmapitem[]{
-    return this._roadmapitem;
-  }
-
-  get survey(): Survey[] {
-    return this._surveys;
-  }
-
-  //API
   private _ROADMAPITEMS$ = new BehaviorSubject<RoadmapItem[]>([]);
   private _ROADMAPITEMS: RoadmapItem[];
   private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
   private _SURVEYS: Survey[];
+  // private _PROJECT$ = new BehaviorSubject<Project[]>([]);
+  // private _PROJECT: Project[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
-    this.roadMapItems$
-      .pipe(
+    this.roadMapItems$.pipe(
         catchError((err) => {
           this._ROADMAPITEMS$.error(err);
           return throwError(err);
         })
-      )
-      .subscribe((roadmapItems: RoadmapItem[]) => {
+      ).subscribe((roadmapItems: RoadmapItem[]) => {
         this._ROADMAPITEMS = roadmapItems;
         this._ROADMAPITEMS$.next(this._ROADMAPITEMS);
       });
@@ -58,10 +41,25 @@ export class DashboardDataService {
         this._SURVEYS = surveys;
         this._SURVEYS$.next(this._SURVEYS);
       });
+
+    // this.projects$
+    //   .pipe(
+    //     catchError((err) => {
+    //       this._PROJECT$.error(err);
+    //       return throwError(err);
+    //     })
+    //   )
+    //   .subscribe((project: Project[]) => {
+    //     this._PROJECT = project;
+    //     this._PROJECT$.next(this._PROJECT);
+    //   });
   }
 
   getSurvey$(id: number): Observable<Survey> {
-    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
+    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(
+      catchError(this.handleError),
+      map(Survey.fromJSON)
+    );
   }
 
   get surveys$(): Observable<Survey[]> {
@@ -72,25 +70,24 @@ export class DashboardDataService {
 
   fetchSurveys$(): Observable<Survey[]>
   {
-    return this.http.get(`${environment.apiUrl}/Surveys`)
+    return this.http.get(`${environment.apiUrl}/Survey`)
         .pipe(
           catchError(this.handleError),
-          tap(console.log),
-          map((list: any[]): Survey[] => list.map(Survey.fromJSON)));
+          map((list: any[]): Survey[] => list.map(Survey.fromJSON))
+        );
   }
 
   get roadMapItems$(): Observable<RoadmapItem[]> {
     return this._RELOAD$.pipe(
-      switchMap(() => this.fetchRoadmapItems$())
+      switchMap(() => this.fetchRoadmapItems$(1))
     );
   }
 
-  fetchRoadmapItems$(): Observable<RoadmapItem[]> {
+  fetchRoadmapItems$(id: any): Observable<RoadmapItem[]> {
     return this.http
-      .get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${2}`)
+      .get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${id}`)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON))
       );
   }
@@ -100,10 +97,30 @@ export class DashboardDataService {
       .get(`${environment.apiUrl}/RoadMapItems/${id}`)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map(RoadmapItem.fromJSON)
       );
   }
+
+  // getProject$(id: number): Observable<Project> {
+  //   return this.http.get(`${environment.apiUrl}/Projects/${id}`).pipe(
+  //     catchError(this.handleError),
+  //     map(Project.fromJSON)
+  //   );
+  // }
+  //
+  // get projects$(): Observable<Project[]> {
+  //   return this._RELOAD$.pipe(
+  //     switchMap(() => this.fetchProjects$())
+  //   );
+  // }
+  //
+  // fetchProjects$(): Observable<Project[]>
+  // {
+  //   return this.http.get(`${environment.apiUrl}/Projects/${1}`)
+  //     .pipe(
+  //       catchError(this.handleError),
+  //       map((list: any[]): Project[] => list.map(Project.fromJSON)));
+  // }
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;
@@ -112,7 +129,6 @@ export class DashboardDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RoadmapItem} from '../roadmapitem.model';
+import {RoadmapItem} from '../../../models/roadmapitem.model';
 import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {MatDialog} from '@angular/material/dialog';
 import {RoadmapDataService} from '../roadmap-data.service';
