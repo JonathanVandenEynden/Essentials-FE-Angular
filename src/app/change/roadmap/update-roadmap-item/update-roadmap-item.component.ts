@@ -14,14 +14,6 @@ function validateDates(control: FormGroup): { [key: string]: any } {
   return null;
 }
 
-function validateStartDate(control: FormControl): { [key: string]: any } {
-  const now = new Date(Date.now());
-  if (control.value < now.toISOString().split('T')[0]) {
-    return {dateNotInFuture: true};
-  }
-  return null;
-}
-
 @Component({
   selector: 'app-update-roadmap-item',
   templateUrl: './update-roadmap-item.component.html',
@@ -43,7 +35,7 @@ export class UpdateRoadmapItemComponent implements OnInit {
     this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
     this.rmiForm = this.fb.group({
       title: [this.roadmapItem.title, Validators.required],
-      startDate: [this.roadmapItem.STARTDATE, validateStartDate],
+      startDate: [this.roadmapItem.STARTDATE],
       endDate: [this.roadmapItem.ENDDATE]
     }, {validator: validateDates});
   }
