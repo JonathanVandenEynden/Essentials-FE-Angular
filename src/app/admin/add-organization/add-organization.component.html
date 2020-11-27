@@ -3,26 +3,47 @@
 
   <div class="h2">Add new organization</div>
 
-  <div class="form">
+  <form (ngSubmit)="onSubmit()">
     <div>
       <mat-form-field>
-        <input matInput aria-label="Name" type="text" placeholder="Name" [(ngModel)]="organizationName">
+        <input matInput #name aria-label="Name" type="text" placeholder="Name" (change)="organizationName = name.value">
       </mat-form-field>
     </div>
     <div>
-      <input type="file" #csvReader name="Upload Employee csv" aria-label="Upload Employee csv"
-             (change)="convertCsv($event)"
+      <input type="file" name="Upload Employee csv" aria-label="Upload Employee csv"
+             (change)="onFileSelected($event)"
              accept=".csv">
     </div>
     <br>
     // TODO changemanager aanwijzen
     <br>
-    <button class="btn btn-primary" (click)="createOrganization()">Create Organization</button>
-  </div>
+    <button class="btn btn-primary" type="submit">Create Organization</button>
+  </form>
 
-  <div *ngFor="let employeeRecord of employeesList">
-    {{employeeRecord.name}}
-  </div>
 
+  <table class="minimalistBlack" *ngIf="employeeRecords.length > 0">
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>team</th>
+      <th>department</th>
+      <th>country</th>
+      <th>factory</th>
+      <th>office</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let record of employeeRecords;let i = index;">
+      <td><span>{{record.name}}</span></td>
+      <td><span>{{record.team}}</span></td>
+      <td><span>{{record.department}}</span></td>
+      <td><span>{{record.country}}</span></td>
+      <td><span>{{record.factory}}</span></td>
+      <td><span>{{record.office}}</span></td>
+    </tr>
+    </tbody>
+  </table>
 
 </div>
+
+
