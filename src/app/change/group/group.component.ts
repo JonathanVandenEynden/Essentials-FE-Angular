@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faArrowLeft, faBars, faRoute, faUserMinus, faUsers} from '@fortawesome/free-solid-svg-icons';
 

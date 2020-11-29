@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {RoadmapItem} from '../../roadmapitem.model';
+import {RoadmapItem} from '../../../../models/roadmapitem.model';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapDataService} from '../../roadmap-data.service';
-import {Question} from '../Question.model';
-import {Survey} from '../survey.model';
+import {Question} from '../../../../models/Question.model';
+import {Survey} from '../../../../models/survey.model';
 import {QuestionDataService} from '../question-data.service';
 import {SurveyDataService} from '../survey-data.service';
 import {Location} from '@angular/common';

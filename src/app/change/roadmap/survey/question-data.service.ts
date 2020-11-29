@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {Survey} from './survey.model';
+import {Survey} from '../../../models/survey.model';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {any} from 'codelyzer/util/function';
-import {ChangeInitiative} from '../../change.model';
-import {Question, QuestionJson} from './Question.model';
+import {ChangeInitiative} from '../../../models/change.model';
+import {Question, QuestionJson} from '../../../models/Question.model';
 
 @Injectable({
   providedIn: 'root'

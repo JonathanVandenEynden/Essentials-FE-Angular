@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapDataService} from '../roadmap-data.service';
-import {ChangeInitiative} from '../../change.model';
+import {ChangeInitiative} from '../../../models/change.model';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import validate = WebAssembly.validate;
 import {QuestionDataService} from '../survey/question-data.service';

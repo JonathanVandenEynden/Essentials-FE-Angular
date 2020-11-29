@@ -6,12 +6,12 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {UserDataService} from '../user-data.service';
-import {Employee} from '../user.model';
+import {Employee} from '../../models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {ChangeGroup} from '../changegroup.model';
+import {ChangeGroup} from '../../models/changegroup.model';
 
 
 function validateDates(control: FormGroup): { [key: string]: any } {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {faClipboard, faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
-import {RoadmapItem} from '../roadmapitem.model';
+import {RoadmapItem} from '../../../models/roadmapitem.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DeleteChangeComponent} from '../../delete-change/delete-change.component';
 import {MatDialog} from '@angular/material/dialog';
