@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {EmployeeCsvRecord} from '../EmployeeCsvRecord';
+import {EmployeeCsvRecord} from '../../models/EmployeeCsvRecord';
 import {AdminDataService} from '../admin-data.service';
 import {Location} from '@angular/common';
 

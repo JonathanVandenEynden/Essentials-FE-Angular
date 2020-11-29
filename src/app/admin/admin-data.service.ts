@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {EmployeeCsvRecord} from './EmployeeCsvRecord';
+import {EmployeeCsvRecord} from '../models/EmployeeCsvRecord';
 import {Observable, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {OrganizationPostJson} from './add-organization/add-organization.component';
+import {Organization} from '../models/Organization.model';
+import {ChangeInitiative} from '../models/change.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,11 @@ export class AdminDataService {
   postOrganization(json: OrganizationPostJson): Observable<any> {
     // TODO remove adminId when backend is ready for authentication
     return this.http.post(`${environment.apiUrl}/Organizations/1`, json).pipe(catchError(this.handleError), tap(console.log));
+  }
+
+  getOrganizations(): Observable<Organization[]>{
+    return this.http.get(`${environment.apiUrl}/Organizations/GetOrganizationsByAdminId/1`)
+      .pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Organization[] => list.map(Organization.fromJSON)));
   }
 
   handleError(err: any): Observable<never> {

@@ -19,7 +19,7 @@ export class OrganizationPart {
   static fromJSON(json: OrganizationPartJson): OrganizationPart{
     const part = new OrganizationPart(
       json.name,
-      json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
+      json.employeeOrganizationParts === null ? null : json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
       json.type
     );
     part.id = json.id;

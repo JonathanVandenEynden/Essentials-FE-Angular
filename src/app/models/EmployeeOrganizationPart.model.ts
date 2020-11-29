@@ -18,6 +18,9 @@ export class EmployeeOrganizationPart {
   ) {}
 
   static fromJSON(json: EmployeeOrganizationPartJson): EmployeeOrganizationPart{
+    if (json === null){
+      return null;
+    }
     const eop = new EmployeeOrganizationPart(
       Employee.fromJSON(json.employee),
       OrganizationPart.fromJSON(json.organizationPart));

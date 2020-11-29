@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {OrganizationPart} from '../../change/OrganizationPart.model';
+import {AdminDataService} from '../admin-data.service';
+import {Organization} from '../../models/Organization.model';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,9 +10,11 @@ import {OrganizationPart} from '../../change/OrganizationPart.model';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  public organizations: Organization[] = [];
+  constructor(private router: Router, private adminDataService: AdminDataService) { }
 
   ngOnInit(): void {
+    this.getOrganizations();
   }
 
   NavigateToAddOrganization(): void {
@@ -19,6 +22,6 @@ export class AdminHomeComponent implements OnInit {
   }
 
   getOrganizations(): void {
-
+    this.adminDataService.getOrganizations().subscribe((result) => this.organizations = result);
   }
 }
