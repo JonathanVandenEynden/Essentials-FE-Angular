@@ -53,7 +53,7 @@ export class ChangeDataService {
     params = progress ? params.append('progress', progress.replace('.', ',')) : params;
     console.log(params);
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${5}`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
 
   getChangeGroup(): Observable<ChangeGroup[]>

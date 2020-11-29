@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -64,12 +64,12 @@ export class AddChangeComponent implements OnInit {
     }));
     // tslint:disable-next-line:max-line-length
     this.changeForm = this.fb.group({
-      name: [''],
-      description: [''],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(500)]],
       startDate: ['', validateStartDate],
-      endDate: [''],
-      changetype: [''],
-      changesponsor: ['']
+      endDate: ['', Validators.required],
+      changetype: ['', Validators.required],
+      changesponsor: ['', Validators.required]
     }, {validator: validateDates});
   }
 
@@ -106,6 +106,10 @@ export class AddChangeComponent implements OnInit {
       return 'The start date should be in the future';
     } else if (errors.endBeforeStart) {
       return 'The end date should be after the start date';
+    } else if (errors.minlength) {
+      return `Field must be at least ${errors.minlength.requiredLength} characters long. (is ${errors.minlength.actualLength})`;
+    } else if (errors.maxlength){
+      return `Field must be ${errors.maxlength.requiredLength} characters at max long. (is ${errors.maxlength.actualLength})`;
     }
   }
 
