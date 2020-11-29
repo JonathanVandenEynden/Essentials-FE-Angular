@@ -2,7 +2,14 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {EmployeeCsvRecord} from './EmployeeCsvRecord';
+import {EmployeeCsvRecord} from '../EmployeeCsvRecord';
+import {AdminDataService} from '../admin-data.service';
+import {Location} from '@angular/common';
+
+export interface OrganizationPostJson {
+  name: string;
+  employeeRecordDTOs: EmployeeCsvRecord[];
+}
 
 @Component({
   selector: 'app-add-organization',
@@ -10,15 +17,32 @@ import {EmployeeCsvRecord} from './EmployeeCsvRecord';
   styleUrls: ['./add-organization.component.css']
 })
 export class AddOrganizationComponent implements OnInit {
-  public organizationName: string;
+  public organizationName = '';
   public employeeRecords: EmployeeCsvRecord[] = [];
   @ViewChild('csvReader') csvReader: any;
 
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router,
+              private adminDataService: AdminDataService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
+  }
+
+  isValid(): boolean {
+    return !(this.organizationName.length > 0 && this.employeeRecords.length > 0);
+  }
+
+  onSubmit(): void {
+    console.log(this.employeeRecords);
+    const json = {
+      name: this.organizationName,
+      employeeRecordDTOs: this.employeeRecords
+    } as OrganizationPostJson;
+    this.adminDataService.postOrganization(json).subscribe(() => {
+      this.location.back();
+    });
   }
 
   onFileSelected(event): void {
@@ -39,7 +63,7 @@ export class AddOrganizationComponent implements OnInit {
         this.employeeRecords = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
       };
 
-      reader.onerror = () =>  {
+      reader.onerror = () => {
         console.log('error is occured while reading file!');
       };
 
@@ -53,15 +77,15 @@ export class AddOrganizationComponent implements OnInit {
     const csvArr = [];
 
     for (let i = 1; i < csvRecordsArray.length - 1; i++) {
-      const curruntRecord = (csvRecordsArray[i] as string).split(';');
-      if (curruntRecord.length === headerLength) {
+      const currentRecord = (csvRecordsArray[i] as string).split(';');
+      if (currentRecord.length === headerLength) {
         const csvRecord: EmployeeCsvRecord = new EmployeeCsvRecord();
-        csvRecord.name = curruntRecord[0].trim();
-        csvRecord.country = curruntRecord[1].trim();
-        csvRecord.office = curruntRecord[2].trim();
-        csvRecord.factory = curruntRecord[3].trim();
-        csvRecord.department = curruntRecord[4].trim();
-        csvRecord.team = curruntRecord[5].trim();
+        csvRecord.name = currentRecord[0].trim() === 'Not Applicable' ? '' : currentRecord[0].trim();
+        csvRecord.country = currentRecord[1].trim() === 'Not Applicable' ? '' : currentRecord[1].trim();
+        csvRecord.office = currentRecord[2].trim() === 'Not Applicable' ? '' : currentRecord[2].trim();
+        csvRecord.factory = currentRecord[3].trim() === 'Not Applicable' ? '' : currentRecord[3].trim();
+        csvRecord.department = currentRecord[4].trim() === 'Not Applicable' ? '' : currentRecord[4].trim();
+        csvRecord.team = currentRecord[5].trim() === 'Not Applicable' ? '' : currentRecord[5].trim();
         csvArr.push(csvRecord);
       }
     }
@@ -75,6 +99,7 @@ export class AddOrganizationComponent implements OnInit {
   getHeaderArray(csvRecordsArr: any): any {
     const headers = (csvRecordsArr[0] as string).split(';');
     const headerArray = [];
+    // tslint:disable-next-line:prefer-for-of
     for (let j = 0; j < headers.length; j++) {
       headerArray.push(headers[j]);
     }
@@ -84,19 +109,5 @@ export class AddOrganizationComponent implements OnInit {
   fileReset(): any {
     this.csvReader.nativeElement.value = '';
     this.employeeRecords = [];
-  }
-
-  onSubmit(): void {
-    console.log( this.employeeRecords);
-    // let json: any;
-    // json = {
-    //   organizationName: this.organizationName,
-    //   employees: this.selectedFile
-    //   // TODO changeManager
-    // };
-    // this.http.post(
-    //   `${environment.apiUrl}/Organizations`, json).subscribe((data: any) => {
-    //   console.log(data);
-    // });
   }
 }
