@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://essentialsapi.azurewebsites.net/api'
+  apiUrl: 'https://essentials-api.azurewebsites.net/api'
 };
