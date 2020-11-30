@@ -1,27 +1,33 @@
-# EssentialsE1
+# Essentials E1 - Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.5.
+https://essentialstoolkit.netlify.app/
 
-## Development server
+Welcome to the Angular web application for the Essentials toolkit. This application is accessible for both change managers and administrators. To login as administrator, please visit https://essentialstoolkit.netlify.app/adminLogin
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Admin
 
-## Code scaffolding
+### Test accounts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Jonathan
+	- email: Jonathan.vandeneyndenvanlysebeth@essentials.com
+	- password: P@ssword1
+- Simon
+	- email: simon.dewilde@essentials.com
+	- password: P@ssword1
 
-## Build
+The admin is an employee of the Essentials Corporation. This person has access to all the organizations he or she has created. On the home screen there is an overview of all organizations of the administrator.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+The admin can create an organization by clicking on the 'add organization'- button. The organization gets a name, which will be used as domain for the email addresses of the employees, an a csv file, constructed as [this one](https://github.com/HoGent-Projecten3/projecten3-2021-angular-e1/blob/master/example_employees.csv). Note that the first employee in this csv will be assigned the role of first change manager of the organization. Each employee will get a unique email-address, consisting of there firstname, lastname and the organization name (ex. jane.doe@organization.com), and a password consisting of "P@ssword1" and there initials (ex. P@ssword1JD).
 
-## Running unit tests
+## Change Manager
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Test accounts
 
-## Running end-to-end tests
+- Sukrit
+	- email: Sukrit.bhattacharya@hogent.com
+	- password: P@ssword1
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+The change manager can see which change initiatives are active. Change initiatives can be created, edited and deleted. Each change initiative has a road map, which represent the different steps in a change, with a survey. These surveys will be available to the employees to be filled in. This way, the change manager can gauge the mood of a specific change in the dashboard, and make alterations when needed. Surveys can contain simple questions, like yes/no, ranged or open questions, but also more detailed questions like multiple-choice. The survey-creation form, as well as all other forms, help the change manager to create new items with little effort.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
