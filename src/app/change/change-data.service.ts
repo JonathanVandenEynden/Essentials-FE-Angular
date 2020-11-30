@@ -52,12 +52,14 @@ export class ChangeDataService {
     params = group ? params.append('group', group) : params;
     params = progress ? params.append('progress', progress.replace('.', ',')) : params;
     console.log(params);
+    // TODO remove Id when backend is ready for authentication
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
 
   getChangeGroup(): Observable<ChangeGroup[]>
   {
+    // TODO remove hardcoded id
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeGroups/GetAllGhangeGroupsOfOrganization/${1}`).pipe(catchError(this.handleError), map((list: any[]): ChangeGroup[] => list.map(ChangeGroup.fromJSON)));
   }

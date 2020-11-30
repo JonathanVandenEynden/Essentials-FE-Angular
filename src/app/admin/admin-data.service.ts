@@ -21,6 +21,7 @@ export class AdminDataService {
   }
 
   getOrganizations(): Observable<Organization[]>{
+    // TODO remove adminId when backend is ready for authentication
     return this.http.get(`${environment.apiUrl}/Organizations/GetOrganizationsByAdminId/1`)
       .pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Organization[] => list.map(Organization.fromJSON)));
   }
