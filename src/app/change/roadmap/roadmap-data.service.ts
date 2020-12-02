@@ -38,6 +38,7 @@ export class RoadmapDataService {
     );
   }
 
+  // Staat hier voor geen kapotte code te hebben; These are not the codes you're looking for
   fetchRoadmapItems$(): Observable<RoadmapItem[]> {
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${2}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON)));
