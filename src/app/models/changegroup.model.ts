@@ -1,5 +1,3 @@
-import {Employee, EmployeeJson} from '../user.model';
-
 export interface ChangeGroupJson{
   id: number;
   name: string;
