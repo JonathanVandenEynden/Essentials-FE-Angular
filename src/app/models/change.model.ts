@@ -1,6 +1,6 @@
 import {RoadmapItem, RoadmapItemJson} from './roadmapitem.model';
 import {ChangeGroup, ChangeGroupJson} from './changegroup.model';
-import {Employee, EmployeeJson} from '../user.model';
+import {Employee, EmployeeJson} from './user.model';
 
 export interface ChangeInitiativeJson{
   id: number;

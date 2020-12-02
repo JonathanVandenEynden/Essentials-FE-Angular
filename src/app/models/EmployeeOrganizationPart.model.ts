@@ -1,5 +1,5 @@
 import {OrganizationPart, OrganizationPartJson} from './OrganizationPart.model';
-import {Employee, EmployeeJson} from '../user.model';
+import {EmployeeJson, Employee} from './user.model';
 
 export interface EmployeeOrganizationPartJson {
   employeeId: number;

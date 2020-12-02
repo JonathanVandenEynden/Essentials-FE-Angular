@@ -3,8 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {catchError, map, switchMap} from 'rxjs/operators';
-import {ChangeInitiative} from "../change/change.model";
-import {Employee} from "../user.model";
+import {Employee} from "../models/user.model";
 
 // tslint:disable-next-line:typedef
 function parseJwt(token) {
