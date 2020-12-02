@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RoadmapDataService } from './roadmap/roadmap-data.service';
+import { RoadmapDataService } from './roadmap-data.service';
 
 describe('RoadmapDataService', () => {
   let service: RoadmapDataService;
