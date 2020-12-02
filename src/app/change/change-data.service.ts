@@ -50,14 +50,15 @@ export class ChangeDataService {
   {
     let params = new HttpParams();
     params = group ? params.append('group', group) : params;
-    params = progress ? params.append('progress', progress.replace('.', ',')) : params;
+    params = progress ? params.append('progress', progress) : params;
     console.log(params);
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager/${6}`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
 
   getChangeGroup(): Observable<ChangeGroup[]>
   {
+    // TODO: Niet meer hardcoded maken
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeGroups/GetAllGhangeGroupsOfOrganization/${1}`).pipe(catchError(this.handleError), map((list: any[]): ChangeGroup[] => list.map(ChangeGroup.fromJSON)));
   }

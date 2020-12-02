@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {Changemanager} from '../../models/changemanager.model';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import {AuthenticationService} from "../../user/authentication.service";
 
 
 @Component({
@@ -17,17 +18,17 @@ export class NavBarComponent implements OnInit {
   prevButtonTrigger;
   faSignInAlt = faSignInAlt;
   faUser = faUser;
-  loggedInUser$ = 'Sukrit';
+  loggedInUser$ = this._authenticationService.user$;
 
 
   // tslint:disable-next-line:variable-name
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   routeAccount(): void {
-    this._router.navigate(['../../account']);
+    this._router.navigate(['../user/account']);
   }
 
   routeSignOut(): void {

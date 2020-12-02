@@ -28,8 +28,8 @@
       </li>
     </ul>
 
-    <div class="account">
-      Welcome, {{loggedInUser$}}
+    <div *ngIf="(loggedInUser$ | async) as user" class="account">
+      Welcome, {{user.FIRSTNAME}}
     <button mat-button class="dropdown-toggle" [matMenuTriggerFor]="belowMenu">
       <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-7.jpg" class="rounded-circle z-depth-0 w-50" alt="avatar image">
     </button>

@@ -76,7 +76,7 @@ export class DashboardDataService {
           map((list: any[]): Survey[] => list.map(Survey.fromJSON))
         );
   }
-
+  // TODO: Niet meer hardcoded maken
   get roadMapItems$(): Observable<RoadmapItem[]> {
     return this._RELOAD$.pipe(
       switchMap(() => this.fetchRoadmapItems$(1))

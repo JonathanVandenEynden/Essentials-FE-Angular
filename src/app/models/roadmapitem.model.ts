@@ -11,7 +11,9 @@ export interface RoadmapItemJson{
 }
 
 export class RoadmapItem {
+  // tslint:disable-next-line:variable-name
   private _startDate: Date;
+  // tslint:disable-next-line:variable-name
   private _endDate: Date;
   private ID: number;
   constructor(

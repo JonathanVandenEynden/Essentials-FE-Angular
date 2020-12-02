@@ -1,0 +1,36 @@
+<app-nav-bar>
+  <div class="row" *ngIf="(loggedInUser$ | async) as user">
+    <div class="col-3">
+      <mat-card class="center">
+        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-7.jpg" class="rounded-circle w-40" alt="avatar image" />
+        <mat-card-title>{{user.FIRSTNAME}} {{user.LASTNAME}}</mat-card-title>
+        <mat-card-content>Change Manager - Essentials</mat-card-content>
+      </mat-card>
+      <mat-card class="option">
+        <h3 class="selected"><fa-icon [icon]="faUser"></fa-icon> Personal information</h3>
+        <h3><fa-icon [icon]="faActivity"></fa-icon> Activity</h3>
+        <h3 class="align-bottom" (click)="logOut()"><fa-icon [icon]="faSignOut"></fa-icon> Sign out</h3>
+      </mat-card>
+    </div>
+    <div class="col">
+      <mat-card class="container">
+        <h1>Personal Information</h1>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <label>Firstname</label>
+          <input type="text" value="{{user.FIRSTNAME}}" readonly/>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <label>Lastname</label>
+          <input type="text" value="{{user.LASTNAME}}" readonly/>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <mat-form-field>
+          <label>Email</label>
+          <input type="text" value="{{user.EMAIL}}" readonly/>
+        </mat-form-field>
+      </mat-card>
+    </div>
+  </div>
+</app-nav-bar>

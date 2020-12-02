@@ -37,7 +37,7 @@ export class UserDataService {
       switchMap(() => this.fetchUsers$())
     );
   }
-
+  // TODO: Niet meer hardcoded maken
   fetchUsers$(): Observable<Employee[]>
   {
     // tslint:disable-next-line:max-line-length

@@ -88,7 +88,7 @@ export class AddChangeComponent implements OnInit {
 
   onSubmit(): void {
     // tslint:disable-next-line:max-line-length
-    this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, new ChangeGroup('Test'), this.changeForm.value.changesponsor, []));
+    this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, new ChangeGroup('Test'), this.changeForm.value.changesponsor, [], 0));
     this.added = true;
     window.scrollTo(0, 0);
   }
