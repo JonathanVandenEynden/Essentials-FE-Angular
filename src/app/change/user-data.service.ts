@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {Employee} from '../user.model';
+import {Employee} from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'

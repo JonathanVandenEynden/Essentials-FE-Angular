@@ -5,7 +5,7 @@
       <form [formGroup]="rmiForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <input matInput aria-label="title" placeholder="title" type="text" formControlName="title" required/>
-          <mat-error *ngIf="rmiForm.get('title')['errors'] && rmiForm.get('title').touched">
+          <mat-error *ngIf="rmiForm.get('title')['errors']">
             {{ getErrorMessage(rmiForm.get('title')['errors']) }}
           </mat-error>
         </mat-form-field>
@@ -13,14 +13,14 @@
         <mat-form-field>
           <input matInput aria-label="Start date" placeholder="Start date" type="date" formControlName="startDate"
                  required/>
-          <mat-error *ngIf="rmiForm.get('startDate')['errors'] && rmiForm.get('startDate').touched">
+          <mat-error *ngIf="rmiForm.get('startDate')['errors']">
             {{ getErrorMessage(rmiForm.get('startDate')['errors']) }}
           </mat-error>
         </mat-form-field>
         <br>
         <mat-form-field>
           <input matInput aria-label="End date" placeholder="End date" type="date" formControlName="endDate" required/>
-          <mat-error *ngIf="rmiForm.get('endDate')['errors'] && rmiForm.get('endDate').touched">
+          <mat-error *ngIf="rmiForm.get('endDate')['errors']">
             {{ getErrorMessage(rmiForm.get('endDate')['errors']) }}
           </mat-error>
         </mat-form-field><br>
@@ -31,7 +31,7 @@
         </div>
         <br>
         <button class="btn btn-success" type="submit" [disabled]="!rmiForm.valid">
-          Add Roadmap item
+          Update Roadmap item
         </button>
       </form>
     </div>

@@ -3,8 +3,8 @@ import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {ChangeInitiative} from './change.model';
-import {ChangeGroup} from './changegroup.model';
+import {ChangeInitiative} from '../models/change.model';
+import {ChangeGroup} from '../models/changegroup.model';
 
 @Injectable({
   providedIn: 'root'

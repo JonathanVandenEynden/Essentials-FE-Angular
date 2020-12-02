@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {ChangeInitiative} from '../change.model';
-import {RoadmapItem} from './roadmapitem.model';
+import {ChangeInitiative} from '../../models/change.model';
+import {RoadmapItem} from '../../models/roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {Survey, SurveyJson} from './survey/survey.model';
-import {Question} from './survey/Question.model';
+import {Survey, SurveyJson} from '../../models/survey.model';
+import {Question} from '../../models/Question.model';
 import {PostRmiJson} from './add-roadmap-item/add-roadmap-item.component';
 
 @Injectable({
