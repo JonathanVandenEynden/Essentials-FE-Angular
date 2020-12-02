@@ -16,13 +16,11 @@ export class AdminDataService {
   constructor(private http: HttpClient) { }
 
   postOrganization(json: OrganizationPostJson): Observable<any> {
-    // TODO remove adminId when backend is ready for authentication
-    return this.http.post(`${environment.apiUrl}/Organizations/1`, json).pipe(catchError(this.handleError), tap(console.log));
+    return this.http.post(`${environment.apiUrl}/Organizations`, json).pipe(catchError(this.handleError), tap(console.log));
   }
 
   getOrganizations(): Observable<Organization[]>{
-    // TODO remove adminId when backend is ready for authentication
-    return this.http.get(`${environment.apiUrl}/Organizations/GetOrganizationsByAdminId/1`)
+    return this.http.get(`${environment.apiUrl}/Organizations/GetOrganizationsForAdmin`)
       .pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Organization[] => list.map(Organization.fromJSON)));
   }
 
