@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import {AuthenticationService} from '../authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {HttpErrorResponse} from '@angular/common/http';
+import {AuthenticationService} from '../../user/authentication.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
+
   public user: FormGroup;
   public errorMessage = '';
   public faArrowRight = faArrowRight;
 
-  constructor(private router: Router, private authenticationService: AuthenticationService,
-              private fb: FormBuilder) { }
+  constructor(private router: Router,
+              private fb: FormBuilder,
+              private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit(): void {
     this.user = this.fb.group({
@@ -25,18 +28,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
-  onSubmit() {
+  public onSubmit(): void {
     this.authenticationService
       .login(this.user.value.username, this.user.value.password)
       .subscribe(
         (val) => {
-          if (val) {
+          if (val && this.authenticationService.role === 'admin') {
             if (this.authenticationService.redirectUrl) {
               this.router.navigateByUrl(this.authenticationService.redirectUrl);
               this.authenticationService.redirectUrl = undefined;
             } else {
-              this.router.navigate(['/change/home']);
+              this.router.navigate(['admin/home']);
             }
           } else {
             this.errorMessage = `Could not login`;
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
           }
         }
       );
+
   }
 
 }

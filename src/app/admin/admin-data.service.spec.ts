@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SurveyDataService } from './roadmap/survey/survey-data.service';
+import { AdminDataService } from './admin-data.service';
 
-describe('SurveyDataService', () => {
-  let service: SurveyDataService;
+describe('AdminDataService', () => {
+  let service: AdminDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SurveyDataService);
+    service = TestBed.inject(AdminDataService);
   });
 
   it('should be created', () => {

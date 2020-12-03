@@ -13,6 +13,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {DashboardModule} from './dashboard/dashboard.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {httpInterceptorProviders} from './interceptors';
+import {AdminModule} from './admin/admin.module';
 
 // tslint:disable-next-line:typedef
 export function playerFactory() {
@@ -29,6 +30,7 @@ export function playerFactory() {
     DashboardModule,
     ChangeModule,
     UserModule,
+    AdminModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
