@@ -5,6 +5,7 @@ import {RoadmapItem} from '../models/roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import {Project} from '../models/Project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class DashboardDataService {
   private _ROADMAPITEMS: RoadmapItem[];
   private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
   private _SURVEYS: Survey[];
-  // private _PROJECT$ = new BehaviorSubject<Project[]>([]);
-  // private _PROJECT: Project[];
+  private _PROJECT$ = new BehaviorSubject<Project[]>([]);
+  private _PROJECT: Project[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
@@ -42,17 +43,17 @@ export class DashboardDataService {
         this._SURVEYS$.next(this._SURVEYS);
       });
 
-    // this.projects$
-    //   .pipe(
-    //     catchError((err) => {
-    //       this._PROJECT$.error(err);
-    //       return throwError(err);
-    //     })
-    //   )
-    //   .subscribe((project: Project[]) => {
-    //     this._PROJECT = project;
-    //     this._PROJECT$.next(this._PROJECT);
-    //   });
+    this.projects$
+      .pipe(
+        catchError((err) => {
+          this._PROJECT$.error(err);
+          return throwError(err);
+        })
+      )
+      .subscribe((project: Project[]) => {
+        this._PROJECT = project;
+        this._PROJECT$.next(this._PROJECT);
+      });
   }
 
   getSurvey$(id: number): Observable<Survey> {
@@ -101,26 +102,26 @@ export class DashboardDataService {
       );
   }
 
-  // getProject$(id: number): Observable<Project> {
-  //   return this.http.get(`${environment.apiUrl}/Projects/${id}`).pipe(
-  //     catchError(this.handleError),
-  //     map(Project.fromJSON)
-  //   );
-  // }
-  //
-  // get projects$(): Observable<Project[]> {
-  //   return this._RELOAD$.pipe(
-  //     switchMap(() => this.fetchProjects$())
-  //   );
-  // }
-  //
-  // fetchProjects$(): Observable<Project[]>
-  // {
-  //   return this.http.get(`${environment.apiUrl}/Projects/${1}`)
-  //     .pipe(
-  //       catchError(this.handleError),
-  //       map((list: any[]): Project[] => list.map(Project.fromJSON)));
-  // }
+  getProject$(id: number): Observable<Project> {
+    return this.http.get(`${environment.apiUrl}/Dashboard/GetProjects/${id}`).pipe(
+      catchError(this.handleError),
+      map(Project.fromJSON)
+    );
+  }
+
+  get projects$(): Observable<Project[]> {
+    return this._RELOAD$.pipe(
+      switchMap(() => this.fetchProjects$())
+    );
+  }
+
+  fetchProjects$(): Observable<Project[]>
+  {
+    return this.http.get(`${environment.apiUrl}/Dashboard`)
+      .pipe(
+        catchError(this.handleError),
+        map((list: any[]): Project[] => list.map(Project.fromJSON)));
+  }
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;
