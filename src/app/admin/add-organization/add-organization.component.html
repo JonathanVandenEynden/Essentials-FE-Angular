@@ -1,0 +1,50 @@
+<div class="container container-fluid">
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+
+  <div class="h2">Add new organization</div>
+
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field>
+        <input matInput #name aria-label="Name" type="text" placeholder="Name" (change)="organizationName = name.value">
+      </mat-form-field>
+    </div>
+    <div>
+      <input type="file" name="Upload Employee csv" aria-label="Upload Employee csv"
+             (change)="onFileSelected($event)"
+             accept=".csv">
+      <div class="alert alert-info mt-3">The first employee record of the csv will be assigned the roll of first change manager.</div>
+    </div>
+    <br>
+    // TODO changemanager aanwijzen
+    <br>
+    <button class="btn btn-primary" type="submit" [disabled]="isValid()">Create Organization</button>
+  </form>
+
+
+  <table class="minimalistBlack">
+    <thead>
+    <tr>
+      <th>name</th>
+      <th>country</th>
+      <th>office</th>
+      <th>factory</th>
+      <th>department</th>
+      <th>team</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let record of employeeRecords;let i = index;">
+      <td><span>{{record.name}}</span></td>
+      <td><span>{{record.country}}</span></td>
+      <td><span>{{record.office}}</span></td>
+      <td><span>{{record.factory}}</span></td>
+      <td><span>{{record.department}}</span></td>
+      <td><span>{{record.team}}</span></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+

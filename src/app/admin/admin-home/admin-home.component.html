@@ -1,0 +1,18 @@
+<div class="container container-fluid">
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+
+  <div class="h2">Admin page</div>
+
+  <button class="btn btn-primary" (click)="NavigateToAddOrganization()">Add new organization</button>
+
+  <div class="d-flex mt-5">
+    <mat-card class="mr-5" *ngFor="let org of organizations">
+      <mat-card-title>{{org.Name}}</mat-card-title>
+      <mat-card-content>
+        <p>{{ org.Employees.length}} employees</p>
+        <p>{{ org.ChangeManagers.length}} change managers</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

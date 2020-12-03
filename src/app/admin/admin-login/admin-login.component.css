@@ -1,0 +1,45 @@
+.container-fluid{
+  margin: auto;
+}
+
+.logo{
+  margin: auto;
+  height: 50%;
+  width: 50%;
+  margin-top: 100px;
+}
+
+.btn{
+  width: 10%;
+  border-radius: 10px;
+  color: white;
+  background-color: #264754;
+}
+
+.form-control{
+  margin: auto;
+  width: 450px;
+  border-radius: 10px;
+  border: 1px solid #264754
+}
+
+.card{
+  margin: auto;
+  height: 50%;
+  width: 50%;
+}
+
+.input{
+  margin-top:5%;
+  margin-bottom:2%;
+}
+
+.arrow{display: none;}
+
+button:hover span{
+  display: none;
+}
+
+button:hover .arrow{
+  display: inline-block;
+}

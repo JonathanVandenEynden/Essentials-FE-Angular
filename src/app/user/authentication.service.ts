@@ -50,6 +50,15 @@ export class AuthenticationService {
     return !!localToken ? localToken : '';
   }
 
+  get role(): string {
+    const parsedToken = parseJwt(this.token);
+    if (parsedToken) {
+      console.log(parsedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
+      return parsedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    }
+    return '';
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.http
       .post(`${environment.apiUrl}/Account/login`, { email, password }, { responseType: 'text' })

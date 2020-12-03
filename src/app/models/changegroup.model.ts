@@ -1,4 +1,4 @@
-export interface ChangeGroupJson{
+export interface ChangeGroupJson {
   id: number;
   name: string;
   // users: EmployeeJson[];
@@ -7,18 +7,23 @@ export interface ChangeGroupJson{
 export class ChangeGroup {
   private ID: number;
   private _CHECKED = false;
+
   constructor(
     private NAME: string,
     // private USERS: Employee[]
-  ) {}
+  ) {
+  }
 
   static fromJSON(json: ChangeGroupJson): ChangeGroup {
-    const changegroup = new ChangeGroup(
-      json.name,
-      // json.users.map(Employee.fromJSON)
-    );
-    changegroup.ID = json.id;
-    return changegroup;
+    if (json !== null) {
+      const changegroup = new ChangeGroup(
+        json.name,
+        // json.users.map(Employee.fromJSON)
+      );
+      changegroup.ID = json.id;
+      return changegroup;
+    }
+    return null as ChangeGroup;
   }
 
   toJSON(): ChangeGroupJson {
@@ -28,20 +33,24 @@ export class ChangeGroup {
       // users: this.USERS
     } as ChangeGroupJson;
   }
+
   get id(): number {
     return this.ID;
   }
-  get name(): string{
+
+  get name(): string {
     return this.NAME;
   }
-  get CHECKED(): boolean{
+
+  get CHECKED(): boolean {
     return this._CHECKED;
   }
+
   set CHECKED(value: boolean) {
     this._CHECKED = value;
   }
+
   /*get users(): Employee[]{
       return this.USERS;
     }*/
 }
-

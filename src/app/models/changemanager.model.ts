@@ -6,23 +6,26 @@ export interface ChangemanagerJson {
   firstName: string;
   lastName: string;
   employeeOrganizationParts: EmployeeOrganizationPartJson[];
-  changeInitiatives: ChangeInitiativeJson[];
+  createdChangeInitiatives: ChangeInitiativeJson[];
 }
+
 export class Changemanager {
   private _ID: number;
+
   constructor(
     private _FIRSTNAME: string,
     private _LASTNAME: string,
     private _EMPLOYEEORGANIZATIONPARTS: EmployeeOrganizationPart[],
     private _CHANGEINITIATIVES: ChangeInitiative[]
-  ) {}
+  ) {
+  }
 
   static fromJSON(json: ChangemanagerJson): Changemanager {
     const changeManager = new Changemanager(
       json.firstName,
       json.lastName,
-      json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
-      json.changeInitiatives.map(ChangeInitiative.fromJSON)
+      json.employeeOrganizationParts === null ? null : json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
+      json.createdChangeInitiatives === null ? null : json.createdChangeInitiatives.map(ChangeInitiative.fromJSON)
     );
     changeManager._ID = json.id;
     return changeManager;
@@ -37,6 +40,7 @@ export class Changemanager {
       changeInitiatives: this._CHANGEINITIATIVES
     } as ChangemanagerJson;
   }
+
   get ID(): number {
     return this._ID;
   }
