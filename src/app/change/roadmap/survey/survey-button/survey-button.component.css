@@ -94,7 +94,7 @@ th {
   font-weight: normal;
 }
 
-.range-table th, td {
+.range-table th, .range-table td {
   min-width: 40px;
   text-align: center;
 }
