@@ -23,17 +23,17 @@
         </table>
 
         <ng-template #Range>
-          <table class="table table-sm col-6 ml-3">
+          <table class="table table-sm col-6 ml-3 range-table">
             <thead>
             <tr>
-              <th *ngFor="let answer of question.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+              <th *ngFor="let answer of question.PossibleAnswers | keyvalue">
                 {{answer.key}}
               </th>
             </tr>
             </thead>
             <tbody>
             <tr>
-              <td *ngFor="let answer of question.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+              <td *ngFor="let answer of question.PossibleAnswers | keyvalue">
                 {{answer.value}}
               </td>
             </tr>
@@ -52,17 +52,17 @@
     <div class="col-12">
       <div>
         <p>{{ survey.Feedback.QuestionString }}</p>
-        <table class="table table-sm col-6 ml-3">
+        <table class="table table-sm col-6 ml-3 range-table">
           <thead>
           <tr>
-            <th *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+            <th *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
               {{answer.key}}
             </th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+            <td *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
               {{answer.value}}
             </td>
           </tr>
