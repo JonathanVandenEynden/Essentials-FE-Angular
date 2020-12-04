@@ -32,13 +32,15 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
     let parsedToken = parseJwt(localStorage.getItem(this._tokenKey));
     if (parsedToken) {
+      this._loggedInUser$ = this.getEmployeeByEmail$(parsedToken.unique_name);
       const expires = new Date(parseInt(parsedToken.exp, 10) * 1000) < new Date();
       if (expires) {
         localStorage.removeItem(this._tokenKey);
+        this._loggedInUser$ = null;
         parsedToken = null;
       }
     }
-    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
+    // this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
   }
 
   get user$(): Observable<Employee> {
@@ -65,7 +67,7 @@ export class AuthenticationService {
       .pipe(map((token: any) => {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
-            this._user$.next(email);
+            // this._user$.next(email);
             this._loggedInUser$ = this.getEmployeeByEmail$(email);
             if (this.errorMessage != null)
             {
@@ -82,9 +84,9 @@ export class AuthenticationService {
 
   // tslint:disable-next-line:typedef
   logout() {
-    if (this._user$.getValue()) {
-      localStorage.removeItem('currentUser');
-      this._user$.next(null);
+    if (localStorage.getItem(this._tokenKey)) {
+      localStorage.removeItem(this._tokenKey);
+      // this._loggedInUser$.next(null);
     }
   }
 

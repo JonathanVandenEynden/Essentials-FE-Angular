@@ -16,8 +16,14 @@
       <div class="alert alert-info mt-3">The first employee record of the csv will be assigned the roll of first change manager.</div>
     </div>
     <br>
-    <button class="btn btn-primary" type="submit" [disabled]="isValid()">Create Organization</button>
+    <div *ngIf="!loading; else Loading">
+      <button class="btn btn-primary" type="submit" [disabled]="isValid()">Create Organization</button>
+    </div>
   </form>
+
+  <ng-template #Loading>
+    <mat-progress-bar class="w-25 mb-2" mode="indeterminate"></mat-progress-bar>
+  </ng-template>
 
 
   <table class="minimalistBlack">

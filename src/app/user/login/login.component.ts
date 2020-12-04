@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       .login(this.user.value.username, this.user.value.password)
       .subscribe(
         (val) => {
-          if (val) {
+          if (val && this.authenticationService.role === 'changeManager') {
             if (this.authenticationService.redirectUrl) {
               this.router.navigateByUrl(this.authenticationService.redirectUrl);
               this.authenticationService.redirectUrl = undefined;
