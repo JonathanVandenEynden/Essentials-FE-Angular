@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {EmployeeCsvRecord} from '../../models/EmployeeCsvRecord';
 import {AdminDataService} from '../admin-data.service';
 import {Location} from '@angular/common';
+import {Observable} from 'rxjs';
 
 export interface OrganizationPostJson {
   name: string;
@@ -19,6 +20,7 @@ export interface OrganizationPostJson {
 export class AddOrganizationComponent implements OnInit {
   public organizationName = '';
   public employeeRecords: EmployeeCsvRecord[] = [];
+  public loading = false;
   @ViewChild('csvReader') csvReader: any;
 
 
@@ -36,11 +38,13 @@ export class AddOrganizationComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.employeeRecords);
+    this.loading = true;
     const json = {
       name: this.organizationName,
       employeeRecordDTOs: this.employeeRecords
     } as OrganizationPostJson;
     this.adminDataService.postOrganization(json).subscribe(() => {
+      this.loading = false;
       this.location.back();
     });
   }

@@ -5,10 +5,10 @@
 
   <button class="btn btn-primary" (click)="NavigateToAddOrganization()">Add new organization</button>
 
-  <div class="d-flex mt-5">
-    <mat-card class="mr-5" *ngFor="let org of organizations">
-      <mat-card-title>{{org.Name}}</mat-card-title>
-      <mat-card-content>
+  <div class="d-flex flex-wrap mt-5">
+    <mat-card class="m-3 bg-secondary" *ngFor="let org of organizations">
+      <mat-card-title class="text-white">{{org.Name}}</mat-card-title>
+      <mat-card-content class="text-white">
         <p>{{ org.Employees.length}} employees</p>
         <p>{{ org.ChangeManagers.length}} change managers</p>
       </mat-card-content>
