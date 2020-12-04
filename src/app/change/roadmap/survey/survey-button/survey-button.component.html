@@ -4,9 +4,43 @@
     <div class="col-12">
       <div *ngFor="let question of survey.Questions">
         <p>{{questionTypes[question.Type]}} question: {{ question.QuestionString }}</p>
-        <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">
-          - {{answer.key}} : chosen {{answer.value}} times
-        </div>
+        <!--        <div class="answers" *ngFor="let answer of question.PossibleAnswers | keyvalue">-->
+        <!--          - {{answer.key}} : chosen {{answer.value}} times-->
+        <!--        </div>-->
+        <table *ngIf="questionTypes[question.Type] !== 'Range'; else Range" class="table table-sm col-4 ml-3">
+          <thead>
+          <tr>
+            <th>Answer</th>
+            <th *ngIf="questionTypes[question.Type] !== 'Open'">Times chosen</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let answer of question.PossibleAnswers | keyvalue">
+            <td>{{answer.key}}</td>
+            <td *ngIf="questionTypes[question.Type] !== 'Open'">{{answer.value}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <ng-template #Range>
+          <table class="table table-sm col-6 ml-3">
+            <thead>
+            <tr>
+              <th *ngFor="let answer of question.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+                {{answer.key}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td *ngFor="let answer of question.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+                {{answer.value}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </ng-template>
+
       </div>
     </div>
 
@@ -18,9 +52,22 @@
     <div class="col-12">
       <div>
         <p>{{ survey.Feedback.QuestionString }}</p>
-        <div class="answers" *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue">
-          - {{answer.key}} : chosen {{answer.value}} times
-        </div>
+        <table class="table table-sm col-6 ml-3">
+          <thead>
+          <tr>
+            <th *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+              {{answer.key}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td *ngFor="let answer of survey.Feedback.PossibleAnswers | keyvalue" style="min-width: 40px; text-align: center">
+              {{answer.value}}
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
