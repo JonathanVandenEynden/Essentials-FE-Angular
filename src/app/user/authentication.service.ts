@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {catchError, map, switchMap} from 'rxjs/operators';
-import {Employee} from "../models/user.model";
+import {Employee} from '../models/user.model';
 
 // tslint:disable-next-line:typedef
 function parseJwt(token) {
@@ -21,8 +21,6 @@ function parseJwt(token) {
 export class AuthenticationService {
   // tslint:disable-next-line:variable-name
   private readonly _tokenKey = 'currentUser';
-  // tslint:disable-next-line:variable-name
-  private _user$: BehaviorSubject<string>;
   // tslint:disable-next-line:variable-name
   private _loggedInUser$: Observable<Employee>;
   public redirectUrl: string = null;
