@@ -23,6 +23,8 @@ export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   // tslint:disable-next-line:variable-name
   private _loggedInUser$: Observable<Employee>;
+  // tslint:disable-next-line:variable-name
+  private _user$: BehaviorSubject<string>;
   public redirectUrl: string = null;
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
   private errorMessage: string;
@@ -38,11 +40,15 @@ export class AuthenticationService {
         parsedToken = null;
       }
     }
-    // this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
+    this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
   }
 
   get user$(): Observable<Employee> {
     return this._loggedInUser$;
+  }
+
+  get dummyUser$(): BehaviorSubject<string> {
+    return this._user$;
   }
 
   get token(): string {
@@ -65,7 +71,7 @@ export class AuthenticationService {
       .pipe(map((token: any) => {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
-            // this._user$.next(email);
+            this._user$.next(email);
             this._loggedInUser$ = this.getEmployeeByEmail$(email);
             if (this.errorMessage != null)
             {
