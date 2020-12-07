@@ -1,35 +1,44 @@
 <app-nav-bar>
   <div class="row" *ngIf="(loggedInUser$ | async) as user">
     <div class="col-3">
-      <mat-card class="center">
+      <mat-card class="left">
+        <div class="center">
         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-7.jpg" class="rounded-circle w-40" alt="avatar image" />
         <mat-card-title>{{user.FIRSTNAME}} {{user.LASTNAME}}</mat-card-title>
         <mat-card-content>Change Manager - Essentials</mat-card-content>
-      </mat-card>
-      <mat-card class="option">
+        </div>
+        <mat-divider></mat-divider>
+        <div class="option">
         <h3 class="selected"><fa-icon [icon]="faUser"></fa-icon> Personal information</h3>
         <h3><fa-icon [icon]="faActivity"></fa-icon> Activity</h3>
         <h3 class="align-bottom" (click)="logOut()"><fa-icon [icon]="faSignOut"></fa-icon> Sign out</h3>
+        </div>
       </mat-card>
     </div>
     <div class="col">
-      <mat-card class="container">
-        <h1>Personal Information</h1>
+      <mat-card class="container h-100 pt-4 pl-4">
+        <h1 class="font-weight-bold">Personal Information</h1>
         <mat-divider></mat-divider>
-        <mat-form-field>
-          <label>Firstname</label>
-          <input type="text" value="{{user.FIRSTNAME}}" readonly/>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <mat-form-field>
-          <label>Lastname</label>
-          <input type="text" value="{{user.LASTNAME}}" readonly/>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <mat-form-field>
-          <label>Email</label>
-          <input type="text" value="{{user.EMAIL}}" readonly/>
-        </mat-form-field>
+        <mat-card-content class="flex">
+        <div>
+          <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">Firstname</h4>
+          <div class="col-sm-2 d-inline-block text-monospace">
+            {{user.FIRSTNAME}}
+          </div>
+        </div>
+        <div>
+            <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">Lastname</h4>
+            <div class="col-sm-2 d-inline-block text-monospace">
+              {{user.LASTNAME}}
+            </div>
+        </div>
+        <div>
+          <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">E-mail</h4>
+          <div class="col-sm-2 d-inline-block text-monospace">
+            {{user.EMAIL}}
+          </div>
+        </div>
+        </mat-card-content>
       </mat-card>
     </div>
   </div>

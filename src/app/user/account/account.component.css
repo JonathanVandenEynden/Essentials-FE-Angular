@@ -1,14 +1,6 @@
-.row{
+div.row{
   width: 80%;
   margin: auto;
-}
-
-.mat-card{
-  margin-top: 10px;
-}
-
-.container{
-  height: 100%;
 }
 
 .center{
@@ -47,12 +39,22 @@ fa-icon{
   margin-right: 10px;
 }
 
+.mat-card{
+  padding: 0;
+}
+
+.mat-card-content{
+  height: 80%
+}
+
 .option{
   background-color: lightgrey;
   padding: 0;
 }
 
-label{
-  font-size: large;
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 

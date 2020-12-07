@@ -23,6 +23,8 @@ export class AuthenticationService {
   private readonly _tokenKey = 'currentUser';
   // tslint:disable-next-line:variable-name
   private _loggedInUser$: Observable<Employee>;
+  // tslint:disable-next-line:variable-name
+  private _user$: BehaviorSubject<string>;
   public redirectUrl: string = null;
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
   private errorMessage: string;
@@ -43,6 +45,10 @@ export class AuthenticationService {
 
   get user$(): Observable<Employee> {
     return this._loggedInUser$;
+  }
+
+  get dummyUser$(): BehaviorSubject<string> {
+    return this._user$;
   }
 
   get token(): string {
