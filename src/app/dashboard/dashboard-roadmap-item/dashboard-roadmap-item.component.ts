@@ -51,7 +51,6 @@ export class DashboardRoadmapItemComponent implements OnInit {
       'November',
       'December'
     ];
-
     rmi.forEach(e => {
         if (e.startDate.getFullYear() === now.getFullYear() && e.endDate.getFullYear() === now.getFullYear()){
           for (let i = e.startDate.getMonth(); i <= e.endDate.getMonth(); i++){
@@ -59,7 +58,6 @@ export class DashboardRoadmapItemComponent implements OnInit {
           }
         }
       });
-
     data.push({data: monthNumber, label: 'Open surveys per month'});
     return {t: 'Monthly active roadmapitems', d: data, l: labels};
   }
@@ -67,4 +65,5 @@ export class DashboardRoadmapItemComponent implements OnInit {
   get roadmapData$(): Observable<RoadmapItem[]>{
     return this.fetchRoadmapItems$;
   }
+
 }

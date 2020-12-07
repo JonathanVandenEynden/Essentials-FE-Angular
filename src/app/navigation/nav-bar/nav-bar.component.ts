@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {Changemanager} from '../../models/changemanager.model';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import {AuthenticationService} from "../../user/authentication.service";
+import {AuthenticationService} from '../../user/authentication.service';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class NavBarComponent implements OnInit {
   }
 
   routeSignOut(): void {
-    this._router.navigate(['../../user/logIn']);
+    this._router.navigate(['../../user/login']);
   }
   // tslint:disable-next-line:typedef
   buttonEnter(trigger) {

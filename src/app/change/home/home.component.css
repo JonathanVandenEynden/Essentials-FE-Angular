@@ -1,7 +1,7 @@
 .container-fluid{
   overflow: hidden;
   background-color: white;
-  height: 150px;
+  max-height: 90vh;
   margin: auto;
 }
 
@@ -9,17 +9,12 @@
     margin: 0;
 }
 
-.col{
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
 button{
     border-radius: 10px;
 }
 
 .container{
-  max-height: 500px;
+  max-height: 80vh;
   overflow: auto;
   border: solid;
   border-radius: 10px;

@@ -1,1 +1,9 @@
-<p>radar-chart works!</p>
+<div style="display: inline-block; margin: 40px">
+  <h2>{{title}}</h2>
+  <canvas baseChart width="400px" height="400px"
+          [data]="radarChartData"
+          [labels]="radarChartLabels"
+          [options]="radarChartOptions"
+          [chartType]="radarChartType">
+  </canvas>
+</div>
