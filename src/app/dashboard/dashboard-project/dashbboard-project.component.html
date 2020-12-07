@@ -2,7 +2,7 @@
   <div class="row mt-4"><h2 class="w-100 text-center">Dashboard Project</h2></div>
   <div class="row">
     <div class="col-sm-2">
-      <div class="dropdown mt-3">
+      <div class="dropdown">
         <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Choose Project <fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon>
         </button>
@@ -20,7 +20,6 @@
                *ngFor="let ri of (projectData$ | async)">
           </div>
         </div>
-
       </div>
     </div>
     <div class="col">
