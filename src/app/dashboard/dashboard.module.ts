@@ -8,20 +8,18 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {LottieModule} from 'ngx-lottie';
 import {RouterModule, Routes} from '@angular/router';
 import { HighlightModule } from 'ngx-highlightjs';
-import { DashboardRoadmapItemComponent } from './dashboard-roadmap-item/dashboard-roadmap-item.component';
 import { DashboardSurveyComponent } from './dashboard-survey/dashboard-survey.component';
 import { DashbboardProjectComponent } from './dashboard-project/dashbboard-project.component';
 import {ChartModule} from './chart/chart.module';
 
 const dashboardRoutes: Routes =
   [
-    { path: 'project', component: DashbboardProjectComponent },
-    { path: 'roadmapitem', component: DashboardRoadmapItemComponent },
+    { path: '', component: DashbboardProjectComponent },
     { path: 'survey', component: DashboardSurveyComponent }
   ];
 
 @NgModule({
-  declarations: [DashbboardProjectComponent, DashboardRoadmapItemComponent, DashboardSurveyComponent, DashbboardProjectComponent],
+  declarations: [DashbboardProjectComponent, DashboardSurveyComponent, DashbboardProjectComponent],
   imports: [
     NavigationModule,
     MaterialModule,

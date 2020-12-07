@@ -16,15 +16,17 @@ export interface ChangeInitiativeJson{
 }
 
 export class ChangeInitiative {
-  private ID: number;
+  private _ID: number;
+  private _STARTDATE: Date;
+  private _ENDDATE: Date;
   constructor(
     private _NAME: string,
     private _DESCRIPTION: string,
-    private _STARTDATE: string,
-    private _ENDDATE: string,
+    private _STARTDATESTRING: string,
+    private _ENDDATESTRING: string,
     private _CHANGEGROUP: ChangeGroup,
     private _CHANGESPONSOR: Employee,
-    private ROADMAP: RoadmapItem[],
+    private _ROADMAP: RoadmapItem[],
     private _PROGRESS: number
   ) {}
 
@@ -39,7 +41,9 @@ export class ChangeInitiative {
       json.roadMap.map(RoadmapItem.fromJSON),
       json.progress
     );
-    change.ID = json.id;
+    change.id = json.id;
+    change.startDate = new Date(json.startDate);
+    change.endDate = new Date(json.endDate);
     return change;
   }
 
@@ -48,74 +52,81 @@ export class ChangeInitiative {
     return {
       name: this._NAME,
       description: this._DESCRIPTION,
-      startDate: this._STARTDATE,
-      endDate: this._ENDDATE,
+      startDate: this._STARTDATESTRING,
+      endDate: this._ENDDATESTRING,
       changeGroup: this._CHANGEGROUP,
       sponsor: this._CHANGESPONSOR,
-      roadMap: this.ROADMAP,
+      roadMap: this._ROADMAP,
       progress: this._PROGRESS
     } as ChangeInitiativeJson;
   }
+
   get id(): number {
-    return this.ID;
+    return this._ID;
+  }
+  set id(value: number) {
+    this._ID = value;
   }
   get name(): string{
     return this._NAME;
   }
-  // tslint:disable-next-line:typedef
-  public NAME(value: string) {
+  set name(value: string) {
     this._NAME = value;
   }
   get description(): string {
     return this._DESCRIPTION;
   }
-
-  // tslint:disable-next-line:typedef
-  public DESCRIPTION(value: string) {
+  set description(value: string) {
     this._DESCRIPTION = value;
   }
-
-  // tslint:disable-next-line:typedef
-  public STARTDATE(value: string) {
-    this._STARTDATE = value;
+  get startDateString(): string {
+    return this._STARTDATESTRING.split('T')[0];
   }
-
-  // tslint:disable-next-line:typedef
-  public ENDDATE(value: string) {
-    this._ENDDATE = value;
+  set startDateString(value: string) {
+    this._STARTDATESTRING = value;
   }
-
-  // tslint:disable-next-line:typedef
-  public CHANGESPONSOR(value: Employee) {
-    this._CHANGESPONSOR = value;
+  get endDateString(): string{
+    return this._ENDDATESTRING.split('T')[0];
   }
-  get CHANGEGROUP(): ChangeGroup {
-    return this._CHANGEGROUP;
-  }
-
-  set CHANGEGROUP(value: ChangeGroup) {
-    this._CHANGEGROUP = value;
-  }
-
-  get startDate(): string {
-    return this._STARTDATE.split('T')[0];
-  }
-  get endDate(): string{
-    return this._ENDDATE.split('T')[0];
+  set endDateString(value: string) {
+    this._ENDDATESTRING = value;
   }
   get sponsor(): Employee{
     return this._CHANGESPONSOR;
   }
-  get roadMap(): RoadmapItem[]{
-    return this.ROADMAP;
+  set sponsor(value: Employee) {
+    this._CHANGESPONSOR = value;
   }
-
-  get PROGRESS(): number {
+  get changegroup(): ChangeGroup {
+    return this._CHANGEGROUP;
+  }
+  set changegroup(value: ChangeGroup) {
+    this._CHANGEGROUP = value;
+  }
+  get roadMap(): RoadmapItem[]{
+    return this._ROADMAP;
+  }
+  set roadMap(value: RoadmapItem[]){
+    this._ROADMAP = value;
+  }
+  get progress(): number {
     return this._PROGRESS;
   }
-
-  set PROGRESS(value: number) {
+  set progress(value: number) {
     this._PROGRESS = value;
+  }
+
+  get startDate(): Date {
+    return this._STARTDATE;
+  }
+  set startDate(value: Date) {
+    this._STARTDATE = value;
+  }
+  get endDate(): Date{
+    return this._ENDDATE;
+  }
+  set endDate(value: Date) {
+    this._ENDDATE = value;
   }
 }
 

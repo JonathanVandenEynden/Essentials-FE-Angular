@@ -6,22 +6,51 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Project} from '../models/Project.model';
+import {ChangeInitiative} from '../models/change.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class DashboardDataService {
+  /*region variables*/
+  private _PROJECT$ = new BehaviorSubject<Project[]>([]);
+  private _PROJECT: Project[];
+  private _CHANGEINITIATIVES$ = new BehaviorSubject<ChangeInitiative[]>([]);
+  private _CHANGEINITIATIVES: ChangeInitiative[];
   private _ROADMAPITEMS$ = new BehaviorSubject<RoadmapItem[]>([]);
   private _ROADMAPITEMS: RoadmapItem[];
   private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
   private _SURVEYS: Survey[];
-  private _PROJECT$ = new BehaviorSubject<Project[]>([]);
-  private _PROJECT: Project[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
+  /*endregion*/
 
   constructor(private http: HttpClient) {
-    this.roadMapItems$.pipe(
+    this.projects$
+      .pipe(
+        catchError((err) => {
+          this._PROJECT$.error(err);
+          return throwError(err);
+        })
+      )
+      .subscribe((project: Project[]) => {
+        this._PROJECT = project;
+        this._PROJECT$.next(this._PROJECT);
+      });
+
+    this.changeInitiatives$
+      .pipe(
+        catchError((err) => {
+          this._CHANGEINITIATIVES$.error(err);
+          return throwError(err);
+        })
+      )
+      .subscribe((changeInitiatives: ChangeInitiative[]) => {
+        this._CHANGEINITIATIVES = changeInitiatives;
+        this._CHANGEINITIATIVES$.next(this._CHANGEINITIATIVES);
+      });
+
+    this.roadmapItems$.pipe(
         catchError((err) => {
           this._ROADMAPITEMS$.error(err);
           return throwError(err);
@@ -42,48 +71,47 @@ export class DashboardDataService {
         this._SURVEYS = surveys;
         this._SURVEYS$.next(this._SURVEYS);
       });
-
-    this.projects$
-      .pipe(
-        catchError((err) => {
-          this._PROJECT$.error(err);
-          return throwError(err);
-        })
-      )
-      .subscribe((project: Project[]) => {
-        this._PROJECT = project;
-        this._PROJECT$.next(this._PROJECT);
-      });
   }
 
-  getSurvey$(id: number): Observable<Survey> {
-    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(
-      catchError(this.handleError),
-      map(Survey.fromJSON)
-    );
-  }
-
-  get surveys$(): Observable<Survey[]> {
+  /*region project*/
+  get projects$(): Observable<Project[]> {
     return this._RELOAD$.pipe(
-      switchMap(() => this.fetchSurveys$())
+      switchMap(() => this.fetchProjects$())
     );
   }
-
-  fetchSurveys$(): Observable<Survey[]>
+  fetchProjects$(): Observable<Project[]>
   {
-    return this.http.get(`${environment.apiUrl}/Survey`)
-        .pipe(
-          catchError(this.handleError),
-          map((list: any[]): Survey[] => list.map(Survey.fromJSON))
-        );
+    return this.http.get(`${environment.apiUrl}/Dashboard/GetProjectsChangeManager`)
+      .pipe(
+        catchError(this.handleError),
+        map((list: any[]): Project[] => list.map(Project.fromJSON)));
   }
+  /*endregion*/
+
+  /*region changeInitiatives*/
   // TODO: Niet meer hardcoded maken
-  get roadMapItems$(): Observable<RoadmapItem[]> {
+  get changeInitiatives$(): Observable<ChangeInitiative[]> {
+    return this._RELOAD$.pipe(
+      switchMap(() => this.fetchChangeInitiatives$())
+    );
+  }
+  fetchChangeInitiatives$(): Observable<ChangeInitiative[]> {
+    return this.http
+      .get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager`)
+      .pipe(
+        catchError(this.handleError),
+        map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON))
+      );
+  }
+  /*endregion*/
+
+  /*region roadmapitem*/
+  // TODO: Niet meer hardcoded maken
+  get roadmapItems$(): Observable<RoadmapItem[]> {
     return this._RELOAD$.pipe(
       switchMap(() => this.fetchRoadmapItems$(1))
     );
   }
-
   fetchRoadmapItems$(id: any): Observable<RoadmapItem[]> {
     return this.http
       .get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${id}`)
@@ -92,36 +120,20 @@ export class DashboardDataService {
         map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON))
       );
   }
+  /*endregion*/
 
-  getRoadmapItem$(id: any): Observable<RoadmapItem> {
-    return this.http
-      .get(`${environment.apiUrl}/RoadMapItems/${id}`)
-      .pipe(
-        catchError(this.handleError),
-        map(RoadmapItem.fromJSON)
-      );
+  /*region survey*/
+  getSurvey$(id: number): Observable<Survey> {
+    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
   }
-
-  getProject$(id: number): Observable<Project> {
-    return this.http.get(`${environment.apiUrl}/Dashboard/GetProjects/${id}`).pipe(
-      catchError(this.handleError),
-      map(Project.fromJSON)
-    );
+  get surveys$(): Observable<Survey[]> {
+    return this._RELOAD$.pipe( switchMap(() => this.fetchSurveys$()) );
   }
-
-  get projects$(): Observable<Project[]> {
-    return this._RELOAD$.pipe(
-      switchMap(() => this.fetchProjects$())
-    );
+  fetchSurveys$(): Observable<Survey[]> {
+    return this.http.get(`${environment.apiUrl}/Survey`)
+      .pipe(catchError(this.handleError), map((list: any[]): Survey[] => list.map(Survey.fromJSON)));
   }
-
-  fetchProjects$(): Observable<Project[]>
-  {
-    return this.http.get(`${environment.apiUrl}/Dashboard`)
-      .pipe(
-        catchError(this.handleError),
-        map((list: any[]): Project[] => list.map(Project.fromJSON)));
-  }
+  /*endregion*/
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;
@@ -132,5 +144,4 @@ export class DashboardDataService {
     }
     return throwError(errorMessage);
   }
-
 }
