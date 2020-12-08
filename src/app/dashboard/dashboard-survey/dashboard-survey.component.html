@@ -1,21 +1,68 @@
 <app-nav-bar>
-  <div class="row mt-4"><h2 class="w-100 text-center">Dashboard Survey</h2></div>
-  <div class="row">
+  <div class="row mt-3 mb-5">
     <div class="col-sm-2">
-      <div class="dropdown mt-3">
+      <div class="dropdown">
         <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Choose dashboard <fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon>
         </button>
         <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" routerLink="/dashboard/project">Project</a>
-          <a class="dropdown-item" routerLink="/dashboard/roadmapitem">Roadmapitem</a>
+          <a class="dropdown-item" routerLink="/">Project</a>
           <a class="dropdown-item" routerLink=".">Survey</a>
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="container">
+    <div class="col-sm-3">
+      <div class="dropdown">
+        <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Choose Survey <fa-icon [icon]="faClipboardList" class="fa-pull-right"></fa-icon>
+        </button>
+        <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
+          <div *ngFor="let roadmapitem of roadmapItems">
+            <div *ngIf="roadmapitem.id === _currentRmi.id; else na">
+              <button class="dropdown-item active" (click)="updateDashboard(roadmapitem)">{{roadmapitem.title}}</button>
+            </div>
+            <ng-template #na>
+              <button class="dropdown-item" (click)="updateDashboard(roadmapitem)">{{roadmapitem.title}}</button>
+            </ng-template>
+          </div>
+        </div>
       </div>
+    </div>
+    <h2 class="col-sm-3 text-center">Dashboard Survey</h2>
+  </div>
+  <div class="row m-2">
+    <div class="block">
+      <span *ngIf="barChartReady">
+        <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
+      </span>
+      <span *ngIf="pieChartReady">
+        <app-pie-chart [pieChartProp]="pieChartProperties"></app-pie-chart>
+      </span>
+
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col" *ngFor="let c of columns">{{c}}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let data of dataSource">
+            <td>{{data.q}}</td>
+            <td>
+              <div *ngFor="let answers of data.an">
+                {{answers}}<br>
+              </div>
+            </td>
+            <td>
+              <div *ngFor="let nranswers of data.ac">
+                {{nranswers}}<br>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   </div>
 </app-nav-bar>

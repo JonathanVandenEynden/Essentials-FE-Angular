@@ -11,12 +11,11 @@
         </div>
       </div>
     </div>
-    <h2 class="col-sm-8 text-center">Dashboard</h2>
+    <h2 class="col-sm-8 text-center">Dashboard Project</h2>
   </div>
   <div class="row m-2">
     <div class="block">
       <span *ngIf="barChartReady">
-        <p>{{barChartReady.valueOf()}}</p>
         <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
       </span>
       <span *ngIf="pieChartChangeInitiativesReady">
