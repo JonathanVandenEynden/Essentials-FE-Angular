@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../authentication.service';
-import {faChartLine, faInfo, faInfoCircle, faSignOutAlt, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faChartLine, faInfoCircle, faSignOutAlt, faUser} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 
 @Component({
@@ -9,7 +9,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  faUser = faInfoCircle;
+  faUser = faUser;
+  faInfo = faInfoCircle;
   faSignOut = faSignOutAlt;
   faActivity = faChartLine;
   public loggedInUser$ = this._authenticationService.user$;
@@ -22,6 +23,6 @@ export class AccountComponent implements OnInit {
 
   logOut(): void {
     this._authenticationService.logout();
-    this._router.navigate(['../../user/logIn']);
+    this._router.navigate(['../../user/login']);
   }
 }

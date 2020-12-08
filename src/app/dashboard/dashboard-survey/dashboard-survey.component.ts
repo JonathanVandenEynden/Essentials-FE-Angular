@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {faPlus, faSyncAlt, faTachometerAlt, faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {DashboardDataService} from '../dashboard-data.service';
-import {Survey} from '../../models/survey.model';
 import {Observable} from 'rxjs';
 import {RoadmapItem} from '../../models/roadmapitem.model';
 import {tap} from 'rxjs/operators';
 import {ChartDataSets} from 'chart.js';
+import {ChangeInitiative} from '../../models/change.model';
 
 @Component({
   selector: 'app-dashboard-survey',
@@ -14,6 +14,7 @@ import {ChartDataSets} from 'chart.js';
   styleUrls: ['./dashboard-survey.component.css']
 })
 export class DashboardSurveyComponent implements OnInit {
+  /*region properties*/
   public faTachometer = faTachometerAlt;
   public faClipboardList = faClipboardCheck;
   public faSync = faSyncAlt;
@@ -23,43 +24,34 @@ export class DashboardSurveyComponent implements OnInit {
   public polarChartProperties: {};
   public pieChartReady = false;
   public barChartReady = false;
-  public polarChartReady = false;
-  private _fetchRoadmapItems$: Observable<RoadmapItem[]>;
-  private _fetchSurveys$: Observable<Survey[]>;
-  private _surveys: Survey[];
-  private _roadmapItems: RoadmapItem[];
+  private _fetchChangeInitiatives$: Observable<ChangeInitiative[]>;
+  private _roadmapItems: RoadmapItem[] = [];
   private _currentRmi: RoadmapItem;
   private _months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
   private _displayedColumns: string[] = ['Question', 'Answer', 'Times chosen'];
-  private _dataSource: [{}];
+  private _dataSource: [{}] = [{}];
+  /*endregion*/
 
   constructor(private _router: Router, private _dashboardDataService: DashboardDataService) { }
 
   ngOnInit(): void {
-    this._fetchSurveys$ = this._dashboardDataService.surveys$;
-    this._fetchRoadmapItems$ = this._dashboardDataService.roadmapItems$;
-    this._fetchRoadmapItems$
+    this._fetchChangeInitiatives$ = this._dashboardDataService.changeInitiatives$;
+    this._fetchChangeInitiatives$
       .pipe(
         tap(console.log)
       )
       .subscribe(
-        (roadmapItems: RoadmapItem[]) => {
-          this._currentRmi = roadmapItems[0];
-          this._roadmapItems = roadmapItems;
-          this.makeCharts();
-        });
-
-    this._fetchSurveys$
-      .pipe(
-        tap(console.log)
-      )
-      .subscribe(
-        (surveys: Survey[]) => {
-          this._surveys = surveys;
+        (changeInitiatives: ChangeInitiative[]) => {
+          const arr: [RoadmapItem[]] = [[]];
+          changeInitiatives.forEach(e => arr.push(e.roadMap));
+          arr.splice(0, 1);
+          arr.forEach(e => e.forEach(r => this._roadmapItems.push(r)));
+          this._currentRmi = this._roadmapItems[0];
           this.makeCharts();
         });
   }
 
+  /*region charts*/
   private makeCharts(): void{
     this.barChartProperties = this.makeDataForBarChart();
     this.pieChartProperties = this.makeDataForPieChartNumberOfQuestions();
@@ -67,13 +59,13 @@ export class DashboardSurveyComponent implements OnInit {
   }
 
   private makeDataForTable(): void {
-    this._dataSource = [{}];
+    this._dataSource.splice(0, 1);
+    console.log(this._currentRmi.survey.Questions.length);
     this._currentRmi.survey.Questions.forEach(e => {
       if (e.PossibleAnswers){
         const n = Object.keys(e.PossibleAnswers);
         const a = Object.values(e.PossibleAnswers);
         this._dataSource.push({q: e.QuestionString, an: n, ac: a});
-        this._dataSource.splice(0, 1);
       }
     });
   }
@@ -90,7 +82,7 @@ export class DashboardSurveyComponent implements OnInit {
             monthNumberChangeinitiatives[i] += 1;
           }
         }
-    });
+      });
     data.push({data: monthNumberChangeinitiatives, label: 'Monthly active'});
     if (data.length !== 0){
       this.barChartReady = true;
@@ -102,8 +94,8 @@ export class DashboardSurveyComponent implements OnInit {
     const data: number[] = [];
     const labels: string[] = [];
     this._roadmapItems.forEach(e => {
-      data.push(e.survey.Questions.length);
-      labels.push(e.survey.Questions.length.toString());
+        data.push(e.survey.Questions.length);
+        labels.push(e.survey.Questions.length.toString());
     });
     if (data.length !== 0){
       this.pieChartReady = true;
@@ -115,16 +107,9 @@ export class DashboardSurveyComponent implements OnInit {
     this._currentRmi = rmi;
     this.makeCharts();
   }
+  /*endregion*/
 
-  get surveyData$(): Observable<Survey[]>{
-    return this._fetchSurveys$;
-  }
-  get roadmapItemData$(): Observable<RoadmapItem[]>{
-    return this._fetchRoadmapItems$;
-  }
-  get surveys(): Survey[]{
-    return this._surveys;
-  }
+  /*region getters*/
   get roadmapItems(): RoadmapItem[]{
     return this._roadmapItems;
   }
@@ -134,4 +119,5 @@ export class DashboardSurveyComponent implements OnInit {
   get columns(): string[]{
     return this._displayedColumns;
   }
+  /*endregion*/
 }

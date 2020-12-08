@@ -14,7 +14,7 @@
     <div class="col-sm-3">
       <div class="dropdown">
         <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose Survey <fa-icon [icon]="faClipboardList" class="fa-pull-right"></fa-icon>
+          {{_currentRmi.title}} <fa-icon [icon]="faClipboardList" class="fa-pull-right"></fa-icon>
         </button>
         <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
           <div *ngFor="let roadmapitem of roadmapItems">

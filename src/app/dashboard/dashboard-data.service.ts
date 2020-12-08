@@ -18,10 +18,7 @@ export class DashboardDataService {
   private _PROJECT: Project[];
   private _CHANGEINITIATIVES$ = new BehaviorSubject<ChangeInitiative[]>([]);
   private _CHANGEINITIATIVES: ChangeInitiative[];
-  private _ROADMAPITEMS$ = new BehaviorSubject<RoadmapItem[]>([]);
-  private _ROADMAPITEMS: RoadmapItem[];
-  private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
-  private _SURVEYS: Survey[];
+
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
   /*endregion*/
 
@@ -49,28 +46,6 @@ export class DashboardDataService {
         this._CHANGEINITIATIVES = changeInitiatives;
         this._CHANGEINITIATIVES$.next(this._CHANGEINITIATIVES);
       });
-
-    this.roadmapItems$.pipe(
-        catchError((err) => {
-          this._ROADMAPITEMS$.error(err);
-          return throwError(err);
-        })
-      ).subscribe((roadmapItems: RoadmapItem[]) => {
-        this._ROADMAPITEMS = roadmapItems;
-        this._ROADMAPITEMS$.next(this._ROADMAPITEMS);
-      });
-
-    this.surveys$
-      .pipe(
-        catchError((err) => {
-          this._SURVEYS$.error(err);
-          return throwError(err);
-        })
-      )
-      .subscribe((surveys: Survey[]) => {
-        this._SURVEYS = surveys;
-        this._SURVEYS$.next(this._SURVEYS);
-      });
   }
 
   /*region project*/
@@ -89,7 +64,6 @@ export class DashboardDataService {
   /*endregion*/
 
   /*region changeInitiatives*/
-  // TODO: Niet meer hardcoded maken
   get changeInitiatives$(): Observable<ChangeInitiative[]> {
     return this._RELOAD$.pipe(
       switchMap(() => this.fetchChangeInitiatives$())
@@ -97,41 +71,11 @@ export class DashboardDataService {
   }
   fetchChangeInitiatives$(): Observable<ChangeInitiative[]> {
     return this.http
-      .get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager`)
+      .get(`${environment.apiUrl}/Dashboard/GetChangeInitiativesForChangeManager`)
       .pipe(
         catchError(this.handleError),
         map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON))
       );
-  }
-  /*endregion*/
-
-  /*region roadmapitem*/
-  // TODO: Niet meer hardcoded maken
-  get roadmapItems$(): Observable<RoadmapItem[]> {
-    return this._RELOAD$.pipe(
-      switchMap(() => this.fetchRoadmapItems$(1))
-    );
-  }
-  fetchRoadmapItems$(id: any): Observable<RoadmapItem[]> {
-    return this.http
-      .get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${id}`)
-      .pipe(
-        catchError(this.handleError),
-        map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON))
-      );
-  }
-  /*endregion*/
-
-  /*region survey*/
-  getSurvey$(id: number): Observable<Survey> {
-    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
-  }
-  get surveys$(): Observable<Survey[]> {
-    return this._RELOAD$.pipe( switchMap(() => this.fetchSurveys$()) );
-  }
-  fetchSurveys$(): Observable<Survey[]> {
-    return this.http.get(`${environment.apiUrl}/Survey`)
-      .pipe(catchError(this.handleError), map((list: any[]): Survey[] => list.map(Survey.fromJSON)));
   }
   /*endregion*/
 

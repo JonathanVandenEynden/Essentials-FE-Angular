@@ -17,10 +17,10 @@
     <div *ngIf="(loggedInUser$ | async) as user" class="account">
       Welcome, {{user.FIRSTNAME}}
     <button mat-button class="dropdown-toggle" [matMenuTriggerFor]="belowMenu">
-      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-7.jpg" class="rounded-circle z-depth-0 w-50" alt="avatar image">
+      <fa-icon [icon]="faUser" class="fa-lg"></fa-icon>
     </button>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item (click)="routeAccount()">Account <fa-icon [icon]=faUser class="fa-pull-right"></fa-icon></button>
+      <button mat-menu-item (click)="routeAccount()">Account <fa-icon [icon]=faInfo class="fa-pull-right"></fa-icon></button>
       <button mat-menu-item (click)="routeSignOut()">Sign out <fa-icon [icon]=faSignInAlt class="fa-pull-right"></fa-icon></button>
     </mat-menu>
     </div>
