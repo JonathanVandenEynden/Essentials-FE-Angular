@@ -16,18 +16,18 @@ export interface ChangeInitiativeJson{
 }
 
 export class ChangeInitiative {
-  private _ID: number;
-  private _STARTDATE: Date;
-  private _ENDDATE: Date;
+  private _id: number;
+  private _startdate: Date;
+  private _enddate: Date;
   constructor(
-    private _NAME: string,
-    private _DESCRIPTION: string,
-    private _STARTDATESTRING: string,
-    private _ENDDATESTRING: string,
-    private _CHANGEGROUP: ChangeGroup,
-    private _CHANGESPONSOR: Employee,
-    private _ROADMAP: RoadmapItem[],
-    private _PROGRESS: number
+    private _name: string,
+    private _description: string,
+    private _startdatestring: string,
+    private _enddatestring: string,
+    private _changegroup: ChangeGroup,
+    private _changesponsor: Employee,
+    private _roadmap: RoadmapItem[],
+    private _progress: number
   ) {}
 
   static fromJSON(json: any): ChangeInitiative {
@@ -50,83 +50,83 @@ export class ChangeInitiative {
   toJSON(): ChangeInitiativeJson {
     // @ts-ignore
     return {
-      name: this._NAME,
-      description: this._DESCRIPTION,
-      startDate: this._STARTDATESTRING,
-      endDate: this._ENDDATESTRING,
-      changeGroup: this._CHANGEGROUP,
-      sponsor: this._CHANGESPONSOR,
-      roadMap: this._ROADMAP,
-      progress: this._PROGRESS
+      name: this._name,
+      description: this._description,
+      startDate: this._startdatestring,
+      endDate: this._enddatestring,
+      changeGroup: this._changegroup,
+      sponsor: this._changesponsor,
+      roadMap: this._roadmap,
+      progress: this._progress
     } as ChangeInitiativeJson;
   }
 
   get id(): number {
-    return this._ID;
+    return this._id;
   }
   set id(value: number) {
-    this._ID = value;
+    this._id = value;
   }
   get name(): string{
-    return this._NAME;
+    return this._name;
   }
   set name(value: string) {
-    this._NAME = value;
+    this._name = value;
   }
   get description(): string {
-    return this._DESCRIPTION;
+    return this._description;
   }
   set description(value: string) {
-    this._DESCRIPTION = value;
+    this._description = value;
   }
   get startDateString(): string {
-    return this._STARTDATESTRING.split('T')[0];
+    return this._startdatestring.split('T')[0];
   }
   set startDateString(value: string) {
-    this._STARTDATESTRING = value;
+    this._startdatestring = value;
   }
   get endDateString(): string{
-    return this._ENDDATESTRING.split('T')[0];
+    return this._enddatestring.split('T')[0];
   }
   set endDateString(value: string) {
-    this._ENDDATESTRING = value;
+    this._enddatestring = value;
   }
   get sponsor(): Employee{
-    return this._CHANGESPONSOR;
+    return this._changesponsor;
   }
   set sponsor(value: Employee) {
-    this._CHANGESPONSOR = value;
+    this._changesponsor = value;
   }
   get changegroup(): ChangeGroup {
-    return this._CHANGEGROUP;
+    return this._changegroup;
   }
   set changegroup(value: ChangeGroup) {
-    this._CHANGEGROUP = value;
+    this._changegroup = value;
   }
   get roadMap(): RoadmapItem[]{
-    return this._ROADMAP;
+    return this._roadmap;
   }
   set roadMap(value: RoadmapItem[]){
-    this._ROADMAP = value;
+    this._roadmap = value;
   }
   get progress(): number {
-    return this._PROGRESS;
+    return this._progress;
   }
   set progress(value: number) {
-    this._PROGRESS = value;
+    this._progress = value;
   }
 
   get startDate(): Date {
-    return this._STARTDATE;
+    return this._startdate;
   }
   set startDate(value: Date) {
-    this._STARTDATE = value;
+    this._startdate = value;
   }
   get endDate(): Date{
-    return this._ENDDATE;
+    return this._enddate;
   }
   set endDate(value: Date) {
-    this._ENDDATE = value;
+    this._enddate = value;
   }
 }
 

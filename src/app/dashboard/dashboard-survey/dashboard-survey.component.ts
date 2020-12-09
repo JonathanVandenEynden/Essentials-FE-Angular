@@ -19,10 +19,13 @@ export class DashboardSurveyComponent implements OnInit {
   public faClipboardList = faClipboardCheck;
   public faSync = faSyncAlt;
   public faPlus = faPlus;
-  public pieChartProperties: {};
+  public pieChartAllQuestionsProperties: {};
+  public pieChartNumberOfQuestionsProperties: {};
   public barChartProperties: {};
-  public polarChartProperties: {};
-  public pieChartReady = false;
+  public pieChartRoadmapPhasesProperties: {};
+  public pieChartAllQuestionsReady = false;
+  public pieChartRoadmapPhasesReady = false;
+  public pieChartNumberOfQuestionsReady = false;
   public barChartReady = false;
   private _fetchChangeInitiatives$: Observable<ChangeInitiative[]>;
   private _roadmapItems: RoadmapItem[] = [];
@@ -54,20 +57,48 @@ export class DashboardSurveyComponent implements OnInit {
   /*region charts*/
   private makeCharts(): void{
     this.barChartProperties = this.makeDataForBarChart();
-    this.pieChartProperties = this.makeDataForPieChartNumberOfQuestions();
+    this.pieChartAllQuestionsProperties = this.makeDataForPieChartAllQuestions();
+    this.pieChartNumberOfQuestionsProperties = this.makeDataForPieChartNumberOfQuestions();
+    this.pieChartRoadmapPhasesProperties = this.makeDataForPieChartRoadmapPhases();
     this.makeDataForTable();
   }
 
   private makeDataForTable(): void {
     this._dataSource.splice(0, 1);
-    console.log(this._currentRmi.survey.Questions.length);
     this._currentRmi.survey.Questions.forEach(e => {
+      console.log(e.Id);
       if (e.PossibleAnswers){
         const n = Object.keys(e.PossibleAnswers);
         const a = Object.values(e.PossibleAnswers);
-        this._dataSource.push({q: e.QuestionString, an: n, ac: a});
+        let average = 0;
+        a.map(z => average += z);
+        if (average === 0){
+          this._dataSource.push({q: e.QuestionString, an: n, ac: a.map(s => '0 %')});
+        } else{
+          this._dataSource.push({q: e.QuestionString, an: n, ac: a.map(s => ((s / average) * 100).toString() + '%')});
+        }
       }
     });
+  }
+
+  private makeDataForPieChartRoadmapPhases(): {} {
+    const data: number[] = [];
+    const labels: string[] = [];
+    // tslint:disable-next-line:one-variable-per-declaration
+    let f1 = 0, f2 = 0, f3 = 0;
+    this._roadmapItems.forEach(e => {
+      switch (e.phase){
+        case 0: f1 += 1; break;
+        case 1: f2 += 1; break;
+        case 2: f3 += 1; break;
+      }
+    });
+    data.push(f1, f2, f3);
+    labels.push('Preparation phase', 'Implementation phase', 'Value creation phase');
+    if (data.length !== 0){
+      this.pieChartRoadmapPhasesReady = true;
+    }
+    return {t: 'Number of roadmapitems in cetrain phase', d: data, l: labels};
   }
 
   private makeDataForBarChart(): {} {
@@ -90,17 +121,45 @@ export class DashboardSurveyComponent implements OnInit {
     return {t: 'Monthly active Surveys', d: data, l: labels};
   }
 
-  private makeDataForPieChartNumberOfQuestions(): {} {
+  private makeDataForPieChartAllQuestions(): {} {
     const data: number[] = [];
     const labels: string[] = [];
     this._roadmapItems.forEach(e => {
         data.push(e.survey.Questions.length);
-        labels.push(e.survey.Questions.length.toString());
+        labels.push(e.title);
     });
     if (data.length !== 0){
-      this.pieChartReady = true;
+      this.pieChartAllQuestionsReady = true;
     }
-    return {t: 'Questions per Survey', d: data, l: labels};
+    return {t: 'pretty useless chart ngl', d: data, l: labels};
+  }
+
+  private makeDataForPieChartNumberOfQuestions(): {} {
+    let data: number[] = [];
+    const labels: string[] = [];
+
+    this._roadmapItems.forEach(e => {
+      if (!data[e.survey.Questions.length]){
+        data[e.survey.Questions.length] = 1;
+      } else{
+        data[e.survey.Questions.length] += 1;
+      }
+    });
+
+    data.forEach(e => {
+      switch (data.indexOf(e)){
+        case 1: labels.push(data.indexOf(e) + ' question'); break;
+        default: labels.push(data.indexOf(e) + ' questions'); break;
+      }
+    });
+
+    data = data.filter(element => element !== undefined);
+
+    if (data.length !== 0){
+      this.pieChartNumberOfQuestionsReady = true;
+    }
+
+    return {t: 'Amount of surveys with # questions', d: data, l: labels};
   }
 
   public updateDashboard(rmi: RoadmapItem): void {

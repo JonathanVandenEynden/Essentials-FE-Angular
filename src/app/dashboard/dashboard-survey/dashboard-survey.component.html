@@ -32,12 +32,6 @@
   </div>
   <div class="row m-2">
     <div class="block">
-      <span *ngIf="barChartReady">
-        <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
-      </span>
-      <span *ngIf="pieChartReady">
-        <app-pie-chart [pieChartProp]="pieChartProperties"></app-pie-chart>
-      </span>
 
       <table class="table table-bordered">
         <thead class="thead-dark">
@@ -62,6 +56,19 @@
           </tr>
         </tbody>
       </table>
+
+      <span *ngIf="barChartReady">
+        <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
+      </span>
+      <span *ngIf="pieChartAllQuestionsReady">
+        <app-pie-chart [pieChartProp]="pieChartAllQuestionsProperties"></app-pie-chart>
+      </span>
+      <span *ngIf="pieChartRoadmapPhasesReady">
+        <app-pie-chart [pieChartProp]="pieChartRoadmapPhasesProperties"></app-pie-chart>
+      </span>
+      <span *ngIf="pieChartNumberOfQuestionsReady">
+        <app-pie-chart [pieChartProp]="pieChartNumberOfQuestionsProperties"></app-pie-chart>
+      </span>
 
     </div>
   </div>
