@@ -15,8 +15,6 @@ export class GroupComponent implements OnInit {
   faRoad = faRoute;
   faGroup = faUsers;
   faDeleteUser = faUserMinus;
-  groups = ['Management', 'IT'];
-  names = ['Simon De Wilde', 'Killian Hoefman', 'Ziggy Moens', 'Jonathan VDEVL', 'Sébastien De Pauw', 'Marbod Naassens'];
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -24,7 +22,8 @@ export class GroupComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
     console.log(this.change);
   }
-  routeRoadmap(): void{
+
+  toRoadMap(): void {
     this.router.navigate(['roadmap/', this.change.id]);
   }
 }
