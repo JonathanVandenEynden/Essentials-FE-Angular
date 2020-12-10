@@ -1,7 +1,9 @@
+import {Employee, EmployeeJson} from './user.model';
+
 export interface ChangeGroupJson {
   id: number;
   name: string;
-  // users: EmployeeJson[];
+  users: EmployeeJson[];
 }
 
 export class ChangeGroup {
@@ -10,7 +12,7 @@ export class ChangeGroup {
 
   constructor(
     private NAME: string,
-    // private USERS: Employee[]
+    private USERS: Employee[]
   ) {
   }
 
@@ -18,7 +20,7 @@ export class ChangeGroup {
     if (json !== null) {
       const changegroup = new ChangeGroup(
         json.name,
-        // json.users.map(Employee.fromJSON)
+        json.users == null ? null : json.users.map(Employee.fromJSON)
       );
       changegroup.ID = json.id;
       return changegroup;
@@ -30,7 +32,7 @@ export class ChangeGroup {
     // @ts-ignore
     return {
       name: this.NAME,
-      // users: this.USERS
+      users: this.USERS
     } as ChangeGroupJson;
   }
 
@@ -50,7 +52,7 @@ export class ChangeGroup {
     this._CHECKED = value;
   }
 
-  /*get users(): Employee[]{
-      return this.USERS;
-    }*/
+  get users(): Employee[] {
+    return this.USERS;
+  }
 }
