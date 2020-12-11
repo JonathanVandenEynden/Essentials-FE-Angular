@@ -23,6 +23,18 @@ const appRoutes: Routes =
     loadChildren: () => import('./change/change.module').then(mod => mod.ChangeModule),
     data: { preload: true }
   },
+   {
+     path: 'employee',
+     canActivate: [AuthGuard],
+     loadChildren: () => import('./employee/employee.module').then(mod => mod.EmployeeModule),
+     data: { preload: true }
+   },
+   {
+     path: 'admin',
+     canActivate: [AuthGuard],
+     loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
+     data: { preload: true }
+   },
    { path: '', redirectTo: 'login', pathMatch: 'full' },
    { path: '**', component: PageNotFoundComponent }
 ];

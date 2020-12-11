@@ -1,7 +1,8 @@
 <!--Navbar -->
 <nav class="navbar-expand-lg mb-1 navbar navbar-dark secondary-color lighten-1">
   <a class="navbar-brand" href="#"><img src="./assets/images/logoWithoutBrandWhite.png" width="75px">HoGent</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+          aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
@@ -10,21 +11,28 @@
         <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/change/home']" routerLinkActive="active">Change events</a>
+        <a class="nav-link" [routerLink]="['/change/home']" routerLinkActive="active">Change events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/employee/overview']" routerLinkActive="active">Employees</a>
       </li>
     </ul>
 
     <div *ngIf="(loggedInUser$ | async) as user" class="account">
       Welcome, {{user.FIRSTNAME}}
-    <button mat-button class="dropdown-toggle" [matMenuTriggerFor]="belowMenu">
-      <fa-icon [icon]="faUser" class="fa-lg"></fa-icon>
-    </button>
-    <mat-menu #belowMenu="matMenu" yPosition="below">
-      <button mat-menu-item (click)="routeAccount()">Account <fa-icon [icon]=faInfo class="fa-pull-right"></fa-icon></button>
-      <button mat-menu-item (click)="routeSignOut()">Sign out <fa-icon [icon]=faSignInAlt class="fa-pull-right"></fa-icon></button>
-    </mat-menu>
+      <button mat-button class="dropdown-toggle" [matMenuTriggerFor]="belowMenu">
+        <fa-icon [icon]="faUser" class="fa-lg"></fa-icon>
+      </button>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <button mat-menu-item (click)="routeAccount()">Account
+          <fa-icon [icon]=faInfo class="fa-pull-right"></fa-icon>
+        </button>
+        <button mat-menu-item (click)="routeSignOut()">Sign out
+          <fa-icon [icon]=faSignInAlt class="fa-pull-right"></fa-icon>
+        </button>
+      </mat-menu>
     </div>
-    </div>
+  </div>
 </nav>
 <!--einde navbar -->
 <ng-content></ng-content>
