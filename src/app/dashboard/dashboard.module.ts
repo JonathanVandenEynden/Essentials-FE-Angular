@@ -14,7 +14,7 @@ import {ChartModule} from './chart/chart.module';
 
 const dashboardRoutes: Routes =
   [
-    { path: 'home', component: DashbboardProjectComponent },
+    { path: 'project', component: DashbboardProjectComponent },
     { path: 'survey', component: DashboardSurveyComponent }
   ];
 
