@@ -31,6 +31,14 @@ export class UserDataService {
     return this._USERS$;
   }
 
+  get allChangeManagers$(): Observable<Employee[]> {
+    return this.http
+      .get(`${environment.apiUrl}/ChangeManagers/GetChangeManagersFromOrganization`)
+      .pipe(
+        catchError(this.handleError),
+        map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
+  }
+
   get users$(): Observable<Employee[]>
   {
     return this._RELOAD$.pipe(
@@ -53,5 +61,9 @@ export class UserDataService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  upgradeEmployeeToChangeManager(employeeId: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/ChangeManagers/${employeeId}`, {}).pipe(catchError(this.handleError));
   }
 }

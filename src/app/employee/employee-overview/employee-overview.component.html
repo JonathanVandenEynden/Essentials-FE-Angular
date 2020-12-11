@@ -2,21 +2,38 @@
   <div class="container m-5">
     <h1>All Employees</h1>
     <div class="container">
-      <div *ngIf="employees.length > 0; else Error">
-        <table class="table table-">
-          <thead class="thead-dark">
+      <div *ngIf="employees !== undefined; else Error">
+        <table class="table">
+          <thead>
           <th>Name</th>
           <th>Email</th>
           <th>Upgrade to change manager</th>
           </thead>
           <tbody>
-
-            <tr *ngFor="let e of employees">
-              <td>{{e.FULLNAME()}}</td>
-              <td>{{e.EMAIL}}</td>
-              <td><!-- TODO hier verder doen met een knopje om up te graden--></td>
-            </tr>
-
+          <tr *ngFor="let e of employees">
+            <td>{{e.FULLNAME()}}</td>
+            <td>{{e.EMAIL}}</td>
+            <td>
+              <button class="btn btn-sm btn-secondary" (click)="upgrade(e.ID)">Upgrade</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h1>All Change Managers</h1>
+    <div class="container">
+      <div *ngIf="changeManagers !== undefined; else Error">
+        <table class="table">
+          <thead>
+          <th>Name</th>
+          <th>Email</th>
+          </thead>
+          <tbody>
+          <tr *ngFor="let e of changeManagers">
+            <td>{{e.FULLNAME()}}</td>
+            <td>{{e.EMAIL}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -25,7 +42,7 @@
   <ng-template #Error>
     <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
       <div class="card-header">
-        <p>Error loading the changes: {{errorMessage}}
+        <p>Error loading the employees: {{errorMessage}}
           Try again later.</p>
       </div>
     </div>
