@@ -29,4 +29,5 @@ const appRoutes: Routes =
   imports: [RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }), BrowserModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

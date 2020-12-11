@@ -21,6 +21,10 @@ export class AdminHomeComponent implements OnInit {
     this.router.navigate(['admin/addOrganization']);
   }
 
+  NavigateToAddAssessment(): void {
+    this.router.navigate(['admin/addAssessment']);
+  }
+
   getOrganizations(): void {
     this.adminDataService.getOrganizations().subscribe((result) => this.organizations = result);
   }
