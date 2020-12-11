@@ -37,12 +37,10 @@ export class UserDataService {
       switchMap(() => this.fetchUsers$())
     );
   }
-  // TODO: Niet meer hardcoded maken
   fetchUsers$(): Observable<Employee[]>
   {
-    // TODO remove hardcoded Id
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/Employees/GetAllEmployeesFromOrganization/${1}`).pipe(catchError(this.handleError), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/Employees/GetAllEmployeesFromOrganization`).pipe(catchError(this.handleError), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
   }
 
   handleError(err: any): Observable<never>
