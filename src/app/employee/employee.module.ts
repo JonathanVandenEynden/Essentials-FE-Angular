@@ -23,7 +23,7 @@ import {UpdateRoadmapItemComponent} from '../change/roadmap/update-roadmap-item/
 
 const routes: Routes =
   [
-    {path: 'overview', component: HomeComponent},
+    {path: 'overview', component: EmployeeOverviewComponent},
   ];
 
 @NgModule({
