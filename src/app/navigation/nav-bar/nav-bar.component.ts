@@ -28,11 +28,12 @@ export class NavBarComponent implements OnInit {
   }
 
   routeAccount(): void {
-    this._router.navigate(['../user/account']);
+    this._router.navigate(['/user/account']);
   }
 
   routeSignOut(): void {
-    this._router.navigate(['../../user/login']);
+    this._authenticationService.logout();
+    this._router.navigate(['/login']);
   }
   // tslint:disable-next-line:typedef
   buttonEnter(trigger) {
