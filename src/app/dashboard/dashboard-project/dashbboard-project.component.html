@@ -1,30 +1,29 @@
 <app-nav-bar>
-  <div class="row mt-4"><h2 class="w-100 text-center">Dashboard Project</h2></div>
-  <div class="row">
+  <div class="row mt-3 mb-5">
     <div class="col-sm-2">
       <div class="dropdown">
         <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose Project <fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon>
+          Choose dashboard <fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon>
         </button>
-
-        <div *ngFor="let project of (projectData$ | async)">
-          <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" [routerLink]="project">{{project.Name}}</a>
-          <!--
+        <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink=".">Project</a>
-          <a class="dropdown-item" routerLink="/dashboard/roadmapitem">Roadmapitem</a>
           <a class="dropdown-item" routerLink="/dashboard/survey">Survey</a>
-          -->
-          </div>
-          <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton"
-               *ngFor="let ri of (projectData$ | async)">
-          </div>
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="container">
-      </div>
+    <h2 class="col-sm-8 text-center">Dashboard Project</h2>
+  </div>
+  <div class="row m-2">
+    <div class="block">
+      <span *ngIf="barChartReady">
+        <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
+      </span>
+      <span *ngIf="pieChartChangeInitiativesReady">
+        <app-pie-chart [pieChartProp]="pieChartChangeInitiativesProperties"></app-pie-chart>
+      </span>
+      <span *ngIf="polarChartReady">
+        <app-polar-chart [polarChartProp]="polarChartProperties"></app-polar-chart>
+      </span>
     </div>
   </div>
 </app-nav-bar>

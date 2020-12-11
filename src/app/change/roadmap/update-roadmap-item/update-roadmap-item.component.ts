@@ -35,8 +35,8 @@ export class UpdateRoadmapItemComponent implements OnInit {
     this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
     this.rmiForm = this.fb.group({
       title: [this.roadmapItem.title, Validators.required],
-      startDate: [this.roadmapItem.STARTDATE],
-      endDate: [this.roadmapItem.ENDDATE]
+      startDate: [this.roadmapItem.startDateString],
+      endDate: [this.roadmapItem.endDateString]
     }, {validator: validateDates});
   }
 

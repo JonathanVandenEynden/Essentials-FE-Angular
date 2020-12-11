@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {Changemanager} from '../../models/changemanager.model';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {faInfoCircle, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {AuthenticationService} from '../../user/authentication.service';
 
@@ -16,6 +15,7 @@ export class NavBarComponent implements OnInit {
   enteredButton = false;
   isMatMenuOpen = false;
   prevButtonTrigger;
+  faInfo = faInfoCircle;
   faSignInAlt = faSignInAlt;
   faUser = faUser;
   loggedInUser$ = this._authenticationService.user$;
