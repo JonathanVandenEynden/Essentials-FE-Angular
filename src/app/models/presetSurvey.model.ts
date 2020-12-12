@@ -2,22 +2,30 @@ import {Question, QuestionJson} from './Question.model';
 
 export interface PresetSurveyJson{
   theme: string;
-  presetQuestion: QuestionJson;
+  presetQuestions: QuestionJson;
 }
+
+// json: { theme: string; presetQuestion: { type: number; questionString: string }}
 
 export class PresetSurvey{
   constructor(
     private theme: string,
-    private presetQuestion: Question
+    private presetQuestions: Question
   ) {
   }
 
   static fromJson(json: PresetSurveyJson): PresetSurvey {
+    console.log('fromjson presetsurvey');
+    console.log(json);
+    console.log('question.fromJson');
+    console.log(json.presetQuestions);
     if (json != null){
       const ps = new PresetSurvey(
         json.theme,
-        Question.fromJson(json.presetQuestion)
+        Question.fromJson(json.presetQuestions)
       );
+      console.log('ps');
+      console.log(ps);
       return ps;
     }
     return null as PresetSurvey;
@@ -26,7 +34,7 @@ export class PresetSurvey{
   toJson(): PresetSurveyJson {
     return {
       theme: this.theme,
-      presetQuestion: this.presetQuestion.toJson()
+      presetQuestions: this.presetQuestions.toJson()
     } as PresetSurveyJson;
   }
 
@@ -35,6 +43,6 @@ export class PresetSurvey{
   }
 
   get PresetQuestion(): Question {
-    return this.presetQuestion;
+    return this.presetQuestions;
   }
 }

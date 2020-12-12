@@ -15,13 +15,21 @@ export class Question {
   }
 
   static fromJson(json: QuestionJson): Question {
+    console.log('fromJSON');
+    console.log(json);
     if (json != null){
+      console.log('test');
       const q = new Question(
         json.type,
         json.questionString,
         json.possibleAnswers
       );
       q.id = json.id;
+      console.log(q.type);
+      console.log(q.questionString);
+      console.log(q.possibleAnswers);
+      console.log(q.id);
+      console.log(q);
       return q;
     }
     return null as Question;

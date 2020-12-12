@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
 import {AdminDataService} from '../admin-data.service';
-import {Organization} from '../../models/Organization.model';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
-import {Survey} from '../../models/survey.model';
-import {PresetSurvey} from '../../models/presetSurvey.model';
-import {Question} from '../../models/Question.model';
+import {Location} from '@angular/common';
+import {delay} from 'rxjs/operators';
 
 
 
@@ -28,13 +25,15 @@ interface AnswerFieldJson {
 export class AddAssessmentComponent implements OnInit {
   public assessmentForm: FormGroup;
   public questionTypes = ['Yes/No', 'Multiple choice', 'Range', 'Open'];
+
   faPlus = faPlus;
   faMin = faMinus;
 
 
   constructor(
     private fb: FormBuilder,
-    private adminDataService: AdminDataService
+    private adminDataService: AdminDataService,
+    private location: Location
   ) {
   }
 
@@ -67,6 +66,7 @@ export class AddAssessmentComponent implements OnInit {
   }
 
   persistQuestions(): void {
+    let answers: string[] = [];
     const questionFields: FormArray = this.assessmentForm.controls.questions.value as FormArray;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questionFields.length; i++) {
@@ -106,9 +106,20 @@ export class AddAssessmentComponent implements OnInit {
       }
 
       // persisting preset survey questions without their answers
-      this.adminDataService.postPresetSurvey(newPresetSurveyJson);
+      this.adminDataService.postPresetSurvey(newPresetSurveyJson).subscribe( (response) => {
+        answers = [];
+        if (newQuestionJson.type === 2) {
+          question.answers.forEach(a => {
+            answers.push(a.answer);
+          });
+          console.log(answers);
+          // TODO persisting of answers of each MC question
+          console.log('id');
+          console.log(response.PresetQuestion.Id);
+          // this.adminDataService.postAnswerToPresetQuestion(response.PresetQuestion.Id, answers).subscribe();
+        }
+      });
 
-      // TODO persisting of answers of each MC question
     }
   }
 
