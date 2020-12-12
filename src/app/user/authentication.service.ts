@@ -24,7 +24,7 @@ export class AuthenticationService {
   // tslint:disable-next-line:variable-name
   private _loggedInUser$: Observable<Employee>;
   // tslint:disable-next-line:variable-name
-  private _user$: BehaviorSubject<string>;
+  //private _dummyUser$: BehaviorSubject<string>;
   public redirectUrl: string = null;
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
   private errorMessage: string;
@@ -40,16 +40,16 @@ export class AuthenticationService {
         parsedToken = null;
       }
     }
-    // this._user$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
+    //this._dummyUser$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
   }
 
   get user$(): Observable<Employee> {
     return this._loggedInUser$;
   }
 
-  get dummyUser$(): BehaviorSubject<string> {
-    return this._user$;
-  }
+  // get dummyUser$(): BehaviorSubject<string> {
+  //   return this._dummyUser$;
+  // }
 
   get token(): string {
     const localToken = localStorage.getItem(this._tokenKey);
@@ -59,7 +59,6 @@ export class AuthenticationService {
   get role(): string {
     const parsedToken = parseJwt(this.token);
     if (parsedToken) {
-      console.log(parsedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']);
       return parsedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     }
     return '';
@@ -71,13 +70,12 @@ export class AuthenticationService {
       .pipe(map((token: any) => {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
-            // this._user$.next(email);
+            //this._dummyUser$.next(email);
             this._loggedInUser$ = this.getEmployeeByEmail$(email);
             if (this.errorMessage != null)
             {
               this._loggedInUser$ = this.getChangeManagerByEmail$(email);
             }
-            console.log(this._loggedInUser$);
             return true;
           } else {
             return false;
@@ -90,7 +88,7 @@ export class AuthenticationService {
   logout() {
     if (localStorage.getItem(this._tokenKey)) {
       localStorage.removeItem(this._tokenKey);
-      // this._loggedInUser$.next(null);
+      //this._dummyUser$.next(null);
     }
   }
 
