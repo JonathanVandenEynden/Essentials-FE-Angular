@@ -1,4 +1,4 @@
-export interface QuestionJson{
+export interface QuestionJson {
   id: number;
   type: number;
   questionString: string;
@@ -6,7 +6,8 @@ export interface QuestionJson{
 }
 
 export class Question {
-  private id: number;
+  id: number;
+
   constructor(
     private type: number,
     private questionString: string,
@@ -14,22 +15,30 @@ export class Question {
   ) {
   }
 
+  get Id(): number {
+    return this.id;
+  }
+
+  get Type(): number {
+    return this.type;
+  }
+
+  get QuestionString(): string {
+    return this.questionString;
+  }
+
+  get PossibleAnswers(): Map<string, number> {
+    return this.possibleAnswers;
+  }
+
   static fromJson(json: QuestionJson): Question {
-    console.log('fromJSON');
-    console.log(json);
-    if (json != null){
-      console.log('test');
+    if (json != null) {
       const q = new Question(
         json.type,
         json.questionString,
         json.possibleAnswers
       );
       q.id = json.id;
-      console.log(q.type);
-      console.log(q.questionString);
-      console.log(q.possibleAnswers);
-      console.log(q.id);
-      console.log(q);
       return q;
     }
     return null as Question;
@@ -42,18 +51,5 @@ export class Question {
       questionString: this.questionString,
       possibleAnswers: this.possibleAnswers
     } as QuestionJson;
-  }
-
-  get Id(): number {
-    return this.id;
-  }
-  get Type(): number {
-    return this.type;
-  }
-  get QuestionString(): string {
-    return this.questionString;
-  }
-  get PossibleAnswers(): Map<string, number> {
-    return this.possibleAnswers;
   }
 }

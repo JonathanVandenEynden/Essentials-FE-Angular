@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {EmployeeCsvRecord} from '../models/EmployeeCsvRecord';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {OrganizationPostJson} from './add-organization/add-organization.component';
 import {Organization} from '../models/Organization.model';
-import {ChangeInitiative} from '../models/change.model';
-import {PresetSurvey, PresetSurveyJson} from '../models/presetSurvey.model';
-import {Question} from '../models/Question.model';
+import {PresetSurvey} from '../models/presetSurvey.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +19,10 @@ export class AdminDataService {
   }
 
   postPresetSurvey(json: { theme: string; presetQuestion: { type: number; questionString: string }}): Observable<PresetSurvey>{
-    console.log('postPresetSurvey');
     return this.http.post(`${environment.apiUrl}/Preset`, json)
       .pipe(
         catchError(this.handleError),
-        tap((jsonResponse: any) => console.log(jsonResponse)),
+        tap(console.log),
         map((jsonResponse: any) => PresetSurvey.fromJson(jsonResponse)));
   }
 

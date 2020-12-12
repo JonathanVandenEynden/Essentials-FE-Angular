@@ -1,31 +1,31 @@
 import {Question, QuestionJson} from './Question.model';
 
-export interface PresetSurveyJson{
+export interface PresetSurveyJson {
   theme: string;
-  presetQuestions: QuestionJson;
+  presetQuestions: QuestionJson[];
 }
 
-// json: { theme: string; presetQuestion: { type: number; questionString: string }}
-
-export class PresetSurvey{
+export class PresetSurvey {
   constructor(
     private theme: string,
-    private presetQuestions: Question
+    private presetQuestions: Question[]
   ) {
   }
 
+  get Theme(): string {
+    return this.theme;
+  }
+
+  get PresetQuestions(): Question[] {
+    return this.presetQuestions;
+  }
+
   static fromJson(json: PresetSurveyJson): PresetSurvey {
-    console.log('fromjson presetsurvey');
-    console.log(json);
-    console.log('question.fromJson');
-    console.log(json.presetQuestions);
-    if (json != null){
+    if (json != null) {
       const ps = new PresetSurvey(
         json.theme,
-        Question.fromJson(json.presetQuestions)
+        json.presetQuestions.map(Question.fromJson)
       );
-      console.log('ps');
-      console.log(ps);
       return ps;
     }
     return null as PresetSurvey;
@@ -34,15 +34,7 @@ export class PresetSurvey{
   toJson(): PresetSurveyJson {
     return {
       theme: this.theme,
-      presetQuestions: this.presetQuestions.toJson()
+      presetQuestions: this.presetQuestions.map(elem => elem.toJson())
     } as PresetSurveyJson;
-  }
-
-  get Theme(): string {
-    return this.theme;
-  }
-
-  get PresetQuestion(): Question {
-    return this.presetQuestions;
   }
 }

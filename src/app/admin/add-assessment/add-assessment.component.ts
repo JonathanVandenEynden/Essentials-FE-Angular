@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminDataService} from '../admin-data.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {Location} from '@angular/common';
-import {delay} from 'rxjs/operators';
-
 
 
 interface QuestionFieldJson {
@@ -32,8 +30,7 @@ export class AddAssessmentComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private adminDataService: AdminDataService,
-    private location: Location
+    private adminDataService: AdminDataService
   ) {
   }
 
@@ -45,7 +42,6 @@ export class AddAssessmentComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('submit');
     console.log('start persisting');
     this.persistQuestions();
     console.log('done persisting');
@@ -84,7 +80,6 @@ export class AddAssessmentComponent implements OnInit {
         presetQuestion: newQuestionJson
       };
 
-      console.log(newQuestionJson.questionString);
 
       switch (question.type) {
         case 'Yes/No': {
@@ -106,20 +101,17 @@ export class AddAssessmentComponent implements OnInit {
       }
 
       // persisting preset survey questions without their answers
-      this.adminDataService.postPresetSurvey(newPresetSurveyJson).subscribe( (response) => {
+      this.adminDataService.postPresetSurvey(newPresetSurveyJson).subscribe((response) => {
         answers = [];
         if (newQuestionJson.type === 2) {
           question.answers.forEach(a => {
             answers.push(a.answer);
           });
-          console.log(answers);
-          // TODO persisting of answers of each MC question
-          console.log('id');
-          console.log(response.PresetQuestion.Id);
-          // this.adminDataService.postAnswerToPresetQuestion(response.PresetQuestion.Id, answers).subscribe();
+          // persisting of answers of each MC question based on their ID
+          const questionId = response.PresetQuestions[0].Id;
+          this.adminDataService.postAnswerToPresetQuestion(questionId, answers).subscribe();
         }
       });
-
     }
   }
 
