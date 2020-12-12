@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {Employee} from '../models/user.model';
@@ -36,6 +36,7 @@ export class UserDataService {
       .get(`${environment.apiUrl}/ChangeManagers/GetChangeManagersFromOrganization`)
       .pipe(
         catchError(this.handleError),
+        tap(console.log),
         map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
   }
 
