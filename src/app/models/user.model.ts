@@ -1,3 +1,4 @@
+import {EmployeeChangeGroup, EmployeeChangeGroupJson} from './EmployeeChangeGroup.model';
 
 export interface EmployeeJson{
   organizationParts: string;
@@ -5,6 +6,7 @@ export interface EmployeeJson{
   firstName: string;
   lastName: string;
   email: string;
+  employeeChangeGroups: EmployeeChangeGroupJson[];
 }
 
 export class Employee {
@@ -14,17 +16,22 @@ export class Employee {
     private _FIRSTNAME: string,
     private _LASTNAME: string,
     private _EMAIL: string,
+    private _EMPLOYEECHANGEGROUPS: EmployeeChangeGroup[]
   ) {}
 
   static fromJSON(json: EmployeeJson): Employee {
-    const user = new Employee(
-      json.organizationParts,
-      json.firstName,
-      json.lastName,
-      json.email
-    );
-    user._ID = json.id;
-    return user;
+    if (json !== undefined){
+      const user = new Employee(
+        json.organizationParts,
+        json.firstName,
+        json.lastName,
+        json.email,
+        json.employeeChangeGroups === null ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
+      );
+      user._ID = json.id;
+      return user;
+    }
+    return null;
   }
 
   toJSON(): EmployeeJson {
@@ -33,7 +40,8 @@ export class Employee {
       organizationParts: this._ORGANIZATIONPARTS,
       firstName: this._FIRSTNAME,
       lastName: this._LASTNAME,
-      email: this._EMAIL
+      email: this._EMAIL,
+      employeeChangeGroups: this._EMPLOYEECHANGEGROUPS === null ? null : this._EMPLOYEECHANGEGROUPS.map(obj => obj.toJson())
     } as EmployeeJson;
   }
 
@@ -43,6 +51,10 @@ export class Employee {
 
   get ORGANIZATIONPARTS(): string {
     return this._ORGANIZATIONPARTS;
+  }
+
+  get EMPLOYEECHANGEGROUPS(): EmployeeChangeGroup[] {
+    return this._EMPLOYEECHANGEGROUPS;
   }
 
   get FIRSTNAME(): string {
