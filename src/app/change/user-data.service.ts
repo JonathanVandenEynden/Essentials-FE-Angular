@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {Employee} from '../models/user.model';
@@ -31,18 +31,25 @@ export class UserDataService {
     return this._USERS$;
   }
 
+  get allChangeManagers$(): Observable<Employee[]> {
+    return this.http
+      .get(`${environment.apiUrl}/ChangeManagers/GetChangeManagersFromOrganization`)
+      .pipe(
+        catchError(this.handleError),
+        tap(console.log),
+        map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
+  }
+
   get users$(): Observable<Employee[]>
   {
     return this._RELOAD$.pipe(
       switchMap(() => this.fetchUsers$())
     );
   }
-  // TODO: Niet meer hardcoded maken
   fetchUsers$(): Observable<Employee[]>
   {
-    // TODO remove hardcoded Id
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/Employees/GetAllEmployeesFromOrganization/${1}`).pipe(catchError(this.handleError), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/Employees/GetAllEmployeesFromOrganization`).pipe(catchError(this.handleError), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
   }
 
   handleError(err: any): Observable<never>
@@ -55,5 +62,9 @@ export class UserDataService {
     }
     console.error(err);
     return throwError(errorMessage);
+  }
+
+  upgradeEmployeeToChangeManager(employeeId: number): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/ChangeManagers/${employeeId}`, {}).pipe(catchError(this.handleError));
   }
 }
