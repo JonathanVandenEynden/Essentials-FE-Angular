@@ -18,7 +18,7 @@ export class ChangeGroup {
   }
 
   static fromJSON(json: ChangeGroupJson): ChangeGroup {
-    if (json !== undefined) {
+    if (json !== undefined && json !== null) {
       const changegroup = new ChangeGroup(
         json.name,
         json.employeeChangeGroups == null ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
