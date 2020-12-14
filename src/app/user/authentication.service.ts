@@ -88,7 +88,6 @@ export class AuthenticationService {
   logout() {
     if (localStorage.getItem(this._tokenKey)) {
       localStorage.removeItem(this._tokenKey);
-      //this._dummyUser$.next(null);
     }
   }
 
