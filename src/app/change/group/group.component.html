@@ -46,9 +46,9 @@
                   <h4></h4>
                 </div>
               </div>
-              <div *ngFor="let user of change.changegroup.users">
+              <div *ngFor="let ecg of change.changegroup.EmployeeChangeGroups">
                 <mat-card class="btn btn-outline-light shadow p-4 mb-3 bg-white">
-                  {{user.FIRSTNAME}} {{user.LASTNAME}}
+                  {{ecg.Employee.FIRSTNAME}} {{ecg.Employee.LASTNAME}}
                 </mat-card>
               </div>
             </div>
