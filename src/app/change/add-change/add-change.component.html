@@ -14,14 +14,6 @@
         </mat-card>
       </div>
 
-      <div *ngIf="added">
-        <mat-card class="card text-white mb-3" (click)="addRoadmap()">
-          Successfully added the new Change
-          <fa-icon [icon]="faCheck" class="fa-pull-right fa-lg"></fa-icon>
-          <br/>
-          Click here to add a roadmap to your change
-        </mat-card>
-      </div>
       <form [formGroup]="changeForm" (ngSubmit)='onSubmit()' class="d-flex flex-row col-8">
         <div class="col-4">
           <h1>Add a new change
@@ -106,6 +98,14 @@
               </div>
             </mat-select>
           </mat-form-field>
+          <div *ngIf="added">
+            <mat-card class="card text-white mb-3" (click)="addRoadmap()">
+              Successfully added the new Change
+              <fa-icon [icon]="faCheck" class="fa-pull-right fa-lg"></fa-icon>
+              <br/>
+              Click here to add a roadmap to your change
+            </mat-card>
+          </div>
         </div>
       </form>
     </div>
