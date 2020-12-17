@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminDataService} from '../admin-data.service';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faMinus, faPlus, faHome} from '@fortawesome/free-solid-svg-icons';
 import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 
 interface QuestionFieldJson {
@@ -26,9 +27,11 @@ export class AddAssessmentComponent implements OnInit {
 
   faPlus = faPlus;
   faMin = faMinus;
+  faHome = faHome;
 
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private adminDataService: AdminDataService
   ) {
@@ -115,6 +118,10 @@ export class AddAssessmentComponent implements OnInit {
     }
   }
 
+  NavigateToAdminHome(): void {
+    this.router.navigate(['admin/home']);
+  }
+
 
   getErrorMessage(errors: any): any {
     if (errors.required) {
@@ -145,6 +152,4 @@ export class AddAssessmentComponent implements OnInit {
   removeAnswer(question, i): void {
     question.controls.answers.removeAt(i);
   }
-
-
 }

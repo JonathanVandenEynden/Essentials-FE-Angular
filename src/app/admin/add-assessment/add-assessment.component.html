@@ -1,7 +1,7 @@
 <div class="container container-fluid">
   <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
 
-  <h1 class="pt-2">Add a new survey</h1>
+  <h1 class="h1 pt-2">Add a new survey</h1>
   <p class="mat-subheading-2">Using this form, you are able to create pre-defined surveys. These surveys are available to the change managers of each organization.</p>
 
   <div class="container-fluid m-5">
@@ -9,7 +9,7 @@
      <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
        <div>
          <mat-form-field>
-           <input matInput type="text" placeholder="Theme" formControlName="theme"/>
+           <input matInput type="text" placeholder="Theme for questions" formControlName="theme"/>
          </mat-form-field>
        </div>
 
@@ -73,6 +73,10 @@
 
        <button class="button" type="submit" mat-raised-button [disabled]="!assessmentForm.valid">Create survey</button>
      </form>
+
+      <button class="btn btn-outline-dark btn-md mt-4" (click)="NavigateToAdminHome()">
+        <fa-icon [icon]="faHome"></fa-icon> Return
+      </button>
     </div>
   </div>
 
