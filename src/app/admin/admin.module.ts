@@ -10,6 +10,7 @@ import {AddOrganizationComponent} from './add-organization/add-organization.comp
 import {AddAssessmentComponent} from './add-assessment/add-assessment.component';
 import { AdminOrganizationComponent } from './admin-organization/admin-organization.component';
 import {OrganizationResolver} from './admin-organization/organizationResolver';
+import { OrganizationFilterPipe } from './admin-home/organization-filter.pipe';
 
 const routes: Routes =
   [
@@ -26,7 +27,8 @@ const routes: Routes =
     AdminHomeComponent,
     AddOrganizationComponent,
     AddAssessmentComponent,
-    AdminOrganizationComponent
+    AdminOrganizationComponent,
+    OrganizationFilterPipe
   ],
   imports: [
     CommonModule,

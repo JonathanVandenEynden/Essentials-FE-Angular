@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AdminDataService} from '../admin-data.service';
 import {Organization} from '../../models/Organization.model';
-import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {Subject} from 'rxjs';
+import {distinctUntilChanged, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-home',
@@ -11,9 +13,16 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 })
 export class AdminHomeComponent implements OnInit {
   private faPlus = faPlus;
-
+  private faSearch = faSearch;
+  public filterOrganizationName: string;
+  public filterOrganization$ = new Subject<string>();
   public organizations: Organization[] = [];
-  constructor(private router: Router, private adminDataService: AdminDataService) { }
+
+  constructor(private router: Router, private adminDataService: AdminDataService) {
+      this.filterOrganization$
+        .pipe(distinctUntilChanged(), map(val => val.toLowerCase()) )
+        .subscribe(val => this.filterOrganizationName = val);
+  }
 
   ngOnInit(): void {
     this.getOrganizations();
