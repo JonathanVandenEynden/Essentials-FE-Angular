@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {OrganizationPostJson} from './add-organization/add-organization.component';
 import {Organization} from '../models/Organization.model';
 import {PresetSurvey} from '../models/presetSurvey.model';
+import {Changemanager} from '../models/changemanager.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,16 @@ export class AdminDataService {
   getOrganizations(): Observable<Organization[]>{
     return this.http.get(`${environment.apiUrl}/Organizations/GetOrganizationsForAdmin`)
       .pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Organization[] => list.map(Organization.fromJSON)));
+  }
+
+  getOrganization(id: number): Observable<Organization>{
+    return this.http.get(`${environment.apiUrl}/Organizations/${id}`)
+      .pipe(catchError(this.handleError), tap(console.log), map(Organization.fromJSON));
+  }
+
+  getChangeManagersFromOrganization(): Observable<Changemanager>{
+    return this.http.get(`${environment.apiUrl}/ChangeManagers/GetChangeManagersFromOrganization`)
+      .pipe(catchError(this.handleError), tap(console.log), map(Changemanager.fromJSON));
   }
 
   handleError(err: any): Observable<never> {

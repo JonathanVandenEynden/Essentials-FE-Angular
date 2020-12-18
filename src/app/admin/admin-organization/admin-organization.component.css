@@ -1,0 +1,21 @@
+.logo{
+  width: 50%;
+}
+
+.brd-right{
+  border-right: 5px solid #264754;
+}
+
+.scroll{
+  height: 70vh;
+  overflow: scroll;
+}
+
+.name{
+  margin: 5em 2em;
+}
+
+thead{
+  background-color: #264754;
+  color:white;
+}

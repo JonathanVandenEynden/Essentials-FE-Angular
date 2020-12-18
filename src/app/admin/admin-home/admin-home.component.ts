@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AdminDataService} from '../admin-data.service';
 import {Organization} from '../../models/Organization.model';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,6 +10,7 @@ import {Organization} from '../../models/Organization.model';
   styleUrls: ['./admin-home.component.css']
 })
 export class AdminHomeComponent implements OnInit {
+  private faPlus = faPlus;
 
   public organizations: Organization[] = [];
   constructor(private router: Router, private adminDataService: AdminDataService) { }
