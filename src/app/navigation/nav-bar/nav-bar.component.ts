@@ -4,7 +4,6 @@ import {faInfoCircle, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import {AuthenticationService} from '../../user/authentication.service';
 
-
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -20,7 +19,6 @@ export class NavBarComponent implements OnInit {
   faUser = faUser;
   loggedInUser$ = this._authenticationService.user$;
 
-
   // tslint:disable-next-line:variable-name
   constructor(private _router: Router, private _authenticationService: AuthenticationService) { }
 
@@ -35,6 +33,7 @@ export class NavBarComponent implements OnInit {
     this._authenticationService.logout();
     this._router.navigate(['/login']);
   }
+
   // tslint:disable-next-line:typedef
   buttonEnter(trigger) {
     trigger.openMenu();

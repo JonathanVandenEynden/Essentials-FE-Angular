@@ -19,11 +19,9 @@ export class DashboardSurveyComponent implements OnInit {
   public faClipboardList = faClipboardCheck;
   public faSync = faSyncAlt;
   public faPlus = faPlus;
-  public pieChartAllQuestionsProperties: {};
   public pieChartNumberOfQuestionsProperties: {};
   public barChartProperties: {};
   public pieChartRoadmapPhasesProperties: {};
-  public pieChartAllQuestionsReady = false;
   public pieChartRoadmapPhasesReady = false;
   public pieChartNumberOfQuestionsReady = false;
   public barChartReady = false;
@@ -57,7 +55,6 @@ export class DashboardSurveyComponent implements OnInit {
   /*region charts*/
   private makeCharts(): void{
     this.barChartProperties = this.makeDataForBarChart();
-    this.pieChartAllQuestionsProperties = this.makeDataForPieChartAllQuestions();
     this.pieChartNumberOfQuestionsProperties = this.makeDataForPieChartNumberOfQuestions();
     this.pieChartRoadmapPhasesProperties = this.makeDataForPieChartRoadmapPhases();
     this.makeDataForTable();
@@ -119,19 +116,6 @@ export class DashboardSurveyComponent implements OnInit {
       this.barChartReady = true;
     }
     return {t: 'Monthly active Surveys', d: data, l: labels};
-  }
-
-  private makeDataForPieChartAllQuestions(): {} {
-    const data: number[] = [];
-    const labels: string[] = [];
-    this._roadmapItems.forEach(e => {
-        data.push(e.survey.Questions.length);
-        labels.push(e.title);
-    });
-    if (data.length !== 0){
-      this.pieChartAllQuestionsReady = true;
-    }
-    return {t: 'pretty useless chart ngl', d: data, l: labels};
   }
 
   private makeDataForPieChartNumberOfQuestions(): {} {
