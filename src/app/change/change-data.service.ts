@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -78,6 +78,8 @@ export class ChangeDataService {
   addNewChange(changeJson: ChangeInitiativePostJson) {
 
     // tslint:disable-next-line:max-line-length
+    // TODO 1 weghalen
+    // tslint:disable-next-line:max-line-length
     return this.http.post(`${environment.apiUrl}/ChangeInitiatives/1`, changeJson).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c: ChangeInitiative) => {
       this._CHANGES = [...this._CHANGES, c];
       this._CHANGES$.next(this._CHANGES);
@@ -110,4 +112,46 @@ export class ChangeDataService {
     console.error(err);
     return throwError(errorMessage);
   }
+
+  sendPushnotification(title: string, message: string,ids: number[]): void{
+    const tokens = [];
+    // tslint:disable-next-line:max-line-length
+    console.log(ids.toString());
+    this.http.get(`${environment.apiUrl}/DeviceTokens/GetByIds?userids=${ids.toString()}`).pipe(catchError(this.handleError)).subscribe(e => tokens.push(e));
+    console.log(tokens);
+    tokens.forEach(t => this.sendNotifications('Essentials - New CI', 'New Change initiative added', t));
+  }
+
+  sendNotifications(title: string, message: string, deviceId: string): void{
+    console.log('notification send');
+    const headers: HttpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'key=' + 'AAAAjQbE4JE:APA91bG6xmBINuyMRO0CIE6IUYW2wT38l3By12RkIcC17sqEznr2yBgZ035VimzzxPWaKMNopW8MS4yH84F6GpVDaOaJZJkhKFFEabGO_YwOGx2kTA39M7bYz3Nae2lr_NWxdcFWi008'
+    });
+
+    const data: FCMData = {
+      body: message,
+      title
+    };
+    const fcmPayload: FCMPayload = {
+      to: deviceId,
+      collapse_key: 'type_a',
+      data
+    };
+    this.http.post('https://fcm.googleapis.com/fcm/send' , fcmPayload , {headers}).subscribe(res => {
+      console.log(res);
+    });
+  }
 }
+
+// Interfaces containing payload
+export interface FCMData {
+  body: string;
+  title: string;
+}
+export interface FCMPayload {
+  to: string;
+  collapse_key: string;
+  data: FCMData;
+}
+

@@ -49,6 +49,7 @@ export class AddChangeComponent implements OnInit {
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
 
   public added = false;
+  public pushnotifications = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) {
@@ -99,8 +100,18 @@ export class AddChangeComponent implements OnInit {
       sponsor: { email: this.changeForm.value.changesponsor },
       changeGroupDto: { name: this.changeForm.value.changeGroupName, userIds: this.changeForm.value.changeGroupEmployeeIds }
     } as ChangeInitiativePostJson;
+    console.log(this.changeForm.value.pushnotifications);
+
+    if (true){
+      console.log('trying');
+      // tslint:disable-next-line:max-line-length
+      this.changeDataService.sendPushnotification('Essentials - New CI', `New Change initiative ${this.changeForm.value.name} added`, this.changeForm.value.changeGroupEmployeeIds);
+    }
 
     this.changeDataService.addNewChange(changeJson);
+
+
+
     this.added = true;
     window.scrollTo(0, 0);
   }
