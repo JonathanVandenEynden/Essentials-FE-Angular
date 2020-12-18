@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -78,6 +78,8 @@ export class ChangeDataService {
   addNewChange(changeJson: ChangeInitiativePostJson) {
 
     // tslint:disable-next-line:max-line-length
+    // TODO 1 weghalen
+    // tslint:disable-next-line:max-line-length
     return this.http.post(`${environment.apiUrl}/ChangeInitiatives/1`, changeJson).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).subscribe((c: ChangeInitiative) => {
       this._CHANGES = [...this._CHANGES, c];
       this._CHANGES$.next(this._CHANGES);
@@ -110,4 +112,16 @@ export class ChangeDataService {
     console.error(err);
     return throwError(errorMessage);
   }
+
+  sendPushnotification(title: string, message: string, ids: number[]): void {
+    console.log(ids.toString());
+    const idparam = ids.toString();
+    let params = new HttpParams();
+    params = idparam ? params.append('userids', idparam) : params;
+    params = title ? params.append('title', title) : params;
+    params = message ? params.append('message', message) : params;
+    console.log(params);
+    this.http.get(`${environment.apiUrl}/DeviceTokens/sendNotifications`, {params}).pipe(catchError(this.handleError)).subscribe();
+  }
+
 }
