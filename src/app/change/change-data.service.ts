@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -113,45 +113,15 @@ export class ChangeDataService {
     return throwError(errorMessage);
   }
 
-  sendPushnotification(title: string, message: string,ids: number[]): void{
-    const tokens = [];
-    // tslint:disable-next-line:max-line-length
+  sendPushnotification(title: string, message: string, ids: number[]): void {
     console.log(ids.toString());
-    this.http.get(`${environment.apiUrl}/DeviceTokens/GetByIds?userids=${ids.toString()}`).pipe(catchError(this.handleError)).subscribe(e => tokens.push(e));
-    console.log(tokens);
-    tokens.forEach(t => this.sendNotifications('Essentials - New CI', 'New Change initiative added', t));
+    const idparam = ids.toString();
+    let params = new HttpParams();
+    params = idparam ? params.append('userids', idparam) : params;
+    params = title ? params.append('title', title) : params;
+    params = message ? params.append('message', message) : params;
+    console.log(params);
+    this.http.get(`${environment.apiUrl}/DeviceTokens/sendNotifications`, {params}).pipe(catchError(this.handleError)).subscribe();
   }
 
-  sendNotifications(title: string, message: string, deviceId: string): void{
-    console.log('notification send');
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'key=' + 'AAAAjQbE4JE:APA91bG6xmBINuyMRO0CIE6IUYW2wT38l3By12RkIcC17sqEznr2yBgZ035VimzzxPWaKMNopW8MS4yH84F6GpVDaOaJZJkhKFFEabGO_YwOGx2kTA39M7bYz3Nae2lr_NWxdcFWi008'
-    });
-
-    const data: FCMData = {
-      body: message,
-      title
-    };
-    const fcmPayload: FCMPayload = {
-      to: deviceId,
-      collapse_key: 'type_a',
-      data
-    };
-    this.http.post('https://fcm.googleapis.com/fcm/send' , fcmPayload , {headers}).subscribe(res => {
-      console.log(res);
-    });
-  }
 }
-
-// Interfaces containing payload
-export interface FCMData {
-  body: string;
-  title: string;
-}
-export interface FCMPayload {
-  to: string;
-  collapse_key: string;
-  data: FCMData;
-}
-
