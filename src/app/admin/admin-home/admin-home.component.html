@@ -1,10 +1,12 @@
 <div class="container container-fluid">
   <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
 
-  <div class="h1">Admin page</div>
+  <div class="mat-display-2">Admin homepage</div>
 
   <button class="btn btn-primary" (click)="NavigateToAddOrganization()">Add new organization</button>
-  <button class="btn btn-secondary ml-3" (click)="NavigateToAddAssessment()">Add new assessment</button>
+  <button class="btn btn-secondary ml-3" (click)="NavigateToOverview()">Predefined assessments</button>
+
+<!--  <button class="btn btn-secondary ml-3" (click)="NavigateToAddAssessment()">Add new assessment</button>-->
 
   <div class="d-flex mt-5">
     <mat-card class="mr-5" *ngFor="let org of organizations">

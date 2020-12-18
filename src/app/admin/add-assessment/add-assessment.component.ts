@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminDataService} from '../admin-data.service';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {faMinus, faPlus, faHome} from '@fortawesome/free-solid-svg-icons';
+import {faMinus, faPlus, faHome, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 
@@ -28,6 +28,7 @@ export class AddAssessmentComponent implements OnInit {
   faPlus = faPlus;
   faMin = faMinus;
   faHome = faHome;
+  faArrowLeft = faArrowLeft;
 
 
   constructor(
@@ -122,6 +123,9 @@ export class AddAssessmentComponent implements OnInit {
     this.router.navigate(['admin/home']);
   }
 
+  NavigateToOverview(): void {
+    this.router.navigate(['admin/overview']);
+  }
 
   getErrorMessage(errors: any): any {
     if (errors.required) {

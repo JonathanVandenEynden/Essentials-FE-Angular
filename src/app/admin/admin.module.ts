@@ -9,13 +9,18 @@ import {AdminHomeComponent} from './admin-home/admin-home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AddOrganizationComponent} from './add-organization/add-organization.component';
 import {AddAssessmentComponent} from './add-assessment/add-assessment.component';
+import { OverviewAssessmentComponent } from './overview-assessment/overview-assessment.component';
+import { PresetDetailComponent } from './preset-detail/preset-detail.component';
+import {DetailResolver} from './preset-detail/DetailResolver';
 
 const routes: Routes =
   [
     {path: 'adminlogin', component: AdminLoginComponent},
     {path: 'admin/home', component: AdminHomeComponent},
     {path: 'admin/addOrganization', component: AddOrganizationComponent},
-    {path: 'admin/addAssessment', component: AddAssessmentComponent}
+    {path: 'admin/addAssessment', component: AddAssessmentComponent},
+    {path: 'admin/overview', component: OverviewAssessmentComponent},
+    {path: 'admin/preset/detail/:theme', component: PresetDetailComponent, resolve: {presetSurvey: DetailResolver}}
   ];
 
 @NgModule({
@@ -23,7 +28,9 @@ const routes: Routes =
     AdminLoginComponent,
     AdminHomeComponent,
     AddOrganizationComponent,
-    AddAssessmentComponent
+    AddAssessmentComponent,
+    OverviewAssessmentComponent,
+    PresetDetailComponent
   ],
   imports: [
     CommonModule,

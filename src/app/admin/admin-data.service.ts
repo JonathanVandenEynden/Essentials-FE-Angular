@@ -35,6 +35,20 @@ export class AdminDataService {
       .pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Organization[] => list.map(Organization.fromJSON)));
   }
 
+  getPresetSurveyThemes(): Observable<string[]>{
+    return this.http.get(`${environment.apiUrl}/Preset/GetAllThemas`)
+      .pipe(catchError(this.handleError), tap(console.log));
+  }
+
+  getPresetSurveysByTheme(theme: string): Observable<PresetSurvey>{
+    console.log('2');
+    return this.http.get(`${environment.apiUrl}/Preset/GetPresetSurveyBy/${theme}`)
+      .pipe(catchError(this.handleError),
+      tap(console.log),
+      map(PresetSurvey.fromJson),
+        tap(console.log));
+  }
+
   handleError(err: any): Observable<never> {
     let errorMessage: string;
     if (err instanceof HttpErrorResponse) {
