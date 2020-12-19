@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Employee} from '../../../models/user.model';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
+import {ChangeDataService} from "../../change-data.service";
 
 @Component({
   selector: 'app-roadmap-employee-information',
@@ -20,7 +21,8 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              public roadmapDataService: RoadmapDataService) { }
+              private roadmapDataService: RoadmapDataService,
+              private changeDataService: ChangeDataService ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.inputRoadmapItem = item.roadmapItem);
@@ -30,6 +32,8 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
 
   // GLHF ZIGGY XXX
   sendNotification(): void{
-
+    const ids = [];
+    this._employees.forEach(e => ids.push(e.ID.toString()));
+    this.changeDataService.sendPushnotification(`Essentials - Please fill in ${this.inputRoadmapItem.title}`, 'Please complete the survey in the roadmapitem', ids);
   }
 }
