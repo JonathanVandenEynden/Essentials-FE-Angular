@@ -30,7 +30,6 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
     this._fetchRmi.subscribe((employees: Employee[]) => this._employees = employees);
   }
 
-  // GLHF ZIGGY XXX
   sendNotification(): void{
     const ids = [];
     this._employees.forEach(e => ids.push(e.ID.toString()));
