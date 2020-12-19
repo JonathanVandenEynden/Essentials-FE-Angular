@@ -33,7 +33,7 @@ const routes: Routes =
     AddOrganizationComponent,
     AddAssessmentComponent,
     AdminOrganizationComponent,
-    OrganizationFilterPipe
+    OrganizationFilterPipe,
     AddAssessmentComponent,
     OverviewAssessmentComponent,
     PresetDetailComponent
@@ -44,7 +44,7 @@ const routes: Routes =
     RouterModule.forChild(routes),
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule,
+    FormsModule
   ]
 })
 export class AdminModule {

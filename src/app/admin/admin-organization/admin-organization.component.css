@@ -12,7 +12,11 @@
 }
 
 .name{
-  margin: 5em 2em;
+  margin: 2em 2em 5em 2em;
+}
+
+.buttons{
+  margin: 2em;
 }
 
 thead{
