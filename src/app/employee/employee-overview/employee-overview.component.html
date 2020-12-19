@@ -2,6 +2,7 @@
   <div class="container m-5">
     <h1>All Employees</h1>
     <div class="container">
+      <div *ngIf="(employees); else loadingOrError">
       <div *ngIf="employees !== undefined; else Error">
         <table class="table">
           <thead>
@@ -20,9 +21,12 @@
           </tbody>
         </table>
       </div>
+      </div>
     </div>
+
     <h1>All Change Managers</h1>
     <div class="container">
+      <div *ngIf="(changeManagers) as cm; else loadingOrError">
       <div *ngIf="changeManagers !== undefined; else Error">
         <table class="table">
           <thead>
@@ -39,6 +43,10 @@
       </div>
     </div>
   </div>
+  </div>
+  <ng-template #loadingOrError>
+    <mat-spinner></mat-spinner>
+  </ng-template>
   <ng-template #Error>
     <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
       <div class="card-header">
