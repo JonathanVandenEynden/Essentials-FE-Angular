@@ -1,7 +1,7 @@
 <div class="container container-fluid">
   <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
 
-  <h1 class="h1 pt-2">Add a new survey</h1>
+  <h1 class="mat-display-3">Add a new survey</h1>
   <p class="mat-subheading-2">Using this form, you are able to create pre-defined surveys. These surveys are available to the change managers of each organization.</p>
 
   <div class="container-fluid m-5">
@@ -74,9 +74,13 @@
        <button class="button" type="submit" mat-raised-button [disabled]="!assessmentForm.valid">Create survey</button>
      </form>
 
-      <button class="btn btn-outline-dark btn-md mt-4" (click)="NavigateToAdminHome()">
-        <fa-icon [icon]="faHome"></fa-icon> Return
+      <button class="btn btn-outline-primary btn-md mt-4" (click)="NavigateToOverview()">
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Return
       </button>
+      <button class="btn btn-outline-dark btn-md mt-4 ml-3" (click)="NavigateToAdminHome()">
+        <fa-icon [icon]="faHome"></fa-icon> Home
+      </button>
+
     </div>
   </div>
 

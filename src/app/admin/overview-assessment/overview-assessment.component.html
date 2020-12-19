@@ -1,0 +1,23 @@
+<div class="container container-fluid">
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+
+  <div class="mat-display-3">Predefined assessment overview</div>
+
+  <button class="btn btn-primary" (click)="NavigateToAddOrganization()">
+    <fa-icon [icon]="faPlus"></fa-icon> Add assessment
+  </button>
+  <button class="btn btn-outline-dark btn-md ml-3" (click)="NavigateToHome()">
+    <fa-icon [icon]="faHome"></fa-icon> Home
+  </button>
+
+  <!--  <button class="btn btn-secondary ml-3" (click)="NavigateToAddAssessment()">Add new assessment</button>-->
+
+  <div class="d-flex mt-5">
+    <mat-card class="mr-5" *ngFor="let theme of themes">
+      <a href="./admin/preset/detail/{{theme}}">
+        <mat-card-title>{{theme}}</mat-card-title>
+      </a>
+    </mat-card>
+  </div>
+
+</div>

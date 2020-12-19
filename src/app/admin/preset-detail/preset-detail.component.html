@@ -1,0 +1,10 @@
+<p>{{presetSurvey.Theme}}</p>
+
+<div class="d-flex mt-5">
+  <mat-card class="mr-5" *ngFor="let question of presetSurvey.PresetQuestions">
+    <mat-card-title>{{question.QuestionString}}</mat-card-title>
+    <mat-card-content>
+      <p>{{ questionTypes[question.Type] }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>

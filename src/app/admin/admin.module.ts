@@ -11,6 +11,9 @@ import {AddAssessmentComponent} from './add-assessment/add-assessment.component'
 import { AdminOrganizationComponent } from './admin-organization/admin-organization.component';
 import {OrganizationResolver} from './admin-organization/organizationResolver';
 import { OrganizationFilterPipe } from './admin-home/organization-filter.pipe';
+import { OverviewAssessmentComponent } from './overview-assessment/overview-assessment.component';
+import { PresetDetailComponent } from './preset-detail/preset-detail.component';
+import {DetailResolver} from './preset-detail/DetailResolver';
 
 const routes: Routes =
   [
@@ -18,7 +21,9 @@ const routes: Routes =
     {path: 'admin/home', component: AdminHomeComponent},
     {path: 'admin/organization/:id', component: AdminOrganizationComponent, resolve: {organization: OrganizationResolver}},
     {path: 'admin/addOrganization', component: AddOrganizationComponent},
-    {path: 'admin/addAssessment', component: AddAssessmentComponent}
+    {path: 'admin/addAssessment', component: AddAssessmentComponent},
+    {path: 'admin/overview', component: OverviewAssessmentComponent},
+    {path: 'admin/preset/detail/:theme', component: PresetDetailComponent, resolve: {presetSurvey: DetailResolver}}
   ];
 
 @NgModule({
@@ -29,6 +34,9 @@ const routes: Routes =
     AddAssessmentComponent,
     AdminOrganizationComponent,
     OrganizationFilterPipe
+    AddAssessmentComponent,
+    OverviewAssessmentComponent,
+    PresetDetailComponent
   ],
   imports: [
     CommonModule,
