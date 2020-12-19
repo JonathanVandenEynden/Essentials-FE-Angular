@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {faClipboard, faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {RoadmapItem} from '../../../models/roadmapitem.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DeleteChangeComponent} from '../../delete-change/delete-change.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SurveyDataService} from '../survey/survey-data.service';
 import {DeleteSurveyComponent} from '../survey/delete-survey/delete-survey.component';
+import {SurveyChoiceDialogComponent} from '../survey/survey-choice-dialog/survey-choice-dialog.component';
 
 @Component({
   selector: 'app-roadmap-item-detail',
@@ -18,6 +18,7 @@ export class RoadmapItemDetailComponent implements OnInit {
   faEdit = faPen;
   faAdd = faPlus;
   delete: boolean;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               public dialog: MatDialog,
@@ -30,7 +31,21 @@ export class RoadmapItemDetailComponent implements OnInit {
   }
 
   addSurvey(): void {
-      this.router.navigate(['addSurvey/', this.roadmapItem.id]);
+    const dialogRef = this.dialog.open(SurveyChoiceDialogComponent, {
+      width: '500px',
+      data: {
+        newSurvey: false,
+        roadMapItemId: this.roadmapItem.id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.router.navigate(['addSurvey/', this.roadmapItem.id]);
+      } else {
+        window.location.reload();
+      }
+    });
   }
 
   deleteSurveyFromRoadmapItem(): void {

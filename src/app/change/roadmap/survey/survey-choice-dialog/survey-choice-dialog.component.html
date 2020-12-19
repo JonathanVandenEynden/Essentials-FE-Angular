@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Choose survey</h2>
+<mat-dialog-content>You can choose to select a predefined survey or create a new one.</mat-dialog-content>
+<mat-dialog-actions>
+  <form [formGroup]="themeForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-select aria-label="theme" placeholder="theme" type="text" formControlName="theme"
+                  required>
+          <mat-option *ngFor="let theme of themes" [value]="theme">
+            {{ theme }}
+          </mat-option>
+      </mat-select>
+      <mat-error *ngIf="themeForm.get('theme')['errors'] && themeForm.get('theme').touched">
+        {{ getErrorMessage(themeForm.get('theme')['errors']) }}
+      </mat-error>
+    </mat-form-field>
+    <button class="btn btn-success" type="submit" [disabled]="!themeForm.valid" [mat-dialog-close]="false">
+      Choose predefined survey
+    </button>
+  </form>
+  <p>or...</p>
+  <button mat-button class="btn btn-success" [mat-dialog-close]="true">Create new survey</button>
+</mat-dialog-actions>

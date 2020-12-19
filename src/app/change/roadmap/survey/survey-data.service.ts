@@ -3,18 +3,13 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Survey} from '../../../models/survey.model';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {any} from 'codelyzer/util/function';
-import {ChangeInitiative} from '../../../models/change.model';
-import {Question, QuestionJson} from '../../../models/Question.model';
-import {log} from 'util';
+import {catchError, map, tap} from 'rxjs/operators';
+import {Question} from '../../../models/Question.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyDataService {
-  private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
-  private _SURVEYS: Survey[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
@@ -78,4 +73,20 @@ export class SurveyDataService {
         )
       );
   }
+
+  getPresetSurveyThemes(): Observable<string[]>{
+    return this.http.get(`${environment.apiUrl}/Preset/GetAllThemas`)
+      .pipe(catchError(this.handleError), tap(console.log));
+  }
+
+  addPredefinedSurveyToRmi(id: number, theme: string): Observable<Survey> {
+    return this.http.post(`${environment.apiUrl}/Survey?roadmapItemId=${id}&thema=${theme}`, null)
+      .pipe(
+        catchError(this.handleError),
+        tap(console.log),
+        map((json: any) => Survey.fromJSON(json)
+        )
+      );
+  }
+
 }
