@@ -29,6 +29,11 @@ export class SurveyDataService {
     return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
   }
 
+  getSurveyFromRoadmapitemId$(id: any): Observable<Survey> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${environment.apiUrl}/Survey/GetSurveyByRoadmapItemId/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
+  }
+
   // get surveys$(): Observable<Survey[]> {
   //   return this._RELOAD$.pipe(
   //     switchMap(() => this.fetchSurveys$())

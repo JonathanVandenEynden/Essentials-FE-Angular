@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {faPen, faPlus, faTrash} from '@fortawesome/free-solid-svg-icons';
+import {faPen, faPlus, faTrash, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {RoadmapItem} from '../../../models/roadmapitem.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -17,6 +17,7 @@ export class RoadmapItemDetailComponent implements OnInit {
   faTrash = faTrash;
   faEdit = faPen;
   faAdd = faPlus;
+  faInfoCircle = faInfoCircle;
   delete: boolean;
 
   constructor(private route: ActivatedRoute,
@@ -63,6 +64,10 @@ export class RoadmapItemDetailComponent implements OnInit {
       }
     });
 
+  }
+
+  navigateToInformationRoadmapitem(): void{
+    this.router.navigate(['roadmapItemDetail/', this.roadmapItem.id, 'Employees']);
   }
 
   updateSurvey(): void {

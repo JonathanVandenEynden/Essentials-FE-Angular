@@ -3,10 +3,12 @@ export interface QuestionJson{
   type: number;
   questionString: string;
   possibleAnswers: Map<string, number>;
+  questionRegistered: {};
 }
 
 export class Question {
   private _id: number;
+  private _questionRegistered: {};
 
   constructor(
     private _type: number,
@@ -23,6 +25,7 @@ export class Question {
         json.possibleAnswers
       );
       q._id = json.id;
+      q._questionRegistered = json.questionRegistered;
       return q;
     }
     return null as Question;
@@ -48,5 +51,8 @@ export class Question {
   }
   get PossibleAnswers(): Map<string, number> {
     return this._possibleAnswers;
+  }
+  get QuestionRegistered(): {} {
+    return this._questionRegistered;
   }
 }

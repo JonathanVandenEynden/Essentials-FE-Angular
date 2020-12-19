@@ -4,6 +4,9 @@
       <div class="col-sm-3">
         <h1>{{roadmapItem.title}}</h1>
         <p>from {{roadmapItem.startDateString}} to {{roadmapItem.endDateString}}</p>
+        <div class="mt-4 w-25 text-center">
+          <button type="button" class="btn info" (click)="navigateToInformationRoadmapitem()"><fa-icon [icon]="faInfoCircle" class="fa-2x text-white"></fa-icon></button>
+        </div>
         <!--        <div class="row">-->
         <!--          <button class="btn active" disabled>Surveys-->
         <!--            <fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon>-->

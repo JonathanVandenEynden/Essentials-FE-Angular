@@ -8,6 +8,7 @@ import {environment} from '../../../environments/environment';
 import {Survey, SurveyJson} from '../../models/survey.model';
 import {Question} from '../../models/Question.model';
 import {PostRmiJson} from './add-roadmap-item/add-roadmap-item.component';
+import {Employee} from '../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,11 @@ export class RoadmapDataService {
   getRoadmapItem$(id: any): Observable<RoadmapItem> {
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/RoadMapItems/${id}`).pipe(catchError(this.handleError), tap(console.log), map(RoadmapItem.fromJSON));
+  }
+
+  getEmployeesNotFilledInSurvey$(id: number): Observable<Employee[]> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${environment.apiUrl}/RoadMapItems/GetEmployeesNotFilledInSurvey/${id}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
   }
 
   handleError(err: any): Observable<never> {
