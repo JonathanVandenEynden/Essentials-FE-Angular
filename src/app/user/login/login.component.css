@@ -1,12 +1,16 @@
-.container-fluid{
-    margin: auto;
+.logo{
+    margin-top: 100px;
 }
 
-.logo{
-    margin: auto;
-    height: 15%;
-    width: 15%;
-    margin-top: 100px;
+@media (max-width: 768px) {
+  .logo{
+    width: 40%;
+  }
+}
+@media (min-width: 768px) {
+  .logo{
+    width: 30%;
+  }
 }
 
 .btn{

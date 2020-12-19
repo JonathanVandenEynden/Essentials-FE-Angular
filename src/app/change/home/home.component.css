@@ -1,7 +1,5 @@
 .container-fluid{
-  overflow: hidden;
   background-color: white;
-  max-height: 90vh;
   margin: auto;
 }
 
@@ -14,22 +12,13 @@ button{
 }
 
 .container{
-  max-height: 80vh;
-  overflow: auto;
   border: solid;
   border-radius: 10px;
   border-color: #264754;
-  padding: 20px;
 }
 
 fa-icon{
   color: white;
-}
-
-.second{
-  position: absolute;
-  padding: 20px;
-  height: 100%;
 }
 
 .dark{
@@ -82,7 +71,6 @@ h3{
 
 .mat-slider{
   margin-top: 10px;
-  width: 20em;
 }
 
 .mat-form-field{
