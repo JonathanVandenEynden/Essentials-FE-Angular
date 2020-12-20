@@ -104,12 +104,13 @@ export class ChangeDataService {
   // tslint:disable-next-line:typedef
   updateChange(change: ChangeInitiative) {
     // tslint:disable-next-line:max-line-length no-shadowed-variable
-    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/${change.id}`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap(() => {
+    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/${change.id}`, change.toJSON()).pipe(catchError(this.handleError), tap(console.log), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap(() => {
       this._RELOAD$.next(true);
     }));
   }
 
   handleError(err: any): Observable<never> {
+    console.error(err);
     let errorMessage: string;
     if (err instanceof HttpErrorResponse) {
       errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;

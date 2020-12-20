@@ -26,7 +26,8 @@ export class Employee {
         json.firstName,
         json.lastName,
         json.email,
-        json.employeeChangeGroups === null ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
+        // tslint:disable-next-line:max-line-length
+        json.employeeChangeGroups === null || json.employeeChangeGroups === undefined ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
       );
       user._ID = json.id;
       return user;
@@ -41,7 +42,8 @@ export class Employee {
       firstName: this._FIRSTNAME,
       lastName: this._LASTNAME,
       email: this._EMAIL,
-      employeeChangeGroups: this._EMPLOYEECHANGEGROUPS === null ? null : this._EMPLOYEECHANGEGROUPS.map(obj => obj.toJson())
+      // tslint:disable-next-line:max-line-length
+      employeeChangeGroups: this._EMPLOYEECHANGEGROUPS === null || this._EMPLOYEECHANGEGROUPS === undefined ? null : this._EMPLOYEECHANGEGROUPS.map(obj => obj.toJson())
     } as EmployeeJson;
   }
 

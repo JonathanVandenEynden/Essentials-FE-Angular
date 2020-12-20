@@ -18,7 +18,7 @@ export class EmployeeChangeGroup {
   ) {}
 
   static fromJSON(json: EmployeeChangeGroupJson): EmployeeChangeGroup{
-    if (json === null){
+    if (json === null || json === undefined){
       return null;
     }
     const ecg = new EmployeeChangeGroup(
@@ -32,9 +32,9 @@ export class EmployeeChangeGroup {
   toJson(): EmployeeChangeGroupJson{
     return {
       employeeId: this.employeeId,
-      employee: this.employee.toJSON(),
+      employee: this.employee === null ? null : this.employee.toJSON(),
       changeGroupId: this.changeGroupId,
-      changeGroup: this.changeGroup.toJSON()
+      changeGroup: this.changeGroup === null ? null : this.changeGroup.toJSON()
     } as EmployeeChangeGroupJson;
   }
 

@@ -87,6 +87,7 @@ export class UpdateChangeComponent implements OnInit {
 
     if (difference)
     {
+      console.log(this.change.changegroup);
       // tslint:disable-next-line:max-line-length
       this.changeDataService.updateChange(this.change).pipe(catchError((err) => { this.update_E = true; this.errorMessage = err; return EMPTY; })).subscribe((change: ChangeInitiative) => {
         this.update_S = true;
