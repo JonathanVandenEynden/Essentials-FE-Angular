@@ -13,6 +13,12 @@
   width: 90%;
 }
 
+.navbtn{
+  background-color: #264754;
+  border-color: #264754;
+  color: white;
+}
+
 .typeselection{
   padding-right: 25px;
 }
@@ -34,17 +40,9 @@ form{
   max-width: 95%;
 }
 
-a{
-  text-decoration: none;
-  color: black;
-}
 
 .h1{
   padding: 0.3em;
-}
-
-.brd-right{
-  border-right: 5px solid #264754;
 }
 
 
@@ -72,9 +70,6 @@ a{
   color: black;
 }
 
-.h1{
-  padding: 0.3em;
-}
 
 .brd-right{
   border-right: 5px solid #264754;
@@ -82,4 +77,8 @@ a{
 
 .page{
   margin: 5em 2em;
+}
+
+.add-btn{
+  margin-right: 11em;
 }
