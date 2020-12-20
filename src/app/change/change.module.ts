@@ -27,6 +27,7 @@ import { UpdateRoadmapItemComponent } from './roadmap/update-roadmap-item/update
 import { DeleteRoadmapItemComponent } from './roadmap/delete-roadmap-item/delete-roadmap-item.component';
 import { SurveyChoiceDialogComponent } from './roadmap/survey/survey-choice-dialog/survey-choice-dialog.component';
 import { RoadmapEmployeeInformationComponent } from './roadmap/roadmap-employee-information/roadmap-employee-information.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const changeRoutes: Routes =
   [
@@ -76,7 +77,8 @@ const changeRoutes: Routes =
     FormsModule,
     FontAwesomeModule,
     RouterModule.forChild(changeRoutes),
-    LottieModule
+    LottieModule,
+    FlexLayoutModule
   ]
 })
 export class ChangeModule {

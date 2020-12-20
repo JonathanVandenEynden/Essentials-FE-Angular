@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService, ChangeInitiativePostJson} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -11,6 +11,7 @@ import {UserDataService} from '../user-data.service';
 import {Employee} from '../../models/user.model';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
+import {ChangeGroup} from '../../models/changegroup.model';
 
 
 function validateDates(control: FormGroup): { [key: string]: any } {
@@ -40,25 +41,18 @@ export class AddChangeComponent implements OnInit {
   faPen = faPen;
   faCheck = faCheck;
   public changeForm: FormGroup;
-  public errorMessage = '';
-  public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
-  public added = false;
-  public pushnotifications = false;
   // tslint:disable-next-line:variable-name
   private _fetchChanges$: Observable<ChangeInitiative[]>;
   // tslint:disable-next-line:variable-name
   private _fetchUsers$: Observable<Employee[]>;
+  public errorMessage = '';
+  public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
+
+  public added = false;
+  public pushnotifications = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) {
-  }
-
-  get changes$(): Observable<ChangeInitiative[]> {
-    return this._fetchChanges$;
-  }
-
-  get users$(): Observable<Employee[]> {
-    return this._fetchUsers$;
   }
 
   ngOnInit(): void {
@@ -73,7 +67,7 @@ export class AddChangeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.changeForm = this.fb.group({
       name: [''],
-      description: ['', Validators.minLength(5)],
+      description: [''],
       startDate: ['', validateStartDate],
       endDate: [''],
       changetype: [''],
@@ -81,6 +75,14 @@ export class AddChangeComponent implements OnInit {
       changeGroupName: [''],
       changeGroupEmployeeIds: [''],
     }, {validator: validateDates});
+  }
+
+  get changes$(): Observable<ChangeInitiative[]> {
+    return this._fetchChanges$;
+  }
+
+  get users$(): Observable<Employee[]> {
+    return this._fetchUsers$;
   }
 
   // tslint:disable-next-line:typedef
@@ -95,18 +97,19 @@ export class AddChangeComponent implements OnInit {
       startDate: this.changeForm.value.startDate,
       endDate: this.changeForm.value.endDate,
       changeType: this.changeForm.value.changetype,
-      sponsor: {email: this.changeForm.value.changesponsor},
-      changeGroupDto: {
-        name: this.changeForm.value.changeGroupName,
-        userIds: this.changeForm.value.changeGroupEmployeeIds
-      }
+      sponsor: { email: this.changeForm.value.changesponsor },
+      changeGroupDto: { name: this.changeForm.value.changeGroupName, userIds: this.changeForm.value.changeGroupEmployeeIds }
     } as ChangeInitiativePostJson;
-    if (this.pushnotifications) {
+
+    if (this.changeForm.value.pushnotifications){
+      console.log('trying');
       // tslint:disable-next-line:max-line-length
       this.changeDataService.sendPushnotification('Essentials - New CI', `New Change initiative ${this.changeForm.value.name} added`, this.changeForm.value.changeGroupEmployeeIds);
     }
 
     this.changeDataService.addNewChange(changeJson);
+
+
 
     this.added = true;
     window.scrollTo(0, 0);
@@ -125,8 +128,6 @@ export class AddChangeComponent implements OnInit {
       return 'The start date should be in the future';
     } else if (errors.endBeforeStart) {
       return 'The end date should be after the start date';
-    } else if (errors.minlength) {
-      return `The description should be longer than ${errors.minlength.requiredLength} characters`;
     }
   }
 }
