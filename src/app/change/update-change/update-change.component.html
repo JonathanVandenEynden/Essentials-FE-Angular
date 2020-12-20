@@ -72,30 +72,6 @@
               </mat-card-content>
             </mat-card>
           </div>
-<!--          <div class="col-4">-->
-<!--            <mat-card>-->
-<!--              <mat-card-title>-->
-<!--                <button class="btn btn-primary" (click)="updateSurvey()">Survey<fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon></button>-->
-<!--              </mat-card-title>-->
-<!--              <mat-card-content>-->
-<!--                <div *ngFor="let item of change.roadMap">-->
-<!--                  <h5>{{item.survey}}</h5>-->
-<!--                </div>-->
-<!--              </mat-card-content>-->
-<!--            </mat-card>-->
-<!--          </div>-->
-          <div class="col-4">
-            <mat-card>
-              <mat-card-title>
-                <button class="btn btn-primary" (click)="updateGroup()">Group<fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon></button>
-              </mat-card-title>
-              <mat-card-content>
-                <div>
-                  <h5>Groups</h5>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
           <div class="col-5 colLoad">
             <ng-lottie *ngIf="update_E" height="70%" width="70%" [options]="options_S" (animationCreated)="onAnimationCreated($event)"></ng-lottie>
             <ng-lottie *ngIf="update_S" height="70%" width="70%" [options]="options_E" (animationCreated)="onAnimationCreated($event)"></ng-lottie>
