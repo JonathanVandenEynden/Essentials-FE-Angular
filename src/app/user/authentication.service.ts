@@ -44,7 +44,6 @@ export class AuthenticationService {
     return this._loggedInUser$;
   }
 
-
   get token(): string {
     const localToken = localStorage.getItem(this._tokenKey);
     return !!localToken ? localToken : '';
