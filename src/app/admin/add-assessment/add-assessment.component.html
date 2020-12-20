@@ -1,0 +1,98 @@
+<div class="container d-block text-center">
+  <a href="/admin/home">
+    <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+  </a>
+
+  <div class="d-flex page">
+    <div class="h1 brd-right">Add an assessment</div>
+    <div class="d-flex w-75 align-items-center justify-content-center">
+      <button class="btn btn-nav h-50 ml-2 mr-4" (click)="NavigateToOverview()"><fa-icon [icon]="faClipboard" class="mr-2"></fa-icon> Predefined assessments</button>
+      <button class="btn btn-nav h-50 ml-2 mr-4" (click)="NavigateToAdminHome()"><fa-icon [icon]="faHome" class="mr-2"></fa-icon> Home</button>
+    </div>
+  </div>
+</div>
+
+<div>
+
+  <div class="container-fluid m-5">
+    <div class="d-flex justify-content-center">
+      <div class="alert alert-info w-75 mt-1 text-center">Using this form, you are able to create pre-defined assessments. These assessments are available to the change managers of each organization.</div>
+    </div>
+    <div>
+     <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
+       <div>
+         <mat-form-field>
+           <input matInput type="text" placeholder="Theme for questions" formControlName="theme"/>
+         </mat-form-field>
+       </div>
+
+       <div formArrayName="questions">
+         <div *ngFor="let question of getQuestions(assessmentForm); let i = index">
+           <div [formGroupName]="i" class="questionbox d-flex">
+             <mat-form-field class="typeselection">
+               <mat-select placeholder="type" aria-label="question type" formControlName="type">
+                 <mat-option *ngFor="let type of questionTypes" [value]="type">
+                   {{type}}
+                 </mat-option>
+               </mat-select>
+               <mat-error *ngIf="question.get('type')['errors'] && question.get('type').touched">
+                 {{ getErrorMessage(question.get('type')['errors']) }}
+               </mat-error>
+             </mat-form-field>
+             <br>
+             <mat-form-field class="questionfield">
+               <input matInput type="text" aria-label="Question" formControlName="questionString"
+                      placeholder="question"/>
+               <mat-error *ngIf="question.get('questionString')['errors'] && question.get('questionString').touched">
+                 {{ getErrorMessage(question.get('questionString')['errors']) }}
+               </mat-error>
+             </mat-form-field>
+             <div class="answerbox" *ngIf="question.controls.type.value === 'Multiple choice'">
+               <div formArrayName="answers">
+                 <div [formGroupName]="j" *ngFor="let answer of getAnswers(question); let j = index">
+                   <mat-form-field>
+                     <input matInput type="text" placeholder="answer" formControlName="answer"/>
+                     <mat-error *ngIf="answer.get('answer')['errors'] && answer.get('answer').touched">
+                       {{ getErrorMessage(answer.get('answer')['errors']) }}
+                     </mat-error>
+                   </mat-form-field>
+                   <!-- Button voor remove answer-->
+                   <button class="btn btn-sm" type="button" (click)="removeAnswer(question, j)">
+                     <fa-icon [icon]="faMin"></fa-icon>
+                   </button>
+                 </div>
+               </div>
+               <!-- button voor add answer-->
+               <button class="btn btn-sm " type="button" (click)="addAnswer(question)">
+                 <fa-icon [icon]="faPlus"></fa-icon>
+                 Add answer
+               </button>
+             </div>
+             <!-- Button om remove question-->
+             <button class="btn btn-sm btn-danger btn-remove-question" type="button"
+                     (click)="removeQuestion(assessmentForm, i)">
+               <fa-icon [icon]="faMin"></fa-icon>
+               Remove question
+             </button>
+           </div>
+         </div>
+         <!-- Button voor add question-->
+         <button class="btn btn-success mt-2 mb-4" type="button" (click)="addQuestion(assessmentForm)">
+           <fa-icon [icon]="faPlus"></fa-icon>
+           Add question
+         </button>
+       </div>
+
+
+       <button class="btn btn-nav btn-primary mb-3" type="submit" [disabled]="!assessmentForm.valid">Create survey</button>
+
+     </form>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+

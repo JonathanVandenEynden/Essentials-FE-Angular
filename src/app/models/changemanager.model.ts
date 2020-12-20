@@ -5,12 +5,14 @@ export interface ChangemanagerJson {
   id: number;
   firstName: string;
   lastName: string;
+  email: string;
   employeeOrganizationParts: EmployeeOrganizationPartJson[];
   createdChangeInitiatives: ChangeInitiativeJson[];
 }
 
 export class Changemanager {
   private _ID: number;
+  private _EMAIL: string;
 
   constructor(
     private _FIRSTNAME: string,
@@ -27,6 +29,7 @@ export class Changemanager {
       json.employeeOrganizationParts === null ? null : json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
       json.createdChangeInitiatives === null ? null : json.createdChangeInitiatives.map(ChangeInitiative.fromJSON)
     );
+    changeManager._EMAIL = json.email;
     changeManager._ID = json.id;
     return changeManager;
   }
@@ -59,5 +62,9 @@ export class Changemanager {
 
   get CHANGEINITIATIVES(): ChangeInitiative[] {
     return this._CHANGEINITIATIVES;
+  }
+
+  get EMAIL(): string{
+    return this._EMAIL;
   }
 }
