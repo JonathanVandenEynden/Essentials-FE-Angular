@@ -15,6 +15,7 @@ import {httpInterceptorProviders} from './interceptors';
 import {AdminModule} from './admin/admin.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
+
 // tslint:disable-next-line:typedef
 export function playerFactory() {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');

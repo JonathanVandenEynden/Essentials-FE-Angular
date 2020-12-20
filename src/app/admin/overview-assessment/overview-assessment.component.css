@@ -8,6 +8,10 @@
   color: white;
 }
 
+.mat-card{
+  background-color: #264754;
+}
+
 .card{
   border-color: #264754;
 }
@@ -37,8 +41,4 @@ a{
 input{
   border: 1px solid #264754;
   border-right: 0px;
-}
-
-mat-card{
-  min-width: 25%;
 }

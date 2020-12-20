@@ -2,12 +2,33 @@
   width: 50%;
 }
 
+.brd-right{
+  border-right: 5px solid #264754;
+}
+
+.scroll{
+  height: 70vh;
+  overflow: scroll;
+}
+
+.name{
+  margin: 2em 2em 5em 2em;
+}
+
+.buttons{
+  margin: 2em;
+}
+
+thead{
+  background-color: #264754;
+  color:white;
+}
+
 .btn{
   background-color: #264754;
   border-color: #264754;
   color: white;
 }
-
 .card{
   border-color: #264754;
 }
@@ -32,11 +53,6 @@ a{
 
 .page{
   margin: 5em 2em;
-}
-
-input{
-  border: 1px solid #264754;
-  border-right: 0px;
 }
 
 mat-card{
