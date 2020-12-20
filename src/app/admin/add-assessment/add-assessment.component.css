@@ -1,0 +1,84 @@
+.logo{
+  width: 50%;
+}
+.answerbox{
+  padding-left: 40px;
+  width: auto;
+}
+.questionbox{
+  border: rgb(38, 71, 84) 2px solid;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 90%;
+}
+
+.navbtn{
+  background-color: #264754;
+  border-color: #264754;
+  color: white;
+}
+
+.typeselection{
+  padding-right: 25px;
+}
+
+.questionfield{
+  width: 40%;
+}
+
+.btn-remove-question{
+  height: fit-content;
+  margin-left: 30px;
+}
+
+form{
+  width: 100%;
+}
+
+.container-fluid{
+  max-width: 95%;
+}
+
+
+.h1{
+  padding: 0.3em;
+}
+
+
+.btn-nav{
+  background-color: #264754;
+  border-color: #264754;
+  color: white;
+}
+
+.logo{
+  width: 50%;
+}
+
+.card{
+  border-color: #264754;
+}
+
+.card-header{
+  background-color: #264754;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
+.brd-right{
+  border-right: 5px solid #264754;
+}
+
+.page{
+  margin: 5em 2em;
+}
+
+.add-btn{
+  margin-right: 11em;
+}

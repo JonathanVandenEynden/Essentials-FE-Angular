@@ -1,0 +1,40 @@
+<div class="container d-block text-center">
+  <a href="/admin/home">
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+  </a>
+</div>
+
+<div class="d-flex page">
+  <div class="h3 brd-right p-3">Predefined assessments info</div>
+  <div class="d-flex w-50 align-items-center justify-content-center">
+    <button class="btn h-75 ml-2 mr-4" (click)="NavigateToPredefinedAssessments()"><fa-icon [icon]="faClipboard" class="mr-2"></fa-icon> Predefined assessments</button>
+    <button class="btn h-75 ml-2 mr-4" (click)="NavigateToHome()"><fa-icon [icon]="faHome" class="mr-2"></fa-icon> Home</button>
+  </div>
+</div>
+
+<h4 class="mat-display-2 text-center">Theme: {{presetSurvey.Theme}}</h4>
+
+<div class="pl-5 pr-5 pb-5">
+  <mat-card class="shadow p-3 mb-5 bg-white">
+    <div class="row">
+      <p>Questions</p>
+      <div class="col-12">
+        <div>
+          <table class="table table-bordered">
+            <thead>
+              <th>Question</th>
+              <th>Type</th>
+            </thead>
+            <tbody *ngFor="let question of presetSurvey.PresetQuestions">
+            <td>{{ question.QuestionString }}</td>
+            <td>{{questionTypes[question.Type]}}</td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+
+

@@ -9,3 +9,8 @@
 .btn-outline-dark:hover{
   opacity: 80%;
 }
+
+fa-icon{
+  color: black;
+  margin: 3px;
+}

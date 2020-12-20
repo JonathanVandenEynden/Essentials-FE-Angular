@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {Router} from '@angular/router';
 import {faEdit, faTrash} from '@fortawesome/free-solid-svg-icons';
 import {ChangeDataService} from '../change-data.service';

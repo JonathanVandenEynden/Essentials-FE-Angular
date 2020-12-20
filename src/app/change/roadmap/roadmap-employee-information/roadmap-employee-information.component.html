@@ -1,0 +1,26 @@
+<app-nav-bar>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-10 h4">These employees didn't fill in the survey yet!</div>
+      <div class="col-2">
+        <button type="button" class="btn notify" (click)="sendNotification()">Notify them <fa-icon [icon]="faBel"></fa-icon></button>
+      </div>
+    </div>
+
+<table class="table table-hover table-bordered mt-4">
+  <thead>
+  <tr>
+    <th scope="col">Firstname</th>
+    <th scope="col">Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let emp of _employees">
+    <td>{{emp.FULLNAME()}}</td>
+    <td>{{emp.EMAIL}}</td>
+  </tr>
+  </tbody>
+</table>
+
+</div>
+</app-nav-bar>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {faClipboard, faPlus, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
-import {ChangeInitiative} from '../../change.model';
+import {ChangeInitiative} from '../../../models/change.model';
 
 @Component({
   selector: 'app-survey',
@@ -15,14 +15,19 @@ export class RoadmapViewComponent implements OnInit {
   faGroup = faUsers;
   faRoad = faRoute;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.change = item.change);
-    console.log(this.change);
   }
 
-  // addSurvey(): void{
-  //   this.router.navigate(['addSurvey']);
-  // }
+  // tslint:disable-next-line:typedef
+  routeGroup() {
+    this.router.navigate(['group', this.change.id]);
+  }
+
+  addRoadMapItem(): void {
+    this.router.navigate(['addRoadmapItem', this.change.id]);
+  }
 }

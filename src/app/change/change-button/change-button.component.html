@@ -1,4 +1,4 @@
-<mat-card class="btn btn-outline-light shadow p-3 mb-5 bg-white">
+<mat-card class="btn btn-outline-light shadow p-3 mb-5">
   <div class="row">
     <div class="col-12" (click)="seeRoadmap()">
       <mat-card-title>{{change.name}}</mat-card-title>
@@ -9,8 +9,12 @@
       </mat-card-content>
     </div>
     <div class="col">
-      <a class="ml-auto" (click)="deleteChange()"><fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon></a>
-      <a class="ml-auto" (click)="updateChange()"><fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon></a>
+      <a class="ml-auto" (click)="deleteChange()">
+        <fa-icon [icon]="faTrash" class="fa-pull-right icon fa-lg"></fa-icon>
+      </a>
+      <a class="ml-auto" (click)="updateChange()">
+        <fa-icon [icon]="faEdit" class="fa-pull-right icon fa-lg"></fa-icon>
+      </a>
     </div>
   </div>
 </mat-card>

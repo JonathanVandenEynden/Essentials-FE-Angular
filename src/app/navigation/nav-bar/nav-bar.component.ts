@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import {Changemanager} from '../../change/changemanager.model';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {faInfoCircle, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-
+import {AuthenticationService} from '../../user/authentication.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -13,23 +12,50 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 export class NavBarComponent implements OnInit {
 
+  faInfo = faInfoCircle;
   faSignInAlt = faSignInAlt;
   faUser = faUser;
-  loggedInUser$ = 'Sukrit';
-
+  loggedInUser$ = this._authenticationService.user$;
 
   // tslint:disable-next-line:variable-name
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   routeAccount(): void {
-    this._router.navigate(['../../account']);
+    this._router.navigate(['/user/account']);
   }
 
   routeSignOut(): void {
-    this._router.navigate(['../../user/logIn']);
+    this._authenticationService.logout();
+    this._router.navigate(['/login']);
   }
 
+  // tslint:disable-next-line:typedef
+  buttonEnter(trigger) {
+    trigger.openMenu();
+    /*setTimeout(() => {
+      if (this.prevButtonTrigger && this.prevButtonTrigger != trigger){
+        this.prevButtonTrigger.closeMenu();
+        this.prevButtonTrigger = trigger;
+        this.isMatMenuOpen = false;
+        this.isMatMenu2Open = false;
+        trigger.openMenu();
+        this.ren.removeClass(trigger.menu.items.first._elementRef.nativeElement, 'cdk-focused');
+        this.ren.removeClass(trigger.menu.items.first._elementRef.nativeElement, 'cdk-program-focused');
+      }
+      else if (!this.isMatMenuOpen) {
+        this.enteredButton = true;
+        this.prevButtonTrigger = trigger;
+        trigger.openMenu();
+        this.ren.removeClass(trigger.menu.items.first._elementRef.nativeElement, 'cdk-focused');
+        this.ren.removeClass(trigger.menu.items.first._elementRef.nativeElement, 'cdk-program-focused');
+      }
+      else {
+        this.enteredButton = true;
+        this.prevButtonTrigger = trigger;
+      }
+    });*/
+  }
 }

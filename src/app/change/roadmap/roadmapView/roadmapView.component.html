@@ -18,14 +18,15 @@
           </button>
         </div>
         <div class="row">
-          <button class="btn btn-primary">Group
+          <button class="btn btn-primary" (click)="routeGroup()">Group
             <fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon>
           </button>
         </div>
       </div>
       <div class="col">
         <div class="row d-flex">
-          <h2>Surveys</h2>
+          <h2>Roadmap</h2>
+          <a class="ml-auto" (click)="addRoadMapItem()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
           <!-- geen survey toevoegen aan change initiative, maar in roadmap-->
           <!-- <a class="ml-auto" (click)="addSurvey()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>-->
         </div>
@@ -33,7 +34,7 @@
         <div class="container">
           <div *ngFor="let roadMap of change.roadMap">
             <!-- roadmapItem -->
-            <app-roadmap-item-button [roadmap]="roadMap"></app-roadmap-item-button>
+            <app-roadmap-item-button [roadmapItem]="roadMap"></app-roadmap-item-button>
           </div>
         </div>
       </div>

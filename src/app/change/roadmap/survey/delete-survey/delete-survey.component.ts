@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Survey} from '../../../../models/survey.model';
 
 @Component({
   selector: 'app-delete-survey',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteSurveyComponent implements OnInit {
 
+  @Input() public survey: Survey;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

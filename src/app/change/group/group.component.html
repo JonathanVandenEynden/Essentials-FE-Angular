@@ -1,1 +1,60 @@
-<p>group works!</p>
+<app-nav-bar>
+  <mat-drawer-container>
+    <mat-drawer #drawer mode="over">
+      <h2>Groups</h2>
+      <div mat-list-item class="btn hover">All groups</div>
+      <div mat-list-item class="btn hover">Your groups</div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="container-fluid second">
+        <div class="row">
+          <div class="col-sm-3">
+            <h1>{{change.name}} <br/>
+              <div class="progress">
+                <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>
+
+              </div>
+            </h1>
+            <!--        <div class="row">-->
+            <!--          <button class="btn active" disabled>Surveys-->
+            <!--            <fa-icon [icon]="faClip" class="fa-pull-right fa-lg"></fa-icon>-->
+            <!--          </button>-->
+            <!--        </div>-->
+            <div class="row">
+              <button class="btn btn-primary" (click)="toRoadMap()">Roadmap
+                <fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon>
+              </button>
+            </div>
+            <div class="row">
+              <button class="btn active">Group
+                <fa-icon [icon]="faGroup" class="fa-pull-right fa-lg"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row d-flex">
+              <h2>Groups for Change <a>
+                <fa-icon [icon]="faBars" class="fa-md fa-pull-left dark" (click)="drawer.toggle()"></fa-icon>
+              </a></h2>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-auto">
+                  <h5>{{change.changegroup.name}}</h5>
+                </div>
+                <div class="col">
+                  <h4></h4>
+                </div>
+              </div>
+              <div *ngFor="let ecg of change.changegroup.EmployeeChangeGroups">
+                <mat-card class="btn btn-outline-light shadow p-4 mb-3 bg-white">
+                  {{ecg.Employee.FIRSTNAME}} {{ecg.Employee.LASTNAME}}
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</app-nav-bar>

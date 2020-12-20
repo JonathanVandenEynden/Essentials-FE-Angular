@@ -1,0 +1,39 @@
+<app-nav-bar>
+  <div class="container-fluid m-5 align-self-auto">
+    <h2>Update roadmap item "{{this.roadmapItem.title}}:"</h2>
+    <div>
+      <form [formGroup]="rmiForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input matInput aria-label="title" placeholder="title" type="text" formControlName="title" required/>
+          <mat-error *ngIf="rmiForm.get('title')['errors']">
+            {{ getErrorMessage(rmiForm.get('title')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput aria-label="Start date" placeholder="Start date" type="date" formControlName="startDate"
+                 required/>
+          <mat-error *ngIf="rmiForm.get('startDate')['errors']">
+            {{ getErrorMessage(rmiForm.get('startDate')['errors']) }}
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput aria-label="End date" placeholder="End date" type="date" formControlName="endDate" required/>
+          <mat-error *ngIf="rmiForm.get('endDate')['errors']">
+            {{ getErrorMessage(rmiForm.get('endDate')['errors']) }}
+          </mat-error>
+        </mat-form-field><br>
+        <div>
+          <mat-error *ngIf="rmiForm.errors">
+            {{ getErrorMessage(rmiForm.errors) }}
+          </mat-error>
+        </div>
+        <br>
+        <button class="btn btn-success" type="submit" [disabled]="!rmiForm.valid">
+          Update Roadmap item
+        </button>
+      </form>
+    </div>
+  </div>
+</app-nav-bar>

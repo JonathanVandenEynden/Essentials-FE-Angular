@@ -1,24 +1,24 @@
-.container-fluid{
+.container-fluid {
   overflow: hidden;
   background-color: white;
   height: 150px;
   margin: auto;
 }
 
-.row{
+.row {
   margin: 0;
 }
 
-.col{
+.col {
   margin-top: 10px;
   margin-bottom: 15px;
 }
 
-button{
+button {
   border-radius: 10px;
 }
 
-.container{
+.container {
   max-height: 500px;
   overflow: auto;
   border-radius: 10px;
@@ -26,7 +26,7 @@ button{
   padding: 20px;
 }
 
-.btn-primary{
+.btn-primary {
   margin-top: 20px;
   padding: 15px;
   text-align: left;
@@ -35,7 +35,7 @@ button{
   width: 200px;
 }
 
-.active{
+.active {
   color: white;
   margin-top: 20px;
   padding: 15px;
@@ -45,52 +45,57 @@ button{
   width: 200px;
 }
 
-fa-icon{
-  color: black;
-  padding-left: 10px;
-}
-
-.second{
+.second {
   position: absolute;
   padding: 20px;
   height: 100%;
 }
 
-.dark{
+.dark {
   margin-right: 20px;
   color: black;
 }
 
-a{
+a:hover {
   cursor: pointer;
 }
 
-h1{
+h1 {
   border-right: black solid 5px;
   font-size: 40px;
   font-weight: bold;
 }
 
-.progress{
-  width: 280px;
-  margin-top: 20px;
-  border-radius: 20px;
+.answers {
+  font-weight: normal;
 }
 
-.progress-bar{
-  background-color: #8dc262;
-  border-radius: 20px;
-}
 
-.btn-outline-light{
+mat-card {
   border-radius: 20px;
+  border: black 1px solid;
   color: black;
   font-weight: bold;
   text-align: left;
   width: 100%;
 }
 
-p{
-  font-size: 10px;
+p {
+  font-size: 15px;
+}
+
+table {
+  font-weight: normal;
+}
+
+th {
+  background: #264754;
+  color: white;
+  font-weight: normal;
+}
+
+.range-table th, .range-table td {
+  min-width: 40px;
+  text-align: center;
 }
 

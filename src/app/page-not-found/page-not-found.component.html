@@ -1,3 +1,4 @@
+<app-nav-bar>
 <div class="notFound">
     <div class="titel">
       <h1 class="display-4">404: Page not found</h1>
@@ -6,8 +7,9 @@
       <button
         type="submit"
         data-cy="return-button"
-        [routerLink]="['']">
-        Return
+        (click)="navigateToHomeScreen()">
+        Go Home
       </button>
     </div>
 </div>
+</app-nav-bar>

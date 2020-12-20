@@ -1,26 +1,30 @@
-.container-fluid{
-    margin: auto;
+.logo{
+    margin-top: 100px;
 }
 
-.logo{
-    margin: auto;
-    height: 15%;
-    width: 15%;
-    margin-top: 100px;
+@media (max-width: 768px) {
+  .logo{
+    width: 40%;
+  }
+}
+@media (min-width: 768px) {
+  .logo{
+    width: 30%;
+  }
 }
 
 .btn{
     width: 10%;
     border-radius: 10px;
     color: white;
-    background-color: rgb(54,162,54);
+    background-color: #264754;
 }
 
 .form-control{
     margin: auto;
     width: 450px;
     border-radius: 10px;
-    border: 1px solid rgb(54,162,54)
+    border: 1px solid #264754
 }
 
 .card{
@@ -34,4 +38,12 @@
   margin-bottom:2%;
 }
 
+.arrow{display: none;}
 
+button:hover span{
+  display: none;
+}
+
+button:hover .arrow{
+  display: inline-block;
+}

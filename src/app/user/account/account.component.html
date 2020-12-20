@@ -1,0 +1,46 @@
+<app-nav-bar>
+  <div class="mt-5">
+  <div class="row" *ngIf="(loggedInUser$ | async) as user">
+    <div class="col-3">
+      <mat-card class="left">
+        <div class="center">
+          <fa-icon [icon]="faUser" class="fa-5x"></fa-icon>
+        <mat-card-title class="mt-3">{{user.FIRSTNAME}} {{user.LASTNAME}}</mat-card-title>
+        <mat-card-content>Change Manager - Essentials</mat-card-content>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="option">
+        <h3 class="selected"><fa-icon [icon]="faInfo"></fa-icon> Personal information</h3>
+        <h3 class="align-bottom" (click)="logOut()"><fa-icon [icon]="faSignOut"></fa-icon> Sign out</h3>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col">
+      <mat-card class="container h-100 pt-4 pl-4">
+        <h1 class="font-weight-bold">Personal Information</h1>
+        <mat-divider></mat-divider>
+        <mat-card-content class="flex">
+        <div>
+          <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">Firstname</h4>
+          <div class="col-sm-2 d-inline-block text-monospace">
+            {{user.FIRSTNAME}}
+          </div>
+        </div>
+        <div>
+            <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">Lastname</h4>
+            <div class="col-sm-2 d-inline-block text-monospace">
+              {{user.LASTNAME}}
+            </div>
+        </div>
+        <div>
+          <h4 class="col-sm-2 d-inline-block font-weight-bold text-monospace">E-mail</h4>
+          <div class="col-sm-2 d-inline-block text-monospace">
+            {{user.EMAIL}}
+          </div>
+        </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  </div>
+</app-nav-bar>

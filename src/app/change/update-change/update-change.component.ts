@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ChangeInitiative} from '../change.model';
+import {ChangeInitiative} from '../../models/change.model';
 import {faClipboard, faPen, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ChangeDataService} from '../change-data.service';
 import {UserDataService} from '../user-data.service';
 import {EMPTY, empty, Observable} from 'rxjs';
-import {Employee} from '../user.model';
+import {Employee} from '../../models/user.model';
 import {catchError} from 'rxjs/operators';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
@@ -49,7 +49,7 @@ export class UpdateChangeComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
     this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     // tslint:disable-next-line:max-line-length
-    this.changeForm = this.fb.group({name: [this.change.name], description: [this.change.description], startDate: [this.change.startDate], endDate: [this.change.endDate], changetype: [this.changeTypes[0]], changesponsor: [this.change.sponsor]});
+    this.changeForm = this.fb.group({name: [this.change.name], description: [this.change.description], startDate: [this.change.startDateString], endDate: [this.change.endDateString], changetype: [this.changeTypes[0]], changesponsor: [this.change.sponsor]});
   }
 
 
@@ -61,27 +61,27 @@ export class UpdateChangeComponent implements OnInit {
     let difference = false;
     if (this.change.name !== this.changeForm.value.name)
     {
-      this.change.NAME(this.changeForm.value.name);
+      this.change.name = this.changeForm.value.name;
       difference = true;
     }
     if (this.change.description !== this.changeForm.value.description)
     {
-      this.change.DESCRIPTION(this.changeForm.value.description);
+      this.change.description = this.changeForm.value.description;
       difference = true;
     }
-    if (this.change.startDate !== this.changeForm.value.startDate)
+    if (this.change.startDateString !== this.changeForm.value.startDate)
     {
-      this.change.STARTDATE(this.changeForm.value.startDate);
+      this.change.startDateString = this.changeForm.value.startDate;
       difference = true;
     }
-    if (this.change.endDate !== this.changeForm.value.endDate)
+    if (this.change.endDateString !== this.changeForm.value.endDate)
     {
-      this.change.ENDDATE(this.changeForm.value.endDate);
+      this.change.endDateString = this.changeForm.value.endDate;
       difference = true;
     }
     if (this.change.sponsor !== this.changeForm.value.changesponsor)
     {
-      this.change.CHANGESPONSOR(this.changeForm.value.sponsor);
+      this.change.sponsor = this.changeForm.value.sponsor;
       difference = true;
     }
 
@@ -110,12 +110,12 @@ export class UpdateChangeComponent implements OnInit {
   }
   // tslint:disable-next-line:typedef
   updateRoadmap(){
-    this.router.navigate(['roadmap/update']);
+    this.router.navigate(['roadmap', this.change.id]);
   }
-  // tslint:disable-next-line:typedef
-  updateSurvey(){
-    this.router.navigate(['roadmapView/update']);
-  }
+  // // tslint:disable-next-line:typedef
+  // updateSurvey(){
+  //   this.router.navigate(['roadmapView/update']);
+  // }
   // tslint:disable-next-line:typedef
   updateGroup(){
     this.router.navigate(['group/update']);
