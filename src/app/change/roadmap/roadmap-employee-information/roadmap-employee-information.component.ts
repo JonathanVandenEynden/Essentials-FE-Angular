@@ -4,7 +4,7 @@ import {RoadmapItem} from '../../../models/roadmapitem.model';
 import {Observable} from 'rxjs';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Employee} from '../../../models/user.model';
-import {faBell} from '@fortawesome/free-solid-svg-icons';
+import {faBell, faArrowCircleLeft} from '@fortawesome/free-solid-svg-icons';
 import {ChangeDataService} from '../../change-data.service';
 
 @Component({
@@ -14,6 +14,7 @@ import {ChangeDataService} from '../../change-data.service';
 })
 export class RoadmapEmployeeInformationComponent implements OnInit {
   public faBel = faBell;
+  public faArrowCircleLeft = faArrowCircleLeft;
 
   public inputRoadmapItem: RoadmapItem;
   private _fetchRmi: Observable<Employee[]>;
@@ -34,5 +35,6 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
     const ids = [];
     this._employees.forEach(e => ids.push(e.ID.toString()));
     this.changeDataService.sendPushnotification(`Essentials - Please fill in ${this.inputRoadmapItem.title}`, 'Please complete the survey in the roadmapitem', ids);
+    alert('You send out a notfication!');
   }
 }
