@@ -75,6 +75,7 @@ export class AddSurveyComponent implements OnInit {
 
   persistQuestions(newSurveyObj: Survey): void {
     const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questionFields.length; i++) {
       const question = questionFields[i] as QuestionFieldJson;
       // question aanmaken
