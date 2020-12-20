@@ -18,7 +18,7 @@ export class EmployeeChangeGroup {
   ) {}
 
   static fromJSON(json: EmployeeChangeGroupJson): EmployeeChangeGroup{
-    if (json === null || json === undefined){
+    if (json === null){
       return null;
     }
     const ecg = new EmployeeChangeGroup(

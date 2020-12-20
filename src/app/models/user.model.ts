@@ -27,7 +27,7 @@ export class Employee {
         json.lastName,
         json.email,
         // tslint:disable-next-line:max-line-length
-        json.employeeChangeGroups === null || json.employeeChangeGroups === undefined ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
+        json.employeeChangeGroups === null ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
       );
       user._ID = json.id;
       return user;

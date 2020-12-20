@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
 import {ChangeDataService, ChangeInitiativePostJson} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
@@ -67,7 +67,7 @@ export class AddChangeComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.changeForm = this.fb.group({
       name: [''],
-      description: [''],
+      description: ['', Validators.minLength(5)],
       startDate: ['', validateStartDate],
       endDate: [''],
       changetype: [''],
@@ -101,8 +101,7 @@ export class AddChangeComponent implements OnInit {
       changeGroupDto: { name: this.changeForm.value.changeGroupName, userIds: this.changeForm.value.changeGroupEmployeeIds }
     } as ChangeInitiativePostJson;
 
-    if (this.changeForm.value.pushnotifications){
-      console.log('trying');
+    if (this.pushnotifications){
       // tslint:disable-next-line:max-line-length
       this.changeDataService.sendPushnotification('Essentials - New CI', `New Change initiative ${this.changeForm.value.name} added`, this.changeForm.value.changeGroupEmployeeIds);
     }
@@ -128,6 +127,14 @@ export class AddChangeComponent implements OnInit {
       return 'The start date should be in the future';
     } else if (errors.endBeforeStart) {
       return 'The end date should be after the start date';
+    } else if (errors.minlength) {
+      return `Should be longer than ${errors.minlength.requiredLength} characters`;
     }
+  }
+
+  // tslint:disable-next-line:typedef
+  getCheckboxChecked(event)
+  {
+    this.pushnotifications = event.checked;
   }
 }

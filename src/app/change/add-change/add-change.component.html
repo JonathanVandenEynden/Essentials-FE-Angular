@@ -85,7 +85,7 @@
                 </div>
               </mat-select>
             </mat-form-field>
-            <mat-checkbox fxLayout="row" [(ngModel)]="pushnotifications" data-cy="notificationSelectBox">Send pushnotifications to employees</mat-checkbox>
+            <mat-checkbox fxLayout="row" (change)="getCheckboxChecked($event)" data-cy="notificationSelectBox">Send pushnotifications to employees</mat-checkbox>
             <div *ngIf="added">
               <mat-card class="card text-white mb-3" (click)="addRoadmap()">
                 Successfully added the new Change
