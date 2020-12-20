@@ -15,8 +15,9 @@
 <div>
 
   <div class="container-fluid m-5">
-    <p class="lead">Using this form, you are able to create pre-defined surveys. These surveys are available to the change managers of each organization.</p>
-
+    <div class="d-flex justify-content-center">
+      <div class="alert alert-info w-75 mt-1 text-center">Using this form, you are able to create pre-defined assessments. These assessments are available to the change managers of each organization.</div>
+    </div>
     <div>
      <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
        <div>
@@ -76,14 +77,15 @@
            </div>
          </div>
          <!-- Button voor add question-->
-         <button class="btn mt-2 mb-4" type="button" (click)="addQuestion(assessmentForm)">
+         <button class="btn btn-success mt-2 mb-4" type="button" (click)="addQuestion(assessmentForm)">
            <fa-icon [icon]="faPlus"></fa-icon>
            Add question
          </button>
        </div>
 
 
-       <button class="button" type="submit" mat-raised-button [disabled]="!assessmentForm.valid">Create survey</button>
+       <button class="btn btn-nav btn-primary mb-3" type="submit" [disabled]="!assessmentForm.valid">Create survey</button>
+
      </form>
 
 

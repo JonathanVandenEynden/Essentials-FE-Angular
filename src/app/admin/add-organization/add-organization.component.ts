@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {faPlus, faSearch, faClipboard, faHome} from '@fortawesome/free-solid-svg-icons';
+
 import {EmployeeCsvRecord} from '../../models/EmployeeCsvRecord';
 import {AdminDataService} from '../admin-data.service';
 import {Location} from '@angular/common';
@@ -19,6 +21,9 @@ export interface OrganizationPostJson {
 export class AddOrganizationComponent implements OnInit {
   public organizationName = '';
   public employeeRecords: EmployeeCsvRecord[] = [];
+  faHome = faHome;
+  faClipboard = faClipboard;
+  faPlus = faPlus;
   @ViewChild('csvReader') csvReader: any;
 
 
@@ -109,5 +114,9 @@ export class AddOrganizationComponent implements OnInit {
   fileReset(): any {
     this.csvReader.nativeElement.value = '';
     this.employeeRecords = [];
+  }
+
+  NavigateToHome(): void {
+    this.router.navigate(['admin/home']);
   }
 }
