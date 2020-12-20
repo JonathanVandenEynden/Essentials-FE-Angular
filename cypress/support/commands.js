@@ -24,12 +24,4 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', () => {
-  const email = 'Sukrit.bhattacharya@essentials.com';
 
-  cy.request({
-    method: 'POST',
-    url: 'api/Account/login',
-    body: {email, password: 'P@ssword1'}
-  }).then((res) => localStorage.setItem('currentUser', res.body));
-});
