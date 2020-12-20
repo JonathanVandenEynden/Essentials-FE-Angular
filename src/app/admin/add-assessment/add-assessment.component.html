@@ -35,7 +35,7 @@
                    {{type}}
                  </mat-option>
                </mat-select>
-               <mat-error *ngIf="question.get('type')['errors'] && question.get('type').touched">
+               <mat-error *ngIf="question.get('type')['errors'] && question.get('type').touched" data-cy="errorQuestion">
                  {{ getErrorMessage(question.get('type')['errors']) }}
                </mat-error>
              </mat-form-field>
