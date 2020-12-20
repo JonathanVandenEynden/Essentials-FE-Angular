@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AnimationOptions} from 'ngx-lottie';
 import {AnimationItem} from 'lottie-web';
 import {faCheck, faPen} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {catchError} from 'rxjs/operators';
-import {ChangeDataService} from '../change-data.service';
+import {ChangeDataService, ChangeInitiativePostJson} from '../change-data.service';
 import {empty, Observable} from 'rxjs';
 import {ChangeInitiative} from '../../models/change.model';
 import {UserDataService} from '../user-data.service';
@@ -47,7 +47,9 @@ export class AddChangeComponent implements OnInit {
   private _fetchUsers$: Observable<Employee[]>;
   public errorMessage = '';
   public changeTypes = ['Economical', 'Organizational', 'Personal', 'Technological'];
+
   public added = false;
+  public pushnotifications = false;
 
   // tslint:disable-next-line:max-line-length
   constructor(private fb: FormBuilder, public router: Router, public dialog: MatDialog, private changeDataService: ChangeDataService, private userDataService: UserDataService) {
@@ -64,12 +66,14 @@ export class AddChangeComponent implements OnInit {
     }));
     // tslint:disable-next-line:max-line-length
     this.changeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(500)]],
+      name: [''],
+      description: [''],
       startDate: ['', validateStartDate],
-      endDate: ['', Validators.required],
-      changetype: ['', Validators.required],
-      changesponsor: ['', Validators.required]
+      endDate: [''],
+      changetype: [''],
+      changesponsor: [''],
+      changeGroupName: [''],
+      changeGroupEmployeeIds: [''],
     }, {validator: validateDates});
   }
 
@@ -87,8 +91,26 @@ export class AddChangeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    // tslint:disable-next-line:max-line-length
-    this.changeDataService.addNewChange(new ChangeInitiative(this.changeForm.value.name, this.changeForm.value.description, this.changeForm.value.startDate, this.changeForm.value.endDate, new ChangeGroup('Test'), this.changeForm.value.changesponsor, []));
+    const changeJson = {
+      name: this.changeForm.value.name,
+      description: this.changeForm.value.description,
+      startDate: this.changeForm.value.startDate,
+      endDate: this.changeForm.value.endDate,
+      changeType: this.changeForm.value.changetype,
+      sponsor: { email: this.changeForm.value.changesponsor },
+      changeGroupDto: { name: this.changeForm.value.changeGroupName, userIds: this.changeForm.value.changeGroupEmployeeIds }
+    } as ChangeInitiativePostJson;
+
+    if (this.changeForm.value.pushnotifications){
+      console.log('trying');
+      // tslint:disable-next-line:max-line-length
+      this.changeDataService.sendPushnotification('Essentials - New CI', `New Change initiative ${this.changeForm.value.name} added`, this.changeForm.value.changeGroupEmployeeIds);
+    }
+
+    this.changeDataService.addNewChange(changeJson);
+
+
+
     this.added = true;
     window.scrollTo(0, 0);
   }
@@ -106,11 +128,6 @@ export class AddChangeComponent implements OnInit {
       return 'The start date should be in the future';
     } else if (errors.endBeforeStart) {
       return 'The end date should be after the start date';
-    } else if (errors.minlength) {
-      return `Field must be at least ${errors.minlength.requiredLength} characters long. (is ${errors.minlength.actualLength})`;
-    } else if (errors.maxlength){
-      return `Field must be ${errors.maxlength.requiredLength} characters at max long. (is ${errors.maxlength.actualLength})`;
     }
   }
-
 }

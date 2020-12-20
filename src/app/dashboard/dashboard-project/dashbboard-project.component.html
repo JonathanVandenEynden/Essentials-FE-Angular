@@ -1,21 +1,32 @@
 <app-nav-bar>
-  <div class="row mt-4"><h2 class="w-100 text-center">Dashboard Project</h2></div>
-  <div class="row">
+  <div class="row mt-3 mb-5">
     <div class="col-sm-2">
-      <div class="dropdown mt-3">
+      <div class="dropdown">
         <button class=" w-100 btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Choose dashboard <fa-icon [icon]="faTachometer" class="fa-pull-right"></fa-icon>
         </button>
         <div class="dropdown-menu breedte" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" routerLink=".">Project</a>
-          <a class="dropdown-item" routerLink="/dashboard/roadmapitem">Roadmapitem</a>
           <a class="dropdown-item" routerLink="/dashboard/survey">Survey</a>
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="container">
-      </div>
+    <h2 class="col-sm-8 text-center">Dashboard Project</h2>
+  </div>
+  <div class="row m-2">
+    <div class="block">
+      <span *ngIf="barChartReady">
+        <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
+      </span>
+      <span *ngIf="pieChartChangeInitiativesReady; else loading">
+        <app-pie-chart [pieChartProp]="pieChartChangeInitiativesProperties"></app-pie-chart>
+      </span>
+      <span *ngIf="polarChartReady">
+        <app-polar-chart [polarChartProp]="polarChartProperties"></app-polar-chart>
+      </span>
     </div>
   </div>
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
 </app-nav-bar>

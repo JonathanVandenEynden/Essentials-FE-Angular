@@ -22,7 +22,7 @@ h2 {
   font-size: 30px;
 }
 
-fa-icon {
+a fa-icon {
   color: black;
   margin-left: 20px;
 }
@@ -31,6 +31,10 @@ fa-icon:hover{
   cursor: pointer;
 }
 
+.info{
+  background-color: #264754;
+
+}
 
 p {
   font-size: 20px;

@@ -9,40 +9,44 @@ export interface OrganizationPartJson{
 
 
 export class OrganizationPart {
-  private id: number;
+  private _organizationParts = ['Country', 'Department', 'Factory', 'Office', 'Team'];
+  private _id: number;
   constructor(
-    private name: string,
-    private employeeOrganizationParts: EmployeeOrganizationPart[],
-    private type: number
+    private _name: string,
+    private _employeeOrganizationParts: EmployeeOrganizationPart[],
+    private _type: number
   ) {}
 
   static fromJSON(json: OrganizationPartJson): OrganizationPart{
     const part = new OrganizationPart(
       json.name,
-      json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
+      json.employeeOrganizationParts === null ? null : json.employeeOrganizationParts.map(EmployeeOrganizationPart.fromJSON),
       json.type
     );
-    part.id = json.id;
+    part._id = json.id;
     return part;
   }
   toJson(): OrganizationPartJson{
     return {
-      id: this.id,
-      name: this.name,
-      employeeOrganizationParts: this.employeeOrganizationParts.map(t => t.toJson()),
-      type: this.type
+      id: this._id,
+      name: this._name,
+      employeeOrganizationParts: this._employeeOrganizationParts.map(t => t.toJson()),
+      type: this._type
     } as OrganizationPartJson;
   }
   get Id(): number{
-    return this.id;
+    return this._id;
   }
   get Name(): string{
-    return this.name;
+    return this._name;
   }
   get EmployeeOrganizationPart(): EmployeeOrganizationPart[]{
-    return this.employeeOrganizationParts;
+    return this._employeeOrganizationParts;
   }
   get Type(): number{
-    return this.type;
+    return this._type;
+  }
+  get TypeString(): string{
+    return this._organizationParts[this.Type];
   }
 }

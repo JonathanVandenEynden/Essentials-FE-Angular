@@ -1,9 +1,3 @@
-.container-fluid{
-  overflow: hidden;
-  background-color: white;
-  margin: auto;
-}
-
 .row{
   margin: 0;
 }
@@ -21,22 +15,16 @@ h1{
   color: white;
 }
 
-.container{
-  max-height: 700px;
+.block{
+  max-height: 85vh;
+  min-width: 100%;
   overflow: auto;
-  border: solid;
   border-radius: 10px;
-  border-color: #264754;
+  border: solid #264754;
   padding: 20px;
 }
 
-.chart{
-  display: flex;
-  max-width: 50%
-}
-
 .btn-primary{
-  margin-top: 20px;
   padding: 15px;
   text-align: left;
   background-color: #264754;
@@ -49,13 +37,7 @@ h1{
 }
 
 .active{
-  color: white;
-  margin-top: 20px;
-  padding: 15px;
-  text-align: left;
-  background-color: #8dc262 !important;
-  border: #8dc262;
-  width: 200px;
+  border-radius: 1px;
 }
 
 fa-icon{

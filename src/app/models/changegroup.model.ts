@@ -1,49 +1,58 @@
-import {Employee, EmployeeJson} from './user.model';
+import {EmployeeChangeGroup, EmployeeChangeGroupJson} from './EmployeeChangeGroup.model';
 
-export interface ChangeGroupJson{
+export interface ChangeGroupJson {
   id: number;
   name: string;
-  // users: EmployeeJson[];
+  employeeChangeGroups: EmployeeChangeGroupJson[];
 }
 
 export class ChangeGroup {
   private ID: number;
   private _CHECKED = false;
+
   constructor(
     private NAME: string,
-    // private USERS: Employee[]
-  ) {}
+    private EMPLOYEECHANGEGROUPS: EmployeeChangeGroup[]
+  ) {
+  }
 
   static fromJSON(json: ChangeGroupJson): ChangeGroup {
-    const changegroup = new ChangeGroup(
-      json.name,
-      // json.users.map(Employee.fromJSON)
-    );
-    changegroup.ID = json.id;
-    return changegroup;
+    if (json !== undefined && json !== null) {
+      const changegroup = new ChangeGroup(
+        json.name,
+        json.employeeChangeGroups == null ? null : json.employeeChangeGroups.map(EmployeeChangeGroup.fromJSON)
+      );
+      changegroup.ID = json.id;
+      return changegroup;
+    }
+    return null as ChangeGroup;
   }
 
   toJSON(): ChangeGroupJson {
     // @ts-ignore
     return {
       name: this.NAME,
-      // users: this.USERS
+      employeeChangeGroups: this.EMPLOYEECHANGEGROUPS
     } as ChangeGroupJson;
   }
+
   get id(): number {
     return this.ID;
   }
-  get name(): string{
+
+  get name(): string {
     return this.NAME;
   }
-  get CHECKED(): boolean{
+
+  get CHECKED(): boolean {
     return this._CHECKED;
   }
+
   set CHECKED(value: boolean) {
     this._CHECKED = value;
   }
-  /*get users(): Employee[]{
-      return this.USERS;
-    }*/
-}
 
+  get EmployeeChangeGroups(): EmployeeChangeGroup[] {
+    return this.EMPLOYEECHANGEGROUPS;
+  }
+}

@@ -25,7 +25,14 @@ export class PieChartComponent implements OnInit {
     plugins: {
       datalabels: {
         formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
+          let label = '';
+          if (this.pieChartData[ctx.dataIndex] !== 0){
+          if (this.pieChartLabels.length > 6){
+            label = this.pieChartLabels[ctx.dataIndex].slice(0, 5) + '...';
+          } else{
+            label = this.pieChartLabels[ctx.dataIndex].toString();
+          }
+          }
           return label;
         },
       },

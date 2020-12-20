@@ -1,0 +1,44 @@
+.logo{
+  width: 50%;
+}
+
+.btn{
+  background-color: #264754;
+  border-color: #264754;
+  color: white;
+}
+
+.mat-card{
+  background-color: #264754;
+}
+
+.card{
+  border-color: #264754;
+}
+
+.card-header{
+  background-color: #264754;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.h1{
+  padding: 0.3em;
+}
+
+.brd-right{
+  border-right: 5px solid #264754;
+}
+
+.page{
+  margin: 5em 2em;
+}
+
+input{
+  border: 1px solid #264754;
+  border-right: 0px;
+}

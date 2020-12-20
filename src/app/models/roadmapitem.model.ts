@@ -7,19 +7,20 @@ export interface RoadmapItemJson{
   done: boolean;
   startDate: string;
   endDate: string;
-
+  phase: number;
 }
 
 export class RoadmapItem {
   private _startDate: Date;
   private _endDate: Date;
-  private ID: number;
+  private _id: number;
+  private _phase: number;
   constructor(
-    private TITLE: string,
-    private _SURVEY: Survey,
-    private _STARTDATE: string,
-    private _ENDDATE: string,
-    private DONE: boolean
+    private _title: string,
+    private _survey: Survey,
+    private _startDateString: string,
+    private _endDateString: string,
+    private _done: boolean
   ) {}
 
   static fromJSON(json: RoadmapItemJson): RoadmapItem {
@@ -30,42 +31,49 @@ export class RoadmapItem {
       json.endDate,
       json.done
     );
-    roadmapItem.ID = json.id;
+    roadmapItem._id = json.id;
+    roadmapItem._phase = json.phase;
     roadmapItem.startDate = new Date(json.startDate);
     roadmapItem.endDate = new Date(json.endDate);
     return roadmapItem;
   }
 
   toJSON(): RoadmapItemJson {
-    // @ts-ignore
     return {
-      title: this.TITLE,
-      assessment: this._SURVEY.toJSON(),
-      startDate: this._STARTDATE,
-      endDate: this._ENDDATE,
-      done: this.DONE
+      title: this.title,
+      assessment: this._survey.toJSON(),
+      startDate: this.startDateString,
+      endDate: this.endDateString,
+      done: this.done,
+      phase: this.phase
     } as RoadmapItemJson;
   }
   get id(): number {
-    return this.ID;
+    return this._id;
   }
   get title(): string {
-    return this.TITLE;
+    return this._title;
   }
   get survey(): Survey{
-    return this._SURVEY;
+    return this._survey;
   }
   set survey(s){
-    this._SURVEY = s;
+    this._survey = s;
   }
   get done(): boolean{
-    return this.DONE;
+    return this._done;
   }
-  get STARTDATE(): string {
-    return this._STARTDATE.split('T')[0];
+  get startDateString(): string {
+    return this._startDateString.split('T')[0];
   }
-  get ENDDATE(): string {
-    return this._ENDDATE.split('T')[0];
+  get endDateString(): string {
+    return this._endDateString.split('T')[0];
+  }
+  get phase(): number{
+    return this._phase;
+  }
+  set phase(p){
+    this._phase = p;
   }
 
   get startDate(): Date{

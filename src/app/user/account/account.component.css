@@ -1,0 +1,60 @@
+div.row{
+  width: 80%;
+  margin: auto;
+}
+
+.center{
+  width: initial;
+  text-align: center;
+  align-items: center;
+}
+
+img{
+  margin-bottom: 20px;
+}
+
+h3{
+  font-weight: 500;
+  margin: 0;
+  padding: 20px;
+}
+
+.selected{
+  background-color: white;
+  color: #264754;
+  border-left: solid #264754;
+}
+
+.selected:hover{
+  opacity: 100%;
+  background-color: white;
+}
+
+h3:hover{
+  opacity: 80%;
+  background-color: darkgrey;
+}
+
+fa-icon{
+  margin-right: 10px;
+}
+
+.mat-card{
+  padding: 0;
+}
+
+.mat-card-content{
+  height: 80%
+}
+
+.option{
+  background-color: lightgrey;
+  padding: 0;
+}
+
+.flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

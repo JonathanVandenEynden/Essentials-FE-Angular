@@ -1,0 +1,35 @@
+<div class="container-fluid text-center">
+  <img class="logo" alt="Essentials logo" src="assets/images/logoEssentialsDarkGreenLightGreen.png"/>
+  <form [formGroup]="user" (ngSubmit)="onSubmit()">
+    <div class="input">
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          id="input1"
+          data-cy="login-username"
+          placeholder="johnsmith@outlook.com"
+          formControlName="username"
+          required>
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          id="input2"
+          data-cy="login-password"
+          placeholder="password"
+          formControlName="password"
+          required>
+      </div>
+    </div>
+
+    <span><p class="error" *ngIf="errorMessage" data-cy="appError"> {{errorMessage}} </p> </span>
+
+    <div class="text-center">
+      <button type="submit" class="btn"><span>Sign in</span>
+        <fa-icon [icon]="faArrowRight" class="fa-align-center arrow"></fa-icon>
+      </button>
+    </div>
+  </form>
+</div>

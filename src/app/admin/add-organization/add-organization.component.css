@@ -1,0 +1,51 @@
+.logo{
+  width: 50%;
+}
+
+.btn{
+  background-color: #264754;
+  border-color: #264754;
+  color: white;
+}
+
+.card{
+  border-color: #264754;
+}
+
+.card-header{
+  background-color: #264754;
+  color: white;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.h1{
+  padding: 0.3em;
+}
+
+.brd-right{
+  border-right: 5px solid #264754;
+}
+
+.page{
+  margin: 5em 2em;
+}
+
+.table{
+  width: 100%;
+}
+
+
+.form{
+  border-radius: 20px;
+  border: 2px solid black;
+  width: 75%;
+  padding: 20px;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #264754;
+}

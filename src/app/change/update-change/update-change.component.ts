@@ -49,7 +49,7 @@ export class UpdateChangeComponent implements OnInit {
     this.route.data.subscribe(item => this.change = item.change);
     this._fetchUsers$ = this.userDataService.users$.pipe(catchError(err => { this.errorMessage = err;  return empty; }));
     // tslint:disable-next-line:max-line-length
-    this.changeForm = this.fb.group({name: [this.change.name], description: [this.change.description], startDate: [this.change.startDate], endDate: [this.change.endDate], changetype: [this.changeTypes[0]], changesponsor: [this.change.sponsor]});
+    this.changeForm = this.fb.group({name: [this.change.name], description: [this.change.description], startDate: [this.change.startDateString], endDate: [this.change.endDateString], changetype: [this.changeTypes[0]], changesponsor: [this.change.sponsor]});
   }
 
 
@@ -61,27 +61,27 @@ export class UpdateChangeComponent implements OnInit {
     let difference = false;
     if (this.change.name !== this.changeForm.value.name)
     {
-      this.change.NAME(this.changeForm.value.name);
+      this.change.name = this.changeForm.value.name;
       difference = true;
     }
     if (this.change.description !== this.changeForm.value.description)
     {
-      this.change.DESCRIPTION(this.changeForm.value.description);
+      this.change.description = this.changeForm.value.description;
       difference = true;
     }
-    if (this.change.startDate !== this.changeForm.value.startDate)
+    if (this.change.startDateString !== this.changeForm.value.startDate)
     {
-      this.change.STARTDATE(this.changeForm.value.startDate);
+      this.change.startDateString = this.changeForm.value.startDate;
       difference = true;
     }
-    if (this.change.endDate !== this.changeForm.value.endDate)
+    if (this.change.endDateString !== this.changeForm.value.endDate)
     {
-      this.change.ENDDATE(this.changeForm.value.endDate);
+      this.change.endDateString = this.changeForm.value.endDate;
       difference = true;
     }
     if (this.change.sponsor !== this.changeForm.value.changesponsor)
     {
-      this.change.CHANGESPONSOR(this.changeForm.value.sponsor);
+      this.change.sponsor = this.changeForm.value.sponsor;
       difference = true;
     }
 

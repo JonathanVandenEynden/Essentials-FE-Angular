@@ -1,0 +1,21 @@
+<div class="container mt-5">
+<div class="h4">These employees didn't fill in the survey yet!</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Firstname</th>
+    <th scope="col">Email</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let emp of _employees">
+    <td>{{emp.FULLNAME()}}</td>
+    <td>{{emp.EMAIL}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <button type="button" class="btn notify" (click)="sendNotification()">Notify them <fa-icon [icon]="faBel"></fa-icon></button>
+</div>
+</div>

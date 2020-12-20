@@ -1,5 +1,5 @@
 import {OrganizationPart, OrganizationPartJson} from './OrganizationPart.model';
-import {Employee, EmployeeJson} from './user.model';
+import {EmployeeJson, Employee} from './user.model';
 
 export interface EmployeeOrganizationPartJson {
   employeeId: number;
@@ -18,6 +18,9 @@ export class EmployeeOrganizationPart {
   ) {}
 
   static fromJSON(json: EmployeeOrganizationPartJson): EmployeeOrganizationPart{
+    if (json === null){
+      return null;
+    }
     const eop = new EmployeeOrganizationPart(
       Employee.fromJSON(json.employee),
       OrganizationPart.fromJSON(json.organizationPart));

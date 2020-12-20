@@ -1,7 +1,5 @@
 .container-fluid{
-  overflow: hidden;
   background-color: white;
-  height: 150px;
   margin: auto;
 }
 
@@ -9,32 +7,18 @@
     margin: 0;
 }
 
-.col{
-    margin-top: 10px;
-    margin-bottom: 15px;
-}
-
 button{
     border-radius: 10px;
 }
 
 .container{
-  max-height: 500px;
-  overflow: auto;
   border: solid;
   border-radius: 10px;
   border-color: #264754;
-  padding: 20px;
 }
 
 fa-icon{
   color: white;
-}
-
-.second{
-  position: absolute;
-  padding: 20px;
-  height: 100%;
 }
 
 .dark{
@@ -87,10 +71,12 @@ h3{
 
 .mat-slider{
   margin-top: 10px;
-  width: 20em;
 }
 
 .mat-form-field{
   width: 50px;
 }
 
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #264754;
+}
