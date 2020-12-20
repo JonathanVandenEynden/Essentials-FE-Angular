@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChangeInitiative} from '../../../models/change.model';
 import {RoadmapItem} from '../../../models/roadmapitem.model';
 
 @Component({

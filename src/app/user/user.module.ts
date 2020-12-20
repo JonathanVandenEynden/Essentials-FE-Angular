@@ -10,7 +10,7 @@ import {NavigationModule} from '../navigation/navigation.module';
 
 const routes: Routes =
 [
-  { path: 'logIn', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'account', component: AccountComponent }
 ];
 

@@ -25,6 +25,9 @@ import { SurveyButtonComponent } from './roadmap/survey/survey-button/survey-but
 import { AddRoadmapItemComponent } from './roadmap/add-roadmap-item/add-roadmap-item.component';
 import { UpdateRoadmapItemComponent } from './roadmap/update-roadmap-item/update-roadmap-item.component';
 import { DeleteRoadmapItemComponent } from './roadmap/delete-roadmap-item/delete-roadmap-item.component';
+import { SurveyChoiceDialogComponent } from './roadmap/survey/survey-choice-dialog/survey-choice-dialog.component';
+import { RoadmapEmployeeInformationComponent } from './roadmap/roadmap-employee-information/roadmap-employee-information.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 const changeRoutes: Routes =
   [
@@ -34,6 +37,7 @@ const changeRoutes: Routes =
     {path: 'delete', component: DeleteChangeComponent},
     {path: 'roadmap/:id', component: RoadmapViewComponent, resolve: {change: ChangeResolver}},
     {path: 'roadmapItemDetail/:id', component: RoadmapItemDetailComponent, resolve: {roadmapItem: RoadmapItemResolver}},
+    {path: 'roadmapItemDetail/:id/Employees', component: RoadmapEmployeeInformationComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'addSurvey/:id', component: AddSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'updateSurvey/:id', component: UpdateSurveyComponent, resolve: {roadmapItem: RoadmapItemResolver}},
     {path: 'group/:id', component: GroupComponent, resolve: {change: ChangeResolver}},
@@ -61,6 +65,8 @@ const changeRoutes: Routes =
     AddRoadmapItemComponent,
     UpdateRoadmapItemComponent,
     DeleteRoadmapItemComponent,
+    SurveyChoiceDialogComponent,
+    RoadmapEmployeeInformationComponent,
   ],
   imports: [
     NavigationModule,
@@ -71,7 +77,8 @@ const changeRoutes: Routes =
     FormsModule,
     FontAwesomeModule,
     RouterModule.forChild(changeRoutes),
-    LottieModule
+    LottieModule,
+    FlexLayoutModule
   ]
 })
 export class ChangeModule {

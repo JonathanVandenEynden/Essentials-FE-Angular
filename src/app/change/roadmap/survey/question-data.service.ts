@@ -1,57 +1,25 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {Survey} from '../../../models/survey.model';
+import {Observable, throwError} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {any} from 'codelyzer/util/function';
-import {ChangeInitiative} from '../../../models/change.model';
-import {Question, QuestionJson} from '../../../models/Question.model';
+import {catchError, map} from 'rxjs/operators';
+
+import {Question} from '../../../models/Question.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionDataService {
-  private _QUESTIONS$ = new BehaviorSubject<Question[]>([]);
-  private _QUESTIONS: Question[];
-  private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
-    // this.questions$
-    //   .pipe(
-    //     catchError((err) => {
-    //       this._QUESTIONS$.error(err);
-    //       return throwError(err);
-    //     })
-    //   )
-    //   .subscribe((questions: Question[]) => {
-    //     this._QUESTIONS = questions;
-    //     this._QUESTIONS$.next(this._QUESTIONS);
-    //   });
   }
 
   getSurvey$(id: number): Observable<Question> {
     return this.http.get(`${environment.apiUrl}/Question/${id}`)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map(Question.fromJson));
   }
-
-  // get questions$(): Observable<Question[]> {
-  //   return this._RELOAD$.pipe(
-  //     switchMap(() => this.fetchQuestions())
-  //   );
-  // }
-
-  // fetchQuestions(): Observable<Question[]> {
-  //   // tslint:disable-next-line:max-line-length
-  //   return this.http.get(`${environment.apiUrl}/Questions`)
-  //       .pipe(
-  //         catchError(this.handleError),
-  //         tap(console.log),
-  //         map((list: any[]): Question[] => list.map(Question.fromJson)));
-  // }
 
   handleError(err: any): Observable<never> {
     let errorMessage: string;
@@ -60,17 +28,13 @@ export class QuestionDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
   addAnswersToQuestion(questionId: number, possibleAnswers: string[]): void {
-    console.log('Antwoorden proberen doorsturen voor');
-    console.log(questionId);
     this.http.post(`${environment.apiUrl}/Questions/PostAnswerToQuestion/${questionId}?initialize=true`, possibleAnswers)
       .pipe(
         catchError(this.handleError),
-        tap(console.log)
       )
       .subscribe();
   }

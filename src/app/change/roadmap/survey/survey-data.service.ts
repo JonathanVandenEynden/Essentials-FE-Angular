@@ -3,52 +3,27 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Survey} from '../../../models/survey.model';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
-import {any} from 'codelyzer/util/function';
-import {ChangeInitiative} from '../../../models/change.model';
-import {Question, QuestionJson} from '../../../models/Question.model';
-import {log} from 'util';
+import {catchError, map, tap} from 'rxjs/operators';
+import {Question} from '../../../models/Question.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyDataService {
-  private _SURVEYS$ = new BehaviorSubject<Survey[]>([]);
-  private _SURVEYS: Survey[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
-    // this.surveys$
-    //   .pipe(
-    //     catchError((err) => {
-    //       this._SURVEYS$.error(err);
-    //       return throwError(err);
-    //     })
-    //   )
-    //   .subscribe((surveys: Survey[]) => {
-    //     this._SURVEYS = surveys;
-    //     this._SURVEYS$.next(this._SURVEYS);
-    //   });
+
   }
   getSurvey$(id: number): Observable<Survey> {
-    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
+    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
   }
 
-  // get surveys$(): Observable<Survey[]> {
-  //   return this._RELOAD$.pipe(
-  //     switchMap(() => this.fetchSurveys$())
-  //   );
-  // }
+  getSurveyFromRoadmapitemId$(id: any): Observable<Survey> {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get(`${environment.apiUrl}/Survey/GetSurveyByRoadmapItemId/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
+  }
 
-  // fetchSurveys$(): Observable<Survey[]>
-  // {
-  //   // tslint:disable-next-line:max-line-length
-  //   return this.http.get(`${environment.apiUrl}/Surveys`)
-  //       .pipe(
-  //         catchError(this.handleError),
-  //         tap(console.log),
-  //         map((list: any[]): Survey[] => list.map(Survey.fromJSON)));
-  // }
 
   handleError(err: any): Observable<never>
   {
@@ -58,7 +33,6 @@ export class SurveyDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
@@ -73,9 +47,23 @@ export class SurveyDataService {
     return this.http.post(`${environment.apiUrl}/Questions/${surveyId}`, json)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map((jsonResponse: any) => Question.fromJson(jsonResponse)
         )
       );
   }
+
+  getPresetSurveyThemes(): Observable<string[]>{
+    return this.http.get(`${environment.apiUrl}/Preset/GetAllThemas`)
+      .pipe(catchError(this.handleError), tap(console.log));
+  }
+
+  addPredefinedSurveyToRmi(id: number, theme: string): Observable<Survey> {
+    return this.http.post(`${environment.apiUrl}/Survey?roadmapItemId=${id}&thema=${theme}`, null)
+      .pipe(
+        catchError(this.handleError),
+        map((json: any) => Survey.fromJSON(json)
+        )
+      );
+  }
+
 }

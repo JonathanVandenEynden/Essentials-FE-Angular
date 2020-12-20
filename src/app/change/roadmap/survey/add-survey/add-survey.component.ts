@@ -8,8 +8,7 @@ import {RoadmapDataService} from '../../roadmap-data.service';
 import {SurveyDataService} from '../survey-data.service';
 import {QuestionDataService} from '../question-data.service';
 import {Location} from '@angular/common';
-import {Observable} from 'rxjs';
-import {delay} from 'rxjs/operators';
+
 
 interface QuestionFieldJson {
   type: string;
@@ -28,7 +27,7 @@ interface AnswerFieldJson {
 })
 export class AddSurveyComponent implements OnInit {
   public roadmapItem: RoadmapItem;
-  public  surveyFrom: FormGroup;
+  public surveyFrom: FormGroup;
   public questionTypes = ['Yes/No', 'Multiple choice', 'Range', 'Open'];
   faPlus = faPlus;
   faMin = faMinus;
@@ -70,14 +69,12 @@ export class AddSurveyComponent implements OnInit {
       .addSurveyToRoadmapItem(this.roadmapItem.id)
       .subscribe((response) => {
         this.persistQuestions(response);
-        this.location.back(); // TODO zou moeten wachten tot persistQuestions gedaan is, maar werkt nog niet (ook niet met observables)
+        this.location.back();
       });
   }
 
   persistQuestions(newSurveyObj: Survey): void {
     const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
-    // console.log(questionFields);
-    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < questionFields.length; i++) {
       const question = questionFields[i] as QuestionFieldJson;
       // question aanmaken
@@ -113,8 +110,6 @@ export class AddSurveyComponent implements OnInit {
           question.answers.forEach(a => {
             answerStrings.push(a.answer);
           });
-          // console.log('HEEEEEJOOOOOO');
-          // console.log(answerStrings);
           this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
         }
       });

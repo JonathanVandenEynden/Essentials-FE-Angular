@@ -1,0 +1,9 @@
+th {
+  background: #264754;
+  color: white;
+  font-weight: normal;
+}
+
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #264754;
+}

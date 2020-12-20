@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import {AuthenticationService} from '../authentication.service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       .login(this.user.value.username, this.user.value.password)
       .subscribe(
         (val) => {
-          if (val) {
+          if (val && this.authenticationService.role === 'changeManager') {
             if (this.authenticationService.redirectUrl) {
               this.router.navigateByUrl(this.authenticationService.redirectUrl);
               this.authenticationService.redirectUrl = undefined;
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
           }
         },
         (err: HttpErrorResponse) => {
-          console.log(err);
           if (err.error instanceof Error) {
             this.errorMessage = `Error while trying to login user ${this.user.value.username}: ${err.error.message}`;
           } else {

@@ -84,3 +84,18 @@ p {
   font-size: 15px;
 }
 
+table {
+  font-weight: normal;
+}
+
+th {
+  background: #264754;
+  color: white;
+  font-weight: normal;
+}
+
+.range-table th, .range-table td {
+  min-width: 40px;
+  text-align: center;
+}
+

@@ -38,3 +38,7 @@ input{
   border: 1px solid #264754;
   border-right: 0px;
 }
+
+mat-card{
+  min-width: 25%;
+}

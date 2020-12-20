@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ChangeInitiative} from '../../../models/change.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Location} from '@angular/common';
@@ -35,8 +34,8 @@ export class UpdateRoadmapItemComponent implements OnInit {
     this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
     this.rmiForm = this.fb.group({
       title: [this.roadmapItem.title, Validators.required],
-      startDate: [this.roadmapItem.STARTDATE],
-      endDate: [this.roadmapItem.ENDDATE]
+      startDate: [this.roadmapItem.startDateString],
+      endDate: [this.roadmapItem.endDateString]
     }, {validator: validateDates});
   }
 

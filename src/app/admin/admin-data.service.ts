@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, exhaust, exhaustMap, map, switchAll, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {OrganizationPostJson} from './add-organization/add-organization.component';
 import {Organization} from '../models/Organization.model';
+import {ChangeInitiative} from '../models/change.model';
+import {Employee} from '../models/user.model';
 import {PresetSurvey} from '../models/presetSurvey.model';
 import {Changemanager} from '../models/changemanager.model';
 
@@ -16,7 +18,9 @@ export class AdminDataService {
   constructor(private http: HttpClient) { }
 
   postOrganization(json: OrganizationPostJson): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/Organizations`, json).pipe(catchError(this.handleError), tap(console.log));
+    return this.http.post(
+      `${environment.apiUrl}/Organizations`, json)
+      .pipe(catchError(this.handleError), tap(console.log));
   }
 
   postPresetSurvey(json: { theme: string; presetQuestion: { type: number; questionString: string }}): Observable<PresetSurvey>{

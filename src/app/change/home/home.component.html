@@ -1,56 +1,55 @@
 <app-nav-bar>
-<div class="container-fluid second">
+  <div class="container-fluid">
+    <div class="row"><h2 class="w-100 text-center">Change events</h2></div>
     <div class="row">
-        <div class="col-sm-3">
-          <mat-card class="filter">
-            <mat-card-title class="title">
-              <h2>Apply filter<fa-icon [icon]="faFilter" class="fa-pull-right"></fa-icon></h2>
-            </mat-card-title>
-            <mat-card-content>
-              <h3>Groups</h3>
-              <mat-divider></mat-divider>
-              <div *ngIf="(changegroups$ | async) as changeGroups; else Error">
-                <div *ngFor="let group of changeGroups">
-                  <div class="row top">
-                    <mat-checkbox [(ngModel)]="group.CHECKED" (change)="onCheckBoxClick(group.CHECKED, group.name)" [value]="filterChangesNames.group">{{group.name}}</mat-checkbox>
-                  </div>
-                </div>
-              </div>
-              <h3>Progress</h3>
-              <mat-divider></mat-divider>
-              <div class="row">
-                <mat-slider min="0" max="100" step="1" [(ngModel)]="value" (click) = "_filterChanges$.next(value)" [value]="filterChangesNames.progress"></mat-slider>
-              </div>
-              <div class="row">
-                <mat-form-field>
-                  <mat-label>Value</mat-label>
-                  <input matInput type="number" [(ngModel)]="value" (change)="_filterChanges$.next(value)" [value]="filterChangesNames.progress">
-                </mat-form-field>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
-        <div class="col">
-          <div class="row d-flex">
-            <h1>Change Events</h1>
-            <a class="ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
-          </div>
-            <div class="container">
-              <div *ngIf="(changes$ | async) as changes; else Error">
-                <div *ngFor="let change of changes">
-                  <app-change-button [change] = "change"></app-change-button>
+      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-2 mt-4">
+        <mat-card class="filter">
+          <mat-card-title class="title">
+            <h2>Apply filter<fa-icon [icon]="faFilter" class="fa-pull-right"></fa-icon></h2>
+          </mat-card-title>
+          <mat-card-content>
+            <h3>Groups</h3>
+            <mat-divider></mat-divider>
+            <div *ngIf="(changegroups$ | async) as changeGroups; else Error">
+              <div *ngFor="let group of changeGroups">
+                <div class="row top">
+                  <mat-checkbox [(ngModel)]="group.CHECKED" (change)="onCheckBoxClick(group.CHECKED, group.name)" [value]="filterChangesNames.group">{{group.name}}</mat-checkbox>
                 </div>
               </div>
             </div>
+            <mat-divider></mat-divider>
+            <div class="row">
+              <mat-slider class="col-11" min="0" max="100" step="1" [(ngModel)]="value" (click) = "_filterChanges$.next(value)" [value]="filterChangesNames.progress"></mat-slider>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Value</mat-label>
+                <input matInput type="number" [(ngModel)]="value" (change)="_filterChanges$.next(value)" [value]="filterChangesNames.progress">
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-sm-12 col-md-6 col-lg-8 col-xl-10 mt-4">
+        <div class="container">
+          <div class="row d-flex mb-2">
+            <a class="mt-2 ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
+          </div>
+          <div *ngIf="(changes$ | async) as changes; else Error">
+            <div *ngFor="let change of changes">
+              <app-change-button [change] = "change"></app-change-button>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-<ng-template #Error>
-  <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
-    <div class="card-header">
-      <p>Error loading the changes: {{errorMessage}}
-        Try again later.</p>
+      </div>
     </div>
   </div>
+<ng-template #Error>
+<div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
+  <div class="card-header">
+    <p>Error loading the changes: {{errorMessage}}
+      Try again later.</p>
+  </div>
+</div>
 </ng-template>
 </app-nav-bar>

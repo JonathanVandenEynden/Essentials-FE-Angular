@@ -11,7 +11,8 @@
           <div class="col-sm-3">
             <h1>{{change.name}} <br/>
               <div class="progress">
-                <div class="progress-bar" style="width:{{change.PROGRESS}}%;" role="progressbar">{{change.PROGRESS}}%</div>
+                <div class="progress-bar" style="width:{{change.progress}}%;" role="progressbar">{{change.progress}}%</div>
+
               </div>
             </h1>
             <!--        <div class="row">-->
@@ -20,7 +21,7 @@
             <!--          </button>-->
             <!--        </div>-->
             <div class="row">
-              <button class="btn btn-primary">Roadmap
+              <button class="btn btn-primary" (click)="toRoadMap()">Roadmap
                 <fa-icon [icon]="faRoad" class="fa-pull-right fa-lg"></fa-icon>
               </button>
             </div>
@@ -32,24 +33,24 @@
           </div>
           <div class="col">
             <div class="row d-flex">
-              <h2>Groups for Change  <a><fa-icon [icon]="faBars" class="fa-md fa-pull-left dark" (click)="drawer.toggle()"></fa-icon></a> </h2>
+              <h2>Groups for Change <a>
+                <fa-icon [icon]="faBars" class="fa-md fa-pull-left dark" (click)="drawer.toggle()"></fa-icon>
+              </a></h2>
             </div>
             <div class="container">
-              <!--Meerdere groepen? <div *ngFor="let group of change.CHANGEGROUP">-->
-                <div class="row">
-                  <div class="col-sm-auto">
-                    <h5>{{change.CHANGEGROUP.name}}</h5>
-                  </div>
-                  <div class="col">
-                    <h4></h4>
-                  </div>
+              <div class="row">
+                <div class="col-sm-auto">
+                  <h5>{{change.changegroup.name}}</h5>
                 </div>
-                <div *ngFor="let name of names">
-                  <mat-card class="btn btn-outline-light shadow p-4 mb-3 bg-white">
-                    {{name}}<a><fa-icon [icon]="faDeleteUser" class="fa-pull-right fa-lg dark"></fa-icon></a>
-                  </mat-card>
+                <div class="col">
+                  <h4></h4>
                 </div>
-              <!--</div>-->
+              </div>
+              <div *ngFor="let ecg of change.changegroup.EmployeeChangeGroups">
+                <mat-card class="btn btn-outline-light shadow p-4 mb-3 bg-white">
+                  {{ecg.Employee.FIRSTNAME}} {{ecg.Employee.LASTNAME}}
+                </mat-card>
+              </div>
             </div>
           </div>
         </div>
