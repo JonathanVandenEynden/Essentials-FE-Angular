@@ -10,7 +10,7 @@
           data-cy="login-username"
           placeholder="johnsmith@outlook.com"
           formControlName="username"
-          required>
+          required data-cy="usernameField">
       </div>
       <div class="form-group">
         <input
@@ -20,14 +20,14 @@
           data-cy="login-password"
           placeholder="password"
           formControlName="password"
-          required>
+          required data-cy="passwordField">
       </div>
     </div>
 
     <span><p class="error" *ngIf="errorMessage" data-cy="appError"> {{errorMessage}} </p> </span>
 
     <div class="text-center">
-      <button type="submit" class="btn"><span>Sign in</span>
+      <button type="submit" class="btn" data-cy="loginButton"><span>Sign in</span>
         <fa-icon [icon]="faArrowRight" class="fa-align-center arrow"></fa-icon>
       </button>
     </div>

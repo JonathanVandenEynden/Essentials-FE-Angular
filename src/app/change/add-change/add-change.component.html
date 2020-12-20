@@ -1,60 +1,60 @@
 <app-nav-bar>
-  <div class="container">
+  <div class="container" data-cy="body">
     <div class="row">
       <form [formGroup]="changeForm" (ngSubmit)='onSubmit()' class="col-sm-12 col-md-12 col-lg-8 mt-5">
-        <h1 class="row mt-2">Add a new change
+        <h1 class="row mt-2" data-cy="title">Add a new change
           <fa-icon class="ml-2" [icon]="faPen"></fa-icon>
         </h1>
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <mat-form-field fxLayout="row">
-              <input matInput aria-label="Title" placeholder="Title" type="text" formControlName="name" required/>
-              <mat-error *ngIf="changeForm.get('name')['errors'] && changeForm.get('name').touched">
+              <input matInput aria-label="Title" placeholder="Title" type="text" formControlName="name" required data-cy="titleInput"/>
+              <mat-error *ngIf="changeForm.get('name')['errors'] && changeForm.get('name').touched" data-cy="titleError">
                 {{ getErrorMessage(changeForm.get('name')['errors']) }}
               </mat-error>
             </mat-form-field>
             <mat-form-field fxLayout="row">
               <input matInput aria-label="Description" placeholder="Description" type="text" formControlName="description"
-                     required/>
-              <mat-error *ngIf="changeForm.get('description')['errors'] && changeForm.get('description').touched">
+                     required data-cy="descriptionInput"/>
+              <mat-error *ngIf="changeForm.get('description')['errors'] && changeForm.get('description').touched" data-cy="descriptionError">
                 {{ getErrorMessage(changeForm.get('description')['errors']) }}
               </mat-error>
             </mat-form-field>
             <mat-form-field fxLayout="row">
               <input matInput aria-label="Start date" placeholder="Start date" type="date" formControlName="startDate"
-                     required/>
-              <mat-error *ngIf="changeForm.get('startDate')['errors'] && changeForm.get('startDate').touched">
+                     required data-cy="startDateInput"/>
+              <mat-error *ngIf="changeForm.get('startDate')['errors'] && changeForm.get('startDate').touched" data-cy="startDateError">
                 {{ getErrorMessage(changeForm.get('startDate')['errors']) }}
               </mat-error>
             </mat-form-field>
             <mat-form-field fxLayout="row">
               <input matInput aria-label="End date" placeholder="End date" type="date" formControlName="endDate"
-                     required/>
-              <mat-error *ngIf="changeForm.get('endDate')['errors'] && changeForm.get('endDate').touched">
+                     required data-cy="endDateInput"/>
+              <mat-error *ngIf="changeForm.get('endDate')['errors'] && changeForm.get('endDate').touched" data-cy="endDateError">
                 {{ getErrorMessage(changeForm.get('endDate')['errors']) }}
               </mat-error>
             </mat-form-field>
             <mat-form-field fxLayout="row">
               <mat-select aria-label="ChangeType" placeholder="Type of change" type="text" formControlName="changetype"
-                          required>
+                          required data-cy="changeTypeSelect">
                 <mat-option *ngFor="let type of changeTypes" [value]="type">
                   {{ type }}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="changeForm.get('changetype')['errors'] && changeForm.get('changetype').touched">
+              <mat-error *ngIf="changeForm.get('changetype')['errors'] && changeForm.get('changetype').touched" data-cy="changeTypeError">
                 {{ getErrorMessage(changeForm.get('changetype')['errors']) }}
               </mat-error>
             </mat-form-field>
             <mat-form-field fxLayout="row">
               <mat-select aria-label="ChangeSponsor" placeholder="Sponsor" type="text" formControlName="changesponsor"
-                          required>
+                          required data-cy="changeSponsorSelect">
                 <div *ngIf="(users$ | async) as users; else Error">
                   <mat-option *ngFor="let user of users" [value]="user.EMAIL">
                     {{ user.FULLNAME() }}
                   </mat-option>
                 </div>
               </mat-select>
-              <mat-error *ngIf="changeForm.get('changesponsor')['errors'] && changeForm.get('changesponsor').touched">
+              <mat-error *ngIf="changeForm.get('changesponsor')['errors'] && changeForm.get('changesponsor').touched" data-cy="changeGroupName">
                 {{ getErrorMessage(changeForm.get('changesponsor')['errors']) }}
               </mat-error>
             </mat-form-field>
@@ -71,7 +71,7 @@
             <mat-form-field fxLayout="row">
               <input matInput aria-label="Change group name" placeholder="Change group name" type="text"
                      formControlName="changeGroupName"
-                     required/>
+                     required data-cy="changeGroupNameInput"/>
               <mat-error *ngIf="changeForm.get('changeGroupName')['errors'] && changeForm.get('changeGroupName').touched">
                 {{ getErrorMessage(changeForm.get('changeGroupName')['errors']) }}
               </mat-error>
@@ -79,13 +79,13 @@
             <mat-form-field fxLayout="row">
               <mat-select aria-label="Employees" placeholder="Employees" type="text"
                           formControlName="changeGroupEmployeeIds"
-                          required multiple>
+                          required multiple data-cy="employeesSelectList">
                 <div *ngIf="(users$ | async) as users; else Error">
                   <mat-option *ngFor="let user of users" [value]="user.ID">{{ user.FULLNAME() }}</mat-option>
                 </div>
               </mat-select>
             </mat-form-field>
-            <mat-checkbox fxLayout="row" [(ngModel)]="pushnotifications">Send pushnotifications to employees</mat-checkbox>
+            <mat-checkbox fxLayout="row" [(ngModel)]="pushnotifications" data-cy="notificationSelectBox">Send pushnotifications to employees</mat-checkbox>
             <div *ngIf="added">
               <mat-card class="card text-white mb-3" (click)="addRoadmap()">
                 Successfully added the new Change
@@ -97,7 +97,7 @@
           </div>
         </div>
         <div class="row mt-3 ml-0">
-          <button class="btn btn-success" type="submit" [disabled]="!changeForm.valid">
+          <button class="btn btn-success" data-cy="submitButton" type="submit" [disabled]="!changeForm.valid">
             Add change
           </button>
         </div>
