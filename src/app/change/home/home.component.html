@@ -33,7 +33,7 @@
       <div class="col-sm-12 col-md-6 col-lg-8 col-xl-10 mt-4">
         <div class="container">
           <div class="row d-flex mb-2">
-            <a class="mt-2 ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
+            <a class="mt-2 ml-auto" (click)="addChangeEvent()" data-cy="navigateToAddCIbutton"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
           </div>
           <div *ngIf="(changes$ | async) as changes; else loadingOrError">
             <div *ngFor="let change of changes">

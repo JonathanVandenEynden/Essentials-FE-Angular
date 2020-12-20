@@ -22,7 +22,7 @@
      <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()">
        <div>
          <mat-form-field>
-           <input matInput type="text" placeholder="Theme for questions" formControlName="theme"/>
+           <input matInput type="text" placeholder="Theme for questions" formControlName="theme" data-cy="themeInputField"/>
          </mat-form-field>
        </div>
 
@@ -30,7 +30,7 @@
          <div *ngFor="let question of getQuestions(assessmentForm); let i = index">
            <div [formGroupName]="i" class="questionbox d-flex">
              <mat-form-field class="typeselection">
-               <mat-select placeholder="type" aria-label="question type" formControlName="type">
+               <mat-select placeholder="type" aria-label="question type" formControlName="type" data-cy="typeSelector">
                  <mat-option *ngFor="let type of questionTypes" [value]="type">
                    {{type}}
                  </mat-option>
@@ -42,7 +42,7 @@
              <br>
              <mat-form-field class="questionfield">
                <input matInput type="text" aria-label="Question" formControlName="questionString"
-                      placeholder="question"/>
+                      placeholder="question" data-cy="questionStringInputField"/>
                <mat-error *ngIf="question.get('questionString')['errors'] && question.get('questionString').touched">
                  {{ getErrorMessage(question.get('questionString')['errors']) }}
                </mat-error>
@@ -84,7 +84,7 @@
        </div>
 
 
-       <button class="btn btn-nav btn-primary mb-3" type="submit" [disabled]="!assessmentForm.valid">Create survey</button>
+       <button class="btn btn-nav btn-primary mb-3" type="submit" data-cy="submitButton" [disabled]="!assessmentForm.valid">Create survey</button>
 
      </form>
 
