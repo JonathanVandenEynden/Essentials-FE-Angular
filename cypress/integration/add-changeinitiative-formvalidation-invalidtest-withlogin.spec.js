@@ -1,4 +1,4 @@
-describe('Form validation test for new CI w/ valid params', function () {
+describe('Form validation test for new CI w/ invalid params', function () {
   it('valid form enables submit button', function () {
     cy.visit('/');
     cy.get('[data-cy=usernameField]').type("Sukrit.bhattacharya@hogent.com");
