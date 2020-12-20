@@ -132,14 +132,13 @@ export class UpdateSurveyComponent implements OnInit {
 
   persistQuestions(newSurveyObj: Survey): void{
     const questionFields: FormArray = this.surveyFrom.controls.questions.value as FormArray;
-    // console.log(questionFields);
+
     for (let i = 0; i <= questionFields.length; i++) {
       const question = questionFields[i] as QuestionFieldJson;
       if (question === undefined) {
         continue;
       }
 
-      console.log(question);
       // question aanmaken
       const newQuestionJson = {
         type: 0,
@@ -166,7 +165,6 @@ export class UpdateSurveyComponent implements OnInit {
         }
       }
 
-      console.log(newQuestionJson);
       // question persisteren
       this.surveyDataService.addQuestionToSurvey(newSurveyObj.Id, newQuestionJson).subscribe((response) => {
         // eventueel answers toevoegen
@@ -175,8 +173,6 @@ export class UpdateSurveyComponent implements OnInit {
           question.answers.forEach(a => {
             answerStrings.push(a.answer);
           });
-          // console.log('HEEEEEJOOOOOO');
-          // console.log(answerStrings);
           this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
         }
       });

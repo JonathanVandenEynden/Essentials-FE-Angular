@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {map, catchError, switchMap, tap} from 'rxjs/operators';
 import {Observable, throwError, BehaviorSubject} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -23,6 +23,7 @@ export class ChangeDataService {
   private _CHANGES$ = new BehaviorSubject<ChangeInitiative[]>([]);
   private _CHANGES: ChangeInitiative[];
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
+  public errorMessage = '';
 
   constructor(private http: HttpClient) {
     this.changes$
@@ -58,7 +59,6 @@ export class ChangeDataService {
     let params = new HttpParams();
     params = group ? params.append('group', group) : params;
     params = progress ? params.append('progress', progress) : params;
-    console.log(params);
     // tslint:disable-next-line:max-line-length
     return this.http.get(`${environment.apiUrl}/ChangeInitiatives/GetChangeInitiativesForChangeManager`, {params}).pipe(catchError(this.handleError), map((list: any[]): ChangeInitiative[] => list.map(ChangeInitiative.fromJSON)));
   }
@@ -84,7 +84,14 @@ export class ChangeDataService {
       this._CHANGES = [...this._CHANGES, c];
       this._CHANGES$.next(this._CHANGES);
       this._RELOAD$.next(true);
-    });
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          this.errorMessage = `Error while trying to add the new change ${changeJson.name.toString()}`;
+        } else {
+          this.errorMessage = `Error! something is wrong with the website, please try again later`;
+        }
+      });
   }
 
   // tslint:disable-next-line:typedef
@@ -97,7 +104,7 @@ export class ChangeDataService {
   // tslint:disable-next-line:typedef
   updateChange(change: ChangeInitiative) {
     // tslint:disable-next-line:max-line-length no-shadowed-variable
-    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/${change.id}`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap((change: ChangeInitiative) => {
+    return this.http.put(`${environment.apiUrl}/ChangeInitiatives/${change.id}`, change.toJSON()).pipe(catchError(this.handleError), map(ChangeInitiative.fromJSON)).pipe(catchError((err) => throwError(err)), tap(() => {
       this._RELOAD$.next(true);
     }));
   }
@@ -109,18 +116,15 @@ export class ChangeDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
   sendPushnotification(title: string, message: string, ids: number[]): void {
-    console.log(ids.toString());
     const idparam = ids.toString();
     let params = new HttpParams();
     params = idparam ? params.append('userids', idparam) : params;
     params = title ? params.append('title', title) : params;
     params = message ? params.append('message', message) : params;
-    console.log(params);
     this.http.get(`${environment.apiUrl}/DeviceTokens/sendNotifications`, {params}).pipe(catchError(this.handleError)).subscribe();
   }
 

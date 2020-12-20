@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {ChangeInitiative} from '../../models/change.model';
 import {RoadmapItem} from '../../models/roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {Survey, SurveyJson} from '../../models/survey.model';
-import {Question} from '../../models/Question.model';
+import {Survey} from '../../models/survey.model';
+
 import {PostRmiJson} from './add-roadmap-item/add-roadmap-item.component';
 import {Employee} from '../../models/user.model';
 
@@ -43,17 +42,17 @@ export class RoadmapDataService {
   fetchRoadmapItems$(): Observable<RoadmapItem[]> {
     // TODO remove hardcoded Id
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${2}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/RoadMapItems/GetRoadMapItemsForChangeInitiative/${2}`).pipe(catchError(this.handleError), map((list: any[]): RoadmapItem[] => list.map(RoadmapItem.fromJSON)));
   }
 
   getRoadmapItem$(id: any): Observable<RoadmapItem> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/RoadMapItems/${id}`).pipe(catchError(this.handleError), tap(console.log), map(RoadmapItem.fromJSON));
+    return this.http.get(`${environment.apiUrl}/RoadMapItems/${id}`).pipe(catchError(this.handleError), map(RoadmapItem.fromJSON));
   }
 
   getEmployeesNotFilledInSurvey$(id: number): Observable<Employee[]> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/RoadMapItems/GetEmployeesNotFilledInSurvey/${id}`).pipe(catchError(this.handleError), tap(console.log), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
+    return this.http.get(`${environment.apiUrl}/RoadMapItems/GetEmployeesNotFilledInSurvey/${id}`).pipe(catchError(this.handleError), map((list: any[]): Employee[] => list.map(Employee.fromJSON)));
   }
 
   handleError(err: any): Observable<never> {
@@ -63,7 +62,6 @@ export class RoadmapDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
@@ -72,7 +70,6 @@ export class RoadmapDataService {
     return this.http.post(`${environment.apiUrl}/Survey?roadmapItemId=${id}`, null)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map((json: any) => Survey.fromJSON(json)
         )
       );
@@ -87,6 +84,6 @@ export class RoadmapDataService {
   }
 
   deleteRoadmapItem(rmiId: number): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/RoadMapItems/${rmiId}`).pipe(catchError(this.handleError), tap(console.log));
+    return this.http.delete(`${environment.apiUrl}/RoadMapItems/${rmiId}`).pipe(catchError(this.handleError));
   }
 }

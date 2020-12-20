@@ -111,8 +111,6 @@ export class AddSurveyComponent implements OnInit {
           question.answers.forEach(a => {
             answerStrings.push(a.answer);
           });
-          // console.log('HEEEEEJOOOOOO');
-          // console.log(answerStrings);
           this.questionDataService.addAnswersToQuestion(response.Id, answerStrings);
         }
       });

@@ -11,9 +11,7 @@ import {AuthenticationService} from '../../user/authentication.service';
 })
 
 export class NavBarComponent implements OnInit {
-  enteredButton = false;
-  isMatMenuOpen = false;
-  prevButtonTrigger;
+
   faInfo = faInfoCircle;
   faSignInAlt = faSignInAlt;
   faUser = faUser;

@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Employee} from '../../../models/user.model';
 import {faBell} from '@fortawesome/free-solid-svg-icons';
-import {ChangeDataService} from "../../change-data.service";
+import {ChangeDataService} from '../../change-data.service';
 
 @Component({
   selector: 'app-roadmap-employee-information',
@@ -17,7 +17,7 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
 
   public inputRoadmapItem: RoadmapItem;
   private _fetchRmi: Observable<Employee[]>;
-  private _employees: Employee[];
+  _employees: Employee[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,

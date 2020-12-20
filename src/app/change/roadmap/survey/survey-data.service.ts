@@ -13,42 +13,17 @@ export class SurveyDataService {
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
-    // this.surveys$
-    //   .pipe(
-    //     catchError((err) => {
-    //       this._SURVEYS$.error(err);
-    //       return throwError(err);
-    //     })
-    //   )
-    //   .subscribe((surveys: Survey[]) => {
-    //     this._SURVEYS = surveys;
-    //     this._SURVEYS$.next(this._SURVEYS);
-    //   });
+
   }
   getSurvey$(id: number): Observable<Survey> {
-    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
+    return this.http.get(`${environment.apiUrl}/Surveys/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
   }
 
   getSurveyFromRoadmapitemId$(id: any): Observable<Survey> {
     // tslint:disable-next-line:max-line-length
-    return this.http.get(`${environment.apiUrl}/Survey/GetSurveyByRoadmapItemId/${id}`).pipe(catchError(this.handleError), tap(console.log), map(Survey.fromJSON));
+    return this.http.get(`${environment.apiUrl}/Survey/GetSurveyByRoadmapItemId/${id}`).pipe(catchError(this.handleError), map(Survey.fromJSON));
   }
 
-  // get surveys$(): Observable<Survey[]> {
-  //   return this._RELOAD$.pipe(
-  //     switchMap(() => this.fetchSurveys$())
-  //   );
-  // }
-
-  // fetchSurveys$(): Observable<Survey[]>
-  // {
-  //   // tslint:disable-next-line:max-line-length
-  //   return this.http.get(`${environment.apiUrl}/Surveys`)
-  //       .pipe(
-  //         catchError(this.handleError),
-  //         tap(console.log),
-  //         map((list: any[]): Survey[] => list.map(Survey.fromJSON)));
-  // }
 
   handleError(err: any): Observable<never>
   {
@@ -58,7 +33,6 @@ export class SurveyDataService {
     } else {
       errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 
@@ -73,7 +47,6 @@ export class SurveyDataService {
     return this.http.post(`${environment.apiUrl}/Questions/${surveyId}`, json)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map((jsonResponse: any) => Question.fromJson(jsonResponse)
         )
       );
@@ -88,7 +61,6 @@ export class SurveyDataService {
     return this.http.post(`${environment.apiUrl}/Survey?roadmapItemId=${id}&thema=${theme}`, null)
       .pipe(
         catchError(this.handleError),
-        tap(console.log),
         map((json: any) => Survey.fromJSON(json)
         )
       );

@@ -28,7 +28,6 @@ export class RoadmapItemDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.roadmapItem = item.roadmapItem);
-    console.log(this.roadmapItem);
   }
 
   addSurvey(): void {

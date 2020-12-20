@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {faPlus, faSyncAlt, faTachometerAlt, faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faTachometerAlt, faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
 import {Router} from '@angular/router';
 import {DashboardDataService} from '../dashboard-data.service';
 import {Observable} from 'rxjs';
 import {RoadmapItem} from '../../models/roadmapitem.model';
-import {tap} from 'rxjs/operators';
 import {ChartDataSets} from 'chart.js';
 import {ChangeInitiative} from '../../models/change.model';
 
@@ -17,7 +16,6 @@ export class DashboardSurveyComponent implements OnInit {
   /*region properties*/
   public faTachometer = faTachometerAlt;
   public faClipboardList = faClipboardCheck;
-  public faSync = faSyncAlt;
   public faPlus = faPlus;
   public pieChartNumberOfQuestionsProperties: {};
   public barChartProperties: {};
@@ -27,7 +25,7 @@ export class DashboardSurveyComponent implements OnInit {
   public barChartReady = false;
   private _fetchChangeInitiatives$: Observable<ChangeInitiative[]>;
   private _roadmapItems: RoadmapItem[] = [];
-  private _currentRmi: RoadmapItem;
+  _currentRmi: RoadmapItem;
   private _months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
   private _displayedColumns: string[] = ['Question', 'Answer', 'Times chosen'];
   private _dataSource: [{}] = [{}];
@@ -38,9 +36,6 @@ export class DashboardSurveyComponent implements OnInit {
   ngOnInit(): void {
     this._fetchChangeInitiatives$ = this._dashboardDataService.changeInitiatives$;
     this._fetchChangeInitiatives$
-      .pipe(
-        tap(console.log)
-      )
       .subscribe(
         (changeInitiatives: ChangeInitiative[]) => {
           const arr: [RoadmapItem[]] = [[]];
@@ -63,14 +58,13 @@ export class DashboardSurveyComponent implements OnInit {
   private makeDataForTable(): void {
     this._dataSource.splice(0, 1);
     this._currentRmi.survey.Questions.forEach(e => {
-      console.log(e.Id);
       if (e.PossibleAnswers){
         const n = Object.keys(e.PossibleAnswers);
         const a = Object.values(e.PossibleAnswers);
         let average = 0;
         a.map(z => average += z);
         if (average === 0){
-          this._dataSource.push({q: e.QuestionString, an: n, ac: a.map(s => '0 %')});
+          this._dataSource.push({q: e.QuestionString, an: n, ac: a.map(() => '0 %')});
         } else{
           this._dataSource.push({q: e.QuestionString, an: n, ac: a.map(s => ((s / average) * 100).toString() + '%')});
         }

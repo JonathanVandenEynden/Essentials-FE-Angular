@@ -1,9 +1,8 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {DashboardDataService} from '../dashboard-data.service';
-import {faPlus, faSyncAlt, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Project} from '../../models/Project.model';
 import {ChartDataSets} from 'chart.js';
 import {ChangeInitiative} from '../../models/change.model';
@@ -16,7 +15,6 @@ import {ChangeInitiative} from '../../models/change.model';
 export class DashbboardProjectComponent implements OnInit {
   /*region properties*/
   public faTachometer = faTachometerAlt;
-  public faSync = faSyncAlt;
   public faPlus = faPlus;
   public barChartProperties: {};
   public pieChartChangeInitiativesProperties: {};
@@ -37,18 +35,12 @@ export class DashbboardProjectComponent implements OnInit {
     this._fetchProjects$ = this._dashboardDataService.projects$;
     this._fetchChangeInitiatives$ = this._dashboardDataService.changeInitiatives$;
     this._fetchProjects$
-      .pipe(
-        tap(console.log)
-      )
       .subscribe(
         (projects: Project[]) => {
           this._projects = projects;
           this.makeProjectCharts();
         });
     this._fetchChangeInitiatives$
-      .pipe(
-        tap(console.log)
-      )
       .subscribe(
         (changeInitiatives: ChangeInitiative[]) => {
           this._changeInitiatives = changeInitiatives;
@@ -96,7 +88,6 @@ export class DashbboardProjectComponent implements OnInit {
       }
     });
     if (data.length !== 0){
-      console.log(data.length);
       this.barChartReady = true;
     }
     return {t: 'Monthly active changeinitiatives', d: data, l: labels};

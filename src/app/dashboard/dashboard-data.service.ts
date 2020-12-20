@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Survey} from '../models/survey.model';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {RoadmapItem} from '../models/roadmapitem.model';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {Project} from '../models/Project.model';
 import {ChangeInitiative} from '../models/change.model';

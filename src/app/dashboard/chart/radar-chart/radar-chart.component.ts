@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ChartDataSets, ChartType, RadialChartOptions} from 'chart.js';
-import {Label, MultiDataSet} from 'ng2-charts';
+import {Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-radar-chart',

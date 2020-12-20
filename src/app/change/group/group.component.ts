@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ChangeInitiative} from '../../models/change.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import {faArrowLeft, faBars, faRoute, faUserMinus, faUsers} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faRoute, faUsers} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-group',
@@ -10,17 +10,14 @@ import {faArrowLeft, faBars, faRoute, faUserMinus, faUsers} from '@fortawesome/f
 })
 export class GroupComponent implements OnInit {
   public change: ChangeInitiative;
-  faArrow = faArrowLeft;
   faBars = faBars;
   faRoad = faRoute;
   faGroup = faUsers;
-  faDeleteUser = faUserMinus;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(item => this.change = item.change);
-    console.log(this.change);
   }
 
   toRoadMap(): void {

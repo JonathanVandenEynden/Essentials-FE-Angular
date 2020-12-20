@@ -1,4 +1,3 @@
-import {Employee, EmployeeJson} from './user.model';
 import {EmployeeChangeGroup, EmployeeChangeGroupJson} from './EmployeeChangeGroup.model';
 
 export interface ChangeGroupJson {

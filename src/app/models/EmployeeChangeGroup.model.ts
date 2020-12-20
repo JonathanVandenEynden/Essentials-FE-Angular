@@ -1,6 +1,5 @@
 import {Employee, EmployeeJson} from './user.model';
 import {ChangeGroup, ChangeGroupJson} from './changegroup.model';
-import {EmployeeOrganizationPartJson} from './EmployeeOrganizationPart.model';
 
 export interface EmployeeChangeGroupJson {
   employeeId: number;

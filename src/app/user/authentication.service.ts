@@ -24,7 +24,6 @@ export class AuthenticationService {
   // tslint:disable-next-line:variable-name
   private _loggedInUser$: Observable<Employee>;
   // tslint:disable-next-line:variable-name
-  //private _dummyUser$: BehaviorSubject<string>;
   public redirectUrl: string = null;
   private _RELOAD$ = new BehaviorSubject<boolean>(true);
   private errorMessage: string;
@@ -39,17 +38,12 @@ export class AuthenticationService {
         this._loggedInUser$ = null;
         parsedToken = null;
       }
-    }
-    //this._dummyUser$ = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name);
-  }
+    }}
 
   get user$(): Observable<Employee> {
     return this._loggedInUser$;
   }
 
-  // get dummyUser$(): BehaviorSubject<string> {
-  //   return this._dummyUser$;
-  // }
 
   get token(): string {
     const localToken = localStorage.getItem(this._tokenKey);
@@ -70,7 +64,6 @@ export class AuthenticationService {
       .pipe(map((token: any) => {
           if (token) {
             localStorage.setItem(this._tokenKey, token);
-            //this._dummyUser$.next(email);
             this._loggedInUser$ = this.getEmployeeByEmail$(email);
             if (this.errorMessage != null)
             {
@@ -124,7 +117,6 @@ export class AuthenticationService {
     } else {
       this.errorMessage = `an unknown error occurred ${err}`;
     }
-    console.error(err);
     return throwError(this.errorMessage);
   }
 }

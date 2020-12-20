@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ChangeInitiative} from '../../../models/change.model';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {RoadmapDataService} from '../roadmap-data.service';
 import {Location} from '@angular/common';
