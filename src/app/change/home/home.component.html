@@ -35,7 +35,7 @@
           <div class="row d-flex mb-2">
             <a class="mt-2 ml-auto" (click)="addChangeEvent()"><fa-icon [icon]="faPlus" class="dark fa-2x"></fa-icon></a>
           </div>
-          <div *ngIf="(changes$ | async) as changes; else Error">
+          <div *ngIf="(changes$ | async) as changes; else loadingOrError">
             <div *ngFor="let change of changes">
               <app-change-button [change] = "change"></app-change-button>
             </div>
@@ -44,12 +44,25 @@
       </div>
     </div>
   </div>
-<ng-template #Error>
-<div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
-  <div class="card-header">
-    <p>Error loading the changes: {{errorMessage}}
-      Try again later.</p>
-  </div>
-</div>
-</ng-template>
+  <ng-template #loadingOrError>
+    <span *ngIf="errorMessage; else loading">
+      <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
+      <div class="card-header">
+        <p>Error loading the changes: {{errorMessage}}
+          Try again later.</p>
+      </div>
+    </div>
+    </span>
+    <ng-template #loading>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </ng-template>
+  <ng-template #Error>
+    <div class="card text-white bg-danger mb-3" *ngIf="errorMessage" data-cy="appError">
+      <div class="card-header">
+        <p>Error loading the changes: {{errorMessage}}
+          Try again later.</p>
+      </div>
+    </div>
+  </ng-template>
 </app-nav-bar>

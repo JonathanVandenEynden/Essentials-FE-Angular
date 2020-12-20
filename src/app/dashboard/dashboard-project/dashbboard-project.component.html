@@ -18,7 +18,7 @@
       <span *ngIf="barChartReady">
         <app-bar-chart [barChartProp]="barChartProperties"></app-bar-chart>
       </span>
-      <span *ngIf="pieChartChangeInitiativesReady">
+      <span *ngIf="pieChartChangeInitiativesReady; else loading">
         <app-pie-chart [pieChartProp]="pieChartChangeInitiativesProperties"></app-pie-chart>
       </span>
       <span *ngIf="polarChartReady">
@@ -26,4 +26,7 @@
       </span>
     </div>
   </div>
+  <ng-template #loading>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
 </app-nav-bar>
