@@ -35,6 +35,6 @@ export class RoadmapEmployeeInformationComponent implements OnInit {
     const ids = [];
     this._employees.forEach(e => ids.push(e.ID.toString()));
     this.changeDataService.sendPushnotification(`Essentials - Please fill in ${this.inputRoadmapItem.title}`, 'Please complete the survey in the roadmapitem', ids);
-    alert('You send out a notfication!');
+    alert('You sent out a notification!');
   }
 }
