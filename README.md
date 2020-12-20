@@ -29,5 +29,7 @@ The admin can create an organization by clicking on the 'add organization'- butt
 
 The change manager can see which change initiatives are active. Change initiatives can be created, edited and deleted. Each change initiative has a road map, which represent the different steps in a change, with a survey. These surveys will be available to the employees to be filled in. This way, the change manager can gauge the mood of a specific change in the dashboard, and make alterations when needed. Surveys can contain simple questions, like yes/no, ranged or open questions, but also more detailed questions like multiple-choice. The survey-creation form, as well as all other forms, help the change manager to create new items with little effort.
 
+## User guide
 
+we also have a [quick start guide](./QuickStartGuide.pdf)
 
