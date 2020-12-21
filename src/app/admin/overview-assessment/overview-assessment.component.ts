@@ -21,7 +21,7 @@ export class OverviewAssessmentComponent implements OnInit {
     this.getThemes();
   }
 
-  NavigateToAddOrganization(): void {
+  NavigateToAddAssessment(): void {
     this.router.navigate(['admin/addAssessment']);
   }
 
